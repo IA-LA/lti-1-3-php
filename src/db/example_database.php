@@ -6,6 +6,7 @@ session_start();
 use \IMSGlobal\LTI;
 
 $_SESSION['iss'] = [];
+// TODO Conectar con servicio READ
 // Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
 $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
 foreach ($reg_configs as $key => $reg_config) {
