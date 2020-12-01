@@ -3,12 +3,15 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../db/example_database.php';
 
 use \IMSGlobal\LTI;
+
 $launch = LTI\LTI_Message_Launch::new(new Example_Database())
     ->validate();
 
-?><link href="static/breakout.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet"><?php
+?>
+<link href="static/breakout.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
 
+<?php
 if ($launch->is_deep_link_launch()) {
     ?>
     <div class="dl-config">

@@ -1,10 +1,12 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: $_SERVER['REQUEST_SCHEME']) . '://' . $_SERVER['HTTP_HOST']);
+define("TOOL_PARAM", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : $_REQUEST['iss']) );
 session_start();
 use \IMSGlobal\LTI;
 
 $_SESSION['iss'] = [];
+// Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
 $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
 foreach ($reg_configs as $key => $reg_config) {
     $_SESSION['iss'] = array_merge($_SESSION['iss'], json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
@@ -17,7 +19,7 @@ class Example_Database implements LTI\Database {
         return LTI\LTI_Registration::new()
             ->set_auth_login_url($_SESSION['iss'][$iss]['auth_login_url'])
             ->set_auth_token_url($_SESSION['iss'][$iss]['auth_token_url'])
-            ->set_auth_server($_SESSION['iss'][$iss]['auth_server'])
+            ->set_auth_server($_SESSION['iss'][$iss]['auth_server']) //No aparece en la llamada a GAME
             ->set_client_id($_SESSION['iss'][$iss]['client_id'])
             ->set_key_set_url($_SESSION['iss'][$iss]['key_set_url'])
             ->set_kid($_SESSION['iss'][$iss]['kid'])
@@ -33,7 +35,9 @@ class Example_Database implements LTI\Database {
             ->set_deployment_id($deployment_id);
     }
 
-    private function private_key($iss) {
+    // Obtiene la cave privada de cada sitio `$iss`
+    private function
+    private_key($iss) {
         return file_get_contents(__DIR__ . $_SESSION['iss'][$iss]['private_key_file']);
     }
 }
