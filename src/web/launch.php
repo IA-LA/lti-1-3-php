@@ -11,10 +11,6 @@ echo '<iframe id="frame" src="https://www.bing.es" onload="document.getElementBy
 
 ?>
 
-<!--
-    <iframe id="frame" src="https://www.bing.es" onload="document.getElementById('frame').src=''"></iframe>
--->
-
 <?php
     if ($launch->is_deep_link_launch()) {
 ?>
