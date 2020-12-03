@@ -51,6 +51,17 @@
         "deployment": [
             "8c49a5fa-f955-405e-865f-3d7e959e809f"
         ]
+    },
+    "http://10.201.54.31:9002": {
+        "client_id": "d42df408-70f5-4b60-8274-6c98d3b9468d",
+        "auth_login_url": "http://10.201.54.31:9001/platform/login.php",
+        "auth_token_url": "http://10.201.54.31:9001/platform/token.php",
+        "key_set_url": "http://10.201.54.31:9001/platform/jwks.php",
+        "private_key_file": "/private.key",
+        "kid": "58f36e10-c1c1-4df0-af8b-85c857d1634f",
+        "deployment": [
+            "8c49a5fa-f955-405e-865f-3d7e959e809f"
+        ]
     }
 }
 
