@@ -7,7 +7,7 @@ use \IMSGlobal\LTI;
 $launch = LTI\LTI_Message_Launch::new(new Example_Database())
     ->validate();
 
-echo '<iframe id="frame" src="https://www.bing.es"></iframe>'
+echo '<iframe id="frame" src="' . TOOL_PARAM . '"></iframe>';
 
 ?>
 
