@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: $_SERVER['REQUEST_SCHEME']) . '://' . $_SERVER['HTTP_HOST']);
-define("http://10.201.54.31:9002%2FPlantilla Azul_5e0df19c0c2e74489066b43f%2Findex_default.html");
+define("TOOL_PARAM", "http://10.201.54.31:9002%2FPlantilla Azul_5e0df19c0c2e74489066b43f%2Findex_default.html" );
 session_start();
 use \IMSGlobal\LTI;
 
