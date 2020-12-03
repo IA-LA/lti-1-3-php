@@ -9,7 +9,7 @@ $launch = LTI\LTI_Message_Launch::new(new Example_Database())
 
 ?>
 
-<iframe id="frame" src="'https://www.bing.es'" onload="document.getElementById('frame').src='https://www.bing.es'">
+<iframe id="frame" src="https://www.bing.es" onload="document.getElementById('frame').src=''">
 
 </iframe>
 
