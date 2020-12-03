@@ -9,7 +9,7 @@ $launch = LTI\LTI_Message_Launch::new(new Example_Database())
 
 ?>
 
-<iframe id="frame" style="width:800px; height:400px"  onload="document.getElementById('frame').src='<?php echo TOOL_PARAM; ?>'">
+<iframe id="frame" src="<?php echo TOOL_PARAM; ?>" style="width:800px; height:400px"  onload="document.getElementById('frame').src=''">
 
 </iframe>
 
