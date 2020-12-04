@@ -14,7 +14,9 @@ $message_jwt = [
     "https://purl.imsglobal.org/spec/lti/claim/deployment_id" => '8c49a5fa-f955-405e-865f-3d7e959e809f',
     "https://purl.imsglobal.org/spec/lti/claim/message_type" => "LtiResourceLinkRequest",
     "https://purl.imsglobal.org/spec/lti/claim/version" => "1.3.0",
-    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_HOST . "/game.php",
+    // Generaliza LAUNCH URL y TARJET URI
+    //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_HOST . "/game.php",
+    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAM,
     "https://purl.imsglobal.org/spec/lti/claim/roles" => [
         "http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor"
     ],
