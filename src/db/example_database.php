@@ -45,12 +45,14 @@ var_dump(stream_get_meta_data($stream));
 //var_dump(stream_get_contents($stream));
 // Resultado
 $json_obj = json_decode(stream_get_contents($stream));
+echo $json_obj;
 echo $json_obj->{'data'}->{'0'};
 if($json_obj->{'result'} === "ok"){
     // Registro
     //$json_obj_registro = json_decode($json_obj->{'data'});
     //echo $json_obj_registro->{'launch_parameters'};
     //$_SESSION['iss'] = [$json_obj_registro->{'launch_parameters'}];
+    print '\n' . 'OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK:';
     echo $json_obj->{'data'}->{'0'}->{'launch_parameters'};
 }
 fclose($stream);
