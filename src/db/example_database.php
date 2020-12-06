@@ -53,14 +53,11 @@ if($json_obj->{'result'} === "ok"){
     print 'OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK:';
     echo $json_obj->{'data'}->{'launch_parameters'}->{'iss'};
     $_SESSION['iss'] = array_merge($_SESSION['iss'], [$json_obj->{'data'}->{'launch_parameters'}->{'iss'} => $json_obj->{'data'}->{'credentials'}]);
+    echo $_SESSION['iss'];
 }
 fclose($stream);
 
-// Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
-$reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
-foreach ($reg_configs as $key => $reg_config) {
-    $_SESSION['iss'] = array_merge($_SESSION['iss'], json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
-}
+
 class Example_Database implements LTI\Database {
     public function find_registration_by_issuer($iss) {
         if (empty($_SESSION['iss']) || empty($_SESSION['iss'][$iss])) {
