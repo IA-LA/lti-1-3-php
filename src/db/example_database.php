@@ -42,7 +42,7 @@ $stream = fopen($url, 'r', false, $context);
 var_dump(stream_get_meta_data($stream));
 
 // actual data at $url
-//var_dump(stream_get_contents($stream));
+var_dump(stream_get_contents($stream));
 // Resultado
 $json_obj = json_decode(stream_get_contents($stream));
 var_dump($json_obj);
@@ -52,7 +52,7 @@ if($json_obj->{'result'} === "ok"){
     // Registro
     print 'OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK:';
     echo $json_obj->{'data'}->{'launch_parameters'}->{'iss'};
-    $_SESSION['iss'] = $json_obj->{'data'}->{'launch_parameters'}->{'iss'};
+    $_SESSION['iss'] = array_merge($_SESSION['iss'], $json_obj->{'data'}->{'launch_parameters'}->{'iss'});
 }
 fclose($stream);
 
