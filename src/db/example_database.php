@@ -44,7 +44,7 @@ var_dump(stream_get_meta_data($stream));
 // actual data at $url
 //var_dump(stream_get_contents($stream));
 $json_obj = json_decode(stream_get_contents($stream));
-echo $json_obj.retult;
+echo $json_obj["result"];
 fclose($stream);
 
 // Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
