@@ -1,23 +1,10 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: $_SERVER['REQUEST_SCHEME']) . '://' . $_SERVER['HTTP_HOST']);
-define("TOOL_PARAM", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : $_REQUEST['iss']) );
 session_start();
 use \IMSGlobal\LTI;
 
 $_SESSION['iss'] = [];
-// TODO Conectar con servicio READ
-if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-    $url = "https://";
-else
-    $url = "http://";
-// Append the host(domain name, ip) to the URL.
-$url.= $_SERVER['HTTP_HOST'];
-
-// Append the requested resource location to the URL
-$url.= $_SERVER['REQUEST_URI'];
-
-echo $_REQUEST['target_link_uri'];
 // Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
 $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
 foreach ($reg_configs as $key => $reg_config) {
