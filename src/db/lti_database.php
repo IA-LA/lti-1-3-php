@@ -20,7 +20,7 @@ $url.= $_SERVER['HTTP_HOST'];
 // Append the requested resource location to the URL
 $url.= $_SERVER['REQUEST_URI'];
 
-echo $_REQUEST['target_link_uri'];
+//echo $_REQUEST['target_link_uri'];
 // Llamadas REST
 //  https://stackoverflow.com/questions/2445276/how-to-post-data-in-php-using-file-get-contents
 //  https://www.php.net/manual/en/context.http.php
