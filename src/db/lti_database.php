@@ -40,15 +40,17 @@ $stream = fopen($url, 'r', false, $context);
 
 // header information as well as meta data
 // about the stream
-var_dump(stream_get_meta_data($stream));
+//var_dump(stream_get_meta_data($stream));
 
 // actual data at $url
 //var_dump(stream_get_contents($stream));
+
 // Resultado
 $json_obj = json_decode(stream_get_contents($stream), true);
 //var_dump($json_obj);
 //echo $json_obj['result'];
 //echo $json_obj->{'data'}->{'usuario'}->{'email'};
+
 if($json_obj['result'] === "ok"){
     // Registro
     //echo "<p>" . 'SERVICIO GET:';
@@ -59,6 +61,8 @@ if($json_obj['result'] === "ok"){
 }
 fclose($stream);
 
+// Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
+$reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
 
 class Example_Database implements LTI\Database {
     public function find_registration_by_issuer($iss) {
