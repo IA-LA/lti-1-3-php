@@ -65,9 +65,7 @@ fclose($stream);
 // Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
 //echo "<p>" . '$_SESSION["iss"] 1:';
 //var_dump($_SESSION['iss'], $iss_get);
-$_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
-$_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
-$_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
+//$_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
 //echo "<p>" . '$_SESSION["iss"] 2:';
 //var_dump($_SESSION['iss'], $iss_get);
 $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
