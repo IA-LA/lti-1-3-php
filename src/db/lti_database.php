@@ -50,7 +50,7 @@ echo $json_obj['result'];
 //echo $json_obj->{'data'}->{'usuario'}->{'email'};
 if($json_obj['result'] === "ok"){
     // Registro
-    echo "\n" . 'SERVICIO GET:';
+    echo "<p>" . 'SERVICIO GET:';
     print $json_obj['data']['launch_parameters']['iss'];
     print "<p>" . 'ARRAY ISS:';
     $_SESSION['iss'] = array_merge($_SESSION['iss'], [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']]);
