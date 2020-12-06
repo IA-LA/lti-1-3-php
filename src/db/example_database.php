@@ -44,8 +44,8 @@ var_dump(stream_get_meta_data($stream));
 // actual data at $url
 //var_dump(stream_get_contents($stream));
 // Resultado
-$json_obj = json_decode(stream_get_contents($stream), false, 5);
-echo $json_obj->{'data'};
+$json_obj = json_decode(stream_get_contents($stream));
+echo $json_obj->{'result'};
 if($json_obj->{'result'} === "ok"){
     // Registro
     //$json_obj_registro = json_decode($json_obj->{'data'});
