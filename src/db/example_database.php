@@ -47,7 +47,7 @@ var_dump(stream_get_meta_data($stream));
 $json_obj = json_decode(stream_get_contents($stream));
 if($json_obj->{'result'} === "ok"){
     // Registro
-    $json_obj_registro = json_decode(stream_get_contents($json_obj->{'data'}));
+    $json_obj_registro = json_decode($json_obj->{'data'});
     echo $json_obj_registro->{'launch_parameters'};
     $_SESSION['iss'] = [$json_obj_registro->{'launch_parameters'}];
 }
