@@ -19,7 +19,7 @@
             "testdeploy"
         ]
     },
-    "http://localhost:9002": {
+    "http://localhost:9001": {
         "client_id": "d42df408-70f5-4b60-8274-6c98d3b9468d",
         "auth_login_url": "http://10.201.54.31:9001/platform/login.php",
         "auth_token_url": "http://10.201.54.31:9001/platform/token.php",
