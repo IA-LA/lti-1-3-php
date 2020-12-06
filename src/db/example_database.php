@@ -44,17 +44,15 @@ var_dump(stream_get_meta_data($stream));
 // actual data at $url
 //var_dump(stream_get_contents($stream));
 // Resultado
-$json_obj = json_decode(stream_get_contents($stream), false, 5);
+$json_obj = json_decode(stream_get_contents($stream));
 var_dump($json_obj);
-echo $json_obj->{'result'};
-echo $json_obj->{'data'}->{'usuario'}->{'email'};
+//echo $json_obj->{'result'};
+//echo $json_obj->{'data'}->{'usuario'}->{'email'};
 if($json_obj->{'result'} === "ok"){
     // Registro
-    //$json_obj_registro = json_decode($json_obj->{'data'});
-    //echo $json_obj_registro->{'launch_parameters'};
-    //$_SESSION['iss'] = [$json_obj_registro->{'launch_parameters'}];
     print 'OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK:';
-    echo $json_obj->{'data'}->{'0'}->{'launch_parameters'}->{'0'};
+    echo $json_obj->{'data'}->{'launch_parameters'}->{'iss'};
+    $_SESSION['iss'] = $json_obj->{'data'}->{'launch_parameters'}->{'iss'};
 }
 fclose($stream);
 
