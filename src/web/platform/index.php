@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../db/example_database.php';
+require_once __DIR__ . '/../../db/lti_database.php';
 ?>
 <ul>
     <li>Fancy LMS</li>

@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../db/example_database.php';
+require_once __DIR__ . '/../db/lti_database.php';
 
 //echo TOOL_HOST . "/launch.php" . "?target_link_uri=" . TOOL_PARAM;
 
