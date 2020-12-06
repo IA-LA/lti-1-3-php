@@ -63,18 +63,18 @@ if($json_obj['result'] === "ok"){
 fclose($stream);
 
 // Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
-echo "<p>" . '$_SESSION["iss"] 1:';
-var_dump($_SESSION['iss'], $iss_get);
+//echo "<p>" . '$_SESSION["iss"] 1:';
+//var_dump($_SESSION['iss'], $iss_get);
 $_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
 $_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
 $_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
-echo "<p>" . '$_SESSION["iss"] 2:';
-var_dump($_SESSION['iss'], $iss_get);
+//echo "<p>" . '$_SESSION["iss"] 2:';
+//var_dump($_SESSION['iss'], $iss_get);
 $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
 foreach ($reg_configs as $key => $reg_config) {
     $_SESSION['iss'] = array_merge($_SESSION['iss'], json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
-    print "<p>" . 'FICHERO:';
-    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
+//    print "<p>" . 'FICHERO:';
+//    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
 }
 class Example_Database implements LTI\Database {
     public function find_registration_by_issuer($iss) {
