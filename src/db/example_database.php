@@ -42,7 +42,7 @@ $stream = fopen($url, 'r', false, $context);
 var_dump(stream_get_meta_data($stream));
 
 // actual data at $url
-var_dump(stream_get_contents($stream));
+//var_dump(stream_get_contents($stream));
 // Resultado
 $json_obj = json_decode(stream_get_contents($stream));
 var_dump($json_obj);
