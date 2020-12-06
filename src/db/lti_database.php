@@ -50,10 +50,11 @@ echo $json_obj['result'];
 //echo $json_obj->{'data'}->{'usuario'}->{'email'};
 if($json_obj['result'] === "ok"){
     // Registro
-    print 'OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK:';
-    echo $json_obj['data']['launch_parameters']['iss'];
+    print 'SERVICO GET:';
+    print $json_obj['data']['launch_parameters']['iss'];
+    print 'ARRAY ISS:';
     $_SESSION['iss'] = array_merge($_SESSION['iss'], [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']]);
-    var_dump($_SESSION['iss']['http://localhost:9001']);
+    var_dump($_SESSION['iss']);
 }
 fclose($stream);
 
@@ -61,7 +62,8 @@ fclose($stream);
 $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
 foreach ($reg_configs as $key => $reg_config) {
     $_SESSION['iss'] = array_merge($_SESSION['iss'], json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
-    echo var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
+    print 'FICHERO:';
+    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
 }
 class Example_Database implements LTI\Database {
     public function find_registration_by_issuer($iss) {
