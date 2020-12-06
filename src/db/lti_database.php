@@ -20,7 +20,7 @@ $url.= $_SERVER['HTTP_HOST'];
 // Append the requested resource location to the URL
 $url.= $_SERVER['REQUEST_URI'];
 
-//echo $_REQUEST['target_link_uri'];
+echo $_REQUEST['target_link_uri'];
 // Llamadas REST
 //  https://stackoverflow.com/questions/2445276/how-to-post-data-in-php-using-file-get-contents
 //  https://www.php.net/manual/en/context.http.php
@@ -45,25 +45,30 @@ $stream = fopen($url, 'r', false, $context);
 // actual data at $url
 //var_dump(stream_get_contents($stream));
 
+$iss_get = ['MAl' => ''];
+
 // Resultado
 $json_obj = json_decode(stream_get_contents($stream), true);
 //var_dump($json_obj);
 //echo $json_obj['result'];
 //echo $json_obj->{'data'}->{'usuario'}->{'email'};
-
 if($json_obj['result'] === "ok"){
     // Registro
     //echo "<p>" . 'SERVICIO GET:';
     //print $json_obj['data']['launch_parameters']['iss'];
     //print "<p>" . 'ARRAY ISS:';
-    $_SESSION['iss'] = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
+    $iss_get = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
     //var_dump($_SESSION['iss']);
 }
 fclose($stream);
 
 // Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
 $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
-
+foreach ($reg_configs as $key => $reg_config) {
+    $_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get, json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
+    //print "<p>" . 'FICHERO:';
+    //var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
+}
 class Example_Database implements LTI\Database {
     public function find_registration_by_issuer($iss) {
         if (empty($_SESSION['iss']) || empty($_SESSION['iss'][$iss])) {
