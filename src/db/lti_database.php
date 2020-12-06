@@ -51,8 +51,8 @@ echo $json_obj['result'];
 if($json_obj['result'] === "ok"){
     // Registro
     print 'OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK:';
-    echo $json_obj->{'data'}->{'launch_parameters'}->{'iss'};
-    $_SESSION['iss'] = array_merge($_SESSION['iss'], [$json_obj->{'data'}->{'launch_parameters'}->{'iss'} => $json_obj->{'data'}->{'credentials'}]);
+    echo $json_obj['data']['launch_parameters']['iss'];
+    $_SESSION['iss'] = array_merge($_SESSION['iss'], [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']]);
     echo $_SESSION['iss'];
 }
 fclose($stream);
