@@ -70,8 +70,8 @@ if($json_obj['result'] === "ok"){
 fclose($stream);
 
 // Obtiene la configuración de los sitios de la llamada de lectura `GET`
-//echo "<p>" . '$_SESSION["iss"] 1:';
-//var_dump($_SESSION['iss'], $iss_get);
+echo "<p>" . '$_SESSION["iss"] 1:';
+var_dump($_SESSION['iss'], $iss_get);
 $_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
 //echo "<p>" . '$_SESSION["iss"] 2:';
 //var_dump($_SESSION['iss'], $iss_get);
