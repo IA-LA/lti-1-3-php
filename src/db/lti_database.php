@@ -84,7 +84,7 @@ foreach ($reg_configs as $key => $reg_config) {
 class Lti_Database implements LTI\Database {
     public function find_registration_by_issuer($iss) {
         if (empty($_SESSION['iss']) || empty($_SESSION['iss'][$iss])) {
-            echo '<p>FRBI:' . $_SESSION['iss'];
+            echo '<p>FRBI:' . $_SESSION['iss'][$iss];
             return false;
         }
         return LTI\LTI_Registration::new()
