@@ -1,10 +1,10 @@
-version: '3'
+version: '1'
 services:
   app:
     build: .
     command: /bin/sh -c "cd /srv/app && php /bin/composer.phar install && php /bin/composer.phar update && apache2-foreground"
-    image: breakout-docker
+    image: lti-docker
     ports:
-      - ${BREAKOUT_PORT:-9001}:80
+      - ${LTI_PORT:-9002}:80
     volumes:
       - ./src:/srv/app
