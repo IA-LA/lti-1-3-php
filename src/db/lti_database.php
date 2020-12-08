@@ -63,7 +63,8 @@ if($json_obj['result'] === "ok"){
     //print $json_obj['data']['launch_parameters']['iss'];
     //print "<p>" . 'ARRAY ISS:';
     // Parámetros
-    $iss_get = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
+    //$iss_get = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
+    $iss_get = [$json_obj['data']['id_actividad'] => $json_obj['data']['credentials']];
     //var_dump($_SESSION['iss']);
 }
 fclose($stream);
