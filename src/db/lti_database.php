@@ -8,7 +8,10 @@ use \IMSGlobal\LTI;
 $_SESSION['iss'] = [];
 
 // TODO Conectar con servicio READ
+//////////////////////////////////
+
 // Información servidor
+//  https://www.php.net/manual/es/function.header.php
 ///////////////////////
 if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
     $url = "https://";
@@ -21,6 +24,7 @@ $url.= $_SERVER['HTTP_HOST'];
 $url.= $_SERVER['REQUEST_URI'];
 
 //echo $_REQUEST['target_link_uri'];
+
 // Llamadas REST
 //  https://stackoverflow.com/questions/2445276/how-to-post-data-in-php-using-file-get-contents
 //  https://www.php.net/manual/en/context.http.php
@@ -48,7 +52,8 @@ $stream = fopen($url, 'r', false, $context);
 $iss_get = ['MAl' => ''];
 
 // Resultado
-$json_obj = json_decode(stream_get_contents($stream), true);
+//  https://www.php.net/manual/es/function.json-decode.php
+$json_obj = json_decode(stream_get_contents($stream), true, 5);
 //var_dump($json_obj);
 //echo $json_obj['result'];
 //echo $json_obj->{'data'}->{'usuario'}->{'email'};
@@ -57,17 +62,19 @@ if($json_obj['result'] === "ok"){
     //echo "<p>" . 'SERVICIO GET:';
     //print $json_obj['data']['launch_parameters']['iss'];
     //print "<p>" . 'ARRAY ISS:';
+    // Parámetros
     $iss_get = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
     //var_dump($_SESSION['iss']);
 }
 fclose($stream);
 
-// Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
+// Obtiene la configuración de los sitios de la llamada de lectura `GET`
 //echo "<p>" . '$_SESSION["iss"] 1:';
 //var_dump($_SESSION['iss'], $iss_get);
 $_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
 //echo "<p>" . '$_SESSION["iss"] 2:';
 //var_dump($_SESSION['iss'], $iss_get);
+// Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
 $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
 foreach ($reg_configs as $key => $reg_config) {
 //    $_SESSION['iss'] = array_merge($_SESSION['iss'], json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
