@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../../db/lti_database.php';
 
 use \IMSGlobal\LTI;
-$launch = LTI\LTI_Message_Launch::from_cache($_REQUEST['launch_id'], new Example_Database());
+$launch = LTI\LTI_Message_Launch::from_cache($_REQUEST['launch_id'], new Lti_Database());
 if (!$launch->has_nrps()) {
     throw new Exception("Don't have names and roles!");
 }

@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../db/lti_database.php';
 
 use \IMSGlobal\LTI;
 
-$redirect = LTI\LTI_OIDC_Login::new(new Example_Database())
+$redirect = LTI\LTI_OIDC_Login::new(new Lti_Database())
     ->do_oidc_login_redirect(TOOL_HOST . "/oidc_demo/lti_launch.php");
 
 if (!empty($_COOKIE['thirdpartycookietest'])) {

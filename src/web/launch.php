@@ -4,7 +4,7 @@ require_once __DIR__ . '/../db/lti_database.php';
 
 use \IMSGlobal\LTI;
 
-$launch = LTI\LTI_Message_Launch::new(new Example_Database())
+$launch = LTI\LTI_Message_Launch::new(new Lti_Database())
     ->validate();
 // IFRAME FULL PAGE cross-browser and fully responsive
 //  https://stackoverflow.com/questions/17710039/full-page-iframe

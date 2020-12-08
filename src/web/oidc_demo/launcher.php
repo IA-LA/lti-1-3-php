@@ -35,7 +35,7 @@ $message_jwt = [
         "lineitems" => "http://localhost/platform/services/ags/lineitems.php",
     ]
 ];
-$database = new Example_Database();
+$database = new Lti_Database();
 $jwt = JWT::encode(
     $message_jwt,
     file_get_contents(__DIR__ . '/../../db/platform.key'),

@@ -49,16 +49,16 @@ $stream = fopen($url, 'r', false, $context);
 // actual data at $url
 //var_dump(stream_get_contents($stream));
 
-$iss_get = ['MAl' => ''];
-
 // Resultado
 //  https://www.php.net/manual/es/function.json-decode.php
 $json_obj = json_decode(stream_get_contents($stream), true, 5);
 //var_dump($json_obj);
 //echo $json_obj['result'];
 //echo $json_obj->{'data'}->{'usuario'}->{'email'};
+
+// Contenido Registro
+$iss_get = ['MAl' => ''];
 if($json_obj['result'] === "ok"){
-    // Registro
     //echo "<p>" . 'SERVICIO GET:';
     //print $json_obj['data']['launch_parameters']['iss'];
     //print "<p>" . 'ARRAY ISS:';
@@ -81,9 +81,10 @@ foreach ($reg_configs as $key => $reg_config) {
 //    print "<p>" . 'FICHERO:';
 //    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
 }
-class Example_Database implements LTI\Database {
+class Lti_Database implements LTI\Database {
     public function find_registration_by_issuer($iss) {
         if (empty($_SESSION['iss']) || empty($_SESSION['iss'][$iss])) {
+            echo '<p>FRBI:' . $_SESSION['iss'];
             return false;
         }
         return LTI\LTI_Registration::new()

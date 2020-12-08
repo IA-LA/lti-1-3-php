@@ -6,7 +6,7 @@ require_once __DIR__ . '/../db/lti_database.php';
 
 use \IMSGlobal\LTI;
 
-LTI\LTI_OIDC_Login::new(new Example_Database())
+LTI\LTI_OIDC_Login::new(new Lti_Database())
     ->do_oidc_login_redirect(TOOL_HOST . "/game.php")
     ->do_redirect();
 ?>
