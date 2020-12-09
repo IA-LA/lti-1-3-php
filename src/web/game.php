@@ -42,8 +42,8 @@ use \IMSGlobal\LTI;
 </div>
 <script>
     // Set game difficulty if it has been set in deep linking
-    var curr_diff = "<?=  print '';//$launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/custom']['difficulty'] ?: 'normal'; ?>";
-    var curr_user_name = "<?=  print '';//$launch->get_launch_data()['name']; ?>";
-    var launch_id = "<?=  print '';//$launch->get_launch_id(); ?>";
+    var curr_diff = "<?=  print 'normal';//$launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/custom']['difficulty'] ?: 'normal'; ?>";
+    var curr_user_name = "<?=  print 'nombre';//$launch->get_launch_data()['name']; ?>";
+    var launch_id = "<?=  print 'lti1p3_launch_';//$launch->get_launch_id(); ?>";
 </script>
 <script type="text/javascript" src="static/breakout.js" charset="utf-8"></script>
