@@ -11,6 +11,20 @@ use \IMSGlobal\LTI;
 <link href="static/breakout.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
 
+<?php
+//if ($launch->is_deep_link_launch()) {
+    ?>
+    <div class="dl-config">
+        <h1>Pick a Difficulty</h1>
+        <ul>
+
+        </ul>
+    </div>
+    <?php
+//    die;
+//}
+?>
+
 <div id="game-screen">
     <div style="position:absolute;width:1000px;margin-left:-500px;left:50%; display:block">
         <div id="scoreboard" style="position:absolute; right:0; width:200px; height:486px">
@@ -24,5 +38,10 @@ use \IMSGlobal\LTI;
         </canvas>
     </div>
 </div>
-
+<script>
+    // Set game difficulty if it has been set in deep linking
+//    var curr_diff = "<?= $launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/custom']['difficulty'] ?: 'normal'; ?>";
+//    var curr_user_name = "<?= $launch->get_launch_data()['name']; ?>";
+//    var launch_id = "<?= $launch->get_launch_id(); ?>";
+</script>
 <script type="text/javascript" src="static/breakout.js" charset="utf-8"></script>
