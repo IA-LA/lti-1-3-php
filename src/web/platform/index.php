@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../db/lti_database.php';
 ?>
 <ul>
-    <li>Fancy LMS</li>
+    <li>Fancy LMS <p>(<?php echo TOOL_HOST; ?>)</p></li>
     <li>Users</li>
     <li>Courses</li>
     <li class="sub" onclick="document.getElementById('frame').src='<?php echo TOOL_HOST; ?>/login.php?iss=http%3A%2F%2Flocalhost:9001&login_hint=123456&target_link_uri=<?php echo TOOL_HOST; ?>%2FPlantilla Azul_5e0df19c0c2e74489066b43f%2Findex_default.html&lti_message_hint=123456'">Pruebas 100</li>
@@ -21,30 +21,33 @@ require_once __DIR__ . '/../../db/lti_database.php';
 
 </iframe>
 <style>
-ul {
-    position:absolute;
-    left:0;
-    top:0;
-    width:200px;
-    bottom:0;
-    background-color:darkslategray;
-    color: white;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 28px;
-    font-weight: bold;
-    margin:0;
-    list-style-type: none;
-}
-li {
-    padding-top: 26px;
+    ul {
+        position:absolute;
+        left:0;
+        top:0;
+        width:200px;
+        bottom:0;
+        background-color:darkslategray;
+        color: white;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 28px;
+        font-weight: bold;
+        margin:0;
+        list-style-type: none;
+    }
+    li {
+        padding-top: 26px;
 
-}
-li.sub {
-    padding-left:26px;
-    font-size: 24px;
-}
-iframe {
-    position: absolute;
-    margin-left: 250px;
-}
+    }
+    li.sub {
+        padding-left:26px;
+        font-size: 24px;
+    }
+    iframe {
+        position: absolute;
+        margin-left: 250px;
+    }
+    p {
+        font-size: 12px;
+    }
 </style>
