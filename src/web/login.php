@@ -8,7 +8,7 @@ use \IMSGlobal\LTI;
 
 LTI\LTI_OIDC_Login::new(new Lti_Database())
     //->do_oidc_login_redirect(TOOL_HOST . "/game.php")
-    ->do_oidc_login_redirect(TOOL_HOST . "/launch.php" . "?iss=" . TOOL_ISS . "?target_link_uri=" . TOOL_PARAM)
+    ->do_oidc_login_redirect(TOOL_HOST . "/launch.php" . "?iss=" . TOOL_ISS . "&target_link_uri=" . TOOL_PARAM)
     //->do_oidc_login_redirect(TOOL_HOST . "https://ailanto-dev.intecca.uned.es/lti/launch.php" . "?target_link_uri=" . TOOL_PARAM)
     ->do_redirect();
 ?>
