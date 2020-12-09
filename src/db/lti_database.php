@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: $_SERVER['REQUEST_SCHEME']) . '://' . $_SERVER['HTTP_HOST']);
-define("TOOL_PARAM", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : $_REQUEST['iss']) );
-define("TOOL_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : $_REQUEST['target_link_uri']) );
+define("TOOL_REDIR", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : $_REQUEST['iss']) );
+define("TOOL_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : 'http%3A%2F%2Flocalhost:9999') );
 session_start();
 use \IMSGlobal\LTI;
 

@@ -5,6 +5,8 @@ require_once __DIR__ . '/../../db/lti_database.php';
 
 use \Firebase\JWT\JWT;
 $message_jwt = [
+    // Generaliza ISS
+    /////////////////
     //"iss" => '5fc3860a81740b0ef098a965',
     //"iss" => 'http://localhost:9001',
     "iss" => TOOL_ISS,
@@ -17,8 +19,9 @@ $message_jwt = [
     "https://purl.imsglobal.org/spec/lti/claim/message_type" => "LtiResourceLinkRequest",
     "https://purl.imsglobal.org/spec/lti/claim/version" => "1.3.0",
     // Generaliza LAUNCH URL y TARJET URI
+    /////////////////////////////////////
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_HOST . "/game.php",
-    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAM,
+    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_REDIR,
     "https://purl.imsglobal.org/spec/lti/claim/roles" => [
         "http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor"
     ],
