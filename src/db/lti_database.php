@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: $_SERVER['REQUEST_SCHEME']) . '://' . $_SERVER['HTTP_HOST']);
 define("TOOL_PARAM", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : $_REQUEST['iss']) );
+define("TOOL_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : 'http%3A%2F%2Flocalhost:9001') );
 session_start();
 use \IMSGlobal\LTI;
 
@@ -58,7 +59,8 @@ $json_obj = json_decode(stream_get_contents($stream), true, 5);
 
 // Contenido Registro
 $iss_get = ['MAl' => ''];
-if($json_obj['result'] === "ok"){
+// TODO Comprobar que || ($_REQUEST['target_link_uri'] === $json_obj['data']['launch_parameters']['target_link_uri')]
+if(($json_obj['result'] === "ok") || (true)){
     //echo "<p>" . 'SERVICIO GET:';
     //print $json_obj['data']['launch_parameters']['iss'];
     //print "<p>" . 'ARRAY ISS:';
@@ -108,7 +110,7 @@ class Lti_Database implements LTI\Database {
             ->set_deployment_id($deployment_id);
     }
 
-    // Obtiene la cave privada de cada sitio `$iss`
+    // Obtiene la cave privada de cada sitio issue `$iss`
     private function
     private_key($iss) {
         return file_get_contents(__DIR__ . $_SESSION['iss'][$iss]['private_key_file']);
