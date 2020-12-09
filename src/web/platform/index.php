@@ -49,5 +49,6 @@ require_once __DIR__ . '/../../db/lti_database.php';
     }
     p {
         font-size: 12px;
+        font-weight: normal;
     }
 </style>
