@@ -12,8 +12,8 @@ use \IMSGlobal\LTI;
 
 $_SESSION['iss'] = [];
 
-// TODO Conectar con servicio READ
-//////////////////////////////////
+// Conectar con servicio READ
+/////////////////////////////
 
 // Información servidor
 //  https://www.php.net/manual/es/function.header.php
@@ -62,8 +62,8 @@ $json_obj = json_decode(stream_get_contents($stream), true, 5);
 
 // Contenido Registro
 $iss_get = ['MAl' => ''];
-// TODO Comprobar que || ($_REQUEST['target_link_uri'] === $json_obj['data']['launch_parameters']['target_link_uri')]
-if(($json_obj['result'] === "ok") || (true)){
+// TODO Comprobar que || (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
+if(($json_obj['result'] === "ok") || (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])){
     //echo "<p>" . 'SERVICIO GET:';
     //print $json_obj['data']['launch_parameters']['iss'];
     //print "<p>" . 'ARRAY ISS:';
