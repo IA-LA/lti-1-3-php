@@ -17,9 +17,9 @@ use \IMSGlobal\LTI;
     <div class="dl-config">
         <h1>Pick a Difficulty</h1>
         <ul>
-            <li><a href="<?= TOOL_HOST ?>/configure.php?diff=easy&launch_id=<?= $launch->get_launch_id(); ?>">Easy</a></li>
-            <li><a href="<?= TOOL_HOST ?>/configure.php?diff=normal&launch_id=<?= $launch->get_launch_id(); ?>">Normal</a></li>
-            <li><a href="<?= TOOL_HOST ?>/configure.php?diff=hard&launch_id=<?= $launch->get_launch_id(); ?>">Hard</a></li>
+            <li><a href="<?= TOOL_HOST ?>/configure.php?diff=easy&launch_id=<?= print '';//$launch->get_launch_id(); ?>">Easy</a></li>
+            <li><a href="<?= TOOL_HOST ?>/configure.php?diff=normal&launch_id=<?= print ''; //$launch->get_launch_id(); ?>">Normal</a></li>
+            <li><a href="<?= TOOL_HOST ?>/configure.php?diff=hard&launch_id=<?= print '';//$launch->get_launch_id(); ?>">Hard</a></li>
         </ul>
     </div>
     <?php
@@ -42,8 +42,8 @@ use \IMSGlobal\LTI;
 </div>
 <script>
     // Set game difficulty if it has been set in deep linking
-//    var curr_diff = "<?= $launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/custom']['difficulty'] ?: 'normal'; ?>";
-//    var curr_user_name = "<?= $launch->get_launch_data()['name']; ?>";
-//    var launch_id = "<?= $launch->get_launch_id(); ?>";
+    var curr_diff = "<?=  print '';//$launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/custom']['difficulty'] ?: 'normal'; ?>";
+    var curr_user_name = "<?=  print '';//$launch->get_launch_data()['name']; ?>";
+    var launch_id = "<?=  print '';//$launch->get_launch_id(); ?>";
 </script>
 <script type="text/javascript" src="static/breakout.js" charset="utf-8"></script>
