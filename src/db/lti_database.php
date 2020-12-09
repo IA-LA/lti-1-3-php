@@ -5,8 +5,8 @@ use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
 
 define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: $_SERVER['REQUEST_SCHEME']) . '://' . $_SERVER['HTTP_HOST']);
-define("TOOL_REDIR", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : $_REQUEST['iss']) );
-define("TOOL_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : $_REQUEST['id_token'] . $_SERVER['REQUEST_URI']) ); //$_POST['id_token'] $_REQUEST['state'] json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]))['aud'])
+define("TOOL_REDIR", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : $_SERVER['REQUEST_URI']['redirect_uri']) );
+define("TOOL_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : $_REQUEST['id_token'] . $_SERVER['REQUEST_URI']['redirect_uri']) ); //$_POST['id_token'] $_REQUEST['state'] json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]))['aud'])
 session_start();
 use \IMSGlobal\LTI;
 
