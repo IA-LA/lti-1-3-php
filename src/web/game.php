@@ -17,7 +17,9 @@ use \IMSGlobal\LTI;
     <div class="dl-config">
         <h1>Pick a Difficulty</h1>
         <ul>
-
+            <li><a href="<?= TOOL_HOST ?>/configure.php?diff=easy&launch_id=<?= print '';//$launch->get_launch_id(); ?>">Easy</a></li>
+            <li><a href="<?= TOOL_HOST ?>/configure.php?diff=normal&launch_id=<?= print ''; //$launch->get_launch_id(); ?>">Normal</a></li>
+            <li><a href="<?= TOOL_HOST ?>/configure.php?diff=hard&launch_id=<?= print '';//$launch->get_launch_id(); ?>">Hard</a></li>
         </ul>
     </div>
     <?php
