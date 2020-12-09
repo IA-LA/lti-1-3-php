@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: $_SERVER['REQUEST_SCHEME']) . '://' . $_SERVER['HTTP_HOST']);
 define("TOOL_REDIR", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : $_REQUEST['iss']) );
-define("TOOL_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : $_REQUEST['id_token']) );
+define("TOOL_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : 'http%3A%2F%2Flocalhost:9999') );
 session_start();
 use \IMSGlobal\LTI;
 
@@ -88,7 +88,7 @@ foreach ($reg_configs as $key => $reg_config) {
 class Lti_Database implements LTI\Database {
     public function find_registration_by_issuer($iss) {
         if (empty($_SESSION['iss']) || empty($_SESSION['iss'][$iss])) {
-            echo '<p>f_r_b_i():' . $iss . ' - ' . $_SESSION['iss']['5fc3860a81740b0ef098a965']['key_set_url'] . ' - ' . TOOL_ISS . ' - ' . $_REQUEST['id_token'];
+            echo '<p>f_r_b_i():' . $iss . ' - ' . $_SESSION['iss']['5fc3860a81740b0ef098a965']['key_set_url'] . ' - ' . TOOL_ISS;
             return false;
         }
         return LTI\LTI_Registration::new()
