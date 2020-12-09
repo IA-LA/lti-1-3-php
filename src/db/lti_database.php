@@ -32,6 +32,7 @@ $url.= $_SERVER['REQUEST_URI'];
 // Llamadas REST
 //  https://stackoverflow.com/questions/2445276/how-to-post-data-in-php-using-file-get-contents
 //  https://www.php.net/manual/en/context.http.php
+// Obtiene la configuración de las actividades con una llamada de lectura `GET`
 ///////////////////
 $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_ISS;
 
@@ -75,7 +76,7 @@ if(($json_obj['result'] === "ok") && (TOOL_REDIR === $json_obj['data']['launch_p
 }
 fclose($stream);
 
-// Obtiene la configuración de los sitios de la llamada de lectura `GET`
+// Obtiene la configuración de los sitios con una llamada de lectura `GET`
 //echo "<p>" . '$_SESSION["iss"] 1:';
 //var_dump($_SESSION['iss'], $iss_get);
 $_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
@@ -92,7 +93,7 @@ foreach ($reg_configs as $key => $reg_config) {
 class Lti_Database implements LTI\Database {
     public function find_registration_by_issuer($iss) {
         if (empty($_SESSION['iss']) || empty($_SESSION['iss'][$iss])) {
-            echo '<p>f_r_b_i():' . $iss . ' - ' . $_SESSION['iss'][TOOL_ISS]['key_set_url'] . ' - ' . TOOL_ISS . ' - ' . TOOL_REDIR;
+            echo '<p>f_r_b_i():' . $iss . ' - ' . $_SESSION['iss'][TOOL_ISS]['key_set_url'] . ' - ' . TOOL_HOST . ' - ' . TOOL_ISS . ' - ' . TOOL_REDIR;
             return false;
         }
         return LTI\LTI_Registration::new()
