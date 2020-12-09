@@ -62,7 +62,7 @@ $json_obj = json_decode(stream_get_contents($stream), true, 5);
 
 // Contenido Registro
 $iss_get = ['MAl' => ''];
-// TODO Comprobar que AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
+// TODO Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
 if(($json_obj['result'] === "ok") && (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])){
     //echo "<p>" . 'SERVICIO GET:';
     //print $json_obj['data']['launch_parameters']['iss'];
