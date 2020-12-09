@@ -6,7 +6,7 @@ use Firebase\JWT\JWT;
 
 define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: $_SERVER['REQUEST_SCHEME']) . '://' . $_SERVER['HTTP_HOST']);
 define("TOOL_REDIR", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : $_REQUEST['redirect_uri']) );
-define("TOOL_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : $_REQUEST['id_token'] . explode('5%26target_link_uri', explode('%3Fiss%3D', $_SERVER['redirect_uri'])[1])[0]) ); //$_POST['id_token'] $_REQUEST['state'] json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]))['aud'])
+define("TOOL_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : $_REQUEST['id_token'] . $_SERVER['redirect_uri']) ); //$_POST['id_token'] $_REQUEST['state'] json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]))['aud'])
 session_start();
 use \IMSGlobal\LTI;
 
