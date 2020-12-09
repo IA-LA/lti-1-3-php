@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../db/lti_database.php';
 
 use \Firebase\JWT\JWT;
 $message_jwt = [
-    "iss" => 'http://localhost:9001',
+    "iss" => 'http://localhost:9000',
     "aud" => ['d42df408-70f5-4b60-8274-6c98d3b9468d'],
     "sub" => '0ae836b9-7fc9-4060-006f-27b2066ac545',
     "exp" => time() + 600,
