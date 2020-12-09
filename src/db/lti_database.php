@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: $_SERVER['REQUEST_SCHEME']) . '://' . $_SERVER['HTTP_HOST']);
 define("TOOL_PARAM", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : $_REQUEST['iss']) );
-define("TOOL_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : 'http%3A%2F%2Flocalhost:9001') );
+define("TOOL_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : $_REQUEST['target_link_uri']) );
 session_start();
 use \IMSGlobal\LTI;
 
@@ -30,7 +30,7 @@ $url.= $_SERVER['REQUEST_URI'];
 //  https://stackoverflow.com/questions/2445276/how-to-post-data-in-php-using-file-get-contents
 //  https://www.php.net/manual/en/context.http.php
 ///////////////////
-$url = "http://10.201.54.31:49151/servicios/lti/lti13/read/5fc3860a81740b0ef098a965";
+$url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_ISS;
 
 $opts = array('http' =>
     array(
