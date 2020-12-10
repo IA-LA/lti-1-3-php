@@ -3,7 +3,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../db/lti_database.php';
 
 //echo TOOL_HOST . "/launch.php" . "?target_link_uri=" . TOOL_REDIR;
-echo $_REQUEST;
+echo $_REQUEST['iss'];
 use \IMSGlobal\LTI;
 
 LTI\LTI_OIDC_Login::new(new Lti_Database())
