@@ -114,7 +114,7 @@ class Lti_Database implements LTI\Database {
     public function find_registration_by_issuer($iss) {
         if (empty($_SESSION['iss']) || empty($_SESSION['iss'][$iss])) {
             echo '<p>f_r_b_i():' . $iss . ' - ' . $_SESSION['iss'][TOOL_ISS]['key_set_url'] . ' - ' . $_SESSION['iss']['MAl'] . ' - ' . TOOL_HOST . ' - ' . TOOL_ISS . ' - ' . TOOL_REDIR . ' # ' . TOOL_TOKEN;
-            print_r($this->request);
+            print_r(json_decode(JWT::urlsafeB64Decode(explode('.', $this->request)[1]), true));
             print_r(json_decode(JWT::urlsafeB64Decode(explode('.', $_POST['id_token'])[1]), true));
             return false;
         }
