@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../db/lti_database.php';
     <li>Fancy LMS <p>(<?php echo TOOL_HOST; ?>)</p></li>
     <li>Users</li>
     <li>Courses</li>
-    <li class="sub" onclick="document.getElementById('frame').src='<?php echo TOOL_HOST; ?>/login.php?iss=5fc3860a81740b0ef098a970&login_hint=123456&target_link_uri=http://10.201.54.31:9001/Plantilla Azul_5e0df19c0c2e74489066b43f/index.php&lti_message_hint=123456'">Prueba 100</li>
+    <li class="sub" onclick="document.getElementById('frame').src='http://10.201.54.31:9001/login.php?iss=http%3A%2F%2Flocalhost:9001&login_hint=123456&target_link_uri=http://10.201.54.31:9001/Plantilla Azul_5e0df19c0c2e74489066b43f/index.php&lti_message_hint=123456'">Prueba 100</li>
     <!-- <li class="sub" onclick="document.getElementById('frame').src='<?php echo TOOL_HOST; ?>/login.php?iss=http%3A%2F%2Flocalhost:9001&login_hint=12345&target_link_uri=http%3A%2F%2Flocalhost%2Fgame.php&lti_message_hint=12345'">Games 101</li> -->
     <!-- <li class="sub" onclick="document.getElementById('frame').src='<?php echo TOOL_HOST; ?>/login.php?iss=<?php echo TOOL_HOST; ?>:9001&login_hint=123456&target_link_uri=<?php echo TOOL_HOST; ?>%2Fgame.php&lti_message_hint=123456'">Games 101</li> -->
     <li class="sub" onclick="document.getElementById('frame').src='<?php echo TOOL_HOST; ?>/login.php?iss=game&login_hint=12345&target_link_uri=<?php echo TOOL_HOST; ?>/game.php&lti_message_hint=12345'">Game 101</li>
