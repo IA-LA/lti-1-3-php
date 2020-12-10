@@ -7,6 +7,8 @@ use \IMSGlobal\LTI;
 $launch = LTI\LTI_Message_Launch::new(new Lti_Database())
     ->validate();
 
+use Firebase\JWT\JWK;
+use Firebase\JWT\JWT;
 // IFRAME FULL PAGE cross-browser and fully responsive
 //  https://stackoverflow.com/questions/17710039/full-page-iframe
 echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
@@ -22,7 +24,7 @@ echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
     z-index: 999999;
     height: 100%;
   "></iframe> <p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
-  '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'];
+  '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'], json_decode(JWT::urlsafeB64Decode(explode('.',$_REQUEST['id_token'])[1]), true)['iss'];
 
 ?>
 
