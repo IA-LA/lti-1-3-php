@@ -41,7 +41,7 @@ $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_ISS;
 $opts = array('http' =>
     array(
         'method' => 'GET',
-        'max_redirects' => '0',
+        'timeout' => '5',
         'ignore_errors' => '1'
     )
 );
