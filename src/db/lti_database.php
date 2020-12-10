@@ -6,7 +6,9 @@ use Firebase\JWT\JWT;
 
 define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: $_SERVER['REQUEST_SCHEME']) . '://' . $_SERVER['HTTP_HOST']);
 define("TOOL_REDIR", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : $_REQUEST['redirect_uri']) ); //explode('%26', explode('target_link_uri%3D', $_SERVER['REQUEST_URI'])[0]))[0]
-define("TOOL_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : json_decode(JWT::urlsafeB64Decode(explode('.',$_REQUEST['id_token'])[1]), true)['iss']. ' ### ' . explode('%26', explode('iss%3D', $_SERVER['REQUEST_URI'])[1])[0]) ); //$_POST['id_token'] $_REQUEST['state'] json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]))['aud'])
+define("TOOL_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : explode('%26', explode('iss%3D', $_SERVER['REQUEST_URI'])[1])[0]) ); //$_POST['id_token'] $_REQUEST['state'] json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]))['aud'])
+define("TOOL_TOKEN", ($_REQUEST['id_token'] ? json_decode(JWT::urlsafeB64Decode(explode('.',$_REQUEST['id_token'])[1]), true)['iss'] : '') );
+
 session_start();
 use \IMSGlobal\LTI;
 
@@ -93,7 +95,7 @@ foreach ($reg_configs as $key => $reg_config) {
 class Lti_Database implements LTI\Database {
     public function find_registration_by_issuer($iss) {
         if (empty($_SESSION['iss']) || empty($_SESSION['iss'][$iss])) {
-            echo '<p>f_r_b_i():' . $iss . ' - ' . $_SESSION['iss'][TOOL_ISS]['key_set_url'] . ' - ' . TOOL_HOST . ' - ' . TOOL_ISS . ' - ' . TOOL_REDIR;
+            echo '<p>f_r_b_i():' . $iss . ' - ' . $_SESSION['iss'][TOOL_ISS]['key_set_url'] . ' - ' . TOOL_HOST . ' - ' . TOOL_ISS . ' - ' . TOOL_REDIR . ' # ' . TOOL_TOKEN;
             return false;
         }
         return LTI\LTI_Registration::new()
