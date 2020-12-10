@@ -9,7 +9,7 @@ $launch = LTI\LTI_Message_Launch::new(new Lti_Database())
 
 use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
-$post_param = json_decode(JWT::urlsafeB64Decode(explode('.',$_REQUEST['id_token'])[1]), true);
+$post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
 // IFRAME FULL PAGE cross-browser and fully responsive
 //  https://stackoverflow.com/questions/17710039/full-page-iframe
 echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
