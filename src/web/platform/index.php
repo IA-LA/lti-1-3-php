@@ -12,8 +12,10 @@ require_once __DIR__ . '/../../db/lti_database.php';
     <li class="sub" onclick="document.getElementById('frame').src='<?php echo TOOL_HOST; ?>/login.php?iss=5fc3860a81740b0ef098a965&login_hint=123456&target_link_uri=http://10.201.54.31:9002/Plantilla Azul_5e0df19c0c2e74489066b43f/index_default.html&lti_message_hint=123456'">BBDD 101</li>
     <li class="sub" onclick="document.getElementById('frame').src='<?php echo TOOL_HOST; ?>/login.php?iss=5fc3860a81740b0ef098a966&login_hint=123456&target_link_uri=https://www.uned.es&lti_message_hint=123456'">BBDD 102</li>
     <li class="sub" onclick="document.getElementById('frame').src='<?php echo TOOL_HOST; ?>/login.php?iss=5fc3860a81740b0ef098a967&login_hint=123456&target_link_uri=https://www.bing.es&lti_message_hint=123456'">BBDD 103</li>
-    <li class="sub" onclick="document.getElementById('frame').src='<?php echo TOOL_HOST; ?>/login_default.php?iss=http%3A%2F%2Flocalhost:9001&login_hint=123456&target_link_uri=<?php echo TOOL_HOST; ?>%2Fgame.php&lti_message_hint=123456'">Example 101</li>
-    <li class="sub" onclick="document.getElementById('frame').src='<?php echo TOOL_HOST; ?>/login_econtent.php?iss=http%3A%2F%2Flocalhost:9001&login_hint=123456&lti_message_hint=123456'">Econtent 101</li>
+    <li class="sub" onclick="document.getElementById('frame').src='<?php echo TOOL_HOST; ?>/login.php?iss=5fc3860a81740b0ef098a971&login_hint=123456&target_link_uri=<?php echo TOOL_HOST; ?>%2Fgame.php&lti_message_hint=123456'">BBDD 104</li>
+    <li class="sub" onclick="document.getElementById('frame').src='<?php echo TOOL_HOST; ?>/login.php?iss=5fc3860a81740b0ef098a972&login_hint=123456&target_link_uri=<?php echo TOOL_HOST; ?>/Plantilla Azul_5e0df19c0c2e74489066b43f/index.php&lti_message_hint=123456'">BBDD 105</li>
+    <li class="sub" onclick="document.getElementById('frame').src='<?php echo TOOL_HOST; ?>/login_default.php?iss=http%3A%2F%2Flocalhost:9001&login_hint=123456&target_link_uri=<?php echo TOOL_HOST; ?>%2Fgame.php&lti_message_hint=123456'">Example 1</li>
+    <li class="sub" onclick="document.getElementById('frame').src='<?php echo TOOL_HOST; ?>/login_econtent.php?iss=http%3A%2F%2Flocalhost:9001&login_hint=123456&lti_message_hint=123456'">Econtent 1</li>
 
     <li>Settings</li>
 </ul>
