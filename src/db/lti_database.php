@@ -65,9 +65,9 @@ $json_obj = json_decode(stream_get_contents($stream), true, 5);
 
 // Contenido Registro
 $iss_get = ['MAl' => 'MAl'];
-// TODO Comprobar que los hint son idénticos AND () AND ()
+// TODO Comprobar que los hint son idénticos AND (['login_hint']) AND (['lti_message_hint'])
 // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
-echo $url . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) === false . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'][0] . ' FIN ';
+print $url . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'][0] . ' FIN ';
 if(($json_obj['result'] === "ok") && (strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) === TOOL_REDIR) ){
     //echo "<p>" . 'SERVICIO GET:';
     //print $json_obj['data']['launch_parameters']['iss'];
