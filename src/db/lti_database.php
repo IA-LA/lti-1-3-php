@@ -58,7 +58,7 @@ $stream = fopen($url, 'r', false, $context);
 
 // Resultado
 //  https://www.php.net/manual/es/function.json-decode.php
-$json_obj = json_decode(stream_get_contents($stream), true, 5);
+$json_obj = json_decode(stream_get_contents($stream), true, 10);
 //var_dump($json_obj);
 //echo $json_obj['result'];
 //echo $json_obj->{'data'}->{'usuario'}->{'email'};
