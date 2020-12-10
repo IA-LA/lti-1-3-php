@@ -41,7 +41,7 @@ $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_ISS;
 $opts = array('http' =>
     array(
         'method' => 'GET',
-        'max_redirects' => '0',
+        'max_redirects' => '1',
         'ignore_errors' => '1'
     )
 );
@@ -58,7 +58,7 @@ $stream = fopen($url, 'r', false, $context);
 
 // Resultado
 //  https://www.php.net/manual/es/function.json-decode.php
-$json_obj = json_decode(stream_get_contents($stream), true);
+$json_obj = json_decode(stream_get_contents($stream), true, 5);
 //var_dump($json_obj);
 //echo $json_obj['result'];
 //echo $json_obj->{'data'}->{'usuario'}->{'email'};
@@ -67,7 +67,7 @@ $json_obj = json_decode(stream_get_contents($stream), true);
 $iss_get = ['MAl' => 'MAl'];
 // TODO Comprobar que los hint son idénticos AND () AND ()
 // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
-echo TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . $json_obj['result'];
+echo TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . $json_obj['data'];
 if(($json_obj['result'] === "ok") && (TOOL_REDIR == $json_obj['data']['launch_parameters']['target_link_uri'])){
     //echo "<p>" . 'SERVICIO GET:';
     //print $json_obj['data']['launch_parameters']['iss'];
