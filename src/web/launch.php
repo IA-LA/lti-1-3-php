@@ -4,6 +4,8 @@ require_once __DIR__ . '/../db/lti_database.php';
 
 use \IMSGlobal\LTI;
 
+echo $_REQUEST['iss'], $_REQUEST['target_link_uri'];
+
 $launch = LTI\LTI_Message_Launch::new(new Lti_Database())
     ->validate();
 
