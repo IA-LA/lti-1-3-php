@@ -21,7 +21,7 @@ echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
     overflow: hidden;
     z-index: 999999;
     height: 100%;
-  "></iframe>';
+  "></iframe>', $_SERVER['REQUEST_URI'];
 
 ?>
 
