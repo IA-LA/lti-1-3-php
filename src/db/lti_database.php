@@ -68,16 +68,7 @@ $iss_get = ['MAl' => 'MAl'];
 // TODO Comprobar que los hint son idénticos AND () AND ()
 // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
 echo $url . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . $json_obj['data']['launch_parameters']['target_link_uri'];
-
-// Function to check string starting
-// with given substring
-//  https://www.geeksforgeeks.org/php-startswith-and-endswith-functions/
-function startsWith ($string, $startString)
-{
-    $len = strlen($startString);
-    return (substr($string, 0, $len) === $startString);
-}
-if(($json_obj['result'] === "ok") && (startsWith($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR)) ){
+if(($json_obj['result'] === "ok") && (strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR)) ){
     //echo "<p>" . 'SERVICIO GET:';
     //print $json_obj['data']['launch_parameters']['iss'];
     //print "<p>" . 'ARRAY ISS:';
