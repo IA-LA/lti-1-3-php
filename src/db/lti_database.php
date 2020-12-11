@@ -43,91 +43,90 @@ class Lti_Database implements LTI\Database {
 
     public function find_registration_by_issuer($iss) {
 
+        //get_iss($iss);
+
+        // Conectar con servicio READ
+        /////////////////////////////
+
+        // Información servidor
+        //  https://www.php.net/manual/es/function.header.php
+        ///////////////////////
+        if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+            $url = "https://";
+        else
+            $url = "http://";
+        // Append the host(domain name, ip) to the URL.
+        $url.= $_SERVER['HTTP_HOST'];
+
+        // Append the requested resource location to the URL
+        $url.= $_SERVER['REQUEST_URI'];
+        //echo $_REQUEST['target_link_uri'];
+
+        // Llamadas REST
+        //  https://stackoverflow.com/questions/2445276/how-to-post-data-in-php-using-file-get-contents
+        //  https://www.php.net/manual/en/context.http.php
+        // Obtiene la configuración de las actividades con una llamada de lectura `GET`
+        ///////////////////
+        $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
+
+        $opts = array('http' =>
+            array(
+                'method' => 'GET',
+                'timeout' => '5',
+                'ignore_errors' => '1'
+            )
+        );
+
+        $context = stream_context_create($opts);
+        $stream = fopen($url, 'r', false, $context);
+
+        // header information as well as meta data
+        // about the stream
+        //var_dump(stream_get_meta_data($stream));
+
+        // actual data at $url
+        //var_dump(stream_get_contents($stream));
+
+        // Resultado
+        //  https://www.php.net/manual/es/function.json-decode.php
+        $json_obj = json_decode(stream_get_contents($stream), true, 5);
+        //var_dump($json_obj);
+        //echo $json_obj['result'];
+        //echo $json_obj->{'data'}->{'usuario'}->{'email'};
+
+        // Contenido Registro
+        $iss_get = ['MAl' => 'MAl'];
+        // TODO Comprobar que los hint son idénticos AND (['login_hint']) AND (['lti_message_hint'])
+        // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
+        // print $url . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
+        $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
+        if(($json_obj['result'] === "ok") && ($GET_target_link_uri === TOOL_PARAMS_TARGET) ){
+            echo "<p>" . 'SERVICIO GET:';
+            //print $json_obj['data']['launch_parameters']['iss'];
+            //print "<p>" . 'ARRAY ISS:';
+            // Parámetros
+            $iss_get = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
+            //$iss_get = [$json_obj['data']['id_actividad'] => $json_obj['data']['credentials']];
+            //var_dump($_SESSION['iss']);
+        }
+        fclose($stream);
+
+        // Obtiene la configuración de los sitios con una llamada de lectura `GET`
+        //echo "<p>" . '$_SESSION["iss"] 1:';
+        //var_dump($_SESSION['iss'], $iss_get);
+        $_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
+        //echo "<p>" . '$_SESSION["iss"] 2:';
+        //var_dump($_SESSION['iss'], $iss_get);
+
+        // Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
+        $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
+        foreach ($reg_configs as $key => $reg_config) {
+            //    $_SESSION['iss'] = array_merge($_SESSION['iss'], json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
+            //    print "<p>" . 'FICHERO:';
+            //    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
+        }
+
         if (empty($_SESSION['iss']) || empty($_SESSION['iss'][$iss])) {
-            //get_iss($iss);
-
-            // Conectar con servicio READ
-            /////////////////////////////
-
-            // Información servidor
-            //  https://www.php.net/manual/es/function.header.php
-            ///////////////////////
-            if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-                $url = "https://";
-            else
-                $url = "http://";
-            // Append the host(domain name, ip) to the URL.
-            $url.= $_SERVER['HTTP_HOST'];
-
-            // Append the requested resource location to the URL
-            $url.= $_SERVER['REQUEST_URI'];
-            //echo $_REQUEST['target_link_uri'];
-
-            // Llamadas REST
-            //  https://stackoverflow.com/questions/2445276/how-to-post-data-in-php-using-file-get-contents
-            //  https://www.php.net/manual/en/context.http.php
-            // Obtiene la configuración de las actividades con una llamada de lectura `GET`
-            ///////////////////
-            $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
-
-            $opts = array('http' =>
-                array(
-                    'method' => 'GET',
-                    'timeout' => '5',
-                    'ignore_errors' => '1'
-                )
-            );
-
-            $context = stream_context_create($opts);
-            $stream = fopen($url, 'r', false, $context);
-
-            // header information as well as meta data
-            // about the stream
-            //var_dump(stream_get_meta_data($stream));
-
-            // actual data at $url
-            //var_dump(stream_get_contents($stream));
-
-            // Resultado
-            //  https://www.php.net/manual/es/function.json-decode.php
-            $json_obj = json_decode(stream_get_contents($stream), true, 5);
-            //var_dump($json_obj);
-            //echo $json_obj['result'];
-            //echo $json_obj->{'data'}->{'usuario'}->{'email'};
-
-            // Contenido Registro
-            $iss_get = ['MAl' => 'MAl'];
-            // TODO Comprobar que los hint son idénticos AND (['login_hint']) AND (['lti_message_hint'])
-            // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
-            // print $url . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
-            $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
-            if(($json_obj['result'] === "ok") && ($GET_target_link_uri === TOOL_PARAMS_TARGET) ){
-                echo "<p>" . 'SERVICIO GET:';
-                //print $json_obj['data']['launch_parameters']['iss'];
-                //print "<p>" . 'ARRAY ISS:';
-                // Parámetros
-                $iss_get = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
-                //$iss_get = [$json_obj['data']['id_actividad'] => $json_obj['data']['credentials']];
-                //var_dump($_SESSION['iss']);
-            }
-            fclose($stream);
-
-            // Obtiene la configuración de los sitios con una llamada de lectura `GET`
-            //echo "<p>" . '$_SESSION["iss"] 1:';
-            //var_dump($_SESSION['iss'], $iss_get);
-            $_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
-            //echo "<p>" . '$_SESSION["iss"] 2:';
-            //var_dump($_SESSION['iss'], $iss_get);
-
-            // Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
-            $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
-            foreach ($reg_configs as $key => $reg_config) {
-                //    $_SESSION['iss'] = array_merge($_SESSION['iss'], json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
-                //    print "<p>" . 'FICHERO:';
-                //    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
-            }
-
-
             echo '<p>f_r_b_i():' . $iss . ' - ' . $_SESSION['iss'][TOOL_PARAMS_ISS]['key_set_url'] . ' - ' . $_SESSION['iss']['MAl'] . ' - ' . TOOL_HOST . ' - ' . TOOL_PARAMS_ISS . ' - ' . TOOL_PARAMS_TARGET . ' # ' . TOOL_TOKEN . '##' . TOOL_PARAMS_ISS;
             print(TOOL_PARAMS_ISS . TOOL_PARAMS_LOGIN . TOOL_PARAMS_TARGET . TOOL_PARAMS_LTI);
             echo '<p>id_token: ';
