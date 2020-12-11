@@ -68,7 +68,7 @@ class Lti_Database implements LTI\Database {
             //  https://www.php.net/manual/en/context.http.php
             // Obtiene la configuración de las actividades con una llamada de lectura `GET`
             ///////////////////
-            $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_ISS;
+            $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
 
             $opts = array('http' =>
                 array(
@@ -101,7 +101,7 @@ class Lti_Database implements LTI\Database {
             // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
             // print $url . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
             $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
-            if(($json_obj['result'] === "ok") && ($GET_target_link_uri === TOOL_REDIR) ){
+            if(($json_obj['result'] === "ok") || ($GET_target_link_uri === TOOL_REDIR) ){
                 //echo "<p>" . 'SERVICIO GET:';
                 //print $json_obj['data']['launch_parameters']['iss'];
                 //print "<p>" . 'ARRAY ISS:';
