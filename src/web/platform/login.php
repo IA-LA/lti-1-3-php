@@ -55,7 +55,7 @@ $jwt = JWT::encode(
 <form id="auto_submit" action="<?= $_REQUEST['redirect_uri']; ?>" method="POST">
     <input type="hidden" name="id_token" value="<?= $jwt ?>" />
     <input type="hidden" name="state" value="<?= $_REQUEST['state']; ?>" />
-    <input type="hidden" name="iss" value="<?= $_REQUEST['iss']; ?>" />
+    <input type="hidden" name="iss" value="<?= $_REQUEST['client_id']; ?>" />
     <input type="hidden" name="login_hint" value="<?= $_REQUEST['login_hint']; ?>" />
     <input type="hidden" name="target_link_uri" value="<?= $_REQUEST['redirect_uri']; ?>" />
     <input type="hidden" name="lti_message_hint" value="<?= $_REQUEST['lti_message_hint']; ?>" />
