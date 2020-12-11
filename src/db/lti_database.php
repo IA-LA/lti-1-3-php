@@ -109,14 +109,18 @@ class Lti_Database implements LTI\Database {
             $request = $_REQUEST;
         }
         $this->request = $request;
-        define("TOOL_PARAMS", $this->request );
+        ["iss" => $_REQUEST['iss'], "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => $_REQUEST['target_link_uri'], "lti_message_hint" => $_REQUEST['lti_message_hint']]
+        define("TOOL_PARAM_ISS", $this->request['iss'] );
+        define("TOOL_PARAMS_LOGIN", $this->request['login_hint'] );
+        define("TOOL_PARAMS_TARGET", $this->request['target_link_uri'] );
+        define("TOOL_PARAMS_LTI", $this->request['lti_message_hint'] );
     }
 
     public function find_registration_by_issuer($iss) {
         //get_iss($iss);
         if (empty($_SESSION['iss']) || empty($_SESSION['iss'][$iss])) {
             echo '<p>f_r_b_i():' . $iss . ' - ' . $_SESSION['iss'][TOOL_ISS]['key_set_url'] . ' - ' . $_SESSION['iss']['MAl'] . ' - ' . TOOL_HOST . ' - ' . TOOL_ISS . ' - ' . TOOL_REDIR . ' # ' . TOOL_TOKEN . '##' . TOOL_PARAMS;
-            print_r(TOOL_PARAMS);
+            print(TOOL_PARAM_ISS . TOOL_PARAMS_LOGIN . TOOL_PARAMS_TARGET . TOOL_PARAMS_LTI);
             echo '<p>id_token: ';
             print_r(json_decode(JWT::urlsafeB64Decode(explode('.', $this->request['id_token'])[1])) );
             echo '<p>request: ';
