@@ -4,14 +4,14 @@ require_once __DIR__ . '/../db/lti_database.php';
 
 //echo TOOL_HOST . "/launch.php" . "?target_link_uri=" . TOOL_REDIR;
 //echo $_REQUEST['iss'], $_REQUEST['target_link_uri'];
-define("TOOL_PARAM_ISS", $_REQUEST['iss'] );
+define("TOOL_PARAMS_ISS", $_REQUEST['iss'] );
 define("TOOL_PARAMS_LOGIN", $_REQUEST['login_hint'] );
 define("TOOL_PARAMS_TARGET", $_REQUEST['target_link_uri'] );
 define("TOOL_PARAMS_LTI", $_REQUEST['lti_message_hint'] );
 
 use \IMSGlobal\LTI;
 
-LTI\LTI_OIDC_Login::new(new Lti_Database(["aiss" => TOOL_PARAM_ISS, "login_hint" => $_REQUEST['login_hint'], "atarget_link_uri" => TOOL_PARAMS_TARGET, "lti_message_hint" => $_REQUEST['lti_message_hint']]))
+LTI\LTI_OIDC_Login::new(new Lti_Database(["aiss" => TOOL_PARAMS_ISS, "login_hint" => $_REQUEST['login_hint'], "atarget_link_uri" => TOOL_PARAMS_TARGET, "lti_message_hint" => $_REQUEST['lti_message_hint']]))
     //->do_oidc_login_redirect(TOOL_HOST . "/game.php")
     //->do_oidc_login_redirect(TOOL_HOST . "https://ailanto-dev.intecca.uned.es/lti/launch.php" . "?target_link_uri=" . TOOL_REDIR)
     //->do_oidc_login_redirect(TOOL_HOST . "/launch.php" . "?iss=" . TOOL_ISS . "&target_link_uri=" . TOOL_REDIR)
