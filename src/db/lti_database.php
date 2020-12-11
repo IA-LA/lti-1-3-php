@@ -29,6 +29,8 @@ class Lti_Database implements LTI\Database {
             $request = $_REQUEST;
         }
         $this->request = $request;
+
+        // CONSTANTES
         //["iss" => $_REQUEST['iss'], "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => $_REQUEST['target_link_uri'], "lti_message_hint" => $_REQUEST['lti_message_hint']]
         define("TOOL_PARAMS_ISS", $this->request['iss'] );
         //define("TOOL_ISS", $this->request['iss'] );
@@ -36,6 +38,12 @@ class Lti_Database implements LTI\Database {
         define("TOOL_PARAMS_TARGET", $this->request['target_link_uri'] );
         //define("TOOL_REDIR", $this->request['target_link_uri'] );
         define("TOOL_PARAMS_LTI", $this->request['lti_message_hint'] );
+
+    }
+
+    public function find_registration_by_issuer($iss) {
+        //get_iss($iss);
+
 
         // Conectar con servicio READ
         /////////////////////////////
@@ -81,13 +89,13 @@ class Lti_Database implements LTI\Database {
 
         // Resultado
         //  https://www.php.net/manual/es/function.json-decode.php
-                $json_obj = json_decode(stream_get_contents($stream), true, 5);
+        $json_obj = json_decode(stream_get_contents($stream), true, 5);
         //var_dump($json_obj);
         //echo $json_obj['result'];
         //echo $json_obj->{'data'}->{'usuario'}->{'email'};
 
         // Contenido Registro
-                $iss_get = ['MAl' => 'MAl'];
+        $iss_get = ['MAl' => 'MAl'];
         // TODO Comprobar que los hint son idénticos AND (['login_hint']) AND (['lti_message_hint'])
         // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
         // print $url . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
@@ -106,22 +114,19 @@ class Lti_Database implements LTI\Database {
         // Obtiene la configuración de los sitios con una llamada de lectura `GET`
         //echo "<p>" . '$_SESSION["iss"] 1:';
         //var_dump($_SESSION['iss'], $iss_get);
-                $_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
+        $_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
         //echo "<p>" . '$_SESSION["iss"] 2:';
         //var_dump($_SESSION['iss'], $iss_get);
 
         // Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
-                $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
-                foreach ($reg_configs as $key => $reg_config) {
-        //    $_SESSION['iss'] = array_merge($_SESSION['iss'], json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
-        //    print "<p>" . 'FICHERO:';
-        //    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
+        $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
+        foreach ($reg_configs as $key => $reg_config) {
+            //    $_SESSION['iss'] = array_merge($_SESSION['iss'], json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
+            //    print "<p>" . 'FICHERO:';
+            //    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
         }
 
-    }
 
-    public function find_registration_by_issuer($iss) {
-        //get_iss($iss);
         if (empty($_SESSION['iss']) || empty($_SESSION['iss'][$iss])) {
             echo '<p>f_r_b_i():' . $iss . ' - ' . $_SESSION['iss'][TOOL_ISS]['key_set_url'] . ' - ' . $_SESSION['iss']['MAl'] . ' - ' . TOOL_HOST . ' - ' . TOOL_ISS . ' - ' . TOOL_REDIR . ' # ' . TOOL_TOKEN . '##' . TOOL_PARAMS_ISS;
             print(TOOL_PARAMS_ISS . TOOL_PARAMS_LOGIN . TOOL_PARAMS_TARGET . TOOL_PARAMS_LTI);
