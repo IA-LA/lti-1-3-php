@@ -117,7 +117,7 @@ class Lti_Database implements LTI\Database {
             print_r(json_decode(JWT::urlsafeB64Decode(explode('.', $this->request['id_token'])[1])) );
             print_r($_REQUEST);
             print_r(json_decode(JWT::urlsafeB64Decode(explode('.', $_POST['id_token'])[1]), true));
-            print_r($_POST);
+            print_r($_POST['request']);
             return false;
         }
         return LTI\LTI_Registration::new()
