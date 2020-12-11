@@ -30,12 +30,12 @@ class Lti_Database implements LTI\Database {
         }
         $this->request = $request;
         //["iss" => $_REQUEST['iss'], "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => $_REQUEST['target_link_uri'], "lti_message_hint" => $_REQUEST['lti_message_hint']]
-        define("TOOL_PARAMS_ISS", $this->request['iss'] );
-        //define("TOOL_ISS", $this->request['iss'] );
-        define("TOOL_PARAMS_LOGIN", $this->request['login_hint'] );
-        define("TOOL_PARAMS_TARGET", $this->request['target_link_uri'] );
-        //define("TOOL_REDIR", $this->request['target_link_uri'] );
-        define("TOOL_PARAMS_LTI", $this->request['lti_message_hint'] );
+        //define("TOOL_PARAMS_ISS", $this->request['iss'] );
+          //define("TOOL_ISS", $this->request['iss'] );
+        //define("TOOL_PARAMS_LOGIN", $this->request['login_hint'] );
+        //define("TOOL_PARAMS_TARGET", $this->request['target_link_uri'] );
+          //define("TOOL_REDIR", $this->request['target_link_uri'] );
+        //define("TOOL_PARAMS_LTI", $this->request['lti_message_hint'] );
 
         // Conectar con servicio READ
         /////////////////////////////
