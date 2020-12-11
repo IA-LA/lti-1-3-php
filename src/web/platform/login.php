@@ -9,8 +9,8 @@ $message_jwt = [
     /////////////////
     //"iss" => '5fc3860a81740b0ef098a965',
     //"iss" => 'http://localhost:9001',
-    //"iss" => TOOL_ISS,
-    "iss" => $_REQUEST['iss'],
+    "iss" => TOOL_ISS,
+    //"iss" => $_REQUEST['iss'],
     "aud" => ['d42df408-70f5-4b60-8274-6c98d3b9468d'],
     "sub" => '0ae836b9-7fc9-4060-006f-27b2066ac545',
     "exp" => time() + 600,
@@ -22,8 +22,8 @@ $message_jwt = [
     // Generaliza LAUNCH URL y TARJET URI
     /////////////////////////////////////
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_HOST . "/game.php",
-    //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_REDIR,
-    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['target_link_uri'],
+    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_REDIR,
+    //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['target_link_uri'],
     "https://purl.imsglobal.org/spec/lti/claim/roles" => [
         "http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor"
     ],
@@ -55,9 +55,7 @@ $jwt = JWT::encode(
 <form id="auto_submit" action="<?= $_REQUEST['redirect_uri']; ?>" method="POST">
     <input type="hidden" name="id_token" value="<?= $jwt ?>" />
     <input type="hidden" name="state" value="<?= $_REQUEST['state']; ?>" />
-    <input type="hidden" name="iss" value="<?= $_REQUEST['iss']; ?>" />
     <input type="hidden" name="login_hint" value="<?= $_REQUEST['login_hint']; ?>" />
-    <input type="hidden" name="target_link_uri" value="<?= $_REQUEST['target_link_uri']; ?>" />
     <input type="hidden" name="lti_message_hint" value="<?= $_REQUEST['lti_message_hint']; ?>" />
 </form>
 <script>
