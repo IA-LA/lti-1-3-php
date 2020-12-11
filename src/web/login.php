@@ -4,9 +4,9 @@ require_once __DIR__ . '/../db/lti_database.php';
 
 //echo TOOL_HOST . "/launch.php" . "?target_link_uri=" . TOOL_REDIR;
 //echo $_REQUEST['iss'], $_REQUEST['target_link_uri'];
-define("TOOL_PARAM_ISS", $_REQUEST['iss'] );
+define("TOOL_ISS", $_REQUEST['iss'] );
 define("TOOL_PARAMS_LOGIN", $_REQUEST['login_hint'] );
-define("TOOL_PARAMS_TARGET", $_REQUEST['target_link_uri'] );
+define("TOOL_REDIR", $_REQUEST['target_link_uri'] );
 define("TOOL_PARAMS_LTI", $_REQUEST['lti_message_hint'] );
 
 use \IMSGlobal\LTI;
