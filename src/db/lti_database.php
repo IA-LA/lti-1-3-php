@@ -115,8 +115,10 @@ class Lti_Database implements LTI\Database {
         if (empty($_SESSION['iss']) || empty($_SESSION['iss'][$iss])) {
             echo '<p>f_r_b_i():' . $iss . ' - ' . $_SESSION['iss'][TOOL_ISS]['key_set_url'] . ' - ' . $_SESSION['iss']['MAl'] . ' - ' . TOOL_HOST . ' - ' . TOOL_ISS . ' - ' . TOOL_REDIR . ' # ' . TOOL_TOKEN;
             print_r(json_decode(JWT::urlsafeB64Decode(explode('.', $this->request['id_token'])[1])) );
+            echo '<p>request: ';
             print_r($_REQUEST);
             print_r(json_decode(JWT::urlsafeB64Decode(explode('.', $_POST['id_token'])[1]), true));
+            echo '<p>post: ';
             print_r($_POST);
             return false;
         }
