@@ -30,12 +30,12 @@ class Lti_Database implements LTI\Database {
         }
         $this->request = $request;
         //["iss" => $_REQUEST['iss'], "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => $_REQUEST['target_link_uri'], "lti_message_hint" => $_REQUEST['lti_message_hint']]
-        //define("TOOL_PARAMS_ISS", $this->request['iss'] );
-          //define("TOOL_ISS", $this->request['iss'] );
-        //define("TOOL_PARAMS_LOGIN", $this->request['login_hint'] );
-        //define("TOOL_PARAMS_TARGET", $this->request['target_link_uri'] );
-          //define("TOOL_REDIR", $this->request['target_link_uri'] );
-        //define("TOOL_PARAMS_LTI", $this->request['lti_message_hint'] );
+        define("TOOL_PARAMS_ISS", $this->request['iss'] );
+        //define("TOOL_ISS", $this->request['iss'] );
+        define("TOOL_PARAMS_LOGIN", $this->request['login_hint'] );
+        define("TOOL_PARAMS_TARGET", $this->request['target_link_uri'] );
+        //define("TOOL_REDIR", $this->request['target_link_uri'] );
+        define("TOOL_PARAMS_LTI", $this->request['lti_message_hint'] );
 
         // Conectar con servicio READ
         /////////////////////////////
@@ -59,7 +59,7 @@ class Lti_Database implements LTI\Database {
         //  https://www.php.net/manual/en/context.http.php
         // Obtiene la configuración de las actividades con una llamada de lectura `GET`
         ///////////////////
-        $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
+        $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_ISS;
 
         $opts = array('http' =>
             array(
@@ -92,7 +92,7 @@ class Lti_Database implements LTI\Database {
         // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
         // print $url . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
         $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
-        if(($json_obj['result'] === "ok") || ($GET_target_link_uri === TOOL_REDIR) ){
+        if(($json_obj['result'] === "ok") && ($GET_target_link_uri === TOOL_REDIR) ){
             //echo "<p>" . 'SERVICIO GET:';
             //print $json_obj['data']['launch_parameters']['iss'];
             //print "<p>" . 'ARRAY ISS:';
