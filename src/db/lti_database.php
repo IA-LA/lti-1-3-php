@@ -59,7 +59,7 @@ class Lti_Database implements LTI\Database {
         //  https://www.php.net/manual/en/context.http.php
         // Obtiene la configuración de las actividades con una llamada de lectura `GET`
         ///////////////////
-        $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
+        $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . $_REQUEST['iss'];
 
         $opts = array('http' =>
             array(
