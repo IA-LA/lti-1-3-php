@@ -109,7 +109,7 @@ class Lti_Database implements LTI\Database {
             $request = $_REQUEST;
         }
         $this->request = $request;
-        ["iss" => $_REQUEST['iss'], "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => $_REQUEST['target_link_uri'], "lti_message_hint" => $_REQUEST['lti_message_hint']]
+        //["iss" => $_REQUEST['iss'], "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => $_REQUEST['target_link_uri'], "lti_message_hint" => $_REQUEST['lti_message_hint']]
         define("TOOL_PARAM_ISS", $this->request['iss'] );
         define("TOOL_PARAMS_LOGIN", $this->request['login_hint'] );
         define("TOOL_PARAMS_TARGET", $this->request['target_link_uri'] );
