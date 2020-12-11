@@ -55,7 +55,8 @@ $jwt = JWT::encode(
 <form id="auto_submit" action="<?= $_REQUEST['redirect_uri']; ?>" method="POST">
     <input type="hidden" name="id_token" value="<?= $jwt ?>" />
     <input type="hidden" name="state" value="<?= $_REQUEST['state']; ?>" />
-    <input type="hidden" name="request" value="<?= $_REQUEST; ?>" />
+    <input type="hidden" name="iss" value="<?= $_REQUEST['iss']; ?>" />
+    <input type="hidden" name="iss" value="<?= $_REQUEST['iss']; ?>" />
 </form>
 <script>
     document.getElementById('auto_submit').submit();
