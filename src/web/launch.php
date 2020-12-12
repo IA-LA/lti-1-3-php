@@ -7,7 +7,7 @@ define("TOOL_PARAMS_TARGET", $_REQUEST['target_link_uri'] );
 define("TOOL_PARAMS_LTI", $_REQUEST['lti_message_hint'] );
 
 use \IMSGlobal\LTI;
-print($_REQUEST['iss'] . $_REQUEST['login_hint'] . $_REQUEST['target_link_uri'] . _REQUEST['lti_message_hint']);
+print($_REQUEST['iss'] . $_REQUEST['login_hint'] . $_REQUEST['target_link_uri'] . $_REQUEST['lti_message_hint']);
 $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => TOOL_PARAMS_ISS, "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => TOOL_PARAMS_TARGET, "lti_message_hint" => $_REQUEST['lti_message_hint']]))
     ->validate();
 
