@@ -1,6 +1,10 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../db/lti_database.php';
+define("TOOL_PARAMS_ISS", $_REQUEST['iss'] );
+define("TOOL_PARAMS_LOGIN", $_REQUEST['login_hint'] );
+define("TOOL_PARAMS_TARGET", $_REQUEST['target_link_uri'] );
+define("TOOL_PARAMS_LTI", $_REQUEST['lti_message_hint'] );
 
 use \IMSGlobal\LTI;
 print_r($_REQUEST);
