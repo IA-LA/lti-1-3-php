@@ -3,7 +3,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../db/lti_database.php';
 
 use \IMSGlobal\LTI;
-print_r('<p>' . $_REQUEST);
+print_r($_REQUEST);
 $launch = LTI\LTI_Message_Launch::new(new Lti_Database())
     ->validate();
 
