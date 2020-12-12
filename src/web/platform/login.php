@@ -3,6 +3,8 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../../db/lti_database.php';
 
+print_r($_REQUEST);
+
 use \Firebase\JWT\JWT;
 $message_jwt = [
     // Generaliza ISS
