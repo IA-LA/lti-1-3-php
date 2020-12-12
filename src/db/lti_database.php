@@ -127,6 +127,15 @@ class Lti_Database implements LTI\Database {
                 //    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
             }
 
+            return LTI\LTI_Registration::new()
+                ->set_auth_login_url($_SESSION['iss'][$iss]['auth_login_url'])
+                ->set_auth_token_url($_SESSION['iss'][$iss]['auth_token_url'])
+                ->set_auth_server($_SESSION['iss'][$iss]['auth_server']) //No aparece en la llamada a GAME
+                ->set_client_id($_SESSION['iss'][$iss]['client_id'])
+                ->set_key_set_url($_SESSION['iss'][$iss]['key_set_url'])
+                ->set_kid($_SESSION['iss'][$iss]['kid'])
+                ->set_issuer($iss)
+                ->set_tool_private_key($this->private_key($iss));
 
             echo '<p>f_r_b_i():' . $iss . ' - ' . $_SESSION['iss'][TOOL_PARAMS_ISS]['key_set_url'] . ' - ' . $_SESSION['iss']['MAl'] . ' - ' . TOOL_HOST . ' - ' . TOOL_PARAMS_ISS . ' - ' . TOOL_PARAMS_TARGET . ' # ' . TOOL_TOKEN . '##' . TOOL_PARAMS_ISS;
             print(TOOL_PARAMS_ISS . TOOL_PARAMS_LOGIN . TOOL_PARAMS_TARGET . TOOL_PARAMS_LTI);
