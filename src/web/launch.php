@@ -4,7 +4,7 @@ require_once __DIR__ . '/../db/lti_database.php';
 
 use \IMSGlobal\LTI;
 print_r($_REQUEST);
-$launch = LTI\LTI_Message_Launch::new(new Lti_Database())
+$launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => TOOL_PARAMS_ISS, "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => TOOL_PARAMS_TARGET, "lti_message_hint" => $_REQUEST['lti_message_hint']]))
     ->validate();
 
 use Firebase\JWT\JWK;
