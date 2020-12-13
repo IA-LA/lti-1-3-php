@@ -14,8 +14,8 @@ $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $_REQUEST['iss'
     ->validate();
 
 // REDIRECTION HEADER
-header('Location: ' . TOOL_PARAMS_TARGET, true, 302);
-die;
+//header('Location: ' . TOOL_PARAMS_TARGET, true, 302);
+//die;
 
 // IFRAME FULL PAGE cross-browser and fully responsive
 //  https://stackoverflow.com/questions/17710039/full-page-iframe
