@@ -12,8 +12,8 @@ $message_jwt = [
     //"iss" => 'http://localhost:9001',
     //"iss" => '5fc3860a81740b0ef098a965',
     //"iss" => TOOL_ISS,
-    //"iss" => TOOL_PARAMS_ISS,
-    "iss" => $_REQUEST['iss'],
+    "iss" => TOOL_PARAMS_ISS,
+    //"iss" => $_REQUEST['iss'],
     "aud" => ['d42df408-70f5-4b60-8274-6c98d3b9468d'],
     "sub" => '0ae836b9-7fc9-4060-006f-27b2066ac545',
     "exp" => time() + 600,
@@ -26,8 +26,8 @@ $message_jwt = [
     /////////////////////////////////////
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_HOST . "/game.php",
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_REDIR,
-    //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAMS_TARGET,
-    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['target_link_uri'],
+    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAMS_TARGET,
+    //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['target_link_uri'],
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['redirect_uri'],
     "https://purl.imsglobal.org/spec/lti/claim/roles" => [
         "http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor"
