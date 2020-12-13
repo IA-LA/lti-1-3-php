@@ -14,7 +14,7 @@ use Firebase\JWT\JWT;
 $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
 
 use \IMSGlobal\LTI;
-print_r($post_param);
+//print_r($post_param);
 $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => TOOL_PARAMS_ISS, "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => TOOL_PARAMS_TARGET, "lti_message_hint" => $_REQUEST['lti_message_hint']]))
     ->validate();
 
