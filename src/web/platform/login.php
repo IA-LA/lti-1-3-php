@@ -63,7 +63,7 @@ $jwt = JWT::encode(
     <input type="hidden" name="state" value="<?= $_REQUEST['state']; ?>" />
     <input type="hidden" name="iss" value="<?= TOOL_PARAMS_ISS; ?>" />
     <input type="hidden" name="login_hint" value="<?= $_REQUEST['login_hint']; ?>" />
-    <input type="hidden" name="target_link_uri" value="<?= $_REQUEST['redirect_uri']; ?>" />
+    <input type="hidden" name="target_link_uri" value="<?= explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0]; ?>" />
     <input type="hidden" name="lti_message_hint" value="<?= $_REQUEST['lti_message_hint']; ?>" />
 </form>
 <script>
