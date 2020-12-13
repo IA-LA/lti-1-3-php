@@ -1,7 +1,10 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../db/lti_database.php';
+
+// TODO leer `target_link_uri` del servicio GET por la `iss` !!!!!!!!!
 define("TOOL_PARAMS_ISS", $_REQUEST['iss'] );
+
 define("TOOL_PARAMS_LOGIN", $_REQUEST['login_hint'] );
 define("TOOL_PARAMS_TARGET", $_REQUEST['target_link_uri'] );
 define("TOOL_PARAMS_LTI", $_REQUEST['lti_message_hint'] );
@@ -14,6 +17,11 @@ use \IMSGlobal\LTI;
 print_r($post_param);
 $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => TOOL_PARAMS_ISS, "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => TOOL_PARAMS_TARGET, "lti_message_hint" => $_REQUEST['lti_message_hint']]))
     ->validate();
+
+// REDIRECTION HEADER
+header('Location: ' . $this->location, true, 302);
+die;
+
 // IFRAME FULL PAGE cross-browser and fully responsive
 //  https://stackoverflow.com/questions/17710039/full-page-iframe
 echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
