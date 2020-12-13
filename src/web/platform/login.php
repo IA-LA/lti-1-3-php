@@ -26,9 +26,10 @@ $message_jwt = [
     /////////////////////////////////////
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_HOST . "/game.php",
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_REDIR,
-    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAMS_TARGET,
+    //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAMS_TARGET,
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['target_link_uri'],
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['redirect_uri'],
+    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0],
     "https://purl.imsglobal.org/spec/lti/claim/roles" => [
         "http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor"
     ],
