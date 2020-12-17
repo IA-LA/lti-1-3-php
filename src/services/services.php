@@ -46,7 +46,7 @@ class services
      * @param string        $url URL to redirect back to after the OIDC login. This URL must match exactly a URL white listed in the platform.
      * @param array|string  $request    An array of request parameters. If not set will default to $_REQUEST.
      *
-     * @return Redirect Returns a redirect object containing the fully formed OIDC login URL.
+     * @return String Returns a redirect object containing the fully formed OIDC login URL.
      */
     public function info($url, array $request = null) {
 
