@@ -4,7 +4,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
 
-define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: $_SERVER['REQUEST_SCHEME']) . '://' . $_SERVER['HTTP_HOST']);
+define("TOOL_HOST", 'https://ailanto-dev.intecca.uned.es/lti/');
 define("TOOL_PARAMS_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : explode('&', explode('%26', explode('iss%3D', $_SERVER['REQUEST_URI'])[1])[0])[0]) ); //$_POST['id_token'] $_REQUEST['state'] json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]))['aud']) //json_decode(JWT::urlsafeB64Decode(explode('.',$_REQUEST['id_token'])[1]), true)['iss']
 define("TOOL_PARAMS_LOGIN", $_REQUEST['login_hint'] );
 //echo ($_SERVER['QUERY_STRING']);
