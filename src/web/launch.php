@@ -8,13 +8,13 @@ $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token
 
 use \IMSGlobal\LTI;
 //print_r($_REQUEST);
-print_r($_REQUEST['iss']);
-//print($_REQUEST['login_hint']);
-print($_REQUEST['target_link_uri']);
-//print($_REQUEST['lti_message_hint']);
-//print($_REQUEST['id_token']);
-print($_REQUEST['state']);
-print($post_param);
+print('<p>' . $_REQUEST['iss']);
+//print('<p>' . $_REQUEST['login_hint']);
+print('<p>' . $_REQUEST['target_link_uri']);
+//print('<p>' . $_REQUEST['lti_message_hint']);
+//print('<p>' . $_REQUEST['id_token']);
+print('<p>' . $_REQUEST['state']);
+print_r($post_param);
 // TODO leer `target_link_uri` del servicio GET por la `iss` !!!!!!!!!
 $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $_REQUEST['iss'], "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => $_REQUEST['target_link_uri'], "lti_message_hint" => $_REQUEST['lti_message_hint']]))
     ->validate();
