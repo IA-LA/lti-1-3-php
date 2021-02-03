@@ -44,9 +44,17 @@ echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
 ?>
 
 <?php
+    if ($launch->is_resource_launch()) {
+        echo 'Resource Launch!';
+    } else if ($launch->is_deep_link_launch()) {
+        echo 'Deep Linking Launch!';
+    } else {
+        echo 'Unknown launch type';
+    }
     if ($launch->is_deep_link_launch()) {
 ?>
         <div id="config">
+            <br/>LAUNCH DEEP LINK:
             <?php
                 echo $_REQUEST['iss'], $_REQUEST['target_link_uri'];
             ?>
