@@ -45,11 +45,11 @@ echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
 
 <?php
     if ($launch->is_resource_launch()) {
-        echo '<br/>><b>Resource Launch!</b>';
+        echo '<hr/><br/><b>Resource Launch!</b>';
     } else if ($launch->is_deep_link_launch()) {
-        echo '<br/>><b>Deep Linking Launch!</b>';
+        echo '<hr/><br/><b>Deep Linking Launch!</b>';
     } else {
-        echo '<br/>><b>Unknown launch type</b>';
+        echo '<hr/><br/><b>Unknown launch type</b>';
     }
     if ($launch->is_deep_link_launch()) {
 ?>
