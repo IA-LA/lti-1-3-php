@@ -33,7 +33,7 @@ else
 $url.= $_SERVER['HTTP_HOST'];
 
 // Append the requested resource location to the URL
-$url.= $_SERVER['REQUEST_URI'];
+//$url.= $_SERVER['REQUEST_URI'];
 //echo $_REQUEST['target_link_uri'];
 
 // Llamadas REST
@@ -41,7 +41,8 @@ $url.= $_SERVER['REQUEST_URI'];
 //  https://www.php.net/manual/en/context.http.php
 // Obtiene la configuración de las actividades con una llamada de lectura `GET`
 ///////////////////
-$url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
+// $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
+$url.= ":49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
 
 $opts = array('http' =>
     array(
