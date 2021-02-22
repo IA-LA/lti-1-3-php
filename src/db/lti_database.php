@@ -42,7 +42,7 @@ $url.= $_SERVER['HTTP_HOST'];
 // Obtiene la configuración de las actividades con una llamada de lectura `GET`
 ///////////////////
 // $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
-$url.= ":49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
+$url= "http://192.168.0.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
 
 $opts = array('http' =>
     array(
