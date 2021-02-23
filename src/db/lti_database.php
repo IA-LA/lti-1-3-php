@@ -40,9 +40,12 @@ $url.= $_SERVER['HTTP_HOST'];
 //  https://stackoverflow.com/questions/2445276/how-to-post-data-in-php-using-file-get-contents
 //  https://www.php.net/manual/en/context.http.php
 // Obtiene la configuración de las actividades con una llamada de lectura `GET`
+// al servidor de SERVICIOS
 ///////////////////
-// $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
-$url= "http://192.168.0.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
+if(strpos($url, '10.201.54.'))
+    $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
+else
+    $url= "http://192.168.0.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
 
 $opts = array('http' =>
     array(
