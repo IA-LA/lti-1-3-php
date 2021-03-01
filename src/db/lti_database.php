@@ -74,11 +74,13 @@ $json_obj = json_decode(stream_get_contents($stream), true, 5);
 
 // Contenido Registro
 $iss_get = ['MAl' => 'MAl'];
-// TODO Comprobar que los hint son idénticos AND (['login_hint']) AND (['lti_message_hint'])
 // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
 // print $url . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
 $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
-if(($json_obj['result'] === "ok") && ($GET_target_link_uri === TOOL_PARAMS_TARGET)){
+// Comprueba que iss y target_link son idénticos a los registrados en la BBDD
+// TODO Comprobar que los hint son idénticos a los registrados en la BBDD AND (['login_hint']) AND (['lti_message_hint'])
+//if(($json_obj['result'] === "ok") && ($GET_target_link_uri === TOOL_PARAMS_TARGET)){
+if(($json_obj['result'] === "ok")){
     //echo "<p>" . 'SERVICIO GET:';
     //print $json_obj['data']['launch_parameters']['iss'];
     //print "<p>" . 'ARRAY ISS:';
