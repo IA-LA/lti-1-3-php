@@ -41,7 +41,7 @@ $url.= $_SERVER['HTTP_HOST'];
 //  https://www.php.net/manual/en/context.http.php
 // Obtiene la configuración de las actividades con una llamada de lectura `GET`
 // al servidor de SERVICIOS
-///////////////////
+///////////////////////////
 if(strpos($url, '10.201.54.'))
     $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
 else
@@ -78,7 +78,7 @@ $iss_get = ['MAl' => 'MAl'];
 // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
 // print $url . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
 $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
-if(($json_obj['result'] === "ok") && ($GET_target_link_uri === TOOL_PARAMS_TARGET) ){
+if(($json_obj['result'] === "ok")  ){
     //echo "<p>" . 'SERVICIO GET:';
     //print $json_obj['data']['launch_parameters']['iss'];
     //print "<p>" . 'ARRAY ISS:';
@@ -133,7 +133,7 @@ class Lti_Database implements LTI\Database {
     }
 
     // TODO obtener registro de SERVIDOR LTI usando servicio GET `iss` !!!!!!!!!
-    // Comparar con registro $_POST de PLATAFORMA AUTH !!!!!!!!!
+    // Comparar con registro $_POST de PLATAFORMA OAUTH !!!!!!!!!
     private function find_issuer($iss) {
 
     }
