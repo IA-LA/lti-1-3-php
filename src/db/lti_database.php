@@ -79,11 +79,11 @@ $iss_get = ['MAl' => 'MAl'];
 $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
 // Comprueba que iss y target_link son idénticos a los registrados en la BBDD
 // TODO Comprobar que los hint son idénticos a los registrados en la BBDD AND (['login_hint']) AND (['lti_message_hint'])
-//if(($json_obj['result'] === "ok") && ($GET_target_link_uri === TOOL_PARAMS_TARGET)){
-if(($json_obj['result'] === "ok")){
-    if(!($GET_target_link_uri === TOOL_PARAMS_TARGET)){
-        define("TOOL_PARAMS_TARGET", $GET_target_link_uri);
-    }
+if(($json_obj['result'] === "ok") && ($GET_target_link_uri === TOOL_PARAMS_TARGET)){
+//if(($json_obj['result'] === "ok")){
+    //if(!($GET_target_link_uri === TOOL_PARAMS_TARGET)){
+    //    define("TOOL_PARAMS_TARGET", $GET_target_link_uri);
+    //}
     //echo "<p>" . 'SERVICIO GET:';
     //print $json_obj['data']['launch_parameters']['iss'];
     //print "<p>" . 'ARRAY ISS:';
