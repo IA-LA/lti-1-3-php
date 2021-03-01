@@ -79,7 +79,7 @@ $iss_get = ['MAl' => 'MAl'];
 $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
 // Comprueba que iss y target_link son idénticos a los registrados en la BBDD
 // TODO Comprobar que los hint son idénticos a los registrados en la BBDD AND (['login_hint']) AND (['lti_message_hint'])
-echo $GET_target_link_uri . ' URLS === URLS ' . TOOL_PARAMS_TARGET;
+//echo $GET_target_link_uri . ' URLS === URLS ' . TOOL_PARAMS_TARGET;
 if(($json_obj['result'] === "ok") && ($GET_target_link_uri == TOOL_PARAMS_TARGET)){
 //if(($json_obj['result'] === "ok")){
     //if(!($GET_target_link_uri === TOOL_PARAMS_TARGET)){
