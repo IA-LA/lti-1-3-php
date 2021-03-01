@@ -43,9 +43,9 @@ $url.= $_SERVER['HTTP_HOST'];
 // al servidor de SERVICIOS
 ///////////////////////////
 if(strpos($url, '10.201.54.'))
-    $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
+    $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
 else
-    $url= "http://192.168.0.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
+    $url= "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
 
 $opts = array('http' =>
     array(
