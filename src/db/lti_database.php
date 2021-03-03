@@ -43,9 +43,9 @@ $url.= $_SERVER['HTTP_HOST'];
 // al servidor de SERVICIOS
 ///////////////////////////
 if(strpos($url, '10.201.54.'))
-    $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+    $url_get = "http://10.201.54.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
 else
-    $url= "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+    $url_get= "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
 
 $opts = array('http' =>
     array(
@@ -56,13 +56,13 @@ $opts = array('http' =>
 );
 
 $context = stream_context_create($opts);
-$stream = fopen($url, 'r', false, $context);
+$stream = fopen($url_get, 'r', false, $context);
 
 // header information as well as meta data
 // about the stream
 //var_dump(stream_get_meta_data($stream));
 
-// actual data at $url
+// actual data at $url_get
 //var_dump(stream_get_contents($stream));
 
 // Resultado
@@ -75,7 +75,7 @@ $json_obj = json_decode(stream_get_contents($stream), true, 5);
 // Contenido Registro
 $iss_get = ['MAl' => 'MAl'];
 // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
-// print $url . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
+// print $url_get . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
 $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
 // Comprueba que iss y target_link son idénticos a los registrados en la BBDD
 // TODO Comprobar que los hint son idénticos a los registrados en la BBDD AND (['login_hint']) AND (['lti_message_hint'])
