@@ -56,34 +56,35 @@ $opts = array('http' =>
 $context = stream_context_create($opts);
 try{
     $stream = fopen($url_get, 'r', false, $context);
-    echo 'STREAM11:' . $stream;
+    echo 'STREAM11: ' . $stream[0];
     if($stream === false) {
-        echo 'STREAM12:' . $stream;
+        echo 'STREAM12: ' . $stream[0];
         $url_get= "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
         $stream = fopen($url_get, 'r', false, $context);
-
+    }
+    else{
+        echo 'STREAM ERROR 13: ' . $stream;
+        exit(0);
     }
 
+    // header information as well as meta data
+    // about the stream
+    //var_dump(stream_get_meta_data($stream));
+
+    // actual data at $url_get
+    //var_dump(stream_get_contents($stream));
+
+    // Resultado
+    //  https://www.php.net/manual/es/function.json-decode.php
+        $json_obj = json_decode(stream_get_contents($stream), true, 5);
+    //var_dump($json_obj);
+    //echo $json_obj['result'];
+    //echo $json_obj->{'data'}->{'usuario'}->{'email'};
 }
 catch(Exception $e){
-    echo 'STREAM13:' . $stream;
-    $url_get= "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-    $stream = fopen($url_get, 'r', false, $context);
+    echo 'STREAM ERROR 14: ' . $stream;
+
 }
-
-// header information as well as meta data
-// about the stream
-//var_dump(stream_get_meta_data($stream));
-
-// actual data at $url_get
-//var_dump(stream_get_contents($stream));
-
-// Resultado
-//  https://www.php.net/manual/es/function.json-decode.php
-$json_obj = json_decode(stream_get_contents($stream), true, 5);
-//var_dump($json_obj);
-//echo $json_obj['result'];
-//echo $json_obj->{'data'}->{'usuario'}->{'email'};
 
 // Contenido Registro
 $iss_get = ['MAl' => 'MAl'];
