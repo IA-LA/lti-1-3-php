@@ -52,6 +52,7 @@ $opts = array('http' =>
     )
 );
 
+/**
 if(strpos(get_headers("http://10.201.54.31:49151/servicios/json/RUTAS.json", 0, stream_context_create($opts))[0], 'OK')){
     $url_get = "http://10.201.54.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
     echo 'PARSE11: ' . parse_url("http://10.201.54.31:49151/servicios/json/RUTAS.json")['port'];
@@ -64,6 +65,7 @@ elseif (strpos(get_headers("http://127.0.0.1:49151/servicios/json/RUTAS.json", 0
     $url_get = "http://127.0.0.1:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
     echo 'PARSE13: ' . parse_url('http://127.0.0.1:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/');
 }
+**/
 
 // CONTEXT Options
 $opts = array('http' =>
