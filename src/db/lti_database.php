@@ -110,11 +110,15 @@ if(($json_obj['result'] === "ok") && ($GET_target_link_uri == TOOL_PARAMS_TARGET
     // Comprueba que iss y target_link son idénticos a los registrados en la BBDD
     // TODO Comprobar que los hint son idénticos a los registrados en la BBDD AND (['login_hint']) AND (['lti_message_hint'])
     //echo $GET_target_link_uri . ' URLS === URLS ' . TOOL_PARAMS_TARGET;
-    
+
     // Parámetros
     $iss_get = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
     //$iss_get = [$json_obj['data']['id_actividad'] => $json_obj['data']['credentials']];
     //var_dump($_SESSION['iss']);
+}
+elseif ($json_obj['result'] === "error"){
+    echo 'STREAM ERROR 15: ' . $json_obj['result'];
+    exit(0);
 }
 fclose($stream);
 
