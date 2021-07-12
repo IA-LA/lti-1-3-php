@@ -49,9 +49,14 @@ $opts = array('http' =>
     array(
         'method' => 'GET',
         'timeout' => '5',
-        'ignore_errors' => '0'
+        'ignore_errors' => '1'
     )
 );
+
+// Contenido Registro
+$iss_get = ['MAl' => 'MAl'];
+// Contenido Redirección
+$GET_target_link_uri = '';
 
 $context = stream_context_create($opts);
 try{
@@ -61,10 +66,10 @@ try{
         echo 'STREAM12: ' . $stream;
         $url_get= "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
         $stream = fopen($url_get, 'r', false, $context);
-    }
-    else{
-        echo 'STREAM ERROR 13: ' . $stream;
-        exit(0);
+        if($stream === false) {
+            echo 'STREAM ERROR 13: ' . $stream;
+            exit(0);
+        }
     }
 
     // header information as well as meta data
@@ -81,8 +86,6 @@ try{
     //echo $json_obj['result'];
     //echo $json_obj->{'data'}->{'usuario'}->{'email'};
 
-    // Contenido Registro
-        $iss_get = ['MAl' => 'MAl'];
     // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
     // print $url_get . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
         $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
