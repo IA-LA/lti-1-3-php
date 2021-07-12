@@ -87,13 +87,6 @@ try{
     //echo $json_obj['result'];
     //echo $json_obj->{'data'}->{'usuario'}->{'email'};
 
-    // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
-    // print $url_get . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
-        $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
-    // Comprueba que iss y target_link son idénticos a los registrados en la BBDD
-    // TODO Comprobar que los hint son idénticos a los registrados en la BBDD AND (['login_hint']) AND (['lti_message_hint'])
-    //echo $GET_target_link_uri . ' URLS === URLS ' . TOOL_PARAMS_TARGET;
-
 }
 catch(Exception $e){
     echo 'STREAM ERROR 14: ' . $stream;
@@ -110,6 +103,14 @@ if(($json_obj['result'] === "ok") && ($GET_target_link_uri == TOOL_PARAMS_TARGET
     //echo "<p>" . 'SERVICIO GET:';
     //print $json_obj['data']['launch_parameters']['iss'];
     //print "<p>" . 'ARRAY ISS:';
+
+    // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
+    // print $url_get . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
+    $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
+    // Comprueba que iss y target_link son idénticos a los registrados en la BBDD
+    // TODO Comprobar que los hint son idénticos a los registrados en la BBDD AND (['login_hint']) AND (['lti_message_hint'])
+    //echo $GET_target_link_uri . ' URLS === URLS ' . TOOL_PARAMS_TARGET;
+    
     // Parámetros
     $iss_get = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
     //$iss_get = [$json_obj['data']['id_actividad'] => $json_obj['data']['credentials']];
