@@ -43,8 +43,10 @@ $url.= $_SERVER['HTTP_HOST'];
 // Obtiene la configuración de las actividades con una llamada de lectura `GET`
 // al servidor de SERVICIOS
 ///////////////////////////
-if(isset(parse_url("http://10.201.54.31:49151/servicios/json/RUTAS.json")['port']))
+if(isset(parse_url("http://10.201.54.31:49151/servicios/json/RUTAS.json")['port'])){
     $url_get = "http://10.201.54.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+    echo 'PARSE11: ' . parse_url("http://10.201.54.31:49151/servicios/json/RUTAS.json")['port'];
+}
 elseif (isset(parse_url("http://192.168.0.31:49151/servicios/json/RUTAS.json")['port']))
     $url_get = "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
 else {
