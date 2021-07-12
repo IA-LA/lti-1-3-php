@@ -66,6 +66,7 @@ try{
 
 }
 catch(Exception $e){
+    echo 'STREAM3:' . $stream;
     $url_get= "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
     $stream = fopen($url_get, 'r', false, $context);
 }
