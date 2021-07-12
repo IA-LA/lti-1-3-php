@@ -80,20 +80,24 @@ try{
     //var_dump($json_obj);
     //echo $json_obj['result'];
     //echo $json_obj->{'data'}->{'usuario'}->{'email'};
+
+    // Contenido Registro
+        $iss_get = ['MAl' => 'MAl'];
+    // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
+    // print $url_get . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
+        $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
+    // Comprueba que iss y target_link son idénticos a los registrados en la BBDD
+    // TODO Comprobar que los hint son idénticos a los registrados en la BBDD AND (['login_hint']) AND (['lti_message_hint'])
+    //echo $GET_target_link_uri . ' URLS === URLS ' . TOOL_PARAMS_TARGET;
+
 }
 catch(Exception $e){
     echo 'STREAM ERROR 14: ' . $stream;
+    exit(0);
 
 }
 
-// Contenido Registro
-$iss_get = ['MAl' => 'MAl'];
-// Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
-// print $url_get . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
-$GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
-// Comprueba que iss y target_link son idénticos a los registrados en la BBDD
-// TODO Comprobar que los hint son idénticos a los registrados en la BBDD AND (['login_hint']) AND (['lti_message_hint'])
-//echo $GET_target_link_uri . ' URLS === URLS ' . TOOL_PARAMS_TARGET;
+// Contenido Resultado de la llamada
 if(($json_obj['result'] === "ok") && ($GET_target_link_uri == TOOL_PARAMS_TARGET)){
 //if(($json_obj['result'] === "ok")){
     //if(!($GET_target_link_uri === TOOL_PARAMS_TARGET)){
