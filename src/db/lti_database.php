@@ -43,8 +43,15 @@ $url.= $_SERVER['HTTP_HOST'];
 // Obtiene la configuración de las actividades con una llamada de lectura `GET`
 // al servidor de SERVICIOS
 ///////////////////////////
-$url_get = "http://10.201.54.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+if(parse_url("http://10.201.54.31:49151/servicios/json/RUTAS.json"))
+    $url_get = "http://10.201.54.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+elseif ("http://192.168.0.31:49151/servicios/json/RUTAS.json")
+    $url_get = "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+else {
+    $url_get = "http://127.0.0.1:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+}
 
+// CONTEXT Options
 $opts = array('http' =>
     array(
         'method' => 'GET',
@@ -82,7 +89,7 @@ try{
     // Resultado
     //  https://www.php.net/manual/es/function.json-decode.php
         $json_obj = json_decode(stream_get_contents($stream), true, 5);
-        echo 'STREAM CONTENS: ' . $json_obj['data'];
+        echo 'STREAM CONTENT: ' . $json_obj['data'];
     //var_dump($json_obj);
     //echo $json_obj['result'];
     //echo $json_obj->{'data'}->{'usuario'}->{'email'};
