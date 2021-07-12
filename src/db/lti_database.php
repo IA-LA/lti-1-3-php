@@ -82,7 +82,7 @@ try{
     // Resultado
     //  https://www.php.net/manual/es/function.json-decode.php
         $json_obj = json_decode(stream_get_contents($stream), true, 5);
-        echo 'STREAM CONTENS: ' . $json_obj;
+        echo 'STREAM CONTENS: ' . $json_obj['data'];
     //var_dump($json_obj);
     //echo $json_obj['result'];
     //echo $json_obj->{'data'}->{'usuario'}->{'email'};
