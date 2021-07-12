@@ -56,9 +56,12 @@ $opts = array('http' =>
 $context = stream_context_create($opts);
 try{
     $stream = fopen($url_get, 'r', false, $context);
+    echo 'STREAM1:' . $stream;
     if($stream === false) {
+        echo 'STREAM2:' . $stream;
         $url_get= "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
         $stream = fopen($url_get, 'r', false, $context);
+
     }
 
 }
