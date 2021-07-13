@@ -32,7 +32,13 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
 else
     $url = "http://";
 // Append the host(domain name, ip) to the URL.
-$url .= explode(':', $_SERVER['HTTP_HOST'])[0];
+if(strpos($_SERVER['HTTP_HOST'], '.intecca.uned.es') || strpos($_SERVER['HTTP_HOST'], '193.146.230.217')){
+    // SERVIDOR SERVICIOS GENERAL
+    $url .= '10.201.54.31';
+}
+else
+    // SERVIDOR SERVICIOS LOCAL
+    $url .= explode(':', $_SERVER['HTTP_HOST'])[0];
 
 // Append the requested resource location to the URL
 //$url.= $_SERVER['REQUEST_URI'];
