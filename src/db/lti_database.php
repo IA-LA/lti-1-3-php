@@ -86,21 +86,21 @@ $GET_target_link_uri = '';
 $context = stream_context_create($opts);
 try{
     $stream = fopen($url_get, 'r', false, $context);
-    echo '\\nSTREAM11: ' . $stream;
+    echo ' STREAM11: ' . $stream;
     if(!$stream) {
-        echo '\\nSTREAM12: ' . $stream;
+        echo ' STREAM12: ' . $stream;
         $url_get= "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
         $stream = fopen($url_get, 'r', false, $context);
         if(!$stream) {
-            echo '\\nSTREAM ERROR 13: ' . $stream;
+            echo ' STREAM ERROR 13: ' . $stream;
             $url_get= "http://127.0.0.1:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
             $stream = fopen($url_get, 'r', false, $context);
             if(!$stream) {
-                echo '\\nSTREAM ERROR 14: ' . $stream;
+                echo ' STREAM ERROR 14: ' . $stream;
                 $url_get = "http://localhost:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
                 $stream = fopen($url_get, 'r', false, $context);
                 if(!$stream) {
-                    // ino
+                    // Salida URL no encontrada
                     exit(0);
                 }
             }
@@ -117,18 +117,21 @@ try{
     // Resultado
     //  https://www.php.net/manual/es/function.json-decode.php
         $json_obj = json_decode(stream_get_contents($stream), true, 5);
-        echo '\\nSTREAM CONTENT 11: ' . $json_obj['data'];
+        echo ' STREAM CONTENT 11: ';
+        print_r($json_obj['data']);
     //var_dump($json_obj);
     //echo $json_obj['result'];
     //echo $json_obj->{'data'}->{'usuario'}->{'email'};
 
 }
 catch(Exception $e){
-    echo '\\nSTREAM ERROR 21: ' . $stream;
+    echo ' STREAM ERROR 21: ' . $stream;
+    // Salida Excepción URL
     exit(0);
 
 }
 
+// LLAMADA OK
 // Contenido Resultado de la llamada
 if(($json_obj['result'] === "ok") && ($GET_target_link_uri == TOOL_PARAMS_TARGET)){
 //if(($json_obj['result'] === "ok")){
@@ -152,7 +155,8 @@ if(($json_obj['result'] === "ok") && ($GET_target_link_uri == TOOL_PARAMS_TARGET
     //var_dump($_SESSION['iss']);
 }
 elseif ($json_obj['result'] === "error"){
-    echo '\\nSTREAM ERROR 31: ' . $json_obj['result'];
+    echo ' STREAM ERROR 31: ' . $json_obj['result'];
+    // Salida ERROR Actividad no encontrada
     exit(0);
 }
 fclose($stream);
