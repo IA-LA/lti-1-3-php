@@ -32,7 +32,7 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
 else
     $url = "http://";
 // Append the host(domain name, ip) to the URL.
-$url .= $_SERVER['SERVER_ADDR'];
+$url .= explode($_SERVER['HTTP_HOST'], ':');
 
 // Append the requested resource location to the URL
 //$url.= $_SERVER['REQUEST_URI'];
