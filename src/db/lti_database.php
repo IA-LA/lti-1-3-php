@@ -100,6 +100,7 @@ try{
                 $url_get = "http://localhost:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
                 $stream = fopen($url_get, 'r', false, $context);
                 if(!$stream) {
+                    //echo ' STREAM ERROR 15: ' . $stream;
                     // Salida URL no encontrada
                     exit(0);
                 }
@@ -118,7 +119,7 @@ try{
     //  https://www.php.net/manual/es/function.json-decode.php
         $json_obj = json_decode(stream_get_contents($stream), true, 5);
     //echo ' STREAM CONTENT 11: ';
-        print_r($json_obj['data']);
+        //print_r($json_obj['data']);
     //var_dump($json_obj);
     //echo $json_obj['result'];
     //echo $json_obj->{'data'}->{'usuario'}->{'email'};
@@ -159,7 +160,7 @@ if(($json_obj['result'] === "ok") && ($json_obj['data']['launch_parameters']['ta
     //var_dump($_SESSION['iss']);
 }
 elseif ($json_obj['result'] === "error"){
-    echo ' STREAM ERROR 31: ' . $json_obj['result'];
+    //echo ' STREAM ERROR 31: ' . $json_obj['result'];
     // Salida ERROR Actividad no encontrada
     exit(0);
 }
