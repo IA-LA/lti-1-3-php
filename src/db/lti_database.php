@@ -133,14 +133,8 @@ catch(Exception $e){
 
 // LLAMADA OK
 // Contenido Resultado de la llamada
-if(($json_obj['result'] === "ok") && ($GET_target_link_uri == TOOL_PARAMS_TARGET)){
+if(($json_obj['result'] === "ok") && ($json_obj['data']['launch_parameters']['target_link_uri'] === TOOL_PARAMS_TARGET)){
 //if(($json_obj['result'] === "ok")){
-    //if(!($GET_target_link_uri === TOOL_PARAMS_TARGET)){
-    //    define("TOOL_PARAMS_TARGET", $GET_target_link_uri);
-    //}
-    //echo "<p>" . 'SERVICIO GET:';
-    //print $json_obj['data']['launch_parameters']['iss'];
-    //print "<p>" . 'ARRAY ISS:';
 
     echo "<p>" . 'SERVICIO OK:';
 
@@ -150,6 +144,14 @@ if(($json_obj['result'] === "ok") && ($GET_target_link_uri == TOOL_PARAMS_TARGET
     // Comprueba que iss y target_link son idénticos a los registrados en la BBDD
     // TODO Comprobar que los hint son idénticos a los registrados en la BBDD AND (['login_hint']) AND (['lti_message_hint'])
     //echo $GET_target_link_uri . ' URLS === URLS ' . TOOL_PARAMS_TARGET;
+
+    //if(!($GET_target_link_uri === TOOL_PARAMS_TARGET)){
+    //    define("TOOL_PARAMS_TARGET", $GET_target_link_uri);
+    //}
+    //echo "<p>" . 'SERVICIO GET:';
+    //print $json_obj['data']['launch_parameters']['iss'];
+    //print "<p>" . 'ARRAY ISS:';
+
 
     // Parámetros
     $iss_get = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
