@@ -142,6 +142,8 @@ if(($json_obj['result'] === "ok") && ($GET_target_link_uri == TOOL_PARAMS_TARGET
     //print $json_obj['data']['launch_parameters']['iss'];
     //print "<p>" . 'ARRAY ISS:';
 
+    echo "<p>" . 'SERVICIO OK:';
+
     // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
     // print $url_get . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
     $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
