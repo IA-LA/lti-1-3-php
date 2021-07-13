@@ -86,17 +86,17 @@ $GET_target_link_uri = '';
 $context = stream_context_create($opts);
 try{
     $stream = fopen($url_get, 'r', false, $context);
-    echo ' STREAM11: ' . $stream;
+    //echo ' STREAM11: ' . $stream;
     if(!$stream) {
-        echo ' STREAM12: ' . $stream;
+        //echo ' STREAM12: ' . $stream;
         $url_get= "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
         $stream = fopen($url_get, 'r', false, $context);
         if(!$stream) {
-            echo ' STREAM ERROR 13: ' . $stream;
+            //echo ' STREAM ERROR 13: ' . $stream;
             $url_get= "http://127.0.0.1:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
             $stream = fopen($url_get, 'r', false, $context);
             if(!$stream) {
-                echo ' STREAM ERROR 14: ' . $stream;
+                //echo ' STREAM ERROR 14: ' . $stream;
                 $url_get = "http://localhost:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
                 $stream = fopen($url_get, 'r', false, $context);
                 if(!$stream) {
@@ -117,7 +117,7 @@ try{
     // Resultado
     //  https://www.php.net/manual/es/function.json-decode.php
         $json_obj = json_decode(stream_get_contents($stream), true, 5);
-        echo ' STREAM CONTENT 11: ';
+    //echo ' STREAM CONTENT 11: ';
         print_r($json_obj['data']);
     //var_dump($json_obj);
     //echo $json_obj['result'];
@@ -125,7 +125,7 @@ try{
 
 }
 catch(Exception $e){
-    echo ' STREAM ERROR 21: ' . $stream;
+    //echo ' STREAM ERROR 21: ' . $stream;
     // Salida Excepción URL
     exit(0);
 
@@ -136,7 +136,7 @@ catch(Exception $e){
 if(($json_obj['result'] === "ok") && ($json_obj['data']['launch_parameters']['target_link_uri'] === TOOL_PARAMS_TARGET)){
 //if(($json_obj['result'] === "ok")){
 
-    echo "<p>" . 'SERVICIO OK:';
+    //echo '<p>' . 'SERVICIO OK:';
 
     // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
     // print $url_get . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
