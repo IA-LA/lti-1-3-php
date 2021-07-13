@@ -32,7 +32,7 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
 else
     $url = "http://";
 // Append the host(domain name, ip) to the URL.
-$url .= $_SERVER['HTTP_HOST'];
+$url .= $_SERVER['SERVER_ADDR'];
 
 // Append the requested resource location to the URL
 //$url.= $_SERVER['REQUEST_URI'];
@@ -44,7 +44,7 @@ $url .= $_SERVER['HTTP_HOST'];
 // Obtiene la configuración de las actividades con una llamada de lectura `GET`
 // al servidor de SERVICIOS
 ///////////////////////////
-$url_get = "http://10.201.54.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+$url_get = $url . ":49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
 
 // CONTEXT Options
 /**
