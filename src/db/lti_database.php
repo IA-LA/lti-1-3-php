@@ -138,7 +138,7 @@ catch(Exception $e){
 if(($json_obj['result'] === "ok") && ($json_obj['data']['launch_parameters']['target_link_uri'] === TOOL_PARAMS_TARGET)){
 //if(($json_obj['result'] === "ok")){
 
-    echo '<p>' . 'SERVICIO OK: ' . $url;
+    //echo '<p>' . 'SERVICIO OK: ' . $url;
 
     // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
     // print $url_get . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
