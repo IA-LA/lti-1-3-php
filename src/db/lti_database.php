@@ -21,6 +21,7 @@ $_SESSION['iss'] = [];
 
 // Conectar con servicio READ
 //  get_iss($iss);
+// http://192.168.0.31:9002/login.php?iss=5fd9e0b286cb7926b85375e5&login_hint=123456&target_link_uri=http://192.168.0.31:8000/uploads/publicacion/10020210506073929000000a/&lti_message_hint=123456
 /////////////////////////////
 
 // Información servidor
@@ -31,7 +32,7 @@ if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
 else
     $url = "http://";
 // Append the host(domain name, ip) to the URL.
-$url.= $_SERVER['HTTP_HOST'];
+$url .= $_SERVER['HTTP_HOST'];
 
 // Append the requested resource location to the URL
 //$url.= $_SERVER['REQUEST_URI'];
@@ -43,7 +44,7 @@ $url.= $_SERVER['HTTP_HOST'];
 // Obtiene la configuración de las actividades con una llamada de lectura `GET`
 // al servidor de SERVICIOS
 ///////////////////////////
-$url_get = "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+$url_get = "http://10.201.54.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
 
 // CONTEXT Options
 /**
@@ -89,7 +90,7 @@ try{
     //echo ' STREAM11: ' . $stream;
     if(!$stream) {
         //echo ' STREAM12: ' . $stream;
-        $url_get= "http://10.201.54.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+        $url_get= "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
         $stream = fopen($url_get, 'r', false, $context);
         if(!$stream) {
             //echo ' STREAM ERROR 13: ' . $stream;
@@ -137,7 +138,7 @@ catch(Exception $e){
 if(($json_obj['result'] === "ok") && ($json_obj['data']['launch_parameters']['target_link_uri'] === TOOL_PARAMS_TARGET)){
 //if(($json_obj['result'] === "ok")){
 
-    //echo '<p>' . 'SERVICIO OK:';
+    echo '<p>' . 'SERVICIO OK: ' . $url;
 
     // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
     // print $url_get . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
