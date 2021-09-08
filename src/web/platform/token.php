@@ -31,7 +31,7 @@ function get_public_key($key_set_url) {
     throw new LTI_Exception("Unable to find public key", 1);
 }
 
-$jwt = JWT::decode($_POST['client_assertion'], get_public_key(TOOL_HOST . "/jwks.php"), array('RS256'));
+$jwt = JWT::decode(get_public_key(TOOL_HOST . "/jwks.php"), array('RS256'));
 
 echo json_encode([
     'access_token' => '9a4b5056-cdce-4cdd-8981-053b610d0842'
