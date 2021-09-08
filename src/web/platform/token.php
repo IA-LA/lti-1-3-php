@@ -29,6 +29,8 @@ function get_public_key($key_set_url) {
     throw new LTI_Exception("Unable to find public key", 1);
 }
 
+// Falla en el repositorio original (access_token)
+//////////////////////////////////////////////////
 //$jwt = JWT::decode($_POST['client_assertion'], get_public_key(TOOL_HOST . "/jwk.php"), array('RS256'));
 
 echo json_encode([
