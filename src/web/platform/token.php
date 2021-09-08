@@ -16,8 +16,9 @@ function get_public_key($key_set_url) {
     }
 
     // Find key used to sign the JWT (matches the KID in the header)
+    print_r($_POST['client_assertion']);
     foreach ($public_key_set['keys'] as $key) {
-        if ($key['kid'] == $_POST['client_assertion']['header']['kid'] && $key['alg'] == $_POST['client_assertion']['header']['alg']) {
+        if ($key['kid'] == $this->jwt['header']['kid'] && $key['alg'] == $this->jwt['header']['alg']) {
             try {
                 return openssl_pkey_get_details(JWK::parseKey($key));
             } catch(\Exception $e) {
