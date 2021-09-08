@@ -3,6 +3,7 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../../db/lti_database.php';
 
 use \IMSGlobal\LTI;
+use \Firebase\JWT\JWK;
 use \Firebase\JWT\JWT;
 
 function get_public_key($key_set_url) {
