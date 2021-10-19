@@ -50,6 +50,9 @@ $message_jwt = [
     ]
 ];
 $database = new Lti_Database();
+// The platform then creates a JWT with all the LTI parameters as claims, signs the JWT
+// using the platform private key, and sends the signed token as a form post to the
+// resource link URL.
 $jwt = JWT::encode(
     $message_jwt,
     file_get_contents(__DIR__ . '/../../db/platform.key'),

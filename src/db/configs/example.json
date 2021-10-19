@@ -1,13 +1,37 @@
 {
     "http://127.0.1.1:8080/oauth2": {
         "client_id": "9f80857a23b454866d1e",
-        "auth_login_url": "http://ailanto-dev.intecca.uned.es:8080/login",
+        "client_secret": "571deb6fb777aa1b2778bc03e580a10b635ec01a",
+        "grant_type": "client_credentials",
+        "auth_login_url": "http://ailanto-dev.intecca.uned.es:8080/oauth2/access_token",
         "auth_token_url": "http://ailanto-dev.intecca.uned.es:8080/oauth2/access_token",
+        "auth_server": "auth_token_url se utiliza también con este nombre y de servidor OAuth",
         "key_set_url": "http://ailanto-dev.intecca.uned.es:8080/oauth2/access_token",
-        "private_key_file": "/config/edx.key",
+        "private_key_file": "/configs/edx.key",
         "kid": "58f36e10-c1c1-4df0-af8b-85c857d1634f",
         "deployment": [
             "8c49a5fa-f955-405e-865f-3d7e959e809f"
+        ]
+    },
+    "http://imsglobal.org/2630": {
+        "client_id": "9f80857a23b454866d1e",
+        "auth_login_url": "https://lti-ri.imsglobal.org/platforms/2630/authorizations/new",
+        "auth_token_url": "https://lti-ri.imsglobal.org/platforms/2630/access_tokens",
+        "key_set_url": "https://lti-ri.imsglobal.org/platforms/2630/platform_keys/2427.json",
+        "private_key_file": "/keys/platform/imsglobal.key",
+        "kid": "IBzQQMWOW87eX0YeyUWhmmF5gg3DkhO4_hkwnwDf1pY",
+        "deployment": [
+            "8c49a5fa-f955-405e-865f-3d7e959e809f"
+        ]
+    },
+    "http://imsglobal.org/2320": {
+        "client_id": "testing12345",
+        "auth_login_url": "https://lti-ri.imsglobal.org/platforms/2320/authorizations/new",
+        "auth_token_url": "https://lti-ri.imsglobal.org/platforms/2320/access_tokens",
+        "key_set_url": "https://lti-ri.imsglobal.org/platforms/2320/platform_keys/2147.json",
+        "private_key_file": "/TestPlatform.key",
+        "deployment": [
+            "1234"
         ]
     },
     "http://imsglobal.org": {
