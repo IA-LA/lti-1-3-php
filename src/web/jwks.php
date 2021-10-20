@@ -5,7 +5,7 @@ require_once __DIR__ . '/../db/lti_database.php';
 use \IMSGlobal\LTI;
 
 LTI\JWKS_Endpoint::new([
-    '58f36e10-c1c1-4df0-af8b-85c857d1634f' => file_get_contents(__DIR__ . '/../db/tool.key')
+    'TRwtvqCcefOWuXU3-Dt4d26vCQExxh14vTO7_A375Pw' => file_get_contents(__DIR__ . '/../db/keys/platform/imsglobal_private.key')
 ])->output_jwks();
 
 ?>
