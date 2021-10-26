@@ -47,10 +47,10 @@ echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
 <?php
     if ($launch->is_resource_launch()) {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
-        echo '<hr/><br/><b>Resource Launch!</b>';
+        echo '<hr/><br/><b>Resource Link Request Launch!</b>';
     } else if ($launch->is_deep_link_launch()) {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiDeepLinkingRequest
-        echo '<hr/><br/><b>Deep Linking Launch!</b>';
+        echo '<hr/><br/><b>Deep Linking Request Launch!</b>';
     } else {
         echo '<hr/><br/><b>Unknown launch type</b>';
     }
