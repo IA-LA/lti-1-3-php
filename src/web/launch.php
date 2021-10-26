@@ -40,14 +40,16 @@ echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
     height: 100%;
   "></iframe>' .
   '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
-  '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'], $post_param['iss'], $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'];
+  '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'], '<a href="http://Haz.que.Lti_Database.tome.estos.parámetros.de.la.llamada.POST"><b>', $post_param['iss'], $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'], '</a></b>';
 
 ?>
 
 <?php
     if ($launch->is_resource_launch()) {
+        // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
         echo '<hr/><br/><b>Resource Launch!</b>';
     } else if ($launch->is_deep_link_launch()) {
+        // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiDeepLinkingRequest
         echo '<hr/><br/><b>Deep Linking Launch!</b>';
     } else {
         echo '<hr/><br/><b>Unknown launch type</b>';
