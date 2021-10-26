@@ -19,7 +19,7 @@
         "auth_token_url": "https://lti-ri.imsglobal.org/platforms/2630/access_tokens",
         "key_set_url": "https://lti-ri.imsglobal.org/platforms/2630/platform_keys/2427.json",
         "private_key_file": "/keys/platform/imsglobal.key",
-        "kid": "IBzQQMWOW87eX0YeyUWhmmF5gg3DkhO4_hkwnwDf1pY",
+        "kid": "58f36e10-c1c1-4df0-af8b-85c857d1634f",
         "deployment": [
             "8c49a5fa-f955-405e-865f-3d7e959e809f"
         ]
