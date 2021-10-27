@@ -52,6 +52,7 @@ echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiDeepLinkingRequest
         echo '<hr/><br/><b>Deep Linking Request Launch!</b>';
     } else {
+        // https://purl.imsglobal.org/spec/lti/claim/message_type ==== otros tipos
         echo '<hr/><br/><b>Unknown launch type</b>';
     }
     if ($launch->is_deep_link_launch()) {
