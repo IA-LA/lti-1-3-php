@@ -4,8 +4,8 @@ require_once __DIR__ . '/../db/lti_database.php';
 
 use \IMSGlobal\LTI;
 
-//$launch = LTI\LTI_Message_Launch::new(new Lti_Database())
-//    ->validate();
+$launch = LTI\LTI_Message_Launch::new(new Lti_Database())
+    ->validate();
 
 ?>
 <link href="static/breakout.css" rel="stylesheet">
