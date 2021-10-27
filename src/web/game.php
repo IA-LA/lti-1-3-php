@@ -12,7 +12,7 @@ use \IMSGlobal\LTI;
 <link href="https://fonts.googleapis.com/css?family=Gugi" rel="stylesheet">
 
 <?php
-//if ($launch->is_deep_link_launch()) {
+if ($launch->is_deep_link_launch()) {
     ?>
     <div class="dl-config">
         <h1>Pick a Difficulty</h1>
@@ -23,8 +23,8 @@ use \IMSGlobal\LTI;
         </ul>
     </div>
     <?php
-//    die;
-//}
+    die;
+}
 ?>
 
 <div id="game-screen">
