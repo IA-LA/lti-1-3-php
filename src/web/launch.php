@@ -40,7 +40,7 @@ echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
     height: 100%;
   "></iframe>' .
   '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
-  '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'], '<br/>ISS: <a href="http://Haz.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.POST"><b>', $post_param['iss'], '</a><br/>TARGET_LINK_URI: <a href="http://Haz.que.Lti_Database.tome.este.parámetro.TARGET_LINK_URI.de.la.llamada.POST">', $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'], '</a></b>';
+  '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'], '<br/><b>ISS: <a href="http://Haz.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.POST">', $post_param['iss'], '</a><br/>TARGET_LINK_URI: <a href="http://Haz.que.Lti_Database.tome.este.parámetro.TARGET_LINK_URI.de.la.llamada.POST">', $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'], '</a></b>';
 
 ?>
 
