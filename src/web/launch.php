@@ -50,7 +50,7 @@ echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
   '<br/><b>VERSION: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/version'], '</a></b>',
   '<br/><b>USER: <a href="http://">', $post_param['name'], '</a></b>',
   '<br/><b>EMAIL: <a href="http://">', $post_param['email'], '</a></b>',
-  '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/role'][0], '</a></b>'
+  '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'], '</a></b>'
   ;
 
 ?>
