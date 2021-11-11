@@ -7,13 +7,13 @@
         "auth_token_url": "http://ailanto-dev.intecca.uned.es:8080/oauth2/access_token",
         "auth_server": "auth_token_url se utiliza también con este nombre y de servidor OAuth",
         "key_set_url": "http://ailanto-dev.intecca.uned.es:8080/oauth2/access_token",
-        "private_key_file": "/configs/edx.key",
+        "private_key_file": "/keys/edx.key",
         "kid": "58f36e10-c1c1-4df0-af8b-85c857d1634f",
         "deployment": [
             "8c49a5fa-f955-405e-865f-3d7e959e809f"
         ]
     },
-    "http://imsglobal.org/2630": {
+    "https://lti-ri.imsglobal.org/platforms/2630": {
         "client_id": "9f80857a23b454866d1e",
         "auth_login_url": "https://lti-ri.imsglobal.org/platforms/2630/authorizations/new",
         "auth_token_url": "https://lti-ri.imsglobal.org/platforms/2630/access_tokens",
