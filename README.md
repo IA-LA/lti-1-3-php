@@ -1,4 +1,11 @@
-# LTI 1.3 Advantage Tool Server
+<p align="center">
+    <a href="http://ailanto-dev.intecca.uned.es/" target="_blank">
+        <img src="https://avatars0.githubusercontent.com/u/99334" height="100px">
+    </a>
+    <h1 align="center">LTI 1.3 Advantage Tool Server</h1>
+    <br>
+</p>
+
 This code consists on a LTI Tool Server that utilize the library LTI 1.3 PHP library https://github.com/IMSGlobal/lti-1-3-php-library.
 
 # Main URLs
