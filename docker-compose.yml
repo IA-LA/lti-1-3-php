@@ -3,7 +3,7 @@ services:
   app:
     build: .
     command: /bin/sh -c "cd /srv/app && php /bin/composer.phar install && php /bin/composer.phar update && apache2-foreground"
-    image: lti-docker
+    image: lti_server-docker
     ports:
       - ${LTI_PORT:-9002}:80
     volumes:
