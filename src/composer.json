@@ -1,7 +1,7 @@
 {
-    "name": "imsglobal/lti-1p3-tool-example",
+    "name": "http://10.201.54.232/vanesa/servidorLTI",
     "type": "project",
-    "description": "Example project using the LTI 1.3 Advantage library",
+    "description": "Server LTI using the LTI 1.3 Advantage library",
     "repositories": [
         {
             "type": "vcs",
@@ -12,6 +12,10 @@
         {
             "name": "Martin Lenord",
             "email": "ims.m@rtin.dev"
+        },
+        {
+            "name": "Francisco Sánchez",
+            "email": "fjsanchez@intecca.uned.es"
         }
     ],
     "require": {
