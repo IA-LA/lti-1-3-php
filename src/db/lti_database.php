@@ -100,17 +100,17 @@ try{
         $context = stream_context_create($opts);
         $stream = fopen($url_get, 'r', false, $context);
     }
-    elseif (false!==("http://192.168.0.31/index.html" . TOOL_PARAMS_ISS)){
+    elseif (file_exists("http://192.168.0.31")){
 
         $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
         $stream = fopen($url_get, 'r');
     }
-    elseif (false!==file("http://192.168.42.10/index.html" . TOOL_PARAMS_ISS)){
+    elseif (file_exists("http://192.168.42.10")){
 
         $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
         $stream = fopen($url_get, 'r');
     }
-    elseif (false!==file("http://192.168.43.130/index.html" . TOOL_PARAMS_ISS)){
+    elseif (file_exists("http://192.168.43.130")){
 
         $url_get = "http://192.168.43.130:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
         $stream = fopen($url_get, 'r');
