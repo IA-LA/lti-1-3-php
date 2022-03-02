@@ -97,53 +97,10 @@ $GET_target_link_uri = '';
 
 try{
     $context = stream_context_create($opts);
-    if (file_exists($url_get)){
-        $stream = fopen($url_get, 'r', false, $context);
-    }
-    elseif (file_exists("http://192.168.0.31:8000/index.php")){
-
-        $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-        $stream = fopen($url_get, 'r', false, $context);
-    }
-    elseif (file_exists("http://192.168.42.10:8000/index.php")){
-
-        $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-        $stream = fopen($url_get, 'r', false, $context);
-    }
-    elseif (file_exists("http://192.168.43.130:8000/index.php")){
 
         $url_get = "http://192.168.43.130:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
         $stream = fopen($url_get, 'r', false, $context);
-    }
-    else {
-
-        // Salida URL no encontrada
-        echo 'Salida URL no encontrada';
-        exit(0);
-    }
-    $context = stream_context_create($opts);
-    $stream = fopen($url_get, 'r', false, $context);
-    //echo ' STREAM11: ' . $stream;
-    if(!$stream) {
-        //echo ' STREAM12: ' . $stream;
-        $url_get= "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-        $stream = fopen($url_get, 'r');
-        if(!$stream) {
-            //echo ' STREAM ERROR 13: ' . $stream;
-            $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-            $stream = fopen($url_get, 'r');
-            if(!$stream) {
-                //echo ' STREAM ERROR 14: ' . $stream;
-                $url_get = "http://192.168.43.130:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-                $stream = fopen($url_get, 'r');
-                if(!$stream) {
-                    //echo ' STREAM ERROR 15: ' . $stream;
-                    // Salida URL no encontrada
-                    exit(0);
-                }
-            }
-        }
-    }
+ 
 
     // header information as well as meta data
     // about the stream
