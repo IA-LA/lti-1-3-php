@@ -1,5 +1,5 @@
 {
-    "name": "servidorLTI",
+    "name": "servidor/lti",
     "description": "Server LTI using the LTI 1.3 Advantage library",
     "keywords": ["LTI", "1.3", "Advantage", "Server", "IMSGlobal", "PHP"],
     "homepage": "http://ailanto-dev.intecca.uned.es:9002",
