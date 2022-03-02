@@ -315,14 +315,17 @@ class Services
             // ERROR LA ABRIR EL FLUJO
             if(!$stream) {
                 //echo ' STREAM12: ' . $stream;
+                // Ethernet
                 $stream = fopen($protocol . "192.168.0.31" . $ruta, 'r', false, $context);
                 // ERROR LA ABRIR EL FLUJO
                 if(!$stream) {
                     //echo ' STREAM ERROR 13: ' . $stream;
+                    // USB L
                     $stream = fopen($protocol . "192.168.42.10" . $ruta, 'r', false, $context);
                     // ERROR LA ABRIR EL FLUJO
                     if(!$stream) {
                         //echo ' STREAM ERROR 14: ' . $stream;
+                        // Wifi H
                         $stream = fopen($protocol . "192.168.43.130" . $ruta, 'r', false, $context);
                         // ERROR LA ABRIR EL FLUJO
                         if(!$stream) {
