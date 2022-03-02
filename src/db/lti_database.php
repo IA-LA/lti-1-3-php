@@ -95,22 +95,22 @@ $iss_get = ['MAl' => 'MAl'];
 // Contenido Redirección
 $GET_target_link_uri = '';
 
-$context = stream_context_create($opts);
 try{
+    $context = stream_context_create($opts);
     $stream = fopen($url_get, 'r', false, $context);
     //echo ' STREAM11: ' . $stream;
     if(!$stream) {
         //echo ' STREAM12: ' . $stream;
         $url_get= "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-        $stream = fopen($url_get, 'r', false, $context);
+        $stream = fopen($url_get, 'r');
         if(!$stream) {
             //echo ' STREAM ERROR 13: ' . $stream;
             $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-            $stream = fopen($url_get, 'r', false, $context);
+            $stream = fopen($url_get, 'r');
             if(!$stream) {
                 //echo ' STREAM ERROR 14: ' . $stream;
                 $url_get = "http://192.168.43.130:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-                $stream = fopen($url_get, 'r', false, $context);
+                $stream = fopen($url_get, 'r');
                 if(!$stream) {
                     //echo ' STREAM ERROR 15: ' . $stream;
                     // Salida URL no encontrada
