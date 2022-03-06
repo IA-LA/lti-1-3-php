@@ -24,14 +24,12 @@ use \IMSGlobal\LTI;
 
 $_SESSION['iss'] = [];
 
+// Conectar con servicio READ
+//  get_iss($iss);
+// Ej.: http://192.168.0.31:9002/login.php?iss=5fd9e0b286cb7926b85375e5&login_hint=123456&target_link_uri=http://192.168.0.31:8000/uploads/publicacion/10020210506073929000000a/&lti_message_hint=123456
+/////////////////////////////
 
 try{
-
-    // Conectar con servicio READ
-    //  get_iss($iss);
-    // Ej.: http://192.168.0.31:9002/login.php?iss=5fd9e0b286cb7926b85375e5&login_hint=123456&target_link_uri=http://192.168.0.31:8000/uploads/publicacion/10020210506073929000000a/&lti_message_hint=123456
-    /////////////////////////////
-
     // Información servidor
     //  https://www.php.net/manual/es/function.header.php
     ///////////////////////
@@ -186,7 +184,7 @@ try{
 
     // Resultado
     //  https://www.php.net/manual/es/function.json-decode.php
-        $json_obj = json_decode(stream_get_contents($stream), true, 5);
+    $json_obj = json_decode(stream_get_contents($stream), true, 5);
     //echo ' STREAM CONTENT 11: ';
         //print_r($json_obj['data']);
     //var_dump($json_obj);
@@ -206,11 +204,11 @@ catch(Exception $e){
 if(($json_obj['result'] === "ok") /*&& ($json_obj['data']['launch_parameters']['target_link_uri'] === TOOL_PARAMS_TARGET)*/){
 //if(($json_obj['result'] === "ok")){
 
-    //echo '<p>' . 'SERVICIO OK: ' . $url;
+    echo '<p>' . 'SERVICIO OK: ' . $url;
 
     // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
     // print $url_get . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
-    $target_link_uri_GET = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
+    $target_link_uri_GET = (string) $json_obj['data']['url_actividad'];
     // Comprueba que iss y target_link son idénticos a los registrados en la BBDD
     // TODO Comprobar que los hint son idénticos a los registrados en la BBDD AND (['login_hint']) AND (['lti_message_hint'])
     //echo $target_link_uri_GET . ' URLS === URLS ' . TOOL_PARAMS_TARGET;
@@ -224,7 +222,7 @@ if(($json_obj['result'] === "ok") /*&& ($json_obj['data']['launch_parameters']['
 
 
     // Parámetros
-    $iss_GET = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
+    $iss_GET = [$json_obj['data']['id_actividad'] => $json_obj['data']['credentials']];
     //$iss_GET = [$json_obj['data']['id_actividad'] => $json_obj['data']['credentials']];
     //var_dump($_SESSION['iss']);
 }
