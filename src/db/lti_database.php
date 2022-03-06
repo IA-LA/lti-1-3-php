@@ -44,8 +44,10 @@ try{
         $url .= '10.201.54.31';
     }
     else{
-        error_reporting(E_ERROR | E_PARSE);
+        //error_reporting(E_ERROR | E_PARSE);
 
+        // Comprueba que respondan las URL locales
+        // https://www.geeksforgeeks.org/how-to-send-http-response-code-in-php/
         // Initialize a variable into domain name
         $domains = [
             'localHwifi'=>'192.168.43.130',
@@ -71,14 +73,16 @@ try{
 
             // Check HTTP response code is 200 or not
             if ($get_http_response_code == 200){
-                echo "<br>HTTP request successfully " . $key;
+                //echo "<br>HTTP request successfully " . $key;
                 // SERVIDOR SERVICIOS LOCAL
                 $url .= $domain;
 
+                // https://stackoverflow.com/questions/18012290/how-to-break-out-of-a-foreach-once-a-condition-is-met
                 break;
             }
             else
-                echo "<br>HTTP request not successfully! " . $key;
+                //echo "<br>HTTP request not successfully! " . $key;
+                $url = $url;
         }
 
         // SERVIDOR SERVICIOS LOCAL
@@ -185,7 +189,7 @@ try{
     // Resultado
     //  https://www.php.net/manual/es/function.json-decode.php
     $json_obj = json_decode(stream_get_contents($stream), true, 5);
-    echo ' STREAM CONTENT 11: '. $url_get;
+    //echo ' STREAM CONTENT 11: '. $url_get;
     //print_r($json_obj['data']);
     //var_dump($json_obj);
     //echo $json_obj['result'];
@@ -204,7 +208,7 @@ catch(Exception $e){
 if(($json_obj['result'] === "ok") /*&& ($json_obj['data']['launch_parameters']['target_link_uri'] === TOOL_PARAMS_TARGET)*/){
 //if(($json_obj['result'] === "ok")){
 
-    echo '<p>' . 'SERVICIO OK: ' . $url;
+    //echo '<p>' . 'SERVICIO OK: ' . $url_get;
 
     // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
     // print $url_get . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
