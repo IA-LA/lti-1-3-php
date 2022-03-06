@@ -185,8 +185,8 @@ try{
     // Resultado
     //  https://www.php.net/manual/es/function.json-decode.php
     $json_obj = json_decode(stream_get_contents($stream), true, 5);
-    echo ' STREAM CONTENT 11: ';
-    print_r($json_obj['data']);
+    echo ' STREAM CONTENT 11: '. $json_obj['result'];
+    //print_r($json_obj['data']);
     //var_dump($json_obj);
     //echo $json_obj['result'];
     //echo $json_obj->{'data'}->{'usuario'}->{'email'};
