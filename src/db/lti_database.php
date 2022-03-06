@@ -69,7 +69,7 @@ try{
             $get_http_response_code = get_http_response_code($url . $domain);
 
             // Display the HTTP response code
-            echo $get_http_response_code;
+            //echo $get_http_response_code;
 
             // Check HTTP response code is 200 or not
             if ($get_http_response_code == 200){
