@@ -99,16 +99,16 @@ try{
     error_reporting(E_ERROR | E_PARSE);
 
     // Initialize a variable into domain name
-    $domain1 = 'http://192.168.42.68';
+    $domain = 'http://192.168.43.130';
 
     // Function to get HTTP response code
-    function get_http_response_code($domain1) {
-        $headers = get_headers($domain1);
+    function get_http_response_code($domain) {
+        $headers = get_headers($domain);
         return substr($headers[0], 9, 3);
     }
 
     // Function call
-    $get_http_response_code = get_http_response_code($domain1);
+    $get_http_response_code = get_http_response_code($domain);
 
     // Display the HTTP response code
     echo $get_http_response_code;
