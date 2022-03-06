@@ -100,7 +100,7 @@ try{
 
     // Initialize a variable into domain name
     $domains = [
-        'general'=>$url_get,
+        'local'=>$url_get,
         'localHwifi'=>'http://192.168.43.130',
         'localHusb'=>'http://192.168.42.0',
         'localLwifi'=>'http://192.168.42.0',
@@ -154,7 +154,7 @@ try{
 
         // Salida URL no encontrada
         echo 'Salida URL no encontrada';
-        exit(0);
+        //exit(0);
     }
     $context = stream_context_create($opts);
     $stream = fopen($url_get, 'r', false, $context);
