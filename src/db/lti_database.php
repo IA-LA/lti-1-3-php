@@ -100,12 +100,13 @@ try{
 
     // Initialize a variable into domain name
     $domains = [
-        'local'=>$url_get,
         'localHwifi'=>'http://192.168.43.130',
         'localHusb'=>'http://192.168.42.0',
         'localLwifi'=>'http://192.168.42.0',
         'localLusb'=>'http://192.168.42.10',
-        'local_ethernet'=>'http://192.168.0.31'];
+        'local_ethernet'=>'http://192.168.0.31',
+        'local'=>$url_get,
+        ];
 
     // Function to get HTTP response code
     function get_http_response_code($domain) {
