@@ -24,113 +24,156 @@ use \IMSGlobal\LTI;
 
 $_SESSION['iss'] = [];
 
-// Conectar con servicio READ
-//  get_iss($iss);
-// Ej.: http://192.168.0.31:9002/login.php?iss=5fd9e0b286cb7926b85375e5&login_hint=123456&target_link_uri=http://192.168.0.31:8000/uploads/publicacion/10020210506073929000000a/&lti_message_hint=123456
-/////////////////////////////
-
-// Información servidor
-//  https://www.php.net/manual/es/function.header.php
-///////////////////////
-if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
-    $url = "https://";
-else
-    $url = "http://";
-// Append the host(domain name, ip) to the URL.
-if(strpos($_SERVER['HTTP_HOST'], '.intecca.uned.es') || strpos($_SERVER['HTTP_HOST'], '193.146.230.217')){
-    // SERVIDOR SERVICIOS GENERAL
-    $url .= '10.201.54.31';
-}
-else
-    // SERVIDOR SERVICIOS LOCAL
-    $url .= explode(':', $_SERVER['HTTP_HOST'])[0];
-
-// Append the requested resource location to the URL
-//$url.= $_SERVER['REQUEST_URI'];
-//echo $_REQUEST['target_link_uri'];
-
-// Llamadas REST
-//  https://stackoverflow.com/questions/2445276/how-to-post-data-in-php-using-file-get-contents
-//  https://www.php.net/manual/en/context.http.php
-// Obtiene la configuración de las actividades con una llamada de lectura `GET`
-// al servidor de SERVICIOS
-///////////////////////////
-$url_get = $url . ":49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-
-// CONTEXT Options
-/**
-$opts = array('http' =>
-    array(
-        'method' => 'HEAD',
-        'timeout' => '5',
-        'ignore_errors' => '1'
-    )
-);
-
-if(strpos(get_headers("http://10.201.54.31:49151/servicios/json/RUTAS.json", 0, stream_context_create($opts))[0], 'OK')){
-    $url_get = "http://10.201.54.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-    echo 'PARSE11: ' . parse_url("http://10.201.54.31:49151/servicios/json/RUTAS.json")['port'];
-}
-elseif (strpos(get_headers("http://192.168.0.31:49151/servicios/json/RUTAS.json", 0, stream_context_create($opts))[0], 'OK')) {
-    $url_get = "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-    echo 'PARSE12: ' . parse_url('http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/');
-}
-elseif (strpos(get_headers("http://127.0.0.1:49151/servicios/json/RUTAS.json", 0, stream_context_create($opts))[0], 'OK')) {
-    $url_get = "http://127.0.0.1:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-    echo 'PARSE13: ' . parse_url('http://127.0.0.1:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/');
-}
-**/
-
-// CONTEXT Options
-$opts = array('http' =>
-    array(
-        'method' => 'GET',
-        'timeout' => '5',
-        'ignore_errors' => '1'
-    )
-);
-
-// Contenido Registro
-$iss_get = ['MAl' => 'MAl'];
-// Contenido Redirección
-$GET_target_link_uri = '';
 
 try{
-    error_reporting(E_ERROR | E_PARSE);
 
-    // Initialize a variable into domain name
-    $domains = [
-        'localHwifi'=>'http://192.168.43.130',
-        'localHusb'=>'http://192.168.42.0',
-        'localLwifi'=>'http://192.168.42.0',
-        'localLusb'=>'http://192.168.42.10',
-        'local_ethernet'=>'http://192.168.0.31',
-        'local'=>$url_get,
+    // Conectar con servicio READ
+    //  get_iss($iss);
+    // Ej.: http://192.168.0.31:9002/login.php?iss=5fd9e0b286cb7926b85375e5&login_hint=123456&target_link_uri=http://192.168.0.31:8000/uploads/publicacion/10020210506073929000000a/&lti_message_hint=123456
+    /////////////////////////////
+
+    // Información servidor
+    //  https://www.php.net/manual/es/function.header.php
+    ///////////////////////
+    if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+        $url = "https://";
+    else
+        $url = "http://";
+
+    // Append the host(domain name, ip) to the URL.
+    if(strpos($_SERVER['HTTP_HOST'], '.intecca.uned.es') || strpos($_SERVER['HTTP_HOST'], '193.146.230.217')){
+        // SERVIDOR SERVICIOS GENERAL
+        $url .= '10.201.54.31';
+    }
+    else{
+        error_reporting(E_ERROR | E_PARSE);
+
+        // Initialize a variable into domain name
+        $domains = [
+            'localHwifi'=>$url . '192.168.43.130',
+            //'localHusb'=>$url . '192.168.42.0',
+            //'localLwifi'=>$url . '192.168.42.0',
+            'localLusb'=>$url . '192.168.42.10',
+            'local_ethernet'=>$url . '192.168.0.31',
+            // SERVIDOR SERVICIOS LOCAL
+            'local'=>$url . explode(':', $_SERVER['HTTP_HOST'])[0],
         ];
 
-    // Function to get HTTP response code
-    function get_http_response_code($domain) {
-        $headers = get_headers($domain);
-        return substr($headers[0], 9, 3);
-    }
-    foreach ($domains as $key => $domain) {
-        // Function call
-        $get_http_response_code = get_http_response_code($domain);
-
-        // Display the HTTP response code
-        echo $get_http_response_code;
-
-        // Check HTTP response code is 200 or not
-        if ($get_http_response_code == 200){
-            echo "<br>HTTP request successfully " . $key;
-            $url_get = $domain;
-
-            break;
+        // Function to get HTTP response code
+        function get_http_response_code($domain) {
+            $headers = get_headers($domain);
+            return substr($headers[0], 9, 3);
         }
-        else
-            echo "<br>HTTP request not successfully! " . $key;
+        foreach ($domains as $key => $domain) {
+            // Function call
+            $get_http_response_code = get_http_response_code($domain);
+
+            // Display the HTTP response code
+            echo $get_http_response_code;
+
+            // Check HTTP response code is 200 or not
+            if ($get_http_response_code == 200){
+                echo "<br>HTTP request successfully " . $key;
+                // SERVIDOR SERVICIOS LOCAL
+                $url .= $domain;
+
+                break;
+            }
+            else
+                echo "<br>HTTP request not successfully! " . $key;
+        }
+
+        // SERVIDOR SERVICIOS LOCAL
+        //$url .= explode(':', $_SERVER['HTTP_HOST'])[0];
     }
 
+    // Append the requested resource location to the URL
+    //$url.= $_SERVER['REQUEST_URI'];
+    //echo $_REQUEST['target_link_uri'];
+
+    // Llamadas REST
+    //  https://stackoverflow.com/questions/2445276/how-to-post-data-in-php-using-file-get-contents
+    //  https://www.php.net/manual/en/context.http.php
+    // Obtiene la configuración de las actividades con una llamada de lectura `GET`
+    // al servidor de SERVICIOS
+    ///////////////////////////
+    $url_get = $url . ":49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+
+    // CONTEXT Options
+    /**
+    $opts = array('http' =>
+        array(
+            'method' => 'HEAD',
+            'timeout' => '5',
+            'ignore_errors' => '1'
+        )
+    );
+     *
+     * GET_HEADERS()
+     *
+    if(strpos(get_headers("http://10.201.54.31:49151/servicios/json/RUTAS.json", 0, stream_context_create($opts))[0], 'OK')){
+        $url_get = "http://10.201.54.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+        echo 'PARSE11: ' . parse_url("http://10.201.54.31:49151/servicios/json/RUTAS.json")['port'];
+    }
+    elseif (strpos(get_headers("http://192.168.0.31:49151/servicios/json/RUTAS.json", 0, stream_context_create($opts))[0], 'OK')) {
+        $url_get = "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+        echo 'PARSE12: ' . parse_url('http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/');
+    }
+    elseif (strpos(get_headers("http://127.0.0.1:49151/servicios/json/RUTAS.json", 0, stream_context_create($opts))[0], 'OK')) {
+        $url_get = "http://127.0.0.1:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+        echo 'PARSE13: ' . parse_url('http://127.0.0.1:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/');
+    }
+     *
+     * FILE_EXISTS()
+     *
+    $context = stream_context_create($opts);
+    if (file_exists($url_get)){
+    $stream = fopen($url_get, 'r', false, $context);
+    }
+    elseif (file_exists("http://192.168.0.31:8000/index.php")){
+
+    $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+    $stream = fopen($url_get, 'r', false, $context);
+    }
+    elseif (file_exists("http://192.168.42.185:8000/index.php")){
+
+    $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+    $stream = fopen($url_get, 'r', false, $context);
+    }
+    elseif (file_exists("http://192.168.42.10:8000/index.php")){
+
+    $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+    $stream = fopen($url_get, 'r', false, $context);
+    }
+    elseif (file_exists("http://192.168.43.130:8000/index.php")){
+
+    $url_get = "http://192.168.43.130:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
+    $stream = fopen($url_get, 'r', false, $context);
+    }
+    else {
+
+    // Salida URL no encontrada
+    echo 'Salida URL no encontrada';
+    exit(0);
+    }
+     **/
+
+    // GET URL
+    // CONTEXT Options
+    $opts = array('http' =>
+        array(
+            'method' => 'GET',
+            'timeout' => '5',
+            'ignore_errors' => '1'
+        )
+    );
+
+    // Contenido Registro
+    $iss_GET = ['MAl' => 'MAl'];
+    // Contenido Redirección
+    $target_link_uri_GET = '';
+
+    // GET URL
     $context = stream_context_create($opts);
     $stream = fopen($url_get, 'r', false, $context);
 
@@ -167,13 +210,13 @@ if(($json_obj['result'] === "ok") /*&& ($json_obj['data']['launch_parameters']['
 
     // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
     // print $url_get . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
-    $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
+    $target_link_uri_GET = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
     // Comprueba que iss y target_link son idénticos a los registrados en la BBDD
     // TODO Comprobar que los hint son idénticos a los registrados en la BBDD AND (['login_hint']) AND (['lti_message_hint'])
-    //echo $GET_target_link_uri . ' URLS === URLS ' . TOOL_PARAMS_TARGET;
+    //echo $target_link_uri_GET . ' URLS === URLS ' . TOOL_PARAMS_TARGET;
 
-    //if(!($GET_target_link_uri === TOOL_PARAMS_TARGET)){
-    //    define("TOOL_PARAMS_TARGET", $GET_target_link_uri);
+    //if(!($target_link_uri_GET === TOOL_PARAMS_TARGET)){
+    //    define("TOOL_PARAMS_TARGET", $target_link_uri_GET);
     //}
     //echo "<p>" . 'SERVICIO GET:';
     //print $json_obj['data']['launch_parameters']['iss'];
@@ -181,8 +224,8 @@ if(($json_obj['result'] === "ok") /*&& ($json_obj['data']['launch_parameters']['
 
 
     // Parámetros
-    $iss_get = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
-    //$iss_get = [$json_obj['data']['id_actividad'] => $json_obj['data']['credentials']];
+    $iss_GET = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
+    //$iss_GET = [$json_obj['data']['id_actividad'] => $json_obj['data']['credentials']];
     //var_dump($_SESSION['iss']);
 }
 elseif ($json_obj['result'] === "error"){
@@ -194,10 +237,10 @@ fclose($stream);
 
 // Obtiene la configuración de los sitios con una llamada de lectura `GET`
 //echo "<p>" . '$_SESSION["iss"] 1:';
-//var_dump($_SESSION['iss'], $iss_get);
-$_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
+//var_dump($_SESSION['iss'], $iss_GET);
+$_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_GET);
 //echo "<p>" . '$_SESSION["iss"] 2:';
-//var_dump($_SESSION['iss'], $iss_get);
+//var_dump($_SESSION['iss'], $iss_GET);
 
 // Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
 $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
