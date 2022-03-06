@@ -99,7 +99,7 @@ try{
     error_reporting(E_ERROR | E_PARSE);
 
     // Initialize a variable into domain name
-    $domain1 = 'http://192.168.42.129';
+    $domain1 = 'http://192.168.42.185';
 
     // Function to get HTTP response code
     function get_http_response_code($domain1) {
