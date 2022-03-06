@@ -99,25 +99,32 @@ try{
     error_reporting(E_ERROR | E_PARSE);
 
     // Initialize a variable into domain name
-    $domain1 = 'http://192.168.43.130';
+    $domains = [
+        'general'=>'$url_get',
+        'localHwifi'=>'http://192.168.43.130:9002',
+        'localHusb'=>'http://192.168.42.*:9002',
+        'localLwifi'=>'http://192.168.42.*:9002',
+        'localLusb'=>'http://192.168.42.10:9002',
+        'local_ethernet'=>'http://192.168.0.31:9002'];
 
     // Function to get HTTP response code
     function get_http_response_code($domain) {
         $headers = get_headers($domain);
         return substr($headers[0], 9, 3);
     }
+    foreach ($domains as $key => $domain) {
+        // Function call
+        $get_http_response_code = get_http_response_code($domain);
 
-    // Function call
-    $get_http_response_code = get_http_response_code($domain1);
+        // Display the HTTP response code
+        echo $get_http_response_code;
 
-    // Display the HTTP response code
-    echo $get_http_response_code;
-
-    // Check HTTP response code is 200 or not
-    if ( $get_http_response_code == 200 )
-        echo "<br>HTTP request successfully";
-    else
-        echo "<br>HTTP request not successfully!";
+        // Check HTTP response code is 200 or not
+        if ($get_http_response_code == 200)
+            echo "<br>HTTP request successfully " . $key;
+        else
+            echo "<br>HTTP request not successfully! " . $key;
+    }
 
     $context = stream_context_create($opts);
     if (file_exists($url_get)){
@@ -128,7 +135,7 @@ try{
         $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
         $stream = fopen($url_get, 'r', false, $context);
     }
-    elseif (file_exists("http://192.168.0.31:8000/index.php")){
+    elseif (file_exists("http://192.168.42.185:8000/index.php")){
 
         $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
         $stream = fopen($url_get, 'r', false, $context);
