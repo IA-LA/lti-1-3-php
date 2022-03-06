@@ -48,13 +48,13 @@ try{
 
         // Initialize a variable into domain name
         $domains = [
-            'localHwifi'=>$url . '192.168.43.130',
-            //'localHusb'=>$url . '192.168.42.0',
-            //'localLwifi'=>$url . '192.168.42.0',
-            'localLusb'=>$url . '192.168.42.10',
-            'local_ethernet'=>$url . '192.168.0.31',
+            'localHwifi'=>'192.168.43.130',
+            //'localHusb'=>'192.168.42.0',
+            //'localLwifi'=>'192.168.42.0',
+            'localLusb'=>'192.168.42.10',
+            'local_ethernet'=>'192.168.0.31',
             // SERVIDOR SERVICIOS LOCAL
-            'local'=>$url . explode(':', $_SERVER['HTTP_HOST'])[0],
+            'local'=>explode(':', $_SERVER['HTTP_HOST'])[0],
         ];
 
         // Function to get HTTP response code
@@ -64,7 +64,7 @@ try{
         }
         foreach ($domains as $key => $domain) {
             // Function call
-            $get_http_response_code = get_http_response_code($domain);
+            $get_http_response_code = get_http_response_code($url . $domain);
 
             // Display the HTTP response code
             echo $get_http_response_code;
