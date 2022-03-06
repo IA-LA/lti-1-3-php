@@ -99,7 +99,7 @@ try{
     error_reporting(E_ERROR | E_PARSE);
 
     // Initialize a variable into domain name
-    $domain1 = 'http://192.168.42.185';
+    $domain1 = 'http://192.168.42.68';
 
     // Function to get HTTP response code
     function get_http_response_code($domain1) {
@@ -121,6 +121,11 @@ try{
 
     $context = stream_context_create($opts);
     if (file_exists($url_get)){
+        $stream = fopen($url_get, 'r', false, $context);
+    }
+    elseif (file_exists("http://192.168.0.31:8000/index.php")){
+
+        $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
         $stream = fopen($url_get, 'r', false, $context);
     }
     elseif (file_exists("http://192.168.0.31:8000/index.php")){
