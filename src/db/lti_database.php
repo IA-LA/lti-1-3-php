@@ -100,7 +100,7 @@ try{
 
     // Initialize a variable into domain name
     $domains = [
-        'general'=>'$url_get',
+        'general'=>$url_get,
         'localHwifi'=>'http://192.168.43.130',
         'localHusb'=>'http://192.168.42.0',
         'localLwifi'=>'http://192.168.42.0',
