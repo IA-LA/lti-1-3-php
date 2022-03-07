@@ -205,7 +205,10 @@ catch(Exception $e){
 
 // LLAMADA OK
 // Contenido Resultado de la llamada
-if(($json_obj['result'] === "ok") /*&& ($json_obj['data']['launch_parameters']['target_link_uri'] === TOOL_PARAMS_TARGET)*/){
+// Doble comprobación según el estándar LTI (para evitar redirecciones arbitrarias):
+//  - Issuer de Plataforma con credenciales dadas de alta (READ ok)
+//  - Target con URL registrada como Actividad LTI
+if(($json_obj['result'] === "ok") && ($json_obj['data']['url_actividad'] === TOOL_PARAMS_TARGET)){
 //if(($json_obj['result'] === "ok")){
 
     //echo '<p>' . 'SERVICIO OK: ' . $url_get;
