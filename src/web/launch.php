@@ -44,7 +44,7 @@ echo '
     overflow: hidden;
     z-index: 999999;
     height: 100%;"></embed>
-    <iframe id="frame2" src="' . $_REQUEST['target_link_uri'] . '"
+    <!-- <iframe id="frame2" src="' . $_REQUEST['target_link_uri'] . '"
     allowfullscreen="true" allowpaymentrequest="true"
     style="
     position: fixed;
@@ -57,7 +57,7 @@ echo '
     padding: 0;
     overflow: hidden;
     z-index: 999999;
-    height: 100%;"></iframe>' .
+    height: 100%;"></iframe> -->' .
   '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
   '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
   '<hr/>',
