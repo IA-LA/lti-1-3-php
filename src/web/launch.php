@@ -26,7 +26,21 @@ $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $_REQUEST['iss'
 
 // IFRAME FULL PAGE cross-browser and fully responsive
 //  https://stackoverflow.com/questions/17710039/full-page-iframe
-echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
+echo '
+    <script type="text/javascript">
+        function test() {
+            document.getElementById("frame").contentWindow.location.reload();
+        }
+    </script>
+
+    <form action="" enctype="multipart/form-data" method="post">
+      <input id="upload" name="upload" size="30" type="file">
+      <input type="submit" value="Upload File" onclick="test();">
+    </form>
+    
+    <script>document.getElementById("frame").contentWindow.location.reload();</script>
+
+    <iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
     position: fixed;
     top: 0px;
     bottom: 0px;
@@ -45,7 +59,7 @@ echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
   '<br/><b>PLATFORM:</b> <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/tool_platform']['name'], '</a></b>',
   '<hr/>',
   '<br/><b>ISS: <a href="http://Haz.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.POST">', $post_param['iss'], '</a></b>',
-  '<br/><b>TARGET_LINK_URI: <a href="http://Haz.Lti_Database.tome.TARGET_LINK_URI.llamada.POST">', $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'], '</a></b>',
+  '<br/><b>TARGET_LINK_URI: <a href="http://Haz.que.Lti_Database.tome.TARGET_LINK_URI.llamada.POST">', $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'], '</a></b>',
   '<br/><b>TYPE: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/message_type'], '</a></b>',
   '<br/><b>VERSION: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/version'], '</a></b>',
   '<br/><b>USER: <a href="http://">', $post_param['name'], '</a></b>',
@@ -62,19 +76,17 @@ echo '<iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
     } else if ($launch->is_deep_link_launch()) {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiDeepLinkingRequest
         echo '<hr/><br/><b>Deep Linking Request Launch!</b>';
-    } else {
-        // https://purl.imsglobal.org/spec/lti/claim/message_type ==== otros tipos
-        echo '<hr/><br/><b>Unknown launch type</b>';
-    }
-    if ($launch->is_deep_link_launch()) {
 ?>
         <div id="config">
             <br/>LAUNCH DEEP LINK:
             <?php
-                echo $_REQUEST['iss'], $_REQUEST['target_link_uri'];
+            echo $_REQUEST['iss'], $_REQUEST['target_link_uri'];
             ?>
         </div>
 <?php
-    die;
+        die;
+    } else {
+        // https://purl.imsglobal.org/spec/lti/claim/message_type ==== otros tipos
+        echo '<hr/><br/><b>Unknown launch type</b>';
     }
 ?>
