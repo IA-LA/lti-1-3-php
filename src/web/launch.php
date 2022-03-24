@@ -24,6 +24,10 @@ $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $_REQUEST['iss'
 //header('Location: ' . TOOL_PARAMS_TARGET, true, 302);
 //die;
 
+// LOAD PAGE
+// https://stackoverflow.com/questions/18327314/how-to-allow-http-content-within-an-iframe-on-a-https-site
+$homepage = file_get_contents($_REQUEST['target_link_uri']);
+echo $homepage;
 // IFRAME FULL PAGE cross-browser and fully responsive
 //  https://stackoverflow.com/questions/17710039/full-page-iframe
 echo '
