@@ -16,6 +16,8 @@ print('<p>' . $_REQUEST['target_link_uri']);
 print('<p>' . $_REQUEST['state']);
 print('<p>');
 print_r($post_param);
+print('</p>');
+
 // TODO leer `target_link_uri` del servicio GET por la `iss` !!!!!!!!!
 $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $_REQUEST['iss'], "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => $_REQUEST['target_link_uri'], "lti_message_hint" => $_REQUEST['lti_message_hint']]))
     ->validate();
@@ -29,7 +31,7 @@ $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $_REQUEST['iss'
 // ALTERNATIVES
 //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
 echo '
-    <iframe id="frame1" src="' . $_REQUEST['target_link_uri'] . '"
+    <iframe id="frame1" src="https://www.geeksforgeeks.org/how-to-place-a-div-inside-an-iframe-for-ie/"
     style="
     position: fixed;
     top: 0px;
