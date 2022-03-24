@@ -42,7 +42,8 @@ echo '
     
     <script>document.getElementById("frame").contentWindow.location.reload();</script>
 
-    <iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '" referrerpolicy="no-referrer" 
+    <iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"
+    allowfullscreen="true" allowpaymentrequest="true" loading="eager"
     style="
     position: fixed;
     top: 0px;
