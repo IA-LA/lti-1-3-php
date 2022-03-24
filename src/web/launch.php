@@ -24,27 +24,9 @@ $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $_REQUEST['iss'
 //header('Location: ' . TOOL_PARAMS_TARGET, true, 302);
 //die;
 
-// LOAD PAGE
-// https://stackoverflow.com/questions/18327314/how-to-allow-http-content-within-an-iframe-on-a-https-site
-$homepage = file_get_contents($_REQUEST['target_link_uri']);
-echo $homepage;
 // IFRAME FULL PAGE cross-browser and fully responsive
 //  https://stackoverflow.com/questions/17710039/full-page-iframe
-echo '
-    <script type="text/javascript">
-        function test() {
-            document.getElementById("frame").contentWindow.location.reload();
-        }
-    </script>
-
-    <form action="" enctype="multipart/form-data" method="post">
-      <input id="upload" name="upload" size="30" type="file">
-      <input type="submit" value="Upload File" onclick="test();">
-    </form>
-    
-    <script>document.getElementById("frame").contentWindow.location.reload();</script>
-
-    <iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
+echo '<embed id="frame" src="' . $_REQUEST['target_link_uri'] . '"   style="
     position: fixed;
     top: 0px;
     bottom: 0px;
@@ -56,7 +38,7 @@ echo '
     overflow: hidden;
     z-index: 999999;
     height: 100%;
-  "></iframe>' .
+  "/>' .
   '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
   '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
   '<hr/>',
