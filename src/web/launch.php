@@ -42,7 +42,8 @@ echo '
     
     <script>document.getElementById("frame").contentWindow.location.reload();</script>
 
-    <iframe id="frame" src="//ailanto-dev.intecca.uned.es/lti/publicacion/10220210903095251000000a"   style="
+    <iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '" referrerpolicy="no-referrer" 
+    style="
     position: fixed;
     top: 0px;
     bottom: 0px;
