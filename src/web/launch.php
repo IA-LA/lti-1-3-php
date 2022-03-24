@@ -31,7 +31,7 @@ $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $_REQUEST['iss'
 // ALTERNATIVES
 //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
 echo '
-    <iframe id="frame1" src="https://www.geeksforgeeks.org/how-to-place-a-div-inside-an-iframe-for-ie/"
+    <iframe id="frame1" src="http://ailanto-dev.intecca.uned.es/uploads/publicacion/10220210903095251000000a/"
     style="
     position: fixed;
     top: 0px;
@@ -58,7 +58,7 @@ echo '
     
     <script>document.getElementById("frame").contentWindow.location.reload();</script>
 
-    <iframe id="frame2" src="' . $_REQUEST['target_link_uri'] . '"
+    <iframe id="frame2" src="http://10.201.54.31:8000/uploads/publicacion/10220210903095251000000a"
     allowfullscreen="true" allowpaymentrequest="true" loading="lazy"
     style="
     position: fixed;
