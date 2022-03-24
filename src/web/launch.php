@@ -58,7 +58,7 @@ echo '
     
     <script>document.getElementById("frame").contentWindow.location.reload();</script>
 
-    <iframe id="frame2" src="https://10.201.54.31:8000/uploads/publicacion/10220210903095251000000a"
+    <iframe id="frame2" src="http://10.201.54.31:8000/uploads/publicacion/10220210903095251000000a"
     allowfullscreen="true" allowpaymentrequest="true" loading="lazy"
     style="
     position: fixed;
