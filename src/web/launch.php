@@ -29,6 +29,20 @@ $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $_REQUEST['iss'
 // ALTERNATIVES
 //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
 echo '
+    <iframe id="frame1" src="' . $_REQUEST['target_link_uri'] . '"
+    style="
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    width: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    z-index: 999999;
+    height: 100%;
+"></iframe>
     <script type="text/javascript">
         function test() {
             document.getElementById("frame").contentWindow.location.reload();
@@ -42,8 +56,8 @@ echo '
     
     <script>document.getElementById("frame").contentWindow.location.reload();</script>
 
-    <iframe id="frame" src="' . $_REQUEST['target_link_uri'] . '"
-    allowfullscreen="true" allowpaymentrequest="true" loading="eager"
+    <iframe id="frame2" src="' . $_REQUEST['target_link_uri'] . '"
+    allowfullscreen="true" allowpaymentrequest="true" loading="lazy"
     style="
     position: fixed;
     top: 0px;
