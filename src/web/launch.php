@@ -31,7 +31,7 @@ $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $_REQUEST['iss'
 // ALTERNATIVES
 //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
 echo '
-    <iframe id="frame1" src="https://ailanto-dev.intecca.uned.es/git/10220210903095251000000a.git/"
+    <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $_REQUEST['iss'] . '"
     style="
     position: fixed;
     top: 0px;
@@ -43,23 +43,9 @@ echo '
     padding: 0;
     overflow: hidden;
     z-index: 999999;
-    height: 100%;
-"></iframe>
-    <script type="text/javascript">
-        function test() {
-            document.getElementById("frame").contentWindow.location.reload();
-        }
-    </script>
-
-    <form action="" enctype="multipart/form-data" method="post">
-      <input id="upload" name="upload" size="30" type="file">
-      <input type="submit" value="Upload File" onclick="test();">
-    </form>
-    
-    <script>document.getElementById("frame").contentWindow.location.reload();</script>
-
-    <iframe id="frame2" src="http://10.201.54.31:8000/uploads/publicacion/10220210903095251000000a"
-    allowfullscreen="true" allowpaymentrequest="true" loading="lazy"
+    height: 100%;"></embed>
+    <iframe id="frame2" src="' . $_REQUEST['target_link_uri'] . '"
+    allowfullscreen="true" allowpaymentrequest="true"
     style="
     position: fixed;
     top: 0px;
@@ -71,8 +57,7 @@ echo '
     padding: 0;
     overflow: hidden;
     z-index: 999999;
-    height: 100%;
-  "></iframe>' .
+    height: 100%;"></iframe>' .
   '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
   '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
   '<hr/>',
