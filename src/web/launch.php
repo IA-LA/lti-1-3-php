@@ -31,7 +31,7 @@ $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $_REQUEST['iss'
 // ALTERNATIVES
 //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
 echo '
-    <iframe id="frame1" src="https://ailanto-dev.intecca.uned.es/eTrivial/"
+    <iframe id="frame1" src="https://ailanto-dev.intecca.uned.es/git/10220210903095251000000a.git/"
     style="
     position: fixed;
     top: 0px;
