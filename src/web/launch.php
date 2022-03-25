@@ -44,7 +44,7 @@ echo '
     overflow: hidden;
     z-index: 999999;
     height: 100%;"></embed>
-    <!-- <iframe id="frame2" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri" . '"
+    <!-- <iframe id="frame2" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
     allowfullscreen="true" allowpaymentrequest="true"
     style="
     position: fixed;
@@ -85,7 +85,7 @@ echo '
         <div id="config">
             <br/>LAUNCH DEEP LINK:
             <?php
-            echo $post_param['iss'], $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri";
+            echo $post_param['iss'], $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"];
             ?>
         </div>
 <?php
