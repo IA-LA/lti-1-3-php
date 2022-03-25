@@ -20,7 +20,7 @@ LTI\LTI_OIDC_Login::new(new Lti_Database(["iss" => $_REQUEST['iss'], "login_hint
     // Login:
     //      - En una Plataforma Consumidora Externa de la Actividad LTI debidamente registradas ambas => redirecciona hacia 'target_link_uri'
     //      - En la Platforma Consumidora Interna de una Actividad eContent debidamente registradas ambas =>  launch.php (lanzador propio del servidor)
-    ->do_oidc_login_redirect(sizeof(explode('econtent.php', $_REQUEST['target_link_uri']) ) > 1 ? ($_REQUEST['target_link_uri']) : ("https://ailanto-dev.intecca.uned.es/lti13" . "/launch.php")
+    ->do_oidc_login_redirect(sizeof(explode('econtent.php', $_REQUEST['target_link_uri']) ) > 1 ? ($_REQUEST['target_link_uri']) : ("https://ailanto-dev.intecca.uned.es/lti13" . "/launch.php"))
 
     // Redirección hacia 'target_link_uri'
         // https://www.w3docs.com/snippets/php/how-to-redirect-a-web-page-with-php.html
