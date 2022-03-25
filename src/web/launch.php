@@ -14,7 +14,7 @@ print('<p>' . $_REQUEST['target_link_uri']);
 //print('<p>' . $_REQUEST['lti_message_hint']);
 //print('<p>' . $_REQUEST['id_token']);
 print('<p>' . $_REQUEST['state']);
-print('<p>');
+print('<p>' . $post_param['iss'] . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]);
 print_r($post_param);
 print('</p>');
 
