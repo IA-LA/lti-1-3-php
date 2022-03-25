@@ -14,12 +14,12 @@ print('<p>' . $_REQUEST['target_link_uri']);
 //print('<p>' . $_REQUEST['lti_message_hint']);
 //print('<p>' . $_REQUEST['id_token']);
 print('<p>' . $_REQUEST['state']);
-print('<p>' . $post_param['iss'] . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]);
+print('<p>' . $post_param['iss'] . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"]);
 print_r($post_param);
 print('</p>');
 
 // TODO leer `target_link_uri` del servicio GET por la `iss` !!!!!!!!!
-$launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $_REQUEST['iss'], "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => $_REQUEST['target_link_uri'], "lti_message_hint" => $_REQUEST['lti_message_hint']]))
+$launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $post_param['iss'], "login_hint" => "000000", "target_link_uri" => $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], "lti_message_hint" => $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"]]))
     ->validate();
 
 // REDIRECTION HEADER
@@ -31,7 +31,7 @@ $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $_REQUEST['iss'
 // ALTERNATIVES
 //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
 echo '
-    <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $_REQUEST['iss'] . '"
+    <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '"
     style="
     position: fixed;
     top: 0px;
@@ -44,7 +44,7 @@ echo '
     overflow: hidden;
     z-index: 999999;
     height: 100%;"></embed>
-    <!-- <iframe id="frame2" src="' . $_REQUEST['target_link_uri'] . '"
+    <!-- <iframe id="frame2" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri" . '"
     allowfullscreen="true" allowpaymentrequest="true"
     style="
     position: fixed;
@@ -85,7 +85,7 @@ echo '
         <div id="config">
             <br/>LAUNCH DEEP LINK:
             <?php
-            echo $_REQUEST['iss'], $_REQUEST['target_link_uri'];
+            echo $post_param['iss'], $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri";
             ?>
         </div>
 <?php
