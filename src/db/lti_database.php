@@ -11,10 +11,13 @@ define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: $_SERVER['REQUEST_SCH
 // PROBLEMAS CON EL HTTP (aparece el contenido en blanco)
 // FUNCIONA CON MOODLE
 //define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: 'https' . '://' . 'ailanto-dev.intecca.uned.es/lti13') );
-define("TOOL_PARAMS_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : explode('&', explode('%26', explode('iss%3D', $_SERVER['REQUEST_URI'])[1])[0])[0]) ); //$_POST['id_token'] $_REQUEST['state'] json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]))['aud']) //json_decode(JWT::urlsafeB64Decode(explode('.',$_REQUEST['id_token'])[1]), true)['iss']
+//define("TOOL_PARAMS_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : explode('&', explode('%26', explode('iss%3D', $_SERVER['REQUEST_URI'])[1])[0])[0]) ); //$_POST['id_token'] $_REQUEST['state'] json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]))['aud']) //json_decode(JWT::urlsafeB64Decode(explode('.',$_REQUEST['id_token'])[1]), true)['iss']
+define("TOOL_PARAMS_ISS", ($_REQUEST['iss'] ? $_REQUEST['iss'] : ($post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true))['iss']));
+
 define("TOOL_PARAMS_LOGIN", $_REQUEST['login_hint'] );
 //echo ($_SERVER['QUERY_STRING']);
-define("TOOL_PARAMS_TARGET", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : explode('&', explode('target_link_uri=', $_SERVER['QUERY_STRING'])[1])[0]) ); //explode('%26', explode('target_link_uri%3D', $_SERVER['REQUEST_URI'])[0])[0] //json_decode(JWT::urlsafeB64Decode(explode('.',$_REQUEST['id_token'])[1]), true)['redirect_uri']
+//define("TOOL_PARAMS_TARGET", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : explode('&', explode('target_link_uri=', $_SERVER['QUERY_STRING'])[1])[0]) ); //explode('%26', explode('target_link_uri%3D', $_SERVER['REQUEST_URI'])[0])[0] //json_decode(JWT::urlsafeB64Decode(explode('.',$_REQUEST['id_token'])[1]), true)['redirect_uri']
+define("TOOL_PARAMS_TARGET", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : ($post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true))["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]));
 //echo (TOOL_PARAMS_TARGET);
 define("TOOL_PARAMS_LTI", $_REQUEST['lti_message_hint'] );
 define("TOOL_TOKEN", ($_REQUEST['id_token'] ? json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true)['iss'] : $_POST['id_token'] . $HTTP_POST_VARS) );
@@ -170,7 +173,7 @@ try{
         )
     );
 
-    // Contenido Registro
+    // Contenido Issuer
     $iss_GET = ['MAl' => 'MAl'];
     // Contenido Redirección
     $target_link_uri_GET = '';
@@ -283,9 +286,15 @@ class Lti_Database implements LTI\Database {
 
     }
 
-    // TODO obtener registro de SERVIDOR LTI usando servicio GET `iss` !!!!!!!!!
+    // TODO obtener `iss` del registro de PLATAFORMA usando servicio GET !!!!!!!!!
     // Comparar con registro $_POST de PLATAFORMA OAUTH !!!!!!!!!
     private function find_issuer($iss) {
+
+    }
+
+    // TODO obtener`target_link_uri` del registro de Actividad LTI usando servicio GET !!!!!!!!!
+    // Comparar con parámetro $_GET de LOGIN !!!!!!!!!
+    private function find_target($target_link_uri) {
 
     }
 
