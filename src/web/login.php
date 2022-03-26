@@ -29,7 +29,7 @@ try{
 }
 catch (IMSGlobal\LTI\OIDC_Exception $e){
 
-    echo ("Error de credenciales". $e);
-    exit($e);
+    echo ("Error de credenciales.");
+    exit(0);
 };
 ?>
