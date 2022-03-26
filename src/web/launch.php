@@ -26,7 +26,7 @@ try {
 
     // Valida el Lanzamiento
     // Lee los parámetros de la llamada POST de la Plataforma
-    $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $post_param['iss'], "login_hint" => "000000", "target_link_uri" => $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], "lti_message_hint" => $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"]]))
+    $launch = LTI\LTI_Message_Launch::new(new Lti_Database())
         ->validate();
 
     // REDIRECTION HEADER
@@ -73,6 +73,7 @@ try {
         '<br/><b>PLATFORM:</b> <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/tool_platform']['name'], '</a></b>',
         '<hr/>',
         '<br/><b>ISS: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', $post_param['iss'], '</a></b>',
+        '<br/><b>LOGIN_HINT: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', "no disponible", '</a></b>',
         '<br/><b>TARGET_LINK_URI: <a href="http://Hecho.que.Lti_Database.tome.TARGET_LINK_URI.de.la.llamada.GET/POST">', $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'], '</a></b>',
         '<br/><b>LTI_MESSAGE_HINT: <a href="http://Hecho.que.Lti_Database.tome.LTI_MESSAGE_HINT.de.la.llamada.GET/POST">', $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"], '</a></b>',
         '<br/><b>TYPE: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/message_type'], '</a></b>',
