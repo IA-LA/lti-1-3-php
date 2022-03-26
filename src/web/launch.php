@@ -81,12 +81,7 @@ try {
         '<br/><b>EMAIL: <a href="http://">', $post_param['email'], '</a></b>',
         '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>'
       ;
-}
-catch (IMSGlobal\LTI\OIDC_Exception $e){
 
-    echo ("<h1>Error de validación de credenciales.</h1>");
-    exit($e->getMessage());
-}
 ?>
 
 <?php
@@ -109,4 +104,10 @@ catch (IMSGlobal\LTI\OIDC_Exception $e){
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== otros tipos
         echo '<hr/><br/><b>Unknown launch type</b>';
     }
+}
+catch (IMSGlobal\LTI\LTI_Exception $e){
+
+    echo ("<h1>Error de validación de credenciales.</h1>");
+    exit($e->getMessage());
+}
 ?>
