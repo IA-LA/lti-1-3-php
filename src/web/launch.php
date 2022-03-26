@@ -18,7 +18,8 @@ print('<p>' . $post_param['iss'] . $post_param["https://purl.imsglobal.org/spec/
 print_r($post_param);
 print('</p>');
 
-// TODO leer `target_link_uri` del servicio GET por la `iss` !!!!!!!!!
+// Valida el Lanzamiento
+// Lee los parámetros de la llamada POST de la Plataforma
 $launch = LTI\LTI_Message_Launch::new(new Lti_Database(["iss" => $post_param['iss'], "login_hint" => "000000", "target_link_uri" => $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], "lti_message_hint" => $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"]]))
     ->validate();
 
@@ -44,7 +45,8 @@ echo '
     overflow: hidden;
     z-index: 999999;
     height: 100%;"></embed>
-    <!-- <iframe id="frame2" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
+    <!--
+    <iframe id="frame2" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
     allowfullscreen="true" allowpaymentrequest="true"
     style="
     position: fixed;
@@ -57,20 +59,21 @@ echo '
     padding: 0;
     overflow: hidden;
     z-index: 999999;
-    height: 100%;"></iframe> -->' .
-  '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
-  '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
-  '<hr/>',
-  '<br/><b>PLATFORM:</b> <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/tool_platform']['name'], '</a></b>',
-  '<hr/>',
-  '<br/><b>ISS: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.POST">', $post_param['iss'], '</a></b>',
-  '<br/><b>TARGET_LINK_URI: <a href="http://Hecho.que.Lti_Database.tome.TARGET_LINK_URI.de.la.llamada.POST">', $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'], '</a></b>',
-  '<br/><b>LTI_MESSAGE_HINT: <a href="http://Hecho.que.Lti_Database.tome.LTI_MESSAGE_HINT.de.la.llamada.POST">', $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"], '</a></b>',
-  '<br/><b>TYPE: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/message_type'], '</a></b>',
-  '<br/><b>VERSION: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/version'], '</a></b>',
-  '<br/><b>USER: <a href="http://">', $post_param['name'], '</a></b>',
-  '<br/><b>EMAIL: <a href="http://">', $post_param['email'], '</a></b>',
-  '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>'
+    height: 100%;"></iframe>
+    -->' .
+    '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
+    '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
+    '<hr/>',
+    '<br/><b>PLATFORM:</b> <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/tool_platform']['name'], '</a></b>',
+    '<hr/>',
+    '<br/><b>ISS: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', $post_param['iss'], '</a></b>',
+    '<br/><b>TARGET_LINK_URI: <a href="http://Hecho.que.Lti_Database.tome.TARGET_LINK_URI.de.la.llamada.GET/POST">', $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'], '</a></b>',
+    '<br/><b>LTI_MESSAGE_HINT: <a href="http://Hecho.que.Lti_Database.tome.LTI_MESSAGE_HINT.de.la.llamada.GET/POST">', $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"], '</a></b>',
+    '<br/><b>TYPE: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/message_type'], '</a></b>',
+    '<br/><b>VERSION: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/version'], '</a></b>',
+    '<br/><b>USER: <a href="http://">', $post_param['name'], '</a></b>',
+    '<br/><b>EMAIL: <a href="http://">', $post_param['email'], '</a></b>',
+    '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>'
   ;
 
 ?>
