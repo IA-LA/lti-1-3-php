@@ -28,7 +28,8 @@ try{
         ->do_redirect();
 }
 catch (IMSGlobal\LTI\OIDC_Exception $e){
-    
+
     echo ("Error de credenciales". $e);
+    exit($e);
 };
 ?>
