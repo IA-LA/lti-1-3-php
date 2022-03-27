@@ -5,6 +5,8 @@ use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
 
 // HOST
+//  HTTPS: puertos 80|443
+//  HTTP : cualquier otro puerto
 define("TOOL_HOST", (preg_match("/(80|443)/", $_SERVER['SERVER_PORT']) ? ('https://' . $_SERVER['HTTP_HOST']. '/lti13') : ($_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'])));
 
 // PROBLEMAS CON EL HTTPS (Fatal error: Uncaught IMSGlobal\LTI\LTI_Exception: State not found)
