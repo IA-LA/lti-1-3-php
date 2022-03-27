@@ -5,11 +5,11 @@ use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
 
 // HOST
-define("TOOL_HOST", $_SERVER['SERVER_PORT']);
+define("TOOL_HOST", (preg_match("/(80|443)/", $_SERVER['SERVER_PORT']) ? ('https://' . $_SERVER['HTTP_HOST']. '/lti13') : ($_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'])));
 
 // PROBLEMAS CON EL HTTPS (Fatal error: Uncaught IMSGlobal\LTI\LTI_Exception: State not found)
 // FUNCIONA CON EDX
-/////////////////////////////////define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: $_SERVER['REQUEST_SCHEME']) . '://' . $_SERVER['HTTP_HOST']);
+//define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: $_SERVER['REQUEST_SCHEME']) . '://' . $_SERVER['HTTP_HOST']);
 //define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: 'https' . '://' . 'https://ailanto-dev.intecca.uned.es/lti/lti13/') );
 // PROBLEMAS CON EL HTTP (aparece el contenido en blanco)
 // FUNCIONA CON MOODLE
