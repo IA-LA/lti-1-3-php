@@ -9,7 +9,7 @@ use \IMSGlobal\LTI;
 try {
 
     // POST
-    // JWT
+    // JWT decode
     $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
 
     // GET
@@ -39,12 +39,12 @@ try {
     //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
     echo '
         <!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
-        <embed id="frame1" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
+        <embed id="embed" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]?$post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]:'' . '"
         style="
         position: fixed;
-        top: 0px;
-        bottom: 0px;
-        right: 0px;
+        top: 0;
+        bottom: 0;
+        right: 0;
         width: 100%;
         border: none;
         margin: 0;
@@ -53,7 +53,7 @@ try {
         z-index: 999999;
         height: 100%;"></embed>
         <!--
-        <iframe id="frame2" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
+        <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
         allowfullscreen="true" allowpaymentrequest="true"
         style="
         position: fixed;
