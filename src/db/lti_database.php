@@ -5,7 +5,7 @@ use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
 
 // HOST
-define("TOOL_HOST", $_SERVER['REQUEST_URI']);
+define("TOOL_HOST", $_SERVER['HTTPS']);
 
 // PROBLEMAS CON EL HTTPS (Fatal error: Uncaught IMSGlobal\LTI\LTI_Exception: State not found)
 // FUNCIONA CON EDX
