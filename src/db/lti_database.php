@@ -17,7 +17,9 @@ define("TOOL_HOST", (preg_match("/(80|443)/", $_SERVER['SERVER_PORT']) ? ('https
 // FUNCIONA CON MOODLE
 //define("TOOL_HOST", ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?: 'https' . '://' . 'ailanto-dev.intecca.uned.es/lti13') );
 
-// TOKEN
+// ID TOKEN
+// Open ID Connect (OIDC)
+// https://auth0.com/blog/id-token-access-token-what-is-the-difference/
 define("TOOL_TOKEN", ($_REQUEST['id_token'] ? ($post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true)) : ($post_param = $_POST['id_token'] . $HTTP_POST_VARS)) );
 
 // PARAMETROS LTI
