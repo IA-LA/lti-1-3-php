@@ -8,15 +8,15 @@ use Firebase\JWT\JWT;
 use \IMSGlobal\LTI;
 try {
 
-    // Valida el Lanzamiento
-    // Lee los parámetros de la Redirección POST de la Plataforma
-    $launch = LTI\LTI_Message_Launch::new(new Lti_Database())
-        ->validate();
-
     // REDIRECCION POST
     // JWT Claims decode
     // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
     $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
+
+    // Valida el Lanzamiento
+    // Lee los parámetros de la Redirección POST de la Plataforma
+    $launch = LTI\LTI_Message_Launch::new(new Lti_Database())
+        ->validate();
 
     // GET
     //print_r($_REQUEST);
