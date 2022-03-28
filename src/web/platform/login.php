@@ -29,13 +29,16 @@ $message_jwt = [
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_REDIR,
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAMS_TARGET,
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['target_link_uri'],
-    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['redirect_uri'],
+    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => "https://ailanto-dev.intecca.uned.es/publicacion/10020220328120650000000a",
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0],
     "https://purl.imsglobal.org/spec/lti/claim/roles" => [
         "http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor"
     ],
     "https://purl.imsglobal.org/spec/lti/claim/resource_link" => [
-        "id" => "7b3c5109-b402-4eac-8f61-bdafa301cbb4",
+        //"id" => "7b3c5109-b402-4eac-8f61-bdafa301cbb4",
+        "id"=> "0123456",
+        "title"=> "Resource_Link",
+        "description"=> "Resource_Link en servidor LTI Tool.",
     ],
     "https://purl.imsglobal.org/spec/lti-nrps/claim/namesroleservice" => [
         "context_memberships_url" => "http://localhost/platform/services/nrps",
@@ -65,7 +68,7 @@ $jwt = JWT::encode(
 <form id="auto_submit" action="<?= $_REQUEST['redirect_uri']; ?>" method="POST">
     <input type="hidden" name="id_token" value="<?= $jwt ?>" />
     <input type="hidden" name="state" value="<?= $_REQUEST['state']; ?>" />
-    <input type="hidden" name="iss" value="10020220328120650000000a" />
+    <input type="hidden" name="iss" value="<?= TOOL_PARAMS_ISS; ?>" />
     <input type="hidden" name="login_hint" value="<?= $_REQUEST['login_hint']; ?>" />
     <!-- <input type="hidden" name="target_link_uri" value="<?= explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0]; ?>" /> -->
     <input type="hidden" name="target_link_uri" value="<?= $_REQUEST['redirect_uri']; ?>" />
