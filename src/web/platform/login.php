@@ -12,6 +12,7 @@ $message_jwt = [
     //"iss" => 'http://localhost:9001',
     //"iss" => '5fc3860a81740b0ef098a965',
     //"iss" => TOOL_ISS,
+    //"iss" => TOOL_PARAMS_ISS,
     "iss" => "10020220328120650000000a",
     //"iss" => $_REQUEST['iss'],
     "aud" => ['d42df408-70f5-4b60-8274-6c98d3b9468d'],
@@ -28,8 +29,8 @@ $message_jwt = [
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_REDIR,
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAMS_TARGET,
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['target_link_uri'],
-    //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['redirect_uri'],
-    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0],
+    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['redirect_uri'],
+    //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0],
     "https://purl.imsglobal.org/spec/lti/claim/roles" => [
         "http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor"
     ],
@@ -66,7 +67,8 @@ $jwt = JWT::encode(
     <input type="hidden" name="state" value="<?= $_REQUEST['state']; ?>" />
     <input type="hidden" name="iss" value="<?= TOOL_PARAMS_ISS; ?>" />
     <input type="hidden" name="login_hint" value="<?= $_REQUEST['login_hint']; ?>" />
-    <input type="hidden" name="target_link_uri" value="<?= explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0]; ?>" />
+    <!-- <input type="hidden" name="target_link_uri" value="<?= explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0]; ?>" /> -->
+    <input type="hidden" name="target_link_uri" value="<?= $_REQUEST['redirect_uri']; ?>" />
     <input type="hidden" name="lti_message_hint" value="<?= $_REQUEST['lti_message_hint']; ?>" />
 </form>
 <script>
