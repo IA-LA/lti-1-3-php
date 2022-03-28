@@ -8,8 +8,14 @@ use Firebase\JWT\JWT;
 use \IMSGlobal\LTI;
 try {
 
-    // POST
+    // Valida el Lanzamiento
+    // Lee los parámetros de la Redirección POST de la Plataforma
+    $launch = LTI\LTI_Message_Launch::new(new Lti_Database())
+        ->validate();
+
+    // REDIRECCION POST
     // JWT decode
+    // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
     $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
 
     // GET
@@ -24,11 +30,6 @@ try {
     print_r($post_param);
     print('</p>');
 
-    // Valida el Lanzamiento
-    // Lee los parámetros de la llamada POST de la Plataforma
-    $launch = LTI\LTI_Message_Launch::new(new Lti_Database())
-        ->validate();
-
     // REDIRECTION HEADER
     //header('Location: ' . TOOL_PARAMS_TARGET, true, 302);
     //die;
@@ -39,7 +40,7 @@ try {
     //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
     echo '
         <!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
-        <embed id="embed" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]?$post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]:'' . '"
+        <embed id="embed" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '"
         style="
         position: fixed;
         top: 0;
@@ -51,7 +52,7 @@ try {
         padding: 0;
         overflow: hidden;
         z-index: 999999;
-        height: 100%;"></embed>
+        height: 100%;"/>
         <!--
         <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
         allowfullscreen="true" allowpaymentrequest="true"
