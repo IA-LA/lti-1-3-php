@@ -37,7 +37,7 @@ $message_jwt = [
     ],
     "https://purl.imsglobal.org/spec/lti/claim/resource_link" => [
         //"id" => "7b3c5109-b402-4eac-8f61-bdafa301cbb4",
-        "id"=> $_REQUEST['lti_message_hint'], //TOOL_PARAMS_LTI, //"0123456",
+        "id"=> "0123456",
         "title"=> "Resource_Link",
         "description"=> "Resource_Link en servidor LTI Tool.",
     ],
