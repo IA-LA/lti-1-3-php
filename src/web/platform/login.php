@@ -4,6 +4,9 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../../db/lti_database.php';
 
 // TODO obtener registro de PLATAFORMA AUTH usando servicio GET `iss` !!!!!!!!!
+// EXTRAER PARAMETROS
+$redirect_uri = parse_url($_REQUEST['redirect_uri'], PHP_URL_SCHEME) . '//' . parse_url($_REQUEST['redirect_uri'], PHP_URL_HOST) . parse_url($_REQUEST['redirect_uri'], PHP_URL_PATH) ;
+
 
 use \Firebase\JWT\JWT;
 $message_jwt = [
@@ -30,14 +33,14 @@ $message_jwt = [
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAMS_TARGET,
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['target_link_uri'],
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAMS_TARGET,
-    //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0],
-    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => explode('?target_link_uri=', $_REQUEST['redirect_uri'])[1],
+    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0],
+    //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => explode('?target_link_uri=', $_REQUEST['redirect_uri'])[1],
     "https://purl.imsglobal.org/spec/lti/claim/roles" => [
         "http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor"
     ],
     "https://purl.imsglobal.org/spec/lti/claim/resource_link" => [
         //"id" => "7b3c5109-b402-4eac-8f61-bdafa301cbb4",
-        "id"=> "0123456",
+        "id"=> $_REQUEST['lti_message_hint'], //TOOL_PARAMS_LTI, //"0123456",
         "title"=> "Resource_Link",
         "description"=> "Resource_Link en servidor LTI Tool.",
     ],
