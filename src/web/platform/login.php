@@ -69,13 +69,13 @@ $jwt = JWT::encode(
 );
 ?>
 
-<form id="auto_submit" action="<?= explode('?target_link_uri=', $_REQUEST['redirect_uri'])[0]; ?>" method="POST">
+<form id="auto_submit" action="<?= explode('&', $_REQUEST['redirect_uri'])[0]; ?>" method="POST">
     <input type="hidden" name="id_token" value="<?= $jwt ?>" />
     <input type="hidden" name="state" value="<?= $_REQUEST['state']; ?>" />
-    <input type="hidden" name="iss" value="<?= $message_jwt['iss']; ?>" />
-    <input type="hidden" name="login_hint" value="<?= $_REQUEST['login_hint']; ?>" />
-    <input type="hidden" name="target_link_uri" value="<?= $message_jwt['https://purl.imsglobal.org/spec/lti/claim/target_link_uri']; ?>" />
-    <input type="hidden" name="lti_message_hint" value="<?= $message_jwt['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']; ?>" />
+    <input type="hidden" name="iss" value="<?= TOOL_PARAMS_ISS; ?>" />
+    <input type="hidden" name="login_hint" value="<?= TOOL_PARAMS_LOGIN; ?>" />
+    <input type="hidden" name="target_link_uri" value="<?= TOOL_PARAMS_TARGET; ?>" />
+    <input type="hidden" name="lti_message_hint" value="<?= TOOL_PARAMS_LTI; ?>" />
 </form>
 <script>
     document.getElementById('auto_submit').submit();
