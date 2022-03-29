@@ -35,7 +35,7 @@ define("TOOL_PARAMS_LTI", ($_REQUEST['lti_message_hint'] ? $_REQUEST['lti_messag
 // LLAMADA REDIRECCION
 //  GET: construye la llamada LAUNCH
 //  para la PLATAFORMA genérica del Servidor LTI
-define("TOOL_REDIR", (preg_match("/\/publicacion\/[a-f,0-9]{24}/", TOOL_PARAMS_TARGET) ? (TOOL_HOST . "/launch.php?iss=" . TOOL_PARAMS_ISS . '&target_link_uri=" . TOOL_PARAMS_TARGET) : (TOOL_PARAMS_TARGET)) );
+define("TOOL_REDIR", (preg_match("/\/publicacion\/[a-f,0-9]{24}/", TOOL_PARAMS_TARGET) ? (TOOL_HOST . "/launch.php?iss=" . TOOL_PARAMS_ISS . "&target_link_uri= . TOOL_PARAMS_TARGET) : (TOOL_PARAMS_TARGET)) );
 
 session_start();
 use \IMSGlobal\LTI;
