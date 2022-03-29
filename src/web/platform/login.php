@@ -31,7 +31,7 @@ $message_jwt = [
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['target_link_uri'],
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAMS_TARGET,
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0],
-    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_HOST . explode('target_id=', $_REQUEST['redirect_uri'])[1],
+    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => explode('?target_link_uri=', $_REQUEST['redirect_uri'])[1],
     "https://purl.imsglobal.org/spec/lti/claim/roles" => [
         "http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor"
     ],
@@ -66,13 +66,12 @@ $jwt = JWT::encode(
 );
 ?>
 
-<form id="auto_submit" action="<?= $_REQUEST['redirect_uri']; ?>" method="POST">
+<form id="auto_submit" action="<?= explode('?target_link_uri=', $_REQUEST['redirect_uri'])[0]; ?>" method="POST">
     <input type="hidden" name="id_token" value="<?= $jwt ?>" />
     <input type="hidden" name="state" value="<?= $_REQUEST['state']; ?>" />
     <input type="hidden" name="iss" value="<?= TOOL_PARAMS_ISS; ?>" />
     <input type="hidden" name="login_hint" value="<?= $_REQUEST['login_hint']; ?>" />
-    <!-- <input type="hidden" name="target_link_uri" value="<?= explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0]; ?>" /> -->
-    <input type="hidden" name="target_link_uri" value="<?= $_REQUEST['redirect_uri']; ?>" />
+    <input type="hidden" name="target_link_uri" value="<?= explode('?target_link_uri=', $_REQUEST['redirect_uri'])[1]; ?>" />
     <input type="hidden" name="lti_message_hint" value="<?= $_REQUEST['lti_message_hint']; ?>" />
 </form>
 <script>
