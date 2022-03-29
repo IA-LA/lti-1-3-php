@@ -12,8 +12,8 @@ $message_jwt = [
     //"iss" => 'http://localhost:9001',
     //"iss" => '5fc3860a81740b0ef098a965',
     //"iss" => TOOL_ISS,
-    //"iss" => TOOL_PARAMS_ISS,
-    "iss" => "10020220328120650000000a",
+    "iss" => TOOL_PARAMS_ISS,
+    //"iss" => "10020220328120650000000a",
     //"iss" => $_REQUEST['iss'],
     "aud" => ['d42df408-70f5-4b60-8274-6c98d3b9468d'],
     "sub" => '0ae836b9-7fc9-4060-006f-27b2066ac545',
@@ -29,14 +29,14 @@ $message_jwt = [
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_REDIR,
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAMS_TARGET,
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['target_link_uri'],
-    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => "https://ailanto-dev.intecca.uned.es/publicacion/10020220328120650000000a",
+    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAMS_TARGET,
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0],
     "https://purl.imsglobal.org/spec/lti/claim/roles" => [
         "http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor"
     ],
     "https://purl.imsglobal.org/spec/lti/claim/resource_link" => [
         //"id" => "7b3c5109-b402-4eac-8f61-bdafa301cbb4",
-        "id"=> "0123456",
+        "id"=> $_REQUEST['lti_message_hint'], //TOOL_PARAMS_LTI, //"0123456",
         "title"=> "Resource_Link",
         "description"=> "Resource_Link en servidor LTI Tool.",
     ],
