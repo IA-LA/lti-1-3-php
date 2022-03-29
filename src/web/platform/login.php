@@ -66,7 +66,7 @@ $jwt = JWT::encode(
 );
 ?>
 
-<form id="auto_submit" action="<?= $_REQUEST['redirect_uri'].spli; ?>" method="POST">
+<form id="auto_submit" action="<?= $_REQUEST['redirect_uri']; ?>" method="POST">
     <input type="hidden" name="id_token" value="<?= $jwt ?>" />
     <input type="hidden" name="state" value="<?= $_REQUEST['state']; ?>" />
     <input type="hidden" name="iss" value="<?= TOOL_PARAMS_ISS; ?>" />
