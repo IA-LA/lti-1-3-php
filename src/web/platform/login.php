@@ -4,9 +4,6 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../../db/lti_database.php';
 
 // TODO obtener registro de PLATAFORMA AUTH usando servicio GET `iss` !!!!!!!!!
-// EXTRAER PARAMETROS
-$redirect_uri = parse_url($_REQUEST['redirect_uri'], PHP_URL_SCHEME) . '//' . parse_url($_REQUEST['redirect_uri'], PHP_URL_HOST) . parse_url($_REQUEST['redirect_uri'], PHP_URL_PATH) ;
-
 
 use \Firebase\JWT\JWT;
 $message_jwt = [
@@ -69,7 +66,7 @@ $jwt = JWT::encode(
 );
 ?>
 
-<form id="auto_submit" action="<?= explode('&', $_REQUEST['redirect_uri'])[0]; ?>" method="POST">
+<form id="auto_submit" action="<?= explode('?iss=', ($_REQUEST['redirect_uri']))[0]; ?>" method="POST">
     <input type="hidden" name="id_token" value="<?= $jwt ?>" />
     <input type="hidden" name="state" value="<?= $_REQUEST['state']; ?>" />
     <input type="hidden" name="iss" value="<?= TOOL_PARAMS_ISS; ?>" />
