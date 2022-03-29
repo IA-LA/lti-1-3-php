@@ -30,7 +30,11 @@ define("TOOL_PARAMS_LOGIN", ($_REQUEST['login_hint'] ? ($_REQUEST['login_hint'])
 //define("TOOL_PARAMS_TARGET", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : explode('&', explode('target_link_uri=', $_SERVER['QUERY_STRING'])[1])[0]) ); //explode('%26', explode('target_link_uri%3D', $_SERVER['REQUEST_URI'])[0])[0] //json_decode(JWT::urlsafeB64Decode(explode('.',$_REQUEST['id_token'])[1]), true)['redirect_uri']
 define("TOOL_PARAMS_TARGET", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]?$post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]:$post_param["redirect_uri"])) );
 //echo (TOOL_PARAMS_TARGET);
-define("TOOL_PARAMS_LTI", ($_REQUEST['lti_message_hint'] ? $_REQUEST['lti_message_hint'] : ($post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"]?$post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"]:"000000") ) );
+define("TOOL_PARAMS_LTI", ($_REQUEST['lti_message_hint'] ? $_REQUEST['lti_message_hint'] : ($post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"]?$post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"]:$post_param["lti_message_hint"]) ) );
+
+// LLAMADA REDIRECCION
+//  GET: construye la llamada para la PLATAFORMA del Servidor LTI
+define("TOOL_REDIR", (preg_match("/\/publicacion\/[a-f,0-9]{24}/", TOOL_PARAMS_TARGET) ? (TOOL_HOST . "/launch.php?" . preg_split("/\/publicacion\/[a-f,0-9]{24}/", TOOL_PARAMS_TARGET)) : (TOOL_PARAMS_TARGET)) );
 
 session_start();
 use \IMSGlobal\LTI;
@@ -284,6 +288,15 @@ class Lti_Database implements LTI\Database {
             $request = $_REQUEST;
         }
         $this->request = $request;
+
+        // CONSTANTES
+        //["iss" => $_REQUEST['iss'], "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => $_REQUEST['target_link_uri'], "lti_message_hint" => $_REQUEST['lti_message_hint']]
+        define("TOOL_PARAMS_ISS", $this->request['iss'] );
+        //define("TOOL_ISS", $this->request['iss'] );
+        define("TOOL_PARAMS_LOGIN", $this->request['login_hint'] );
+        define("TOOL_PARAMS_TARGET", $this->request['target_link_uri'] );
+        //define("TOOL_REDIR", $this->request['target_link_uri'] );
+        define("TOOL_PARAMS_LTI", $this->request['lti_message_hint'] );
 
     }
 
