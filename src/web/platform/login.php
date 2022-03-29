@@ -33,14 +33,14 @@ $message_jwt = [
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAMS_TARGET,
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => $_REQUEST['target_link_uri'],
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAMS_TARGET,
-    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0],
+    "https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => TOOL_PARAMS_TARGET,
     //"https://purl.imsglobal.org/spec/lti/claim/target_link_uri" => explode('?target_link_uri=', $_REQUEST['redirect_uri'])[1],
     "https://purl.imsglobal.org/spec/lti/claim/roles" => [
         "http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor"
     ],
     "https://purl.imsglobal.org/spec/lti/claim/resource_link" => [
         //"id" => "7b3c5109-b402-4eac-8f61-bdafa301cbb4",
-        "id"=> $_REQUEST['lti_message_hint'], //TOOL_PARAMS_LTI, //"0123456",
+        "id"=> TOOL_PARAMS_LTI, //"0123456",
         "title"=> "Resource_Link",
         "description"=> "Resource_Link en servidor LTI Tool.",
     ],
@@ -72,10 +72,10 @@ $jwt = JWT::encode(
 <form id="auto_submit" action="<?= explode('?target_link_uri=', $_REQUEST['redirect_uri'])[0]; ?>" method="POST">
     <input type="hidden" name="id_token" value="<?= $jwt ?>" />
     <input type="hidden" name="state" value="<?= $_REQUEST['state']; ?>" />
-    <input type="hidden" name="iss" value="<?= TOOL_PARAMS_ISS; ?>" />
+    <input type="hidden" name="iss" value="<?= $message_jwt['iss']; ?>" />
     <input type="hidden" name="login_hint" value="<?= $_REQUEST['login_hint']; ?>" />
-    <input type="hidden" name="target_link_uri" value="<?= explode('?target_link_uri=', $_REQUEST['redirect_uri'])[1]; ?>" />
-    <input type="hidden" name="lti_message_hint" value="<?= $_REQUEST['lti_message_hint']; ?>" />
+    <input type="hidden" name="target_link_uri" value="<?= $message_jwt['https://purl.imsglobal.org/spec/lti/claim/target_link_uri']; ?>" />
+    <input type="hidden" name="lti_message_hint" value="<?= $message_jwt['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']; ?>" />
 </form>
 <script>
     document.getElementById('auto_submit').submit();
