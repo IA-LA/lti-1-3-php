@@ -1,7 +1,7 @@
 <?php
+namespace Services\services;
 
-class Services
-{
+class Services {
 
     private $request;
     private $rest;
@@ -22,24 +22,14 @@ class Services
         }
         $this->request = $request;
 
-        // CONSTANTES
-        //["iss" => $_REQUEST['iss'], "login_hint" => $_REQUEST['login_hint'], "target_link_uri" => $_REQUEST['target_link_uri'], "lti_message_hint" => $_REQUEST['lti_message_hint']]
-        define("TOOL_PARAMS_ISS", $this->request['iss'] );
-        //define("TOOL_ISS", $this->request['iss'] );
-        define("TOOL_PARAMS_LOGIN", $this->request['login_hint'] );
-        define("TOOL_PARAMS_TARGET", $this->request['target_link_uri'] );
-        //define("TOOL_REDIR", $this->request['target_link_uri'] );
-        define("TOOL_PARAMS_LTI", $this->request['lti_message_hint'] );
-
-        $_SESSION['iss'] = [];
     }
 
     /**
      * Static function to allow for method chaining without having to assign to a variable first.
      */
-    public static function new(array $request = null) {
-        return new Services($request);
-    }
+    //public static function new(array $request = null) {
+    //    return new Services($request);
+    //}
 
     /**
      * Getter and Setters
@@ -94,8 +84,6 @@ class Services
      * Calculate the verb to return to a REST request.
      *
      * @param string        $method CRUD GET, POST, PUT, DELETE, etc. Command to redirect back to after the OIDC login. This URL must match exactly a URL white listed in the platform.
-     * @param string        $model COLLETION to get BBDD (Lti, Platform, Upload, etc.).
-     * @param string        $id ATTRIBUTE to search on cllection.
      * @param array|string  $request    An array of request parameters. If not set will default to $_REQUEST.
      *
      * @return String Returns a redirect object containing the fully formed OIDC login URL.
@@ -130,7 +118,6 @@ class Services
     /**
      * Calculate the redirect protocol to return to a REST request.
      *
-     * @param string        $url URL to redirect back to after the OIDC login. This URL must match exactly a URL white listed in the platform.
      * @param array|string  $request    An array of request parameters. If not set will default to $_REQUEST.
      *
      * @return String Returns a redirect object containing the fully formed OIDC login URL.
@@ -153,7 +140,7 @@ class Services
      *
      * @param array|string  $request    An array of request parameters. If not set will default to $_REQUEST.
      *
-     * @return String Returns a redirect object containing the fully formed OIDC login URL.
+     * @return array|string Returns a redirect object containing the fully formed OIDC login URL.
      */
     public function url(array $request = null) {
 
@@ -161,12 +148,51 @@ class Services
         if(strpos($_SERVER['HTTP_HOST'], '.intecca.uned.es') || strpos($_SERVER['HTTP_HOST'], '193.146.230.217')){
             // SERVIDOR SERVICIOS GENERAL
             $this->url = '10.201.54.31';
+
+            return $this->url;
         }
-        else
+        else{
             // SERVIDOR SERVICIOS EN LOCAL
             $this->url = explode(':', $_SERVER['HTTP_HOST'])[0];
+            error_reporting(E_ERROR | E_PARSE);
 
-        return $this->url;
+            // Comprueba que respondan las URL locales
+            // https://www.geeksforgeeks.org/how-to-send-http-response-code-in-php/
+            // Initialize a variable list into domains name
+            $domains = [
+                'localHwifi'=>'http://192.168.43.130',
+                //'localHusb'=>'http://192.168.42.0',
+                //'localLwifi'=>'http://192.168.43.0',
+                'localLusb'=>'http://192.168.42.10',
+                'local_ethernet'=>'http://192.168.0.31',
+                'local'=>$this->url,
+            ];
+
+            // Function to get HTTP response code
+            function get_http_response_code($domain) {
+                $headers = get_headers($domain);
+                return substr($headers[0], 9, 3);
+            }
+            foreach ($domains as $key => $domain) {
+                // Function call
+                $get_http_response_code = get_http_response_code($this->protocol . $domain);
+
+                // Display the HTTP response code
+                //echo $get_http_response_code;
+
+                // Check HTTP response code is 200 or not
+                if ($get_http_response_code == 200){
+                    //echo "<br>HTTP request successfully " . $key;
+                    $this->url = $domain;
+
+                    return $this->url;
+                }
+                //else
+                    //echo "<br>HTTP request not successfully! " . $key;
+            }
+        }
+
+        return ['result'=>'error', 'data'=>$this->url];
     }
 
     /**
@@ -174,111 +200,30 @@ class Services
      *
      * @param string        $method CRUD GET, POST, PUT, DELETE, etc. Command to redirect back to after the OIDC login. This URL must match exactly a URL white listed in the platform.
      * @param string        $model COLLETION to get BBDD (Lti, Platform, Upload, etc.).
-     * @param string        $id ATTRIBUTE to search on cllection.
+     * @param string        $attribute ATTRIBUTE to search on cllection.
+     * @param string        $value ATTRIBUTE VALUE to search on cllection.
      * @param array|string  $request    An array of request parameters. If not set will default to $_REQUEST.
      *
      * @return String Returns a redirect object containing the fully formed OIDC login URL.
      */
-    public function ruta($method, $model, $id, array $request = null) {
-        $this->ruta = ":49151/servicios/lti/lti13/". $method ."/coleccion/" . $model . "/id_actividad/" . $id;
+    public function ruta($method, $model, $attribute, $value, array $request = null) {
+        //$this->ruta = ":49151/servicios/lti/lti13/" . $method . "/coleccion/" . $model . "/id_actividad/" . $value;
+        $this->ruta = ":49151/servicios/lti/lti13/" . $method . "/coleccion/" . $model . "/" . $attribute . "/" . $value;
         return $this->ruta;
     }
-    
-    /**
-     * Calculate the redirect location to return to based on an OIDC third party initiated login request.
-     *
-     * @param string        $url URL to redirect back to after the OIDC login. This URL must match exactly a URL white listed in the platform.
-     * @param string        $rest GET, POST, PUT, DELETE, etc. Command to redirect back to after the OIDC login. This URL must match exactly a URL white listed in the platform.
-     * @param array|string  $request    An array of request parameters. If not set will default to $_REQUEST.
-     *
-     * @return Redirect Returns a redirect object containing the fully formed OIDC login URL.
-     */
-    public function REST($url, $rest, array $request = null) {
-
-        // Conectar con servicio READ
-        //  get_iss($iss);
-        /////////////////////////////
-
-        // Llamadas REST
-        //  https://stackoverflow.com/questions/2445276/how-to-post-data-in-php-using-file-get-contents
-        //  https://www.php.net/manual/en/context.http.php
-        // Obtiene la configuración de las actividades con una llamada de lectura `GET`
-        ///////////////////
-        $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
-
-        $opts = array('http' =>
-            array(
-                'method' => $rest,
-                'timeout' => '5',
-                'ignore_errors' => '1'
-            )
-        );
-
-        $context = stream_context_create($opts);
-        $stream = fopen($url, 'r', false, $context);
-
-        // header information as well as meta data
-        // about the stream
-        //var_dump(stream_get_meta_data($stream));
-
-        // actual data at $url
-        //var_dump(stream_get_contents($stream));
-
-        // Resultado
-        //  https://www.php.net/manual/es/function.json-decode.php
-        $json_obj = json_decode(stream_get_contents($stream), true, 5);
-        //var_dump($json_obj);
-        //echo $json_obj['result'];
-        //echo $json_obj->{'data'}->{'usuario'}->{'email'};
-
-        // Contenido Registro
-        $iss_get = ['MAl' => 'MAl'];
-
-        // TODO Comprobar que los hint son idénticos AND (['login_hint']) AND (['lti_message_hint'])
-        // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
-        // print $url . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
-        $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
-        if(($json_obj['result'] === "ok") && ($GET_target_link_uri === TOOL_PARAMS_TARGET) ){
-            //echo "<p>" . 'SERVICIO GET:';
-            //print $json_obj['data']['launch_parameters']['iss'];
-            //print "<p>" . 'ARRAY ISS:';
-            // Parámetros
-            $iss_get = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
-            //$iss_get = [$json_obj['data']['id_actividad'] => $json_obj['data']['credentials']];
-            //var_dump($_SESSION['iss']);
-        }
-        fclose($stream);
-
-        // Obtiene la configuración de los sitios con una llamada de lectura `GET`
-        //echo "<p>" . '$_SESSION["iss"] 1:';
-        //var_dump($_SESSION['iss'], $iss_get);
-        $_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
-        //echo "<p>" . '$_SESSION["iss"] 2:';
-        //var_dump($_SESSION['iss'], $iss_get);
-
-        // Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
-        $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
-        foreach ($reg_configs as $key => $reg_config) {
-            //    $_SESSION['iss'] = array_merge($_SESSION['iss'], json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
-            //    print "<p>" . 'FICHERO:';
-            //    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
-        }
-
-        return $_SESSION['iss'];
-    }
-
 
     /**
      * Calculate the redirect location to return to based on an OIDC third party initiated login request.
      *
      * @param string        $method CRUD GET, POST, PUT, DELETE, etc. Command to redirect back to after the OIDC login. This URL must match exactly a URL white listed in the platform.
      * @param string        $model COLLETION to get BBDD (Lti, Platform, Upload, etc.).
-     * @param string        $id ATTRIBUTE to search on cllection.
+     * @param string        $attribute ATTRIBUTE to search on cllection.
+     * @param string        $value ATTRIBUTE VALUE to search on cllection.
      * @param array|string  $request An array of request parameters. If not set will default to $_REQUEST.
      *
      * @return array|json Returns a redirect object containing the information of the REST action.
      */
-    public function service($method, $model, $id , array $request = null) {
+    public function service($method, $model, $attribute, $value , array $request = null) {
 
         if ($request === null) {
             $request = $_REQUEST;
@@ -287,9 +232,9 @@ class Services
         // Componentes Llamada REST
         $rest = $this->verb($method);
         // Componentes Llamada URI
-        $protocol = $this->protocol($_REQUEST);
-        $url = $this->url($_REQUEST);
-        $ruta = $this->ruta($method, $model, $id);
+        $protocol = $this->protocol();
+        $url = $this->url();
+        $ruta = $this->ruta($method, $model, $attribute, $value);
 
         // Append the requested resource location to the URL
         //$url.= $_SERVER['REQUEST_URI'];
@@ -397,5 +342,88 @@ class Services
             exit(0);
         }
     }
-    
+
+    /**
+     * Calculate the redirect location to return to based on an OIDC third party initiated login request.
+     *
+     * @param string        $url URL to redirect back to after the OIDC login. This URL must match exactly a URL white listed in the platform.
+     * @param string        $rest GET, POST, PUT, DELETE, etc. Command to redirect back to after the OIDC login. This URL must match exactly a URL white listed in the platform.
+     * @param array|string  $request    An array of request parameters. If not set will default to $_REQUEST.
+     *
+     * @return Redirect Returns a redirect object containing the fully formed OIDC login URL.
+     */
+    public function REST($url, $rest, array $request = null) {
+
+        // Conectar con servicio READ
+        //  get_iss($iss);
+        /////////////////////////////
+
+        // Llamadas REST
+        //  https://stackoverflow.com/questions/2445276/how-to-post-data-in-php-using-file-get-contents
+        //  https://www.php.net/manual/en/context.http.php
+        // Obtiene la configuración de las actividades con una llamada de lectura `GET`
+        ///////////////////
+        $url = "http://10.201.54.31:49151/servicios/lti/lti13/read/" . TOOL_PARAMS_ISS;
+
+        $opts = array('http' =>
+            array(
+                'method' => $rest,
+                'timeout' => '5',
+                'ignore_errors' => '1'
+            )
+        );
+
+        $context = stream_context_create($opts);
+        $stream = fopen($url, 'r', false, $context);
+
+        // header information as well as meta data
+        // about the stream
+        //var_dump(stream_get_meta_data($stream));
+
+        // actual data at $url
+        //var_dump(stream_get_contents($stream));
+
+        // Resultado
+        //  https://www.php.net/manual/es/function.json-decode.php
+        $json_obj = json_decode(stream_get_contents($stream), true, 5);
+        //var_dump($json_obj);
+        //echo $json_obj['result'];
+        //echo $json_obj->{'data'}->{'usuario'}->{'email'};
+
+        // Contenido Registro
+        $iss_get = ['MAl' => 'MAl'];
+
+        // TODO Comprobar que los hint son idénticos AND (['login_hint']) AND (['lti_message_hint'])
+        // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
+        // print $url . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
+        $GET_target_link_uri = (string) $json_obj['data']['launch_parameters']['target_link_uri'];
+        if(($json_obj['result'] === "ok") && ($GET_target_link_uri === TOOL_PARAMS_TARGET) ){
+            //echo "<p>" . 'SERVICIO GET:';
+            //print $json_obj['data']['launch_parameters']['iss'];
+            //print "<p>" . 'ARRAY ISS:';
+            // Parámetros
+            $iss_get = [$json_obj['data']['launch_parameters']['iss'] => $json_obj['data']['credentials']];
+            //$iss_get = [$json_obj['data']['id_actividad'] => $json_obj['data']['credentials']];
+            //var_dump($_SESSION['iss']);
+        }
+        fclose($stream);
+
+        // Obtiene la configuración de los sitios con una llamada de lectura `GET`
+        //echo "<p>" . '$_SESSION["iss"] 1:';
+        //var_dump($_SESSION['iss'], $iss_get);
+        $_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_get);
+        //echo "<p>" . '$_SESSION["iss"] 2:';
+        //var_dump($_SESSION['iss'], $iss_get);
+
+        // Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
+        $reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
+        foreach ($reg_configs as $key => $reg_config) {
+            //    $_SESSION['iss'] = array_merge($_SESSION['iss'], json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
+            //    print "<p>" . 'FICHERO:';
+            //    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
+        }
+
+        return $_SESSION['iss'];
+    }
+
 }
