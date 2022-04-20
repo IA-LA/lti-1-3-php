@@ -42,7 +42,7 @@ use \IMSGlobal\LTI;
 
 $_SESSION['iss'] = [];
 $_SESSION['target_link_uri'] = [];
-use \services\Services;
+use \services;
 
 // Conectar con servicio READ
 //  get_iss($iss);
@@ -222,7 +222,7 @@ try{
     // Ej.: http://192.168.0.31:9002/login.php?iss=5fd9e0b286cb7926b85375e5&login_hint=123456&target_link_uri=http://192.168.0.31:8000/uploads/publicacion/10020210506073929000000a/&lti_message_hint=123456
     /////////////////////////////
     //$serv = new Services($_REQUEST);
-    $serv = Services\Services::new($_REQUEST);
+    $serv = Services::new($_REQUEST);
 
     // Contenido Issuer (Audience o Iss)
     $iss_GET = ['MAl' => 'MAl'];
