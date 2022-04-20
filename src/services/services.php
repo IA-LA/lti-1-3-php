@@ -1,5 +1,5 @@
 <?php
-namespace Services\services;
+namespace Services;
 
 class Services {
 
