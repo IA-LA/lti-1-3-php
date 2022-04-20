@@ -237,8 +237,8 @@ try{
     // Obtiene la configuración de las actividades con una llamada de lectura `GET`
     // al servidor de SERVICIOS
     ///////////////////////////
-    $iss_GET =  $serv.service('read', 'Platform', 'id_actividad', TOOL_PARAMS_ISS, $_REQUEST);
-    $target_link_uri_GET =  $serv.service('read', 'Lti', 'url_actividad', TOOL_PARAMS_TARGET, $_REQUEST);
+    $iss_GET =  $serv->service('read', 'Platform', 'id_actividad', TOOL_PARAMS_ISS, $_REQUEST);
+    $target_link_uri_GET =  $serv->service('read', 'Lti', 'url_actividad', TOOL_PARAMS_TARGET, $_REQUEST);
 
     // LLAMADA OK
     // Contenido Resultado de las llamadas existe
