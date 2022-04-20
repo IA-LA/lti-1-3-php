@@ -240,6 +240,9 @@ try{
     $iss_GET =  $serv->service('read', 'Platform', 'id_actividad', TOOL_PARAMS_ISS, $_REQUEST);
     $target_link_uri_GET =  $serv->service('read', 'Lti', 'url_actividad', TOOL_PARAMS_TARGET, $_REQUEST);
 
+    print_r($iss_GET);
+    print_r($target_link_uri_GET);
+    
     // LLAMADA OK
     // Contenido Resultado de las llamadas existe
     //if(($json_obj['result'] === "ok")){
