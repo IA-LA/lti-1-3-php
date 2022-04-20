@@ -1,5 +1,4 @@
 <?php
-namespace Services;
 
 class Services {
 
@@ -27,9 +26,9 @@ class Services {
     /**
      * Static function to allow for method chaining without having to assign to a variable first.
      */
-    //public static function new(array $request = null) {
-    //    return new Services($request);
-    //}
+    public static function new(array $request = null) {
+        return new Services($request);
+    }
 
     /**
      * Getter and Setters
