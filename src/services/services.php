@@ -329,7 +329,7 @@ class Services {
             elseif ($json_obj['result'] === "error"){
                 //echo ' STREAM ERROR 31: ' . $json_obj['result'];
                 // Salida ERROR Actividad no encontrada
-                return ['result' => 'error', 'data' => 'Credenciales inexistentes ' . $this->$protocol . $this->$url . $this->$ruta];
+                return ['result' => 'error', 'data' => 'Credenciales inexistentes ' . $protocol . $url . $ruta];
                 exit(0);
             }
             fclose($stream);
@@ -338,7 +338,7 @@ class Services {
         catch(Exception $e){
             //echo ' STREAM ERROR 21: ' . $stream;
             // Salida Excepción URL
-            return ['result' => 'error', 'data' => 'Fallo al abrir el flujo' . $this->$protocol . $this->$url . $this->$ruta];
+            return ['result' => 'error', 'data' => 'Fallo al abrir el flujo' . $protocol . $url . $ruta];
             exit(0);
         }
     }
