@@ -239,9 +239,9 @@ try{
     ///////////////////////////
     $iss_GET =  $serv->service('read', 'Platform', 'id_actividad', TOOL_PARAMS_ISS, $_REQUEST);
     $target_link_uri_GET =  $serv->service('read', 'Lti', 'url_actividad', TOOL_PARAMS_TARGET, $_REQUEST);
-    //print_r($iss_GET);
+    print_r($iss_GET);
     //echo "TARGET";
-    //print_r($target_link_uri_GET);
+    print_r($target_link_uri_GET);
 
     // LLAMADA OK
     // Contenido Resultado de las llamadas existe
@@ -285,7 +285,6 @@ try{
         //    print "<p>" . 'FICHERO:';
         //    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
         //}
-        exit(0);
 
     }
     elseif ($iss_GET['result'] === "error"){
