@@ -274,8 +274,8 @@ try{
         //var_dump($_SESSION['iss'], $iss_GET);
         $_SESSION['iss'] = array_merge($_SESSION['iss'], [$iss_GET['data']['id_actividad'] => $iss_GET['data']['credentials']]);
 
-        //echo "<p>" . '$_SESSION["iss"] 2:';
-        //var_dump($_SESSION['iss'], $iss_GET);
+        //echo "<p>" . '$_SESSION["target_link_uri"] 2:';
+        //var_dump($_SESSION['target_link_uri'], $target_link_uri_GET);
         $_SESSION['target_link_uri'] = array_merge($_SESSION['target_link_uri'], [$target_link_uri_GET['data']['id_actividad'] => $target_link_uri_GET['data']]);
 
         // Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
@@ -285,6 +285,7 @@ try{
         //    print "<p>" . 'FICHERO:';
         //    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
         //}
+        exit(0);
 
     }
     elseif ($iss_GET['result'] === "error"){
