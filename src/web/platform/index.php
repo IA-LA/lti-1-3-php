@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../db/lti_database.php';
+require_once __DIR__ . '/../../db/iss_target_lti_database.php';
 ?>
 <ul>
     <li>Fancy LMS <p>(<?php echo TOOL_HOST; ?>)</p></li>

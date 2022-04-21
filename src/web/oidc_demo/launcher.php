@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ . '/../../db/lti_database.php';
+require_once __DIR__ . '/../../db/example_database.php';
 
 use \Firebase\JWT\JWT;
 $message_jwt = [
@@ -34,7 +34,7 @@ $message_jwt = [
         "lineitems" => "http://localhost/platform/services/ags/lineitems.php",
     ]
 ];
-$database = new Lti_Database();
+$database = new Example_Database();
 $jwt = JWT::encode(
     $message_jwt,
     file_get_contents(__DIR__ . '/../../db/platform.key'),

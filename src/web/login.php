@@ -1,11 +1,11 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../db/lti_database.php';
+require_once __DIR__ . '/../db/iss_target_lti_database.php';
 
 use \IMSGlobal\LTI;
 try{
 
-    LTI\LTI_OIDC_Login::new(new Lti_Database())
+    LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database())
 
         // Actividades ECONTENT alojadas en el Servidor o Externas alojadas en otro servidor o Plataforma:
         //      - Internas: (eContent) utiliza un conteniedo .php y un iframe para presentarlo y manejar la llamda POST JWT LTI Claims (similar a la de ./platform/login.php)

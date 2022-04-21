@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../db/lti_database.php';
+require_once __DIR__ . '/../db/iss_target_lti_database.php';
 
 use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
@@ -10,7 +10,7 @@ try {
 
     // Valida el Lanzamiento
     // Lee los parámetros de la Redirección POST de la Plataforma
-    $launch = LTI\LTI_Message_Launch::new(new Lti_Database())
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database())
         ->validate();
 
     // REDIRECCION POST
