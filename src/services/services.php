@@ -208,7 +208,7 @@ class Services {
      */
     public function ruta($method, $model, $attribute, $value, array $request = null) {
         //$this->ruta = ":49151/servicios/lti/lti13/" . $method . "/coleccion/" . $model . "/id_actividad/" . $value;
-        $this->ruta = ":49151/servicios/lti/lti13/" . $method . "/coleccion/" . $model . "/" . $attribute . "/" . explode('0=', http_build_query([$value]));
+        $this->ruta = ":49151/servicios/lti/lti13/" . $method . "/coleccion/" . $model . "/" . $attribute . "/" . explode('param0->', http_build_query([$value], 'param', '->')[0]);
         return $this->ruta;
     }
 
