@@ -126,19 +126,19 @@ try{
 
     }
     elseif ($iss_GET['result'] === "error"){
-        echo ' STREAM ERROR iss: ' . $iss_GET['result'];
+        //echo ' GET ERROR iss: ' . $iss_GET['result'];
         // Salida ERROR Plataforma no encontrada
         exit(0);
     }
     elseif ($target_link_uri_GET['result'] === "error"){
-        echo ' STREAM ERROR target: ' . $target_link_uri_GET['result'];
+        //echo ' GET ERROR target: ' . $target_link_uri_GET['result'];
         // Salida ERROR Actividad no encontrada
         exit(0);
     }
 
 }
 catch(Exception $e){
-    echo ' STREAM ERROR exception: ' . $stream;
+    //echo ' GET ERROR exception: ' . $e->getMessage();
     // Salida Excepción URL
     exit(0);
 
@@ -150,15 +150,6 @@ catch(Exception $e){
 $_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_GET);
 //echo "<p>" . '$_SESSION["iss"] 2:';
 //var_dump($_SESSION['iss'], $iss_GET);
-
-// Obtiene la configuración de los sitios del directorio `/configs` y de fichero JSON
-$reg_configs = array_diff(scandir(__DIR__ . '/configs'), array('..', '.', '.DS_Store'));
-foreach ($reg_configs as $key => $reg_config) {
-    //    $_SESSION['iss'] = array_merge($_SESSION['iss'], json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
-    //    print "<p>" . 'FICHERO:';
-    //    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
-}
-
 
 class Lti_Database implements LTI\Database {
 
