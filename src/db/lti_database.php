@@ -291,12 +291,12 @@ try{
 
     }
     elseif ($iss_GET['result'] === "error"){
-        //echo ' STREAM ERROR 21: ' . $json_obj['result'];
+        echo ' STREAM ERROR 21: ' . $json_obj['result'];
         // Salida ERROR Plataforma no encontrada
         exit(0);
     }
     elseif ($target_link_uri_GET['result'] === "error"){
-        //echo ' STREAM ERROR 22: ' . $json_obj['result'];
+        echo ' STREAM ERROR 22: ' . $json_obj['result'];
         // Salida ERROR Actividad no encontrada
         exit(0);
     }
