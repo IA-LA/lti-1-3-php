@@ -111,77 +111,6 @@ try{
         //$url .= explode(':', $_SERVER['HTTP_HOST'])[0];
     }
 
-    // Append the requested resource location to the URL
-    //$url.= $_SERVER['REQUEST_URI'];
-    //echo $_REQUEST['target_link_uri'];
-
-    // Llamadas REST
-    //  https://stackoverflow.com/questions/2445276/how-to-post-data-in-php-using-file-get-contents
-    //  https://www.php.net/manual/en/context.http.php
-    // Obtiene la configuración de las actividades con una llamada de lectura `GET`
-    // al servidor de SERVICIOS
-    ///////////////////////////
-    $url_get = $url . ":49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-
-    // CONTEXT Options
-    /**
-    $opts = array('http' =>
-        array(
-            'method' => 'HEAD',
-            'timeout' => '5',
-            'ignore_errors' => '1'
-        )
-    );
-     *
-     * GET_HEADERS()
-     *
-    if(strpos(get_headers("http://10.201.54.31:49151/servicios/json/RUTAS.json", 0, stream_context_create($opts))[0], 'OK')){
-        $url_get = "http://10.201.54.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-        echo 'PARSE11: ' . parse_url("http://10.201.54.31:49151/servicios/json/RUTAS.json")['port'];
-    }
-    elseif (strpos(get_headers("http://192.168.0.31:49151/servicios/json/RUTAS.json", 0, stream_context_create($opts))[0], 'OK')) {
-        $url_get = "http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-        echo 'PARSE12: ' . parse_url('http://192.168.0.31:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/');
-    }
-    elseif (strpos(get_headers("http://127.0.0.1:49151/servicios/json/RUTAS.json", 0, stream_context_create($opts))[0], 'OK')) {
-        $url_get = "http://127.0.0.1:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-        echo 'PARSE13: ' . parse_url('http://127.0.0.1:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/');
-    }
-     *
-     * FILE_EXISTS()
-     *
-    $context = stream_context_create($opts);
-    if (file_exists($url_get)){
-    $stream = fopen($url_get, 'r', false, $context);
-    }
-    elseif (file_exists("http://192.168.0.31:8000/index.php")){
-
-    $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-    $stream = fopen($url_get, 'r', false, $context);
-    }
-    elseif (file_exists("http://192.168.42.185:8000/index.php")){
-
-    $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-    $stream = fopen($url_get, 'r', false, $context);
-    }
-    elseif (file_exists("http://192.168.42.10:8000/index.php")){
-
-    $url_get= "http://192.168.42.10:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-    $stream = fopen($url_get, 'r', false, $context);
-    }
-    elseif (file_exists("http://192.168.43.130:8000/index.php")){
-
-    $url_get = "http://192.168.43.130:49151/servicios/lti/lti13/read/coleccion/Lti/id_actividad/" . TOOL_PARAMS_ISS;
-    $stream = fopen($url_get, 'r', false, $context);
-    }
-    else {
-
-    // Salida URL no encontrada
-    echo 'Salida URL no encontrada';
-    exit(0);
-    }
-     **/
-
     // GET URL
     // CONTEXT Options
     $opts = array('http' =>
@@ -308,43 +237,6 @@ catch(Exception $e){
     exit(0);
 
 }
-
-// LLAMADA OK
-// Contenido Resultado de la llamada
-// Doble comprobación según el estándar LTI (para evitar redirecciones arbitrarias):
-//  - Issuer de Plataforma con credenciales dadas de alta (READ ok)
-//  - Target con URL registrada como Actividad LTI
-if(($json_obj['result'] === "ok") && ($json_obj['data']['url_actividad'] === TOOL_PARAMS_TARGET)){
-//if(($json_obj['result'] === "ok")){
-
-    //echo '<p>' . 'SERVICIO OK: ' . $url_get;
-
-    // Comprobar que ambas REDIRECTION URI son idénticas AND (TOOL_REDIR === $json_obj['data']['launch_parameters']['target_link_uri'])
-    // print $url_get . ' ###### ' . TOOL_ISS . ' ###### ' . TOOL_REDIR . ' ###### ' . strpos($json_obj['data']['launch_parameters']['target_link_uri'], TOOL_REDIR) . ' READ ' . $json_obj['data']['launch_parameters']['target_link_uri'] . ' FIN ';
-    $target_link_uri_GET = (string) $json_obj['data']['url_actividad'];
-    // Comprueba que iss y target_link son idénticos a los registrados en la BBDD
-    // TODO Comprobar que los hint son idénticos a los registrados en la BBDD AND (['login_hint']) AND (['lti_message_hint'])
-    //echo $target_link_uri_GET . ' URLS === URLS ' . TOOL_PARAMS_TARGET;
-
-    //if(!($target_link_uri_GET === TOOL_PARAMS_TARGET)){
-    //    define("TOOL_PARAMS_TARGET", $target_link_uri_GET);
-    //}
-    //echo "<p>" . 'SERVICIO GET:';
-    //print $json_obj['data']['launch_parameters']['iss'];
-    //print "<p>" . 'ARRAY ISS:';
-
-
-    // Parámetros
-    $iss_GET = [$json_obj['data']['id_actividad'] => $json_obj['data']['credentials']];
-    //$iss_GET = [$json_obj['data']['id_actividad'] => $json_obj['data']['credentials']];
-    //var_dump($_SESSION['iss']);
-}
-elseif ($json_obj['result'] === "error"){
-    echo ' STREAM ERROR 31: ' . $json_obj['result'];
-    // Salida ERROR Actividad no encontrada
-    exit(0);
-}
-fclose($stream);
 
 // Obtiene la configuración de los sitios con una llamada de lectura `GET`
 //echo "<p>" . '$_SESSION["iss"] 1:';
