@@ -287,7 +287,6 @@ try{
         //    var_dump(json_decode(file_get_contents(__DIR__ . "/configs/$reg_config"), true));
         //}
         // Salida OK Plataforma y Target Link URI encontrada
-        exit(0);
 
     }
     elseif ($iss_GET['result'] === "error"){
