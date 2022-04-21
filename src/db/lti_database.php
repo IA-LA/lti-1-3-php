@@ -144,13 +144,6 @@ catch(Exception $e){
 
 }
 
-// Obtiene la configuración de los sitios con una llamada de lectura `GET`
-//echo "<p>" . '$_SESSION["iss"] 1:';
-//var_dump($_SESSION['iss'], $iss_GET);
-$_SESSION['iss'] = array_merge($_SESSION['iss'], $iss_GET);
-//echo "<p>" . '$_SESSION["iss"] 2:';
-//var_dump($_SESSION['iss'], $iss_GET);
-
 class Lti_Database implements LTI\Database {
 
     private $request;
