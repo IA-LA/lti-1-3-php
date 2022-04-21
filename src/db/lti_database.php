@@ -291,19 +291,19 @@ try{
 
     }
     elseif ($iss_GET['result'] === "error"){
-        echo ' STREAM ERROR 21: ' . $json_obj['result'];
+        echo ' STREAM ERROR iss: ' . $iss_GET['result'];
         // Salida ERROR Plataforma no encontrada
         exit(0);
     }
     elseif ($target_link_uri_GET['result'] === "error"){
-        echo ' STREAM ERROR 22: ' . $json_obj['result'];
+        echo ' STREAM ERROR target: ' . $target_link_uri_GET['result'];
         // Salida ERROR Actividad no encontrada
         exit(0);
     }
 
 }
 catch(Exception $e){
-    //echo ' STREAM ERROR 21: ' . $stream;
+    echo ' STREAM ERROR exception: ' . $stream;
     // Salida Excepción URL
     exit(0);
 
@@ -340,7 +340,7 @@ if(($json_obj['result'] === "ok") && ($json_obj['data']['url_actividad'] === TOO
     //var_dump($_SESSION['iss']);
 }
 elseif ($json_obj['result'] === "error"){
-    //echo ' STREAM ERROR 31: ' . $json_obj['result'];
+    echo ' STREAM ERROR 31: ' . $json_obj['result'];
     // Salida ERROR Actividad no encontrada
     exit(0);
 }
