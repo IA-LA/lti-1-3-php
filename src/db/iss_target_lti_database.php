@@ -109,7 +109,7 @@ catch(Exception $e){
 
 }
 
-class Iss_Target_Lti_Database implements LTI\Database {
+class Lti_Database implements LTI\Database {
 
     private $request;
 
