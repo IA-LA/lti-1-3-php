@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
