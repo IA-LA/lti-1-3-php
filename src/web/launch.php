@@ -8,9 +8,9 @@ use Firebase\JWT\JWT;
 use \IMSGlobal\LTI;
 try {
     echo "ISS";
-    print_r($iss_GET);
+    print_r($_GET);
     echo "TARGET";
-    print_r($target_link_uri_GET);
+    print_r($_REQUEST);
     // Valida el Lanzamiento
     // Lee los parámetros de la Redirección POST de la Plataforma
     $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database())
