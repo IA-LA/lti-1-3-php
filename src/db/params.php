@@ -22,8 +22,10 @@ define("TOOL_PARAMS_TARGET", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_l
 define("TOOL_PARAMS_LTI", ($_REQUEST['lti_message_hint'] ? $_REQUEST['lti_message_hint'] : ($post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"]?$post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"]:$post_param["lti_message_hint"]) ) );
 
 // LLAMADA REDIRECCION
-//  GET: construye la llamada LAUNCH
-//  para la PLATAFORMA genérica del Servidor LTI
+//  GET: construye la llamada a LAUNCH
+//      PLATAFORMA simulada del Servidor LTI (/publicacion/) a los eContent internos
+//  GET: redirecciona la llamada a TARGET_LINK_URI
+//      PLATAFORMAS reales y URLs externas
 define("TOOL_REDIR", (preg_match("/\/publicacion\/[a-f,0-9]{24}/", TOOL_PARAMS_TARGET) ? (TOOL_HOST . "/launch.php". "?iss=" . TOOL_PARAMS_ISS . "&target_link_uri=" . TOOL_PARAMS_TARGET ) : (TOOL_PARAMS_TARGET)) );
 
 ?>

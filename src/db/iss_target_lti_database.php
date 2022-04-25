@@ -93,13 +93,13 @@ try{
     elseif ($iss_GET['result'] === "error"){
         //echo ' GET ERROR iss: ' . $iss_GET['result'];
         // Salida ERROR Plataforma no encontrada
-        echo ("<h1>Error.</h1>");
+        echo ("<h1>Error.</h1>" . $_SERVER["HTTP_REFERER"]);
         exit(0);
     }
     elseif ($target_link_uri_GET['result'] === "error"){
         //echo ' GET ERROR target: ' . $target_link_uri_GET['result'];
         // Salida ERROR Actividad no encontrada
-        echo ("<h1>Error de credenciales.</h1>");
+        echo ("<h1>Error..</h1>" . $_SERVER["HTTP_REFERER"]);
         exit(0);
     }
 
@@ -107,7 +107,7 @@ try{
 catch(Exception $e){
     //echo ' GET ERROR exception: ' . $e->getMessage();
     // Salida Excepción URL
-    echo ("<h1>Error..</h1>");
+    echo ("<h1>Error...</h1>");
     exit($e->getMessage());
     exit(0);
 
