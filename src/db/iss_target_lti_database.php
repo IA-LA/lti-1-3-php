@@ -93,13 +93,13 @@ try{
     elseif ($iss_GET['result'] === "error"){
         //echo ' GET ERROR iss: ' . $iss_GET['result'];
         // Salida ERROR Plataforma no encontrada
-        echo ("<h1>Error.</h1>" . $_SERVER["HTTP_REFERER"]);
+        echo ("<h1>Error.</h1>" . TOOL_PARAMS_ISS);
         exit(0);
     }
     elseif ($target_link_uri_GET['result'] === "error"){
         //echo ' GET ERROR target: ' . $target_link_uri_GET['result'];
         // Salida ERROR Actividad no encontrada
-        echo ("<h1>Error..</h1>" . $_SERVER["HTTP_REFERER"]);
+        echo ("<h1>Error..</h1>" . TOOL_PARAMS_TARGET);
         exit(0);
     }
 
