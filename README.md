@@ -33,6 +33,15 @@ Local:
 http://10.201.54.232/vanesa/servidorLTI.git
 ~~~
 
+# Configuring The Server
+
+## Params
+Define la recuperación de los valores de host, token, LTI launch y redirección del servidor
+
+~~~
+db/prams.php
+~~~
+
 # Running The Server
 
 ## Setup
