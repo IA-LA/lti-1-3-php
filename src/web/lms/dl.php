@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../db/iss_target_lti_database.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../db/iss_target_lti_database.php';
 
 use \IMSGlobal\LTI;
 try{
