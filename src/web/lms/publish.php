@@ -9,8 +9,8 @@ use \IMSGlobal\LTI;
 try {
     // Valida el Lanzamiento
     // Lee los parámetros de la Redirección POST de la Plataforma
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database())
-        ->validate();
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database());
+     //   ->validate();
 
     // REDIRECCION POST
     // JWT Claims decode
