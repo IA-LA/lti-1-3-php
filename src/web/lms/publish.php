@@ -114,7 +114,7 @@ try {
 }
 catch (IMSGlobal\LTI\LTI_Exception $e){
 
-    echo ("<h1>Error de validación de credenciales.</h1>");
+    echo ("<h1>Error de validación de credenciales....</h1>");
     exit($e->getMessage());
 }
 ?>

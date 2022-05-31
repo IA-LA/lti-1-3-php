@@ -7,6 +7,7 @@ use Firebase\JWT\JWT;
 
 use \IMSGlobal\LTI;
 try {
+    $login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database());
     // Valida el Lanzamiento
     // Lee los parámetros de la Redirección POST de la Plataforma
     $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database())
@@ -109,7 +110,7 @@ try {
 }
 catch (IMSGlobal\LTI\LTI_Exception $e){
 
-    echo ("<h1>Error de validación de credenciales.</h1>");
+    echo ("<h1>Error de validación de credenciales...</h1>");
     exit($e->getMessage());
 }
 ?>
