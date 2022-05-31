@@ -10,7 +10,7 @@ try {
     // Valida el Lanzamiento
     // Lee los parámetros de la Redirección POST de la Plataforma
     $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database())
-    //    ->validate();
+        ->validate();
 
     // REDIRECCION POST
     // JWT Claims decode
