@@ -6,8 +6,15 @@ use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
 
 use \IMSGlobal\LTI;
+use IMSGlobal\LTI\Cookie;
+
 try {
-    $login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database());
+    //$login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database()) //;
+    //    ->do_oidc_login_redirect(TOOL_REDIR)
+    //    ->do_js_redirect();
+
+    $cookie = new Cookie();
+
     // Valida el Lanzamiento
     // Lee los parámetros de la Redirección POST de la Plataforma
     $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database())
