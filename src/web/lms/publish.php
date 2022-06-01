@@ -6,6 +6,7 @@ use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
 
 use \IMSGlobal\LTI;
+use \IMSGlobal\LTI\Cookie;
 try {
 
     // REDIRECCION POST
@@ -20,7 +21,7 @@ try {
     /////    ->do_oidc_login_redirect(TOOL_REDIR)
     //////    ->do_js_redirect();
 
-    $cookie = new Cookie('lti1p3_' . $_REQUEST['state']);
+    $cookie = new \http\Cookie('lti1p3_' . $_REQUEST['state']);
 
     // Valida el Lanzamiento
     // Lee los parámetros de la Redirección POST de la Plataforma
