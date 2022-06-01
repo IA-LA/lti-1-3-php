@@ -22,14 +22,14 @@ try {
     /////    ->do_oidc_login_redirect(TOOL_REDIR)
     //////    ->do_js_redirect();
 
-    ///$cookie = new Cookie();
+    $cookie = new Cookie('lti1p3_' . $_REQUEST['state']);
 
     // Valida el Lanzamiento
     // Lee los parámetros de la Redirección POST de la Plataforma
-    ///$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database(), null, $cookie)
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database())
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database(), null, $cookie)
+    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database())
         //->validate();
-        ->validate($_REQUEST['id_token']);
+        ->validate($post_param);
     // GET
     //print_r($_REQUEST);
     print('<p>' . $_REQUEST['iss']);
