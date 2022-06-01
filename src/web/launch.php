@@ -18,7 +18,7 @@ try {
     //die;
 
     $login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database())
-        ->do_oidc_login_redirect(TOOL_REDIR);
+        ->do_oidc_login_redirect(TOOL_REDIR)
         ->do_js_redirect();
 
     ///$cookie = new Cookie();
