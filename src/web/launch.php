@@ -29,7 +29,7 @@ try {
     ///$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database(), null, $cookie)
     $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database())
         //->validate();
-        ->validate($post_param);
+        ->validate($_REQUEST['id_token']);
     // GET
     //print_r($_REQUEST);
     print('<p>' . $_REQUEST['iss']);
