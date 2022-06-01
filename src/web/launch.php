@@ -14,21 +14,22 @@ try {
     // JWT Claims decode
     // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
     $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
-    print_r($post_param);
-    print('<p>' . $_REQUEST['state']);
-    die;
+    //print_r($post_param);
+    //print('<p>' . $_REQUEST['state']);
+    //die;
 
-    //$login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database())
-    //    ->do_oidc_login_redirect(TOOL_REDIR)
-    //    ->do_js_redirect();
+    ////$login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database())
+    /////    ->do_oidc_login_redirect(TOOL_REDIR)
+    //////    ->do_js_redirect();
 
-    $cookie = new Cookie();
+    ///$cookie = new Cookie();
 
     // Valida el Lanzamiento
     // Lee los parámetros de la Redirección POST de la Plataforma
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database(), null, $cookie)
-    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database())
-        ->validate();
+    ///$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database(), null, $cookie)
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database())
+        //->validate();
+        ->validate($post_param);
     // GET
     //print_r($_REQUEST);
     print('<p>' . $_REQUEST['iss']);
