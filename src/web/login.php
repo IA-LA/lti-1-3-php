@@ -21,7 +21,7 @@ try{
 
         // Redirección hacia 'target_link_uri'
         // https://www.w3docs.com/snippets/php/how-to-redirect-a-web-page-with-php.html
-        ->do_js_redirect();
+        ->do_hybrid_redirect();
 }
 catch (IMSGlobal\LTI\OIDC_Exception $e){
 
