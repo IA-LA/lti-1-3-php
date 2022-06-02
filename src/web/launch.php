@@ -6,7 +6,6 @@ use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
 
 use \IMSGlobal\LTI;
-use IMSGlobal\LTI\Cookie;
 
 try {
 
