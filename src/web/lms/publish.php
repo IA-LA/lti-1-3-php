@@ -33,9 +33,9 @@ try {
         ->validate($post_param);
 
     // RELOCATION
-    header('X-Frame-Options: ' . 'SAMEORIGIN', true);
-    header('Location: ' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], true, 302);
-    die;
+    //header('X-Frame-Options: ' . 'SAMEORIGIN', true);
+    //header('Location: ' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], true, 302);
+    //die;
     
     // GET
     //print_r($_REQUEST);
