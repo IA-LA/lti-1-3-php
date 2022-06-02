@@ -22,7 +22,7 @@ try {
     //////    ->do_js_redirect();
 
     $cookie = new Cookie('lti1p3_' . $_REQUEST['state']);
-    $cookie->set_cookie('lti1p3_' . $_REQUEST['state']);
+    $cookie->set_cookie('lti1p3_' . $_REQUEST['state'], $_REQUEST['state']);
 
     // Valida el Lanzamiento
     // Lee los parámetros de la Redirección POST de la Plataforma
