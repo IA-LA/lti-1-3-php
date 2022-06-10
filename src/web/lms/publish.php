@@ -30,9 +30,9 @@ try {
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database(), null, $cookie);
     $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
-        //->validate();
+        ->validate();
         //->validate($_REQUEST);
-        ->validate($post_param);
+        //->validate($post_param);
 
     // RELOCATION
     //header('X-Frame-Options: ' . 'SAMEORIGIN', true);
