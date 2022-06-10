@@ -29,9 +29,13 @@ try {
     // Lee los parámetros de la Redirección POST de la Plataforma
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database(), null, $cookie);
     $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
-        ->validate();
+        ->validate()//;
         //->validate(new Iss_Target_Lti_Database());
+    ->do_oidc_login_redirect($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"])
 
+        // Redirección hacia 'target_link_uri'
+        // https://www.w3docs.com/snippets/php/how-to-redirect-a-web-page-with-php.html
+        ->do_redirect();
     // RELOCATION
     //header('X-Frame-Options: ' . 'SAMEORIGIN', true);
     //header('Location: ' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], true, 302);
