@@ -29,7 +29,8 @@ try {
     // Lee los parámetros de la Redirección POST de la Plataforma
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database(), null, $cookie);
     $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
-        ->validate();
+        //->validate();
+        ->validate($_REQUEST);
         //->validate($post_param);
 
     // RELOCATION
