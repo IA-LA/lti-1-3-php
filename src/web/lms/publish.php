@@ -9,6 +9,13 @@ use \IMSGlobal\LTI;
 use \IMSGlobal\LTI\Cookie;
 try {
 
+    // REDIRECCION POST
+    // JWT Claims decode
+    // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
+    $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
+    print_r($post_param);
+    //print('<p>' . $_REQUEST['state']);
+    //die;
 
     ////$login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database())
     /////    ->do_oidc_login_redirect(TOOL_REDIR)
@@ -20,23 +27,15 @@ try {
 
     // Valida el Lanzamiento
     // Lee los parámetros de la Redirección POST de la Plataforma
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database()) //;
+    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database()) //;
     // Usa una Cookie pero falla al evitar el ERROR ´State not found´
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database(), null, $cookie);
     // Evita ERROR ´State not found´
-    ////////$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
         ->validate();
         //->validate($_REQUEST);
         //->validate($post_param);
-
-    // REDIRECCION POST
-    // JWT Claims decode
-    // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
-    $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
-    print_r($post_param);
-    //print('<p>' . $_REQUEST['state']);
-    //die;
 
     // RELOCATION
     //header('X-Frame-Options: ' . 'SAMEORIGIN', true);
