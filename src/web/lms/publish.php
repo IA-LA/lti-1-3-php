@@ -9,6 +9,13 @@ use \IMSGlobal\LTI;
 use \IMSGlobal\LTI\Cookie;
 try {
 
+    // COMPROBACION problema ERROR 'Failed to fetch public key'
+    $w = stream_get_wrappers();
+    echo 'openssl: ',  extension_loaded  ('openssl') ? 'yes':'no', "\n";
+    echo 'http wrapper: ', in_array('http', $w) ? 'yes':'no', "\n";
+    echo 'https wrapper: ', in_array('https', $w) ? 'yes':'no', "\n";
+    echo 'wrappers: ', var_export($w);
+
     // REDIRECCION POST
     // JWT Claims decode
     // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
