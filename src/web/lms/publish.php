@@ -122,20 +122,8 @@ try {
 ?>
     <!-- Contenido -->
 
-    <div style="
-        position: fixed;
-        top: 100px;
-        bottom: 0;
-        right: 0;
-        width: 10%;
-        border: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        z-index: 999999;
-        height: 100%;">
-        <dialog>Hola <?php echo $post_param["given_name"]; ?>, bienvenido a este eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ utilizando el perfil de <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?> </dialog>
-    </div>
+    <p><br/><br/></p>
+    <p>Hola <?php echo $post_param["given_name"]; ?>, bienvenida al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ con perfil <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?> </p>
 
 <?php
     if ($launch->is_resource_launch()) {
