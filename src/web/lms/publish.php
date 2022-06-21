@@ -122,7 +122,7 @@ try {
 ?>
     <!-- Contenido -->
 
-    <p><br/><br/></p>
+    <p><br/></p>
     <p>Hola <?php echo $post_param["given_name"]; ?>, bienvenida al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ con perfil <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?> </p>
 
 <?php
