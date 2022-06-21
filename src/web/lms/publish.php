@@ -120,6 +120,39 @@ try {
       ;
 
 ?>
+    <!-- Contenido -->
+
+    <div id="fondo">
+        <!-- Mostrando botones para mostrar al visitante -->
+        <div class="mo-title">&nbsp;</div>
+        <div onClick="loadDynamicContentModal('oracle')"
+             class="btn btn-success">Oracle</div>
+        <div onClick="loadDynamicContentModal('sql-server')"
+             class="btn btn-info">SQL Server</div>
+        <div onClick="loadDynamicContentModal('mysql')"
+             class="btn btn-primary">MySQL</div>
+        <div onClick="loadDynamicContentModal('postgresql')"
+             class="btn btn-secondary">PostgreSQL</div>
+    </div>
+
+
+    <div class="modal fade" id="bootstrap-modal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <!-- Modal contenido-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Contenido modal dinámico Bootstrap</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body">
+                    <div id="conte-modal"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <?php
     if ($launch->is_resource_launch()) {
