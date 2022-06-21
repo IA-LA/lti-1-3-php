@@ -71,7 +71,6 @@ try {
     // ALTERNATIVES
     //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
     echo '
-        <p>Hola <?php echo $post_param["given_name"]; ?>, bienvenida al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ con perfil <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?> </p>
         <!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
         <embed id="embedP" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '"
         style="
@@ -121,6 +120,9 @@ try {
       ;
 
 ?>
+    <!-- Contenido
+    <p>Hola <?php echo $post_param["given_name"]; ?>, bienvenida al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ con perfil <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?> </p>
+    -->
 <?php
     if ($launch->is_resource_launch()) {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
