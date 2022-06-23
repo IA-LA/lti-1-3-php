@@ -44,6 +44,14 @@ try {
         //->validate($_REQUEST);
         //->validate($post_param);
 
+    //SERVICES
+    if (!$launch->has_nrps()) {
+        throw new Exception("Don't have names and roles!");
+    }
+    if (!$launch->has_ags()) {
+        throw new Exception("Don't have grades!");
+    }
+
     // RELOCATION
     //header('X-Frame-Options: ' . 'SAMEORIGIN', true);
     //header('Location: ' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], true, 302);
@@ -121,7 +129,7 @@ try {
 
 ?>
     <!-- Contenido
-    <p>Hola <?php echo $post_param["given_name"]; ?>, bienvenida al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ con perfil <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?> </p>
+    <p>Hola <?php echo $post_param["given_name"]; ?>, bienvenid@ al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ como <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?> </p>
     -->
 <?php
     if ($launch->is_resource_launch()) {
