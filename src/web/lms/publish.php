@@ -52,7 +52,7 @@ try {
         throw new Exception("Don't have grades!");
     }
     $grades = $launch->get_ags();
-    echo '\nGRADES:' . json_encode($grades);
+    echo '<br/>GRADES:' . json_encode($grades);
     print_r($grades);
 
     $grade = LTI\LTI_Grade::new()
@@ -63,7 +63,7 @@ try {
         ->set_grading_progress('FullyGraded')
         ->set_user_id($launch->get_launch_data()['sub']);
     $grades->put_grade($grade);
-    echo '\nGRADE:' . json_encode($grade);
+    echo '<br/>GRADE:' . json_encode($grade);
     print_r($grades);
 
     $lineitem = LTI\LTI_Lineitem::new()
@@ -72,7 +72,7 @@ try {
         ->set_label('Score')
         ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
     //$grades->put_grade($grade, $lineitem);
-    echo '\nGRADE:' . json_encode($lineitem);
+    echo '<br/>LINEITEM:' . json_encode($lineitem);
     print_r($lineitem);
 
 /*
