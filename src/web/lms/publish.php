@@ -52,24 +52,37 @@ try {
         throw new Exception("Don't have grades!");
     }
     $grades = $launch->get_ags();
-
+    echo 'GRADES:';
+    print_r($grades);
     $grade = LTI\LTI_Grade::new()
-        ->set_score_given($grade)
+        ->set_score_given(10)
         ->set_score_maximum(100)
         ->set_timestamp(date(DateTime::ISO8601))
         ->set_activity_progress('Completed')
         ->set_grading_progress('FullyGraded')
-        ->set_user_id($launch->get_launch_data()['email']);
+        ->set_user_id($launch->get_launch_data()['sub']);
+    $grades->put_grade($grade);
+    echo 'GRADE:';
+    print_r($grades);
+
+/*
+    $score = LTI\LTI_Grade::new()
+        ->set_score_given($_REQUEST['score'])
+        ->set_score_maximum(100)
+        ->set_timestamp(date(DateTime::ISO8601))
+        ->set_activity_progress('Completed')
+        ->set_grading_progress('FullyGraded')
+        ->set_user_id($launch->get_launch_data()['sub']);
     $score_lineitem = LTI\LTI_Lineitem::new()
         ->set_tag('score')
         ->set_score_maximum(100)
         ->set_label('Score')
         ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-    $grades->put_grade($grade, $score_lineitem);
+    $grades->put_grade($score, $score_lineitem);
 
-/*
+
     $time = LTI\LTI_Grade::new()
-        ->set_score_given('time')
+        ->set_score_given($_REQUEST['time'])
         ->set_score_maximum(999)
         ->set_timestamp(date(DateTime::ISO8601))
         ->set_activity_progress('Completed')
@@ -81,9 +94,9 @@ try {
         ->set_label('Time Taken')
         ->set_resource_id('time'.$launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
     $grades->put_grade($time, $time_lineitem);
-*/
+
     $ags = $launch->get_ags();
-/*
+
     $score_lineitem = LTI\LTI_Lineitem::new()
         ->set_tag('score')
         ->set_score_maximum(100)
