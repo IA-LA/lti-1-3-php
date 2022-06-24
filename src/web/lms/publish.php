@@ -54,7 +54,7 @@ try {
     $grades = $launch->get_ags();
 
     $score = LTI\LTI_Grade::new()
-        ->set_score_given($_REQUEST['score'])
+        ->set_score_given('score')
         ->set_score_maximum(100)
         ->set_timestamp(date(DateTime::ISO8601))
         ->set_activity_progress('Completed')
@@ -69,7 +69,7 @@ try {
 
 
     $time = LTI\LTI_Grade::new()
-        ->set_score_given($_REQUEST['time'])
+        ->set_score_given('time')
         ->set_score_maximum(999)
         ->set_timestamp(date(DateTime::ISO8601))
         ->set_activity_progress('Completed')
