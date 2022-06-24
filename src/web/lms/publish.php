@@ -61,7 +61,7 @@ try {
         ->set_activity_progress('Completed')
         ->set_grading_progress('FullyGraded')
         ->set_user_id($launch->get_launch_data()['sub']);
-    //$grades->put_grade($grade);
+    $grades->put_grade($grade);
     echo '\nGRADE:';
     print_r($grades);
 
@@ -70,9 +70,9 @@ try {
         ->set_score_maximum(100)
         ->set_label('Score')
         ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-    $grades->put_grade($grade, $lineitem);
-    echo '\nGRADE:';
-    print_r($grades);
+    //$grades->put_grade($grade, $lineitem);
+    echo '\nGRADE:' . $lineitem.__toString();
+    print_r($lineitem);
 
 /*
     $score = LTI\LTI_Grade::new()
