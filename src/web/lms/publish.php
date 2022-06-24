@@ -65,6 +65,15 @@ try {
     echo '\nGRADE:';
     print_r($grades);
 
+    $lineitem = LTI\LTI_Lineitem::new()
+        ->set_tag('score')
+        ->set_score_maximum(100)
+        ->set_label('Score')
+        ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+    $grades->put_grade($grades, $lineitem);
+    echo '\nGRADE:';
+    print_r($grades);
+
 /*
     $score = LTI\LTI_Grade::new()
         ->set_score_given($_REQUEST['score'])
