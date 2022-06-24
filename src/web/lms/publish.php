@@ -71,7 +71,7 @@ try {
         ->set_label('Score')
         ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
     //$grades->put_grade($grade, $lineitem);
-    echo '\nGRADE:' . $lineitem.__toString();
+    echo '\nGRADE:' . $lineitem.toString();
     print_r($lineitem);
 
 /*
