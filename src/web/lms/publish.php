@@ -52,17 +52,17 @@ try {
         throw new Exception("Don't have grades!");
     }
     $grades = $launch->get_ags();
-    echo 'GRADES:';
-    print_r($grades);
+    echo '\nGRADES: ' . json_encode($grades);
+
     $grade = LTI\LTI_Grade::new()
-        ->set_score_given(10)
+        ->set_score_given(20)
         ->set_score_maximum(100)
         ->set_timestamp(date(DateTime::ISO8601))
         ->set_activity_progress('Completed')
         ->set_grading_progress('FullyGraded')
         ->set_user_id($launch->get_launch_data()['sub']);
     $grades->put_grade($grade);
-    echo 'GRADE:';
+    echo '\nGRADE:';
     print_r($grades);
 
 /*
