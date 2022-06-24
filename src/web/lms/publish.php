@@ -53,8 +53,8 @@ try {
     }
     $grades = $launch->get_ags();
 
-    $score = LTI\LTI_Grade::new()
-        ->set_score_given(30)
+    $grade = LTI\LTI_Grade::new()
+        ->set_score_given($grade)
         ->set_score_maximum(100)
         ->set_timestamp(date(DateTime::ISO8601))
         ->set_activity_progress('Completed')
@@ -65,7 +65,7 @@ try {
         ->set_score_maximum(100)
         ->set_label('Score')
         ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-    $grades->put_grade($score, $score_lineitem);
+    $grades->put_grade($grade, $score_lineitem);
 
 /*
     $time = LTI\LTI_Grade::new()
