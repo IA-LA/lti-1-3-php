@@ -59,7 +59,7 @@ try {
         ->set_timestamp(date(DateTime::ISO8601))
         ->set_activity_progress('Completed')
         ->set_grading_progress('FullyGraded')
-        ->set_user_id($launch->get_launch_data()['sub']);
+        ->set_user_id($post_param['sub']);
     $score_lineitem = LTI\LTI_Lineitem::new()
         ->set_tag('score')
         ->set_score_maximum(100)
