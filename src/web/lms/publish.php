@@ -61,7 +61,7 @@ try {
         ->set_activity_progress('Completed')
         ->set_grading_progress('FullyGraded')
         ->set_user_id($launch->get_launch_data()['sub']);
-    $grades->put_grade($grade);
+    //$grades->put_grade($grade);
     echo '\nGRADE:';
     print_r($grades);
 
