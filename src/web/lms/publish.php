@@ -64,7 +64,7 @@ try {
         ->set_user_id($launch->get_launch_data()['sub']);
     $grades->put_grade($grade);
     echo '<br/>GRADE:' . json_encode($grade);
-    print_r($grades);
+    print_r($grade);
 
     $lineitem = LTI\LTI_Lineitem::new()
         ->set_tag('score')
