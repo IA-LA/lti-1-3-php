@@ -67,14 +67,14 @@ try {
     print_r($grade);
 
     $lineitem = LTI\LTI_Lineitem::new()
-        ->set_tag('score')
+        ->set_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id'] . date(DateTime::ISO8601))
+        ->set_tag('grade')
         ->set_score_maximum(100)
-        ->set_label('Score')
+        ->set_label('Grade')
         ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-    //$grades->put_grade($grade, $lineitem);
     echo '<br/>LINEITEM:' . json_encode($lineitem);
     print_r($lineitem);
-
+    $grades->put_grade($grade, $lineitem);
 /*
     $score = LTI\LTI_Grade::new()
         ->set_score_given($_REQUEST['score'])
