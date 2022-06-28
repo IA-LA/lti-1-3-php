@@ -160,7 +160,8 @@ try {
         ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
     echo '<br/>LINEITEM:' . json_encode($lineitem);
     print_r($lineitem);
-    echo '<br/>ENDPOINT:' . $launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint'];
+    echo '<br/>ENDPOINT:';
+    print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
     $grades->put_grade($grade, $lineitem);
     /*
         $score = LTI\LTI_Grade::new()
