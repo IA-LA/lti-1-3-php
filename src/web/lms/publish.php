@@ -153,7 +153,7 @@ try {
     print_r($grades);
 
     $lineitem = LTI\LTI_Lineitem::new()
-        //->set_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id'] . date('YmdHisu'))
+        ->set_id(date('YmdHisu'))
         ->set_tag('grade')
         ->set_score_maximum(100)
         ->set_label('Grade')
