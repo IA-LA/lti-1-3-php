@@ -145,15 +145,15 @@ try {
         ->set_activity_progress('Completed')
         ->set_grading_progress('FullyGraded')
         ->set_user_id($launch->get_launch_data()['sub']);
-    $grades->put_grade($grade);
-    $grades = $launch->get_ags();
-    echo '<br/>GRADES1:' . json_encode($grades);
-    print_r($grades);
     echo '<br/>GRADE:' . json_encode($grade);
     print_r($grade);
+    $grades->put_grade($grade);
+    $grades = $launch->get_ags();
+    echo '<br/>GRADES2:' . json_encode($grades);
+    print_r($grades);
 
     $lineitem = LTI\LTI_Lineitem::new()
-        ->set_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id'] . date('YmdHisu'))
+        //->set_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id'] . date('YmdHisu'))
         ->set_tag('grade')
         ->set_score_maximum(100)
         ->set_label('Grade')
