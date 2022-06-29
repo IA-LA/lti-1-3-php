@@ -95,7 +95,7 @@ try {
     echo '<br/><br/>ENDPOINT:';
     print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
     $grades->put_grade($grade, $lineitem);
-    die;
+
     /*
         $score = LTI\LTI_Grade::new()
             ->set_score_given($_REQUEST['score'])
