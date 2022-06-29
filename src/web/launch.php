@@ -21,15 +21,17 @@ try {
     
     // GET
     //print_r($_REQUEST);
-    print('<p>' . $_REQUEST['iss']);
+    //print('<p>' . $_REQUEST['iss']);
     //print('<p>' . $_REQUEST['login_hint']);
-    print('<p>' . $_REQUEST['target_link_uri']);
+    //print('<p>' . $_REQUEST['target_link_uri']);
     //print('<p>' . $_REQUEST['lti_message_hint']);
     //print('<p>' . $_REQUEST['id_token']);
-    print('<p>' . $_REQUEST['state']);
-    print('<p>' . $post_param['iss'] . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"]);
-    print_r($post_param);
-    print('</p>');
+    //print('<p>' . $_REQUEST['state']);
+
+    // POST
+    //print('<p>' . $post_param['iss'] . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"]);
+    //print_r($post_param);
+    //print('</p>');
 
     // REDIRECTION HEADER
     //header('Location: ' . TOOL_PARAMS_TARGET, true, 302);
@@ -41,7 +43,7 @@ try {
     //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
     echo '
         <!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
-        <embed id="embed" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '"
+        <embed id="embedL" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '"
         style="
         position: fixed;
         top: 0;
