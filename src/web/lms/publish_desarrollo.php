@@ -65,7 +65,7 @@ try {
         ->set_activity_progress('Completed')
         ->set_grading_progress('FullyGraded')
         ->set_user_id($launch->get_launch_data()['sub']);
-    echo '<br/>GRADE:' . json_encode($grade);
+    echo '<br/><br/>GRADE:' . json_encode($grade);
     print_r($grade);
     $grades->put_grade($grade);
     $grades = $launch->get_ags();
@@ -78,9 +78,9 @@ try {
         ->set_score_maximum(100)
         ->set_label('Score')
         ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-    echo '<br/>LINEITEM:' . json_encode($lineitem);
+    echo '<br/><br/>LINEITEM:' . json_encode($lineitem);
     print_r($lineitem);
-    echo '<br/>ENDPOINT:';
+    echo '<br/><br/>ENDPOINT:';
     print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
     $grades->put_grade($grade, $lineitem);
 
