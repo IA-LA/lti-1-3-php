@@ -67,7 +67,10 @@ try {
         ->set_user_id($launch->get_launch_data()['sub']);
     echo '<br/><br/><b>GRADE</b>:' . json_encode($grade);
     print_r($grade);
+
+    echo '<br/><br/><b>GRADES->PUT_GRADE()3</b>:';
     $grades->put_grade($grade);
+
     $grades = $launch->get_ags();
     echo '<br/><br/><b>GRADES2</b>:' . json_encode($grades);
     print_r($grades);
@@ -78,10 +81,16 @@ try {
         ->set_label('Grade');
     echo '<br/><br/><b>LINEITEM</b>:' . json_encode($lineitem);
     print_r($lineitem);
+
     echo '<br/><br/><b>ENDPOINT</b>:';
     print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
+
     echo '<br/><br/><b>GRADES->PUT_GRADE() 1</b>:';
     $grades->put_grade($grade, $lineitem);
+
+    $grades = $launch->get_ags();
+    echo '<br/><br/><b>GRADES3</b>:' . json_encode($grades);
+    print_r($grades);
 
     $lineitem = LTI\LTI_Lineitem::new()
         ->set_tag('grade2')
@@ -91,9 +100,12 @@ try {
     print_r($lineitem);
     echo '<br/><br/><b>ENDPOINT</b>:';
     print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
-    echo '<br/><br/><b>GRADES->PUT_GRADE() 2</b>:';
+    echo '<br/><br/><b>GRADES->PUT_GRADE()3</b>:';
     $grades->put_grade($grade, $lineitem);
 
+    $grades = $launch->get_ags();
+    echo '<br/><br/><b>GRADES4</b>:' . json_encode($grades);
+    print_r($grades);
     /*
         $score = LTI\LTI_Grade::new()
             ->set_score_given($_REQUEST['score'])
