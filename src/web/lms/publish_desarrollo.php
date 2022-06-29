@@ -73,8 +73,7 @@ try {
     print_r($grades);
 
     $lineitem = LTI\LTI_Lineitem::new()
-        ->set_id(2121)
-        ->set_tag(['grade'])
+        ->set_tag(['grade1'])
         ->set_score_maximum(100)
         ->set_label('Grade');
     echo '<br/><br/><b>LINEITEM</b>:' . json_encode($lineitem);
@@ -85,11 +84,9 @@ try {
     $grades->put_grade($grade, $lineitem);
 
     $lineitem = LTI\LTI_Lineitem::new()
-        ->set_id(2122)
-        ->set_tag('grade')
+        ->set_tag('grade2')
         ->set_score_maximum(100)
-        ->set_label('Grade')
-        ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+        ->set_label('Grade');
     echo '<br/><br/><b>LINEITEM</b>:' . json_encode($lineitem);
     print_r($lineitem);
     echo '<br/><br/><b>ENDPOINT</b>:';
