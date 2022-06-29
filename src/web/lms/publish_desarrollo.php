@@ -55,7 +55,7 @@ try {
         throw new Exception("Don't have grades!");
     }
     $grades = $launch->get_ags();
-    echo '<br/>GRADES1:' . json_encode($grades);
+    echo '<br/><br/>GRADES1:' . json_encode($grades);
     print_r($grades);
 
     $grade = LTI\LTI_Grade::new()
@@ -69,7 +69,7 @@ try {
     print_r($grade);
     $grades->put_grade($grade);
     $grades = $launch->get_ags();
-    echo '<br/>GRADES2:' . json_encode($grades);
+    echo '<br/><br/>GRADES2:' . json_encode($grades);
     print_r($grades);
 
     $lineitem = LTI\LTI_Lineitem::new()
@@ -90,11 +90,12 @@ try {
         ->set_score_maximum(100)
         ->set_label('Grade')
         ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-    echo '<br/>LINEITEM:' . json_encode($lineitem);
+    echo '<br/><br/>LINEITEM:' . json_encode($lineitem);
     print_r($lineitem);
-    echo '<br/>ENDPOINT:';
+    echo '<br/><br/>ENDPOINT:';
     print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
     $grades->put_grade($grade, $lineitem);
+    die;
     /*
         $score = LTI\LTI_Grade::new()
             ->set_score_given($_REQUEST['score'])
