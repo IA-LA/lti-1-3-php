@@ -80,6 +80,7 @@ try {
     print_r($lineitem);
     echo '<br/><br/><b>ENDPOINT</b>:';
     print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
+    echo '<br/><br/><b>GRADES->PUT_GRADE 1</b>:';
     $grades->put_grade($grade, $lineitem);
 
     $lineitem = LTI\LTI_Lineitem::new()
@@ -92,6 +93,7 @@ try {
     print_r($lineitem);
     echo '<br/><br/><b>ENDPOINT</b>:';
     print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
+    echo '<br/><br/><b>GRADES->PUT_GRADE 2</b>:';
     $grades->put_grade($grade, $lineitem);
 
     /*
