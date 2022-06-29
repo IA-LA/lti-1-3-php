@@ -73,6 +73,7 @@ try {
     print_r($grades);
 
     $lineitem = LTI\LTI_Lineitem::new()
+        ->set_id(2121)
         ->set_tag(['grade'])
         ->set_score_maximum(100)
         ->set_label('Grade');
