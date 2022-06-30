@@ -78,6 +78,7 @@ try {
 
     echo '<br/><br/><b>GRADES->PUT_GRADE()1</b>:';
     $grades->put_grade($grade);
+    print_r($grades);
 
     $grades = $launch->get_ags();
     echo '<br/><br/><b>GRADES2</b>:' . json_encode($grades);
@@ -95,6 +96,7 @@ try {
 
     echo '<br/><br/><b>GRADES->PUT_GRADE()2</b>:';
     $grades->put_grade($grade, $lineitem);
+    print_r($grades);
 
     $grades = $launch->get_ags();
     echo '<br/><br/><b>GRADES3</b>:' . json_encode($grades);
@@ -106,14 +108,18 @@ try {
         ->set_label('Grade');
     echo '<br/><br/><b>LINEITEM</b>:' . json_encode($lineitem);
     print_r($lineitem);
+
     echo '<br/><br/><b>ENDPOINT</b>:';
     print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
+
     echo '<br/><br/><b>GRADES->PUT_GRADE()3</b>:';
     $grades->put_grade($grade, $lineitem);
+    print_r($grades);
 
     $grades = $launch->get_ags();
     echo '<br/><br/><b>GRADES4</b>:' . json_encode($grades);
     print_r($grades);
+
     /*
         $score = LTI\LTI_Grade::new()
             ->set_score_given($_REQUEST['score'])
@@ -219,7 +225,7 @@ try {
     //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
     echo '
         <!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
-        <embed id="embedPD" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '"
+        <embed id="embedLGD" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '"
         style="
         position: fixed;
         top: 0;
