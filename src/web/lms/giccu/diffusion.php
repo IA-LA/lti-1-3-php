@@ -44,6 +44,14 @@ try {
         //->validate($_REQUEST);
         //->validate($post_param);
 
+    // ERROR file_get_content()
+    ///////////////////////////
+    $w = stream_get_wrappers();
+    echo 'openssl: ',  extension_loaded  ('openssl') ? 'yes':'no', "\n";
+    echo 'http wrapper: ', in_array('http', $w) ? 'yes':'no', "\n";
+    echo 'https wrapper: ', in_array('https', $w) ? 'yes':'no', "\n";
+    echo 'wrappers: ', var_export($w);
+
     //SERVICES
     //////////
     // NPRS (Names and Role Provisioning Services)
@@ -68,7 +76,7 @@ try {
     echo '<br/><br/><b>GRADE</b>:' . json_encode($grade);
     print_r($grade);
 
-    echo '<br/><br/><b>GRADES->PUT_GRADE()3</b>:';
+    echo '<br/><br/><b>GRADES->PUT_GRADE()1</b>:';
     $grades->put_grade($grade);
 
     $grades = $launch->get_ags();
@@ -85,7 +93,7 @@ try {
     echo '<br/><br/><b>ENDPOINT</b>:';
     print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
 
-    echo '<br/><br/><b>GRADES->PUT_GRADE() 1</b>:';
+    echo '<br/><br/><b>GRADES->PUT_GRADE()2</b>:';
     $grades->put_grade($grade, $lineitem);
 
     $grades = $launch->get_ags();
