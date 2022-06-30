@@ -77,7 +77,7 @@ try {
     print_r($grade);
 
     echo '<br/><br/><b>GRADES->PUT_GRADE()1</b>:';
-    echo $grades->put_grade($grade);
+    echo json_encode($grades->put_grade($grade));
     print_r($grades);
 
     $grades = $launch->get_ags();
@@ -95,7 +95,7 @@ try {
     print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
 
     echo '<br/><br/><b>GRADES->PUT_GRADE()2</b>:';
-    echo $grades->put_grade($grade, $lineitem);
+    echo json_encode($grades->put_grade($grade, $lineitem));
     print_r($grades);
 
     $grades = $launch->get_ags();
@@ -113,7 +113,7 @@ try {
     print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
 
     echo '<br/><br/><b>GRADES->PUT_GRADE()3</b>:';
-    echo $grades->put_grade($grade, $lineitem);
+    echo json_encode($grades->put_grade($grade, $lineitem));
     print_r($grades);
 
     $grades = $launch->get_ags();
