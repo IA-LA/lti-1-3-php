@@ -82,7 +82,7 @@ try {
 
     $grades = $launch->get_ags();
     echo '<br/><br/><b>GRADES2</b>:' . json_encode($grades);
-    print_r($grades);
+    //print_r($grades);
 
     $lineitem = LTI\LTI_Lineitem::new()
         ->set_tag(['grade1'])
@@ -100,7 +100,7 @@ try {
 
     $grades = $launch->get_ags();
     echo '<br/><br/><b>GRADES3</b>:' . json_encode($grades);
-    print_r($grades);
+    //print_r($grades);
 
     $lineitem = LTI\LTI_Lineitem::new()
         ->set_tag('grade2')
@@ -110,7 +110,7 @@ try {
     print_r($lineitem);
 
     echo '<br/><br/><b>ENDPOINT</b>:';
-    print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
+    //print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
 
     echo '<br/><br/><b>GRADES->PUT_GRADE()3</b>:';
     echo json_encode($grades->put_grade($grade, $lineitem));
@@ -118,7 +118,7 @@ try {
 
     $grades = $launch->get_ags();
     echo '<br/><br/><b>GRADES4</b>:' . json_encode($grades);
-    print_r($grades);
+    //print_r($grades);
 
     /*
         $score = LTI\LTI_Grade::new()
