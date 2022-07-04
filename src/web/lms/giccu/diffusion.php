@@ -93,7 +93,7 @@ try {
             ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
         $grades->put_grade($score, $score_lineitem);
 
-        echo '<br/><br/><b>ENDPOINT</b>:';
+        echo '<br/><br/><b>ENDPOINT</b>:' . $launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id'];
         print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
 
         echo '<br/><br/><b>GRADES->PUT_GRADE()2</b>:';
