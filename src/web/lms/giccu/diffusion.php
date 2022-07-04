@@ -80,7 +80,7 @@ try {
         print_r($grades);
 
         $grade = LTI\LTI_Grade::new()
-            ->set_score_given(20)
+            ->set_score_given($_REQUEST['score'])
             ->set_score_maximum(100)
             ->set_timestamp(date(DateTime::ISO8601))
             ->set_activity_progress('Completed')
@@ -89,8 +89,8 @@ try {
         echo '<br/><br/><b>GRADE</b>:' . json_encode($grade);
         print_r($grade);
 
-        echo '<br/><br/><b>GRADES->PUT_GRADE()1</b>:';
-        echo json_encode($grades->put_grade($grade));
+        ////echo '<br/><br/><b>GRADES->PUT_GRADE()1</b>:';
+        ////echo json_encode($grades->put_grade($grade));
         //print_r($grades);
 
         $grades = $launch->get_ags();
@@ -98,7 +98,7 @@ try {
         //print_r($grades);
 
         $lineitem = LTI\LTI_Lineitem::new()
-            ->set_id(2121)
+            ->set_id($launch->get_launch_id())
             ->set_tag(['grade1'])
             ->set_score_maximum(100)
             ->set_label('Grade');
@@ -288,7 +288,7 @@ try {
             ->set_custom_params(['my_param' => 'value'])
             ->set_title('My Resource');
         $dl->output_response_form([$resource]);
-        $dl->output_response_form([$resource]);
+        $dl->get_response_jwt([$resource]);
 ?>
     <!--
         <div id="config">
