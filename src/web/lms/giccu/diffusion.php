@@ -282,6 +282,13 @@ try {
     } else if ($launch->is_deep_link_launch()) {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiDeepLinkingRequest
         echo '<!-- <hr/><br/><b>Deep Linking Request Launch!</b> -->';
+        $dl = $launch->get_deep_link();
+        $resource = LTI\LTI_Deep_Link_Resource::new()
+            ->set_url("https://my.tool/launch")
+            ->set_custom_params(['my_param' => 'value'])
+            ->set_title('My Resource');
+        $dl->output_response_form([$resource]);
+        $dl->output_response_form([$resource]);
 ?>
     <!--
         <div id="config">
@@ -291,6 +298,7 @@ try {
             ?>
         </div>
      -->
+
     <!-- Contenido de JWT 2
     <p>Hola <?php echo $post_param["given_name"]; ?>, bienvenid@ al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ como <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?> </p>
     -->
