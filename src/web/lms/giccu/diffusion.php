@@ -79,37 +79,25 @@ try {
         echo '<br/><br/><b>GRADES1:</b>' . json_encode($grades);
         print_r($grades);
 
-        $grade = LTI\LTI_Grade::new()
+        $score = LTI\LTI_Grade::new()
             ->set_score_given($_REQUEST['score'])
             ->set_score_maximum(100)
             ->set_timestamp(date(DateTime::ISO8601))
             ->set_activity_progress('Completed')
             ->set_grading_progress('FullyGraded')
             ->set_user_id($launch->get_launch_data()['sub']);
-        echo '<br/><br/><b>GRADE</b>:' . json_encode($grade);
-        print_r($grade);
-
-        ////echo '<br/><br/><b>GRADES->PUT_GRADE()1</b>:';
-        ////echo json_encode($grades->put_grade($grade));
-        //print_r($grades);
-
-        $grades = $launch->get_ags();
-        echo '<br/><br/><b>GRADES2</b>:' . json_encode($grades);
-        //print_r($grades);
-
-        $lineitem = LTI\LTI_Lineitem::new()
-            ->set_id($launch->get_launch_id())
-            ->set_tag(['grade1'])
+        $score_lineitem = LTI\LTI_Lineitem::new()
+            ->set_tag('score')
             ->set_score_maximum(100)
-            ->set_label('Grade');
-        echo '<br/><br/><b>LINEITEM1</b>:' . json_encode($lineitem);
-        print_r($lineitem);
+            ->set_label('Score')
+            ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+        $grades->put_grade($score, $score_lineitem);
 
         echo '<br/><br/><b>ENDPOINT</b>:';
         print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
 
         echo '<br/><br/><b>GRADES->PUT_GRADE()2</b>:';
-        echo json_encode($grades->put_grade($grade, $lineitem));
+        echo json_encode($grades->put_grade($score, $score_lineitem));
         //print_r($grades);
 
         $grades = $launch->get_ags();
@@ -127,7 +115,7 @@ try {
         //print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
 
         echo '<br/><br/><b>GRADES->PUT_GRADE()3</b>:';
-        echo json_encode($grades->put_grade($grade, $lineitem));
+        echo json_encode($grades->put_grade($score, $lineitem));
         //print_r($grades);
 
         $grades = $launch->get_ags();
