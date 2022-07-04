@@ -87,7 +87,7 @@ try {
             ->set_grading_progress('FullyGraded')
             ->set_user_id($launch->get_launch_data()['sub']);
         $score_lineitem = LTI\LTI_Lineitem::new()
-            //->set_id(2121)
+            ->set_id(2121)
             ->set_tag('score')
             ->set_score_maximum(100)
             ->set_label('Score')
