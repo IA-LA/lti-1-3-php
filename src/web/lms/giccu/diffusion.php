@@ -20,7 +20,7 @@ try {
     // JWT Claims decode
     // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
     $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
-    print_r($post_param);
+    //print_r($post_param);
     //print('<p>' . $_REQUEST['state']);
     //die;
 
@@ -79,26 +79,37 @@ try {
         echo '<br/><br/><b>GRADES1:</b>' . json_encode($grades);
         print_r($grades);
 
-        $score = LTI\LTI_Grade::new()
-            ->set_score_given($_REQUEST['score'])
+        $grade = LTI\LTI_Grade::new()
+            ->set_score_given(20)
             ->set_score_maximum(100)
             ->set_timestamp(date(DateTime::ISO8601))
             ->set_activity_progress('Completed')
             ->set_grading_progress('FullyGraded')
             ->set_user_id($launch->get_launch_data()['sub']);
-        $score_lineitem = LTI\LTI_Lineitem::new()
-            ->set_id(2121)
-            ->set_tag('score')
-            ->set_score_maximum(100)
-            ->set_label('Score')
-            ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-        $grades->put_grade($score, $score_lineitem);
+        echo '<br/><br/><b>GRADE</b>:' . json_encode($grade);
+        print_r($grade);
 
-        echo '<br/><br/><b>ENDPOINT</b>:' . $launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id'];
+        echo '<br/><br/><b>GRADES->PUT_GRADE()1</b>:';
+        echo json_encode($grades->put_grade($grade));
+        //print_r($grades);
+
+        $grades = $launch->get_ags();
+        echo '<br/><br/><b>GRADES2</b>:' . json_encode($grades);
+        //print_r($grades);
+
+        $lineitem = LTI\LTI_Lineitem::new()
+            ->set_id(2121)
+            ->set_tag(['grade1'])
+            ->set_score_maximum(100)
+            ->set_label('Grade');
+        echo '<br/><br/><b>LINEITEM1</b>:' . json_encode($lineitem);
+        print_r($lineitem);
+
+        echo '<br/><br/><b>ENDPOINT</b>:';
         print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
 
         echo '<br/><br/><b>GRADES->PUT_GRADE()2</b>:';
-        echo json_encode($grades->put_grade($score, $score_lineitem));
+        echo json_encode($grades->put_grade($grade, $lineitem));
         //print_r($grades);
 
         $grades = $launch->get_ags();
@@ -116,7 +127,7 @@ try {
         //print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
 
         echo '<br/><br/><b>GRADES->PUT_GRADE()3</b>:';
-        echo json_encode($grades->put_grade($score, $lineitem));
+        echo json_encode($grades->put_grade($grade, $lineitem));
         //print_r($grades);
 
         $grades = $launch->get_ags();
