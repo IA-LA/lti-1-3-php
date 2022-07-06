@@ -40,8 +40,8 @@ try {
     // Evita ERROR ´State not found´
     $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
-        ->validate();
-        //->validate($_REQUEST);
+        //->validate();
+        ->validate($_REQUEST);
         //->validate($post_param);
 
 ?>
