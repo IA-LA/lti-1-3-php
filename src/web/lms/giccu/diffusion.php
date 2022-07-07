@@ -80,7 +80,7 @@ try {
         print_r($grades);
 
         $members = $launch->get_nrps()->get_members();
-        echo '<br/><br/><b>MEMBERS1:</b>' . json_encode($members);
+        echo '<br/><br/><b>MEMBERS1:</b>' . json_encode($launch->get_nrps()->get_members());
         print_r($members);
 
         $grade = LTI\LTI_Grade::new()
