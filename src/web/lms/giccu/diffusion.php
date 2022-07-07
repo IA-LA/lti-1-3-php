@@ -80,7 +80,7 @@ try {
         print_r($grades);
 
         $members = $launch->get_nrps()->get_members();
-        echo '<br/><br/><b>MEMBERS1:</b>' . json_encode($members);
+        echo '<br/><br/><b>MEMBERS1:</b>' . json_encode(($members ? $members : []));
         print_r($members);
 
         $score_lineitem = LTI\LTI_Lineitem::new()
@@ -96,7 +96,7 @@ try {
             ->set_score_maximum(999)
             ->set_label('Time Taken')
             ->set_resource_id('time'.$launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-        $times = $ags->get_grades($time_lineitem);
+        $times = $grades->get_grades($time_lineitem);
 
         $members = $launch->get_nrps()->get_members();
 
