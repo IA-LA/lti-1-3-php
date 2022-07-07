@@ -79,6 +79,10 @@ try {
         echo '<br/><br/><b>GRADES1:</b>' . json_encode($grades);
         print_r($grades);
 
+        $members = $launch->get_nrps()->get_members();
+        echo '<br/><br/><b>MEMBERS1:</b>' . json_encode($members);
+        print_r($members);
+
         $grade = LTI\LTI_Grade::new()
             ->set_score_given(20)
             ->set_score_maximum(100)
