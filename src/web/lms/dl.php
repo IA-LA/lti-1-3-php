@@ -34,6 +34,9 @@ try{
     } else if ($launch->is_deep_link_launch()) {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiDeepLinkingRequest
         echo '<!-- <hr/><br/><b>Deep Linking Request Launch!</b> -->';
+        $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
+        print('<p>' . $_REQUEST['state'] . '</p>');
+        print_r($post_param);
         $dl = $launch->get_deep_link();
         $resource = LTI\LTI_Deep_Link_Resource::new()
             ->set_url("https://my.tool/launch")
