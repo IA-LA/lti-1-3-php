@@ -4,6 +4,14 @@ require_once __DIR__ . '/../../db/iss_target_lti_database.php';
 
 use \IMSGlobal\LTI;
 try{
+    // REDIRECCION POST
+    // JWT Claims decode
+    // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
+    $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
+    print('<p>' . $_REQUEST['state'] . '</p>');
+    print_r($post_param);
+    //die;
+
     $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
     ->validate();
@@ -34,9 +42,6 @@ try{
     } else if ($launch->is_deep_link_launch()) {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiDeepLinkingRequest
         echo '<!-- <hr/><br/><b>Deep Linking Request Launch!</b> -->';
-        $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
-        print('<p>' . $_REQUEST['state'] . '</p>');
-        print_r($post_param);
         $dl = $launch->get_deep_link();
         $resource = LTI\LTI_Deep_Link_Resource::new()
             ->set_url("https://my.tool/launch")
