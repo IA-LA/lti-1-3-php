@@ -80,7 +80,7 @@ try {
         print_r($grades);
 
         $members = $launch->get_nrps()->get_members();
-        echo '<br/><br/><b>MEMBERS1:</b>' . json_encode(($members ? $members : []));
+        echo '<br/><br/><b>MEMBERS1:</b>' . json_encode(($members ? $members : '[]'));
         print_r(($members ? $members : []));
 
         $score_lineitem = LTI\LTI_Lineitem::new()
