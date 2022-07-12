@@ -52,8 +52,8 @@ try{
             ->set_url("https://my.tool/launch")
             ->set_custom_params(['my_param' => 'value'])
             ->set_title('My Resource');
-        //$dl->get_response_jwt([$resource]);
-        $dl->output_response_form([$resource]);
+        $dl->get_response_jwt([$resource]);
+        //$dl->output_response_form([$resource]);
         die;
     } else {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== otros tipos
