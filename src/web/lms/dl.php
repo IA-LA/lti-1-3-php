@@ -15,15 +15,16 @@ try{
     print_r($post_param);
     //die;
 
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
-    ->validate();
+    //->validate();
 
     //LAUNCH TYPE:
     //  - LtiResourceLinkRequest
     //  - LtiDeepLinkingRequest
     //  - Otros tipos!!!
     if ($launch->is_resource_launch()) {
+        // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
         LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database())
 
             // Actividades ECONTENT alojadas en el Servidor o Externas alojadas en otro servidor o Plataforma:
