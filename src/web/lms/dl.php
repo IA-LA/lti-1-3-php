@@ -58,6 +58,9 @@ try{
     } else {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== otros tipos
         echo '<!-- <hr/><br/><b>Unknown launch type</b> -->';
+        $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
+        //print('<p>JWT: ' . $_REQUEST['state'] . '</p>');
+        print_r($post_param);
     }
 }
 catch (IMSGlobal\LTI\OIDC_Exception $e){
