@@ -25,6 +25,7 @@ try{
     //  - Otros tipos!!!
     if ($launch->is_resource_launch()) {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
+        echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->';
         LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database())
 
             // Actividades ECONTENT alojadas en el Servidor o Externas alojadas en otro servidor o Plataforma:
@@ -55,13 +56,14 @@ try{
         $dl->get_response_jwt([$resource]);
         $dl->output_response_form([$resource]);
         die;
-    } else {
+    }
+    else if ($launch->is_submission_review_launch()) {
+        // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiSubmissionReviewRequest
+        echo '<!-- <hr/><br/><b>Submission Review Request Launch!</b> -->';
+    }
+    else {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== otros tipos
-        echo '<!-- <hr/><br/><b>Unknown launch type</b> -->';
-
-        //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
-        $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
-        ->validate();
+        echo '<!-- <hr/><br/><b>Unknown Request Launch type</b> -->';
     }
 }
 catch (IMSGlobal\LTI\OIDC_Exception $e){
