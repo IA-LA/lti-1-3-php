@@ -52,20 +52,12 @@ try{
             ->set_url("https://my.tool/launch")
             ->set_custom_params(['my_param' => 'value'])
             ->set_title('My Resource');
-        $dl->get_response_jwt([$resource]);
+        //$dl->get_response_jwt([$resource]);
         $dl->output_response_form([$resource]);
         die;
     } else {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== otros tipos
         echo '<!-- <hr/><br/><b>Unknown launch type</b> -->';
-        $dl = $launch->get_deep_link();
-        $resource = LTI\LTI_Deep_Link_Resource::new()
-            ->set_type("LtiResourceLinkRequest")
-            ->set_url("https://my.tool/launch")
-            ->set_custom_params(['my_param' => 'value'])
-            ->set_title('My Resource');
-        $dl->get_response_jwt([$resource]);
-        $dl->output_response_form([$resource]);
     }
 }
 catch (IMSGlobal\LTI\OIDC_Exception $e){
