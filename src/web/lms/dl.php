@@ -49,7 +49,7 @@ try{
         $dl = $launch->get_deep_link();
         $resource = LTI\LTI_Deep_Link_Resource::new()
             ->set_type("LtiResourceLinkRequest")
-            ->set_url("https://my.tool/launch")
+            ->set_url("https://google.es")
             ->set_custom_params(['my_param' => 'value'])
             ->set_title('My Resource');
         $dl->get_response_jwt([$resource]);
