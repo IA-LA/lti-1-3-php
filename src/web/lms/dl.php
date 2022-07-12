@@ -56,7 +56,7 @@ try{
             ->set_title('My Resource');
         $dl->get_response_jwt([$resource]);
         $dl->output_response_form([$resource]);
-        die;
+        //die;
     }
     else if ($launch->is_submission_review_launch()) {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiSubmissionReviewRequest
