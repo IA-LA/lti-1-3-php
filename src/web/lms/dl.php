@@ -48,7 +48,7 @@ try{
         echo '<!-- <hr/><br/><b>Deep Linking Request Launch!</b> -->';
         $dl = $launch->get_deep_link();
         $resource = LTI\LTI_Deep_Link_Resource::new()
-            ->set_type("LtiResourceLinkRequest")
+            ->set_type("LtiDeepLinkingRequest")
             ->set_url("https://google.es")
             ->set_custom_params(['my_param' => 'value'])
             ->set_title('My Resource');
