@@ -48,8 +48,8 @@ try{
         echo '<!-- <hr/><br/><b>Deep Linking Request Launch!</b> -->';
         $dl = $launch->get_deep_link();
         $resource = LTI\LTI_Deep_Link_Resource::new()
-            ->set_type("LtiDeepLinkingRequest")
-            ->set_url("https://google.es")
+            ->set_type("LtiResourceLinkRequest")
+            ->set_url("https://my.tool/launch")
             ->set_custom_params(['my_param' => 'value'])
             ->set_title('My Resource');
         $dl->get_response_jwt([$resource]);
@@ -58,9 +58,14 @@ try{
     } else {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== otros tipos
         echo '<!-- <hr/><br/><b>Unknown launch type</b> -->';
-        $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
-        //print('<p>JWT: ' . $_REQUEST['state'] . '</p>');
-        print_r($post_param);
+        $dl = $launch->get_deep_link();
+        $resource = LTI\LTI_Deep_Link_Resource::new()
+            ->set_type("LtiResourceLinkRequest")
+            ->set_url("https://my.tool/launch")
+            ->set_custom_params(['my_param' => 'value'])
+            ->set_title('My Resource');
+        $dl->get_response_jwt([$resource]);
+        $dl->output_response_form([$resource]);
     }
 }
 catch (IMSGlobal\LTI\OIDC_Exception $e){
