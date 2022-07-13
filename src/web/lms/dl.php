@@ -15,7 +15,14 @@ try{
     //print_r($post_param);
     //die;
 
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
+    //RECUPERA LAUNCH
+    //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($_REQUEST));
+    //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
+    //->validate();
+
+    //CREA LAUNCH
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database())//;
+    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
     ->validate();
     $launch_id = $launch->get_launch_id();
