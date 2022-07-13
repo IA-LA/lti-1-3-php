@@ -19,7 +19,7 @@ try{
     $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param));
     //->validate();
     $launch_id = $launch->get_launch_id();
-    $launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
+    //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
 
     //LAUNCH TYPE:
     //  - LtiResourceLinkRequest
