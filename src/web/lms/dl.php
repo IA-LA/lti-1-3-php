@@ -15,11 +15,10 @@ try{
     //print_r($post_param);
     //die;
 
-    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param));
-    //->validate();
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
+    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param));
+    ->validate();
     $launch_id = $launch->get_launch_id();
-    //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
 
     //LAUNCH TYPE:
     //  - LtiResourceLinkRequest
@@ -83,6 +82,10 @@ try{
     else {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== otros tipos
         echo '<!-- <hr/><br/><b>Unknown Request type (' . $launch_id . ') Launch!</b> -->';
+
+        //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($_REQUEST));
+        //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
+        //->validate();
     }
 }
 catch (IMSGlobal\LTI\OIDC_Exception $e){
