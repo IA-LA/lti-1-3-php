@@ -15,11 +15,11 @@ try{
     //print_r($post_param);
     //die;
 
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));
-    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
+    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param));
     //->validate();
     $launch_id = $launch->get_launch_id();
-    $launch = LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database());
+    $launch = LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
 
     //LAUNCH TYPE:
     //  - LtiResourceLinkRequest
@@ -45,7 +45,7 @@ try{
 
             // Redirección hacia 'target_link_uri'
             // https://www.w3docs.com/snippets/php/how-to-redirect-a-web-page-with-php.html
-            ->do_hybrid_redirect();
+            ->do_js_redirect();
 
     } else if ($launch->is_deep_link_launch()) {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiDeepLinkingRequest
