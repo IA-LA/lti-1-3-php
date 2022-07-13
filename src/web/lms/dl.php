@@ -15,8 +15,8 @@ try{
     //print_r($post_param);
     //die;
 
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
-    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param));
+    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
     ->validate();
     $launch_id = $launch->get_launch_id();
 
