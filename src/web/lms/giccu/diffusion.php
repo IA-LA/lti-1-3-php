@@ -71,6 +71,10 @@ try {
         if (!$launch->has_nrps()) {
             throw new Exception("Don't have names and roles!");
         }
+        $members = $launch->get_nrps()->get_members();
+        echo '<br/><br/><b>MEMBERS1:</b>' . json_encode(($members ? $members : '[]'));
+        print_r(($members ? $members : []));
+        
         // AGS (Assignment and Grade Services)
         if (!$launch->has_ags()) {
             throw new Exception("Don't have grades!");
@@ -79,9 +83,19 @@ try {
         echo '<br/><br/><b>GRADES1:</b>' . json_encode($grades);
         print_r($grades);
 
-        $members = $launch->get_nrps()->get_members();
-        echo '<br/><br/><b>MEMBERS1:</b>' . json_encode(($members ? $members : '[]'));
-        print_r(($members ? $members : []));
+        $grade = LTI\LTI_Grade::new()
+            ->set_score_given(20)
+            ->set_score_maximum(100)
+            ->set_timestamp(date(DateTime::ISO8601))
+            ->set_activity_progress('Completed')
+            ->set_grading_progress('FullyGraded')
+            ->set_user_id($launch->get_launch_data()['sub']);
+        echo '<br/><br/><b>GRADE</b>:' . json_encode($grade);
+        //print_r($grade);
+
+        echo '<br/><br/><b>GRADES->PUT_GRADE()1</b>:';
+        echo json_encode($grades->put_grade($grade));
+        print_r($grades);
 
         $score_lineitem = LTI\LTI_Lineitem::new()
             ->set_tag('score')
@@ -119,20 +133,6 @@ try {
             $scoreboard[] = $result;
         }
         echo json_encode($scoreboard);
-
-        $grade = LTI\LTI_Grade::new()
-            ->set_score_given(20)
-            ->set_score_maximum(100)
-            ->set_timestamp(date(DateTime::ISO8601))
-            ->set_activity_progress('Completed')
-            ->set_grading_progress('FullyGraded')
-            ->set_user_id($launch->get_launch_data()['sub']);
-        echo '<br/><br/><b>GRADE</b>:' . json_encode($grade);
-        print_r($grade);
-
-        echo '<br/><br/><b>GRADES->PUT_GRADE()1</b>:';
-        echo json_encode($grades->put_grade($grade));
-        //print_r($grades);
 
         $grades = $launch->get_ags();
         echo '<br/><br/><b>GRADES2</b>:' . json_encode($grades);
@@ -274,7 +274,7 @@ try {
         //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
         echo '
         <!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
-        <embed id="embedLGD" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '"
+        <embed id="embedLD" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '"
         style="
         position: fixed;
         top: 0;
