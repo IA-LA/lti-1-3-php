@@ -71,8 +71,11 @@ try {
         if (!$launch->has_nrps()) {
             throw new Exception("Don't have names and roles!");
         }
+        $nrps = $launch->get_nrps();
+        echo '<br/><br/><b>NRPS:</b>' . json_encode($nrps);
+        print_r($nrps);
         $members = $launch->get_nrps()->get_members();
-        echo '<br/><br/><b>MEMBERS1:</b>' . json_encode(($members ? $members : '[]'));
+        echo '<br/><br/><b>MEMBERS:</b>' . json_encode(($members ? $members : '[]'));
         print_r(($members ? $members : []));
         
         // AGS (Assignment and Grade Services)
