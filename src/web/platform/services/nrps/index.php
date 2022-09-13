@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../db/iss_target_lti_database.php';
+
+use \IMSGlobal\LTI;
 echo json_encode([
     "id" => "http://localhost:9001/platform/nrps.php",
     "members" => [

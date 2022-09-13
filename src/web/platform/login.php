@@ -42,7 +42,7 @@ $message_jwt = [
         "description"=> "Resource_Link en servidor LTI Tool.",
     ],
     "https://purl.imsglobal.org/spec/lti-nrps/claim/namesroleservice" => [
-        "context_memberships_url" => "http://localhost/platform/services/nrps",
+        "context_memberships_url" => TOOL_HOST . "/platform/services/nrps",
         "service_versions" => ["2.0"]
     ],
     "https://purl.imsglobal.org/spec/lti-ags/claim/endpoint" => [
@@ -51,7 +51,7 @@ $message_jwt = [
           "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly",
           "https://purl.imsglobal.org/spec/lti-ags/scope/score"
         ],
-        "lineitems" => "http://localhost/platform/services/ags/lineitems.php",
+        "lineitems" => TOOL_HOST . "/platform/services/ags/lineitems.php",
     ]
 ];
 $database = new Iss_Target_Lti_Database();

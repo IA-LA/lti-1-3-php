@@ -1,4 +1,8 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../db/iss_target_lti_database.php';
+
+use \IMSGlobal\LTI;
 switch($_SERVER['PATH_INFO']) {
     case '/scores':
         $data = file_get_contents('php://input');
