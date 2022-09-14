@@ -42,7 +42,7 @@ $message_jwt = [
         "description"=> "Resource_Link en servidor LTI Tool.",
     ],
     "https://purl.imsglobal.org/spec/lti-nrps/claim/namesroleservice" => [
-        "context_memberships_url" => TOOL_HOST . "/platform/services/nrps",
+        "context_memberships_url" => TOOL_HOST . "/platform/services/nrps/",
         "service_versions" => ["2.0"]
     ],
     "https://purl.imsglobal.org/spec/lti-ags/claim/endpoint" => [
