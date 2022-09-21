@@ -86,6 +86,20 @@ try {
         echo '<br/><br/><b>GRADES1:</b>' . json_encode($grades);
         print_r($grades);
 
+        $score = LTI\LTI_Grade::new()
+            ->set_score_given(120)
+            ->set_score_maximum(100)
+            ->set_timestamp(date(DateTime::ISO8601))
+            ->set_activity_progress('Completed')
+            ->set_grading_progress('FullyGraded')
+            ->set_user_id($launch->get_launch_data()['sub']);
+        $score_lineitem = LTI\LTI_Lineitem::new()
+            ->set_tag('score')
+            ->set_score_maximum(100)
+            ->set_label('Score')
+            ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+        echo json_encode($grades->put_grade($score, $score_lineitem));
+
         $grade = LTI\LTI_Grade::new()
             ->set_score_given(20)
             ->set_score_maximum(100)
