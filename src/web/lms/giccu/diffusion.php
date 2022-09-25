@@ -70,7 +70,7 @@ try {
         $launch_id = $launch->get_launch_id();
         echo '<br/><br/><b>LAUNCH ID:</b>' . json_encode($launch_id);
         print_r($launch_id);
-        $launch = LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database());
+        $launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database());
 
         //SERVICES
         //////////
