@@ -38,11 +38,11 @@ try {
     // Usa una Cookie pero falla al evitar el ERROR ´State not found´
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database(), null, $cookie);
     // Evita ERROR ´State not found´
-    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
+    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
         //->validate();
-        //->validate($_REQUEST);
-        ->validate($post_param);
+        ->validate($_REQUEST);
+        //->validate($post_param);
 
 ?>
     <!-- Contenido de JWT 1
@@ -64,6 +64,12 @@ try {
         echo 'http wrapper: ', in_array('http', $w) ? 'yes' : 'no', "\n";
         echo 'https wrapper: ', in_array('https', $w) ? 'yes' : 'no', "\n";
         echo 'wrappers: ', var_export($w);
+
+        //LAUNCH ID
+        ///////////
+        $launch_id = $launch->get_launch_id();
+        echo '<br/><br/><b>LAUNCH ID:</b>' . json_encode($launch_id);
+        print_r($launch_id);
 
         //SERVICES
         //////////
