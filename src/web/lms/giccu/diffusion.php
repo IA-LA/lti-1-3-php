@@ -41,8 +41,8 @@ try {
     $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
         //->validate();
-        ->validate($_REQUEST);
-        //->validate($post_param);
+        //->validate($_REQUEST);
+        ->validate($post_param);
 
 ?>
     <!-- Contenido de JWT 1
@@ -98,6 +98,7 @@ try {
             ->set_score_maximum(100)
             ->set_label('Score')
             ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+        echo '<br/><br/><b>GRADES->PUT_GRADE()0</b>:';
         echo json_encode($grades->put_grade($score, $score_lineitem));
 
         $grade = LTI\LTI_Grade::new()
