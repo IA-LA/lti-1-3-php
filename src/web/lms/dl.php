@@ -11,8 +11,8 @@ try{
     // JWT Claims decode
     // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
     $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
-    print('<p>JWT (state): ' . $_REQUEST['state'] . '</p>');
-    print('<p>JWT (id_token): ');
+    print('<p><b>JWT (state)</b>: ' . $_REQUEST['state'] . '</p>');
+    print('<p><b>JWT (id_token)</b>: ');
     print_r($post_param);
     print('</p>');
     //die;
@@ -31,9 +31,9 @@ try{
     print_r($launch_id);
 
     //RECUPERA LAUNCH
-    $launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($_REQUEST))
+        //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database())
         //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($_REQUEST));
-        //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
+        $launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param)) //;
         ->validate();
 
     //LAUNCH TYPE:
