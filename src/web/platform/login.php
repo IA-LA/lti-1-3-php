@@ -3,7 +3,8 @@
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../../db/iss_target_lti_database.php';
 
-// TODO obtener registro de PLATAFORMA AUTH usando servicio GET `iss` !!!!!!!!!
+// DONE obtener registro de PLATAFORMA AUTH usando servicio GET `iss` !!!!!!!!!
+// se hace en iss_target_lti_database mediante Services en params
 
 use \Firebase\JWT\JWT;
 $message_jwt = [
