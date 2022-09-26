@@ -20,6 +20,8 @@ try{
 
     // LOGIN
     $login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database());
+    // REDIRECT
+    $redirect = $login->do_oidc_login_redirect($post_param['deep_link_return_url']);
 
     //CREA LAUNCH
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database());//
