@@ -12,7 +12,7 @@ try{
     // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
     $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
     print('<p><b>JWT (state)</b>: ' . $_REQUEST['state'] . '</p>');
-    print('<p><b>JWT (state)</b>: ' . $post_param['https://purl.imsglobal.org/spec/lti/claim/message_type'] . '</p>');
+    print('<p><b>JWT (message type)</b>: ' . $post_param['https://purl.imsglobal.org/spec/lti/claim/message_type'] . '</p>');
     print('<p><b>JWT (id_token)</b>: ');
     print_r($post_param);
     print('</p>');
@@ -23,8 +23,8 @@ try{
 
     //CREA LAUNCH
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database());//
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));//
-    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param));//
+    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));//
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param));//
     //->validate();
 
     //LAUNCH ID
