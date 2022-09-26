@@ -21,7 +21,10 @@ try{
     // LOGIN
     $login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database());
     // REDIRECT
-    $redirect = $login->do_oidc_login_redirect($post_param['deep_link_return_url']);
+    $redirect = $login->do_oidc_login_redirect($post_param['https://purl.imsglobal.org/spec/lti-dl/claim/deep_linking_settings']['deep_link_return_url']);
+    print('<p><b>JWT (Deep Linking)</b>: ');
+    print_r($post_param['https://purl.imsglobal.org/spec/lti-dl/claim/deep_linking_settings']);
+    print('</p>');
 
     //CREA LAUNCH
     $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database());//
