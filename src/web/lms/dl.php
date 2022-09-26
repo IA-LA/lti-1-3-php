@@ -18,10 +18,12 @@ try{
     print('</p>');
     //die;
 
+    // LOGIN
+    $login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database());
 
     //CREA LAUNCH
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database());//
-    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));//
+    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database());//
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));//
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param));//
     //->validate();
 
@@ -108,7 +110,7 @@ try{
 }
 catch (IMSGlobal\LTI\OIDC_Exception $e){
 
-    echo ("<h1>Error de credenciales.</h1>");
+    echo ("<h1>Error de DL.</h1>");
     exit($e->getMessage());
 }
 ?>
