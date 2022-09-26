@@ -17,11 +17,12 @@ try{
     print('</p>');
     //die;
 
-        //CREA LAUNCH
-        //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database());//
-        //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));//
-        $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param)) //;
-        ->validate();
+
+    //CREA LAUNCH
+    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database());//
+    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));//
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param));//
+    //->validate();
 
     //LAUNCH ID
     ///////////
@@ -30,10 +31,10 @@ try{
     print_r($launch_id);
 
     //RECUPERA LAUNCH
-    //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database())
-    //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($_REQUEST));
-    $launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param)) //;
-    ->validate();
+    $launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($_REQUEST))
+        //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($_REQUEST));
+        //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
+        ->validate();
 
     //LAUNCH TYPE:
     //  - LtiResourceLinkRequest
