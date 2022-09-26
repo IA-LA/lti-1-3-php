@@ -24,9 +24,9 @@ try{
     $redirect = $login->do_oidc_login_redirect($post_param['deep_link_return_url']);
 
     //CREA LAUNCH
-    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database());//
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database());//
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));//
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param));//
+    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param));//
     //->validate();
 
     //LAUNCH ID
