@@ -20,10 +20,10 @@ try{
 
 
     //CREA LAUNCH
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database())//;
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database());//
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));//
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param));//
-    ->validate();//
+    //->validate();
 
     //LAUNCH ID
     ///////////
