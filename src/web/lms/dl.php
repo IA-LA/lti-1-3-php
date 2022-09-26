@@ -12,8 +12,9 @@ try{
     // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
     $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
     print('<p>JWT (state): ' . $_REQUEST['state'] . '</p>');
-    print('<p>JWT (id_token): ' . $post_param . '</p>');
-    //print_r($post_param);
+    print('<p>JWT (id_token): ');
+    print_r($post_param);
+    print('</p>');
     //die;
 
 
