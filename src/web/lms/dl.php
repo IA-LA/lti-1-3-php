@@ -11,21 +11,29 @@ try{
     // JWT Claims decode
     // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
     $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
-    //print('<p>JWT: ' . $_REQUEST['state'] . '</p>');
+    print('<p>JWT: ' . $_REQUEST['state'] . '</p>');
+    print('<p>JWT: ' . $_REQUEST['id_token'] . '</p>');
     //print_r($post_param);
     //die;
 
-    //RECUPERA LAUNCH
-    //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($_REQUEST));
-    //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
-    //->validate();
 
     //CREA LAUNCH
     $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database());
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST));
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
     //->validate();
+
+    //LAUNCH ID
+    ///////////
     $launch_id = $launch->get_launch_id();
+    echo '<br/><br/><b>LAUNCH ID:</b>' . json_encode($launch_id);
+    print_r($launch_id);
+
+    //RECUPERA LAUNCH
+    $launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($_REQUEST))
+        //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($_REQUEST));
+        //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
+        ->validate();
 
     //LAUNCH TYPE:
     //  - LtiResourceLinkRequest
