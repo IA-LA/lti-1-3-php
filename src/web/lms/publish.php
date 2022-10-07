@@ -20,9 +20,7 @@ try {
     // JWT Claims decode
     // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
     $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
-    echo('</--');
-    print_r($post_param);
-    echo('-->');
+    //print_r($post_param);
     //print('<p>' . $_REQUEST['state']);
     //die;
 
@@ -127,6 +125,9 @@ try {
     <p>Hola <?php echo $post_param["given_name"]; ?>, bienvenid@ al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ como <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?> </p>
     -->
 <?php
+    echo('<\--');
+    print_r($post_param);
+    echo('-->');
     if ($launch->is_resource_launch()) {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
         echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->';
