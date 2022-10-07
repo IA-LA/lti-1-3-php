@@ -34,12 +34,16 @@ define("TOOL_REDIR",
     (preg_match("/00000000000000000000000[a,c-f,0-9]{1}/", TOOL_PARAMS_ISS)
     ? (TOOL_HOST . "/lms/launch.php". "?iss=" . TOOL_PARAMS_ISS . "&target_link_uri=" . TOOL_PARAMS_TARGET )
     : (preg_match("/https:\/\/agora\.uned\.es/", TOOL_PARAMS_ISS)
+        // Tareas publicadas en abierto en Ágora
         ? (preg_match("/\/publicacion\/10020220629094/", TOOL_PARAMS_TARGET)
                 ? (TOOL_HOST . "/lms/publish.php")
                 : TOOL_PARAMS_TARGET)
         : (preg_match("/\/publicacion\/[a-f,0-9]{24}/", TOOL_PARAMS_TARGET)
             ? (preg_match("/:\/\/ailanto-dev\.intecca\.uned\.es/", TOOL_PARAMS_ISS)
-                    ? (TOOL_HOST . "/lms/publish.php")
+                    // Tareas publicadas como administrador
+                    ? (preg_match("/\/publicacion\/100/", TOOL_PARAMS_TARGET)
+                        ? (TOOL_HOST . "/lms/giccu/diffusion.php")
+                        : (TOOL_HOST . "/lms/publish.php"))
                     : (TOOL_HOST . "/lms/giccu/diffusion.php"))
             : TOOL_PARAMS_TARGET))) );
 
