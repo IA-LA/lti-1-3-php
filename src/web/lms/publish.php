@@ -20,7 +20,7 @@ try {
     // JWT Claims decode
     // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
     $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
-    //print_r($post_param);
+    print_r($post_param);
     //print('<p>' . $_REQUEST['state']);
     //die;
 
@@ -37,9 +37,10 @@ try {
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database()) //;
     // Usa una Cookie pero falla al evitar el ERROR ´State not found´
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database(), null, $cookie);
-    // Evita ERROR ´State not found´
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database())//;
+    // Intenta evitar ERROR ´State not found´ en NAVEGACION PRIVADA
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
+    //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
         ->validate();
         //->validate($_REQUEST);
         //->validate($post_param);
