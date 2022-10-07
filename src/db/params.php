@@ -36,7 +36,7 @@ define("TOOL_REDIR",
     : (preg_match("/https:\/\/agora\.uned\.es/", TOOL_PARAMS_ISS)
         ? TOOL_PARAMS_TARGET
         : (preg_match("/\/publicacion\/[a-f,0-9]{24}/", TOOL_PARAMS_TARGET)
-            ? (preg_match("ailanto-dev\.intecca\.uned\.es/", TOOL_PARAMS_ISS)
+            ? (preg_match("/:\/\/ailanto-dev\.intecca\.uned\.es/", TOOL_PARAMS_ISS)
                     ? (TOOL_HOST . "/lms/publish.php")
                     : (TOOL_HOST . "/lms/giccu/diffusion.php"))
             : (TOOL_PARAMS_TARGET)))) );
