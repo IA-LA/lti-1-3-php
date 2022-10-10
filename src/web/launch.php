@@ -92,7 +92,7 @@ try {
         '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>',
     '  <script>
                 async function getSrc() {
-                  const res = await fetch("https://www.uned.es/universidad/inicio.html", {
+                  const res = await fetch("https://ailanto-dev.intecca.uned.es/publicacion/10220221005072709000000a", {
                     method: "GET",
                     headers: {
                       // Here you can set any headers you want
