@@ -68,7 +68,7 @@ try {
     //die;
 
     // CORS HEADER
-    header('Access-Control-Allow-Headers: Accept', true, 302);
+    header('Access-Control-Allow-Headers: devcont.cursosvirtuales.uned.es', true, 302);
 
     // IFRAME FULL PAGE cross-browser and fully responsive
     //  https://stackoverflow.com/questions/17710039/full-page-iframe
