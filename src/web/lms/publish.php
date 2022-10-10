@@ -45,7 +45,7 @@ try {
         //->validate($_REQUEST);
         //->validate($post_param);
 
-    // RELOCATION  HEADER
+    // RELOCATION HEADER
     //header('X-Frame-Options: ' . 'SAMEORIGIN', true);
     //header('Location: ' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], true, 302);
     //die;
@@ -66,9 +66,6 @@ try {
     // REDIRECTION HEADER
     //header('Location: ' . TOOL_PARAMS_TARGET, true, 302);
     //die;
-
-    // CORS HEADER
-    header('Access-Control-Allow-Headers: *', true, 302);
 
     // IFRAME FULL PAGE cross-browser and fully responsive
     //  https://stackoverflow.com/questions/17710039/full-page-iframe
@@ -120,22 +117,7 @@ try {
         '<br/><b>USER: <a href="http://">', $post_param['name'], '</a></b>',
         '<br/><b>EMAIL: <a href="http://">', $post_param['email'], '</a></b>',
         '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>',
-        '-->',
-        '  <script>
-                async function getSrc() {
-                  const res = await fetch("http://example.com/someiframe", {
-                    method: "GET",
-                    headers: {
-                      // Here you can set any headers you want
-                      Access-Control-Allow-Headers: "*"
-                    }
-                  });
-                  const blob = await res.blob();
-                  const urlObject = URL.createObjectURL(blob);
-                  document.querySelector("embed").setAttribute("src", urlObject)
-                }
-                getSrc();
-            </script>'
+        '-->'
       ;
 
 ?>

@@ -37,6 +37,9 @@ try {
     //header('Location: ' . TOOL_PARAMS_TARGET, true, 302);
     //die;
 
+    // CORS HEADER
+    header('Access-Control-Allow-Headers: *', true, 200);
+
     // IFRAME FULL PAGE cross-browser and fully responsive
     //  https://stackoverflow.com/questions/17710039/full-page-iframe
     // ALTERNATIVES
