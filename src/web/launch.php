@@ -101,7 +101,7 @@ try {
                   });
                   const blob = await res.blob();
                   const urlObject = URL.createObjectURL(blob);
-                  document.querySelector("embed").setAttribute("src", urlObject)
+                  document.querySelector("embedL").setAttribute("src", urlObject)
                 }
                 getSrc();
             </script>'
