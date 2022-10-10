@@ -89,7 +89,22 @@ try {
         '<br/><b>VERSION: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/version'], '</a></b>',
         '<br/><b>USER: <a href="http://">', $post_param['name'], '</a></b>',
         '<br/><b>EMAIL: <a href="http://">', $post_param['email'], '</a></b>',
-        '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>'
+        '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>',
+    '  <script>
+                async function getSrc() {
+                  const res = await fetch("https://uned.es", {
+                    method: "GET",
+                    headers: {
+                      // Here you can set any headers you want
+                      Access-Control-Allow-Headers: "*"
+                    }
+                  });
+                  const blob = await res.blob();
+                  const urlObject = URL.createObjectURL(blob);
+                  document.querySelector("embed").setAttribute("src", urlObject)
+                }
+                getSrc();
+            </script>'
       ;
 
 ?>
