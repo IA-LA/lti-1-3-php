@@ -45,7 +45,7 @@ try {
         //->validate($_REQUEST);
         //->validate($post_param);
 
-    // RELOCATION
+    // RELOCATION  HEADER
     //header('X-Frame-Options: ' . 'SAMEORIGIN', true);
     //header('Location: ' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], true, 302);
     //die;
@@ -66,6 +66,9 @@ try {
     // REDIRECTION HEADER
     //header('Location: ' . TOOL_PARAMS_TARGET, true, 302);
     //die;
+
+    // CORS HEADER
+    header('Access-Control-Allow-Headers: Accept', true, 302);
 
     // IFRAME FULL PAGE cross-browser and fully responsive
     //  https://stackoverflow.com/questions/17710039/full-page-iframe
