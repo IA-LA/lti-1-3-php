@@ -96,12 +96,12 @@ try {
                     method: "GET",
                     headers: {
                       // Here you can set any headers you want
-                      //"Access-Control-Allow-Headers": "uned.es"
+                      "Access-Control-Allow-Headers": "uned.es"
                     }
                   });
                   const blob = await res.blob();
                   const urlObject = URL.createObjectURL(blob);
-                  document.querySelector("embedL").setAttribute("src", urlObject)
+                  document.querySelector("embed").setAttribute("src", urlObject)
                 }
                 getSrc();
             </script>'
