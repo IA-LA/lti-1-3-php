@@ -92,11 +92,11 @@ try {
         '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>',
     '  <script>
                 async function getSrc() {
-                  const res = await fetch("https://devcont.cursosvirtuales.uned.es/templates_desarrollo/disenio/generico/style.css", {
+                  const res = await fetch("https://ailanto-dev.intecca.uned.es/publicacion/10220221005072709000000a", {
                     method: "GET",
                     headers: {
                       // Here you can set any headers you want
-                      "Access-Control-Allow-Headers": "devcont.cursosvirtuales.uned.es"
+                      "Access-Control-Allow-Headers": "Accept"
                     }
                   });
                   const blob = await res.blob();
