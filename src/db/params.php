@@ -43,7 +43,9 @@ define("TOOL_REDIR",
                     // Tareas publicadas como administrador
                     ? (preg_match("/\/publicacion\/100/", TOOL_PARAMS_TARGET)
                         ? (TOOL_HOST . "/lms/giccu/diffusion.php")
-                        : (TOOL_HOST . "/launch.php"))
+                        : (preg_match("/\/publicacion\/102/", TOOL_PARAMS_TARGET)
+                            ? TOOL_PARAMS_TARGET
+                            : (TOOL_HOST . "/launch.php")))
                     : (TOOL_HOST . "/lms/giccu/diffusion.php"))
             : TOOL_PARAMS_TARGET))) );
 
