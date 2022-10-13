@@ -44,8 +44,8 @@ define("TOOL_REDIR",
                     ? (preg_match("/\/publicacion\/100/", TOOL_PARAMS_TARGET)
                         ? (TOOL_HOST . "/lms/giccu/diffusion.php")
                         : (preg_match("/\/publicacion\/102/", TOOL_PARAMS_TARGET)
-                            ?  (TOOL_HOST . "/lms/publish.php")
-                            : (TOOL_HOST . "/launch.php")))
+                            ? (TOOL_HOST . "/launch.php")
+                            : (TOOL_HOST . "/lms/publish.php")))
                     : (TOOL_HOST . "/lms/giccu/diffusion.php"))
             : TOOL_PARAMS_TARGET))) );
 
