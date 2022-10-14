@@ -61,7 +61,7 @@ try {
         //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
         echo '
         <!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
-        <embed id="embedLD" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '"
+        <embed id="embedLD" src="javascript:;"
         style="
         position: fixed;
         top: 0;
@@ -111,7 +111,7 @@ try {
         echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
         '  <script>
                 async function getSrc() {
-                  const res = await fetch("https:///ailanto-dev.intecca.uned.es/publicacion/index.html", {
+                  const res = await fetch("' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '", {
                     method: "GET",
                     headers: {
                       // Here you can set any headers you want
