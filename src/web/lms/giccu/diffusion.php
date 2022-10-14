@@ -111,7 +111,7 @@ try {
         echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
         '  <script>
                 async function getSrc() {
-                  const res = await fetch("https:///ailanto-dev.intecca.uned.es/publicacion/index.html", {
+                  const res = await fetch("https:///ailanto-dev.intecca.uned.es/publicacion/10020220623052455000000a/index.html", {
                     method: "GET",
                     headers: {
                       // Here you can set any headers you want
