@@ -60,20 +60,7 @@ try {
         // ALTERNATIVES
         //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
         echo '
-        <embed id="embedLD" 
-        
-        style="
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        width: 100%;
-        border: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        z-index: 999999;
-        height: 100%;"/>' .
+        <div id="htmlTest"></div>' .
         '<!--',
         '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
         '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
@@ -94,19 +81,21 @@ try {
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
         echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
         '  <script>
-                async function getSrc() {
-                  const res = await fetch("' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '", {
-                    method: "GET",
-                    headers: {
-                      // Here you can set any headers you want
-                      "Access-Control-Allow-Headers": "Accept"
-                    }
-                  });
-                  const blob = await res.blob();
-                  const urlObject = URL.createObjectURL(blob);
-                  document.querySelector("embed").setAttribute("src", urlObject)
-                }
-                getSrc();
+                // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html
+                var blobMe= URL["createObjectURL"](new Blob([""], {type: "text/html"}));
+var elIframe = document["createElement"]("iframe");
+elIframe["setAttribute"]("frameborder", "0");
+elIframe["setAttribute"]("width", "100%");
+elIframe["setAttribute"]("height", "500px");
+elIframe["setAttribute"]("allowfullscreen", "true");
+elIframe["setAttribute"]("webkitallowfullscreen", "true");
+elIframe["setAttribute"]("mozallowfullscreen", "true");
+elIframe["setAttribute"]("src", blobMe);
+var idOne= "gepa_"+ Date.now();
+elIframe["setAttribute"]("id", idOne);
+document.getElementById("htmlTest").appendChild(elIframe);
+const iframeHere= "' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '";
+document["getElementById"]/(idOne)["contentWindow"]["document"].write("<script type=text/javascript>location.href = "' + iframeHere + '";</script>")
             </script>';
 
         // ERROR file_get_content()
