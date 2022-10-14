@@ -102,6 +102,7 @@ try {
                 method: \'GET\',
                 headers: {
                   // Here you can set any headers you want
+                  "Access-Control-Allow-Headers": "Accept"
                 }
               });
               const blob = await res.blob();
