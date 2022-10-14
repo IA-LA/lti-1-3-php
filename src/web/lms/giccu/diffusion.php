@@ -80,22 +80,22 @@ try {
 
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
         echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
-        '  <script>
-                // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html
-                var blobMe= URL["createObjectURL"](new Blob([""], {type: "text/html"}));
-var elIframe = document["createElement"]("iframe");
-elIframe["setAttribute"]("frameborder", "0");
-elIframe["setAttribute"]("width", "100%");
-elIframe["setAttribute"]("height", "500px");
-elIframe["setAttribute"]("allowfullscreen", "true");
-elIframe["setAttribute"]("webkitallowfullscreen", "true");
-elIframe["setAttribute"]("mozallowfullscreen", "true");
-elIframe["setAttribute"]("src", blobMe);
-var idOne= "gepa_"+ Date.now();
-elIframe["setAttribute"]("id", idOne);
-document.getElementById("htmlTest").appendChild(elIframe);
-const iframeHere= "' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '";
-document["getElementById"]/(idOne)["contentWindow"]["document"].write("<script type=text/javascript>location.href = "' + iframeHere + '";</script>")
+        '<script>
+            // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html
+            var blobMe= URL["createObjectURL"](new Blob([""], {type: "text/html"}));
+            var elIframe = document["createElement"]("iframe");
+            elIframe["setAttribute"]("frameborder", "0");
+            elIframe["setAttribute"]("width", "100%");
+            elIframe["setAttribute"]("height", "500px");
+            elIframe["setAttribute"]("allowfullscreen", "true");
+            elIframe["setAttribute"]("webkitallowfullscreen", "true");
+            elIframe["setAttribute"]("mozallowfullscreen", "true");
+            elIframe["setAttribute"]("src", blobMe);
+            var idOne= "gepa_"+ Date.now();
+            elIframe["setAttribute"]("id", idOne);
+            document.getElementById("htmlTest").appendChild(elIframe);
+            const iframeHere= "";
+            document["getElementById"](idOne)["contentWindow"]["document"].write("<script type="text/javascript">location.href = "' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '";</script>")
             </script>';
 
         // ERROR file_get_content()
