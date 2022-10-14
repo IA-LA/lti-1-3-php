@@ -95,7 +95,7 @@ try {
         echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
         '  <script>
                 async function getSrc() {
-                  const res = await fetch("https:///ailanto-dev.intecca.uned.es/publicacion/index.html", {
+                  const res = await fetch("' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '", {
                     method: "GET",
                     headers: {
                       // Here you can set any headers you want
