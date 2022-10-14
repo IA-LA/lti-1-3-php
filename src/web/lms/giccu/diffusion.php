@@ -83,7 +83,7 @@ try {
         '<script>
             // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html
             var blobMe= URL["createObjectURL"](new Blob([""], {type: "text/html"}));
-            var elIframe = document["createElement"]("embed");
+            var elIframe = document["createElement"]("iframe");
             elIframe["setAttribute"]("frameborder", "0");
             elIframe["setAttribute"]("width", "100%");
             elIframe["setAttribute"]("height", "500px");
@@ -95,7 +95,7 @@ try {
             elIframe["setAttribute"]("id", idOne);
             document.getElementById("htmlTest").appendChild(elIframe);
             const iframeHere= "";
-            document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=text/javascript>location.href = \'' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
+            document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
             
             async function getSrc() {
               const res = await fetch("' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '", {
