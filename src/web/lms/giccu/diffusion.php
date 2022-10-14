@@ -95,7 +95,7 @@ try {
             elIframe["setAttribute"]("id", idOne);
             document.getElementById("htmlTest").appendChild(elIframe);
             const iframeHere= "";
-            document["getElementById"](idOne)["contentWindow"]["document"].write("<script type="text/javascript">location.href = "\'' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'"\x3c/script>");
+            document["getElementById"](idOne)["contentWindow"]["document"].write("<script type="text/javascript">location.href = "\'' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'"\</script>");
             </script>';
 
         // ERROR file_get_content()
