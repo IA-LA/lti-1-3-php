@@ -98,7 +98,7 @@ try {
             document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
             
             async function getSrc() {
-              const res = await fetch("' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '", {
+              const res = await fetch("https://www.uned.es", {
                 method: \'GET\',
                 headers: {
                   // Here you can set any headers you want
