@@ -61,7 +61,7 @@ try {
         //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
         echo '
         <!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
-        <embed id="embedLD" src="https://ailanto-dev.intecca.uned.es/publicacion/index.html"
+        <embed id="embedLD" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
         style="
         position: fixed;
         top: 0;
@@ -73,24 +73,8 @@ try {
         padding: 0;
         overflow: hidden;
         z-index: 999999;
-        height: 100%;"/>
-        <!--
-        <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
-        allowfullscreen="true" allowpaymentrequest="true"
-        style="
-        position: fixed;
-        top: 0px;
-        bottom: 0px;
-        right: 0px;
-        width: 100%;
-        border: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        z-index: 999999;
-        height: 100%;"></iframe>
-        -->' .
-            '<!--',
+        height: 100%;"/>' .
+        '<!--',
         '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
         '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
         '<hr/>',
@@ -111,7 +95,7 @@ try {
         echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
         '  <script>
                 async function getSrc() {
-                  const res = await fetch("' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '", {
+                  const res = await fetch("https://ailanto-dev.intecca.uned.es/publicacion/index.html", {
                     method: "GET",
                     headers: {
                       // Here you can set any headers you want
