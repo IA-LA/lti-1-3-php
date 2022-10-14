@@ -60,8 +60,8 @@ try {
         // ALTERNATIVES
         //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
         echo '
-        <!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
-        <embed id="embedLD" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
+        <embed id="embedLD" 
+        
         style="
         position: fixed;
         top: 0;
@@ -92,7 +92,22 @@ try {
         '-->';
 
         // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
-        echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->';
+        echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
+        '  <script>
+                async function getSrc() {
+                  const res = await fetch("https:///ailanto-dev.intecca.uned.es/publicacion/index.html", {
+                    method: "GET",
+                    headers: {
+                      // Here you can set any headers you want
+                      "Access-Control-Allow-Headers": "Accept"
+                    }
+                  });
+                  const blob = await res.blob();
+                  const urlObject = URL.createObjectURL(blob);
+                  document.querySelector("embed").setAttribute("src", urlObject)
+                }
+                getSrc();
+            </script>';
 
         // ERROR file_get_content()
         ///////////////////////////
