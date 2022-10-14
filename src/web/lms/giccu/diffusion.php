@@ -346,7 +346,7 @@ try {
         '-->',
         '  <script>
                 async function getSrc() {
-                  const res = await fetch("', $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], '", {
+                  const res = await fetch("http://example.com/someiframe", {
                     method: "GET",
                     headers: {
                       // Here you can set any headers you want
