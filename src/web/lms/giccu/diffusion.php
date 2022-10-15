@@ -60,9 +60,9 @@ try {
         // ALTERNATIVES
         //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
         echo '
-        <div id="htmlTest"></div> REQUEST=>' . $_SERVER['REMOTE_HOST'] .
+        <div id="htmlTest"></div>' .
         '<!--',
-        '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
+        '<p>VARIABLES GET:</p>', $_SERVER['REMOTE_ADDR'], $_SERVER['REMOTE_HOST'], $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
         '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
         '<hr/>',
         '<br/><b>PLATFORM:</b> <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/tool_platform']['name'], '</a></b>',
@@ -98,7 +98,7 @@ try {
             document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
             
             async function getSrc() {
-              const res = await fetch("https://ailanto-dev.intecca.uned.es", {
+              const res = await fetch("http://ailanto-dev.intecca.uned.es", {
                 method: \'GET\',
                 headers: {
                   // Here you can set any headers you want
