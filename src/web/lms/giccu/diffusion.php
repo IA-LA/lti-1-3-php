@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../../vendor/autoload.php';
 require_once __DIR__ . '/../../../db/iss_target_lti_database.php';
+require_once __DIR__ . '/../../../services/services.php';
 
 use Firebase\JWT\JWK;
 use Firebase\JWT\JWT;
