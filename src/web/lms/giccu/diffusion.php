@@ -56,62 +56,86 @@ try {
     //  - Otros tipos!!!
     if ($launch->is_resource_launch()) {
 
-        // IFRAME FULL PAGE cross-browser and fully responsive
-        //  https://stackoverflow.com/questions/17710039/full-page-iframe
-        // ALTERNATIVES
-        //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
-        echo '
-        <div id="htmlTest"></div>' .
-        '<!--',
-        '<p>VARIABLES GET:</p>', $_SERVER['HTTP_ORIGIN'], $_SERVER['HTTP_REFERER'], $_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
-        '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
-        '<hr/>',
-        '<br/><b>PLATFORM:</b> <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/tool_platform']['name'], '</a></b>',
-        '<hr/>',
-        '<br/><b>ISS: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', $post_param['iss'], '</a></b>',
-        '<br/><b>LOGIN_HINT: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', "no disponible", '</a></b>',
-        '<br/><b>TARGET_LINK_URI: <a href="http://Hecho.que.Lti_Database.tome.TARGET_LINK_URI.de.la.llamada.GET/POST">', $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'], '</a></b>',
-        '<br/><b>LTI_MESSAGE_HINT: <a href="http://Hecho.que.Lti_Database.tome.LTI_MESSAGE_HINT.de.la.llamada.GET/POST">', $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"], '</a></b>',
-        '<br/><b>TYPE: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/message_type'], '</a></b>',
-        '<br/><b>VERSION: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/version'], '</a></b>',
-        '<br/><b>USER: <a href="http://">', $post_param['name'], '</a></b>',
-        '<br/><b>EMAIL: <a href="http://">', $post_param['email'], '</a></b>',
-        '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>',
-        '-->';
+        // CLASE SERVICIOS
+        // Conectar con servicios CRUD
+        //  get_iss($iss);
+        // Ej.: http://192.168.0.31:9002/login.php?iss=5fd9e0b286cb7926b85375e5&login_hint=123456&target_link_uri=http://192.168.0.31:8000/uploads/publicacion/10020210506073929000000a/&lti_message_hint=123456
+        /////////////////////////////
+        $serv = new Services($_REQUEST);
+        $serv = Services::new($_REQUEST);
 
-        // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
-        echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
-        '<script>
-            // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html
-            var blobMe= URL["createObjectURL"](new Blob([""], {type: "text/html"}));
-            var elIframe = document["createElement"]("iframe");
-            elIframe["setAttribute"]("frameborder", "0");
-            elIframe["setAttribute"]("width", "100%");
-            elIframe["setAttribute"]("height", "500px");
-            elIframe["setAttribute"]("allowfullscreen", "true");
-            elIframe["setAttribute"]("webkitallowfullscreen", "true");
-            elIframe["setAttribute"]("mozallowfullscreen", "true");
-            elIframe["setAttribute"]("src", blobMe);
-            var idOne= "gepa_"+ Date.now();
-            elIframe["setAttribute"]("id", idOne);
-            document.getElementById("htmlTest").appendChild(elIframe);
-            const iframeHere= "";
-            document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
-            
-            async function getSrc() {
-              const res = await fetch("http://ailanto-dev.intecca.uned.es", {
-                method: \'GET\',
-                headers: {
-                  // Here you can set any headers you want
-                  "Access-Control-Allow-Headers": "Accept"
+        // Llamadas REST
+        //  https://stackoverflow.com/questions/2445276/how-to-post-data-in-php-using-file-get-contents
+        //  https://www.php.net/manual/en/context.http.php
+        // Obtiene la configuración de las actividades con una llamada de lectura `GET`
+        // al servidor de SERVICIOS
+        ///////////////////////////
+        $iss_GET =  $serv->service('read', 'Platform', 'id_actividad', $_SERVER['HTTP_ORIGIN'], $_REQUEST);
+
+        // LLAMADA OK
+        // Contenido Resultado de las llamadas existe
+        //if(($json_obj['result'] === "ok")){
+        if(($iss_GET['result'] === "ok")) {
+
+            // IFRAME FULL PAGE cross-browser and fully responsive
+            //  https://stackoverflow.com/questions/17710039/full-page-iframe
+            // ALTERNATIVES
+            //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
+            echo '
+            <div id="htmlTest"></div>' .
+                '<!--',
+            '<p>VARIABLES GET:</p>', $_SERVER['HTTP_ORIGIN'], $_SERVER['HTTP_REFERER'], $_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
+            '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
+            '<hr/>',
+            '<br/><b>PLATFORM:</b> <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/tool_platform']['name'], '</a></b>',
+            '<hr/>',
+            '<br/><b>ISS: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', $post_param['iss'], '</a></b>',
+            '<br/><b>LOGIN_HINT: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', "no disponible", '</a></b>',
+            '<br/><b>TARGET_LINK_URI: <a href="http://Hecho.que.Lti_Database.tome.TARGET_LINK_URI.de.la.llamada.GET/POST">', $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'], '</a></b>',
+            '<br/><b>LTI_MESSAGE_HINT: <a href="http://Hecho.que.Lti_Database.tome.LTI_MESSAGE_HINT.de.la.llamada.GET/POST">', $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"], '</a></b>',
+            '<br/><b>TYPE: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/message_type'], '</a></b>',
+            '<br/><b>VERSION: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/version'], '</a></b>',
+            '<br/><b>USER: <a href="http://">', $post_param['name'], '</a></b>',
+            '<br/><b>EMAIL: <a href="http://">', $post_param['email'], '</a></b>',
+            '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>',
+            '-->';
+
+            // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
+            echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
+                '<script>
+                // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html
+                var blobMe= URL["createObjectURL"](new Blob([""], {type: "text/html"}));
+                var elIframe = document["createElement"]("iframe");
+                elIframe["setAttribute"]("frameborder", "0");
+                elIframe["setAttribute"]("width", "100%");
+                elIframe["setAttribute"]("height", "500px");
+                elIframe["setAttribute"]("allowfullscreen", "true");
+                elIframe["setAttribute"]("webkitallowfullscreen", "true");
+                elIframe["setAttribute"]("mozallowfullscreen", "true");
+                elIframe["setAttribute"]("src", blobMe);
+                var idOne= "gepa_"+ Date.now();
+                elIframe["setAttribute"]("id", idOne);
+                document.getElementById("htmlTest").appendChild(elIframe);
+                const iframeHere= "";
+                document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
+                
+                async function getSrc() {
+                  const res = await fetch("http://ailanto-dev.intecca.uned.es", {
+                    method: \'GET\',
+                    headers: {
+                      // Here you can set any headers you want
+                      "Access-Control-Allow-Headers": "Accept"
+                    }
+                  });
+                  const blob = await res.blob();
+                  const urlObject = URL.createObjectURL(blob);
+                  document.querySelector(\'iframe\').setAttribute("src", urlObject)
                 }
-              });
-              const blob = await res.blob();
-              const urlObject = URL.createObjectURL(blob);
-              document.querySelector(\'iframe\').setAttribute("src", urlObject)
-            }
-            getSrc();
-        </script>';
+                getSrc();
+            </script>';
+        }
+        else
+            echo '¡¡¡¡NOOOO AMIGO NO!!!!';
 
         // ERROR file_get_content()
         ///////////////////////////
