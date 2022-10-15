@@ -62,7 +62,7 @@ try {
         echo '
         <div id="htmlTest"></div>' .
         '<!--',
-        '<p>VARIABLES GET:</p>', $_SERVER['REMOTE_ADDR'], $_SERVER['REMOTE_HOST'], $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
+        '<p>VARIABLES GET:</p>', gethostbyaddr($_SERVER['REMOTE_ADDR']), $_SERVER['REMOTE_HOST'], $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
         '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
         '<hr/>',
         '<br/><b>PLATFORM:</b> <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/tool_platform']['name'], '</a></b>',
