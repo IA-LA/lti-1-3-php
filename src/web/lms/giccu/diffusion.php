@@ -60,7 +60,7 @@ try {
         // ALTERNATIVES
         //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
         echo '
-        <div id="htmlTest"></div>' .
+        <div id="htmlTest"></div> REQUEST=>' . $_SERVER['REMOTE_HOST'] .
         '<!--',
         '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
         '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
