@@ -58,7 +58,7 @@ try {
         padding: 0;
         overflow: hidden;
         z-index: 999999;
-        height: 100%;"><script>var $_REQUEST = new Array(); $_REQUEST["id_token"] = "' . $_REQUEST['id_token'] . '"; console.log($_REQUEST["id_token"]); console.log(' . json_decode($_REQUEST["id_token"]) . ');</script></embed>
+        height: 100%;"><script>var $_REQUEST = new Array(); $_REQUEST["id_token"] = "' . $_REQUEST['id_token'] . '"; console.log($_REQUEST["id_token"]); console.log(' . print_r($post_param) . ');</script></embed>
         <!--
         <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
         allowfullscreen="true" allowpaymentrequest="true"
