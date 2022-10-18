@@ -44,8 +44,7 @@ try {
     //  https://stackoverflow.com/questions/17710039/full-page-iframe
     // ALTERNATIVES
     //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
-    echo '
-        <!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
+    echo '<!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
         <embed id="embedL" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '"
         style="
         position: fixed;
@@ -58,8 +57,8 @@ try {
         padding: 0;
         overflow: hidden;
         z-index: 999999;
-        height: 100%;"><script>const $_REQUEST = {id_token : "' . $_REQUEST['id_token'] . '";<\script><\embed>' .
-        '<!--
+        height: 100%;"><script>const $_REQUEST = {id_token : "' . $_REQUEST['id_token'] . '";<\script><\embed>
+        <!--
         <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
         allowfullscreen="true" allowpaymentrequest="true"
         style="
