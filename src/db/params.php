@@ -62,7 +62,7 @@ define("TOOL_REDIR",
                         ? (TOOL_HOST . "/lms/giccu/diffusion.php")
                         // Tareas publicadas en abierto por CTU
                         : (preg_match("/\/publicacion\/102/", TOOL_PARAMS_TARGET)
-                            ? (TOOL_HOST . "/lms/publish.php")
+                            ? (TOOL_PARAMS_TARGET)
                             // Tareas publicadas en abierto por Resto
                             : (TOOL_PARAMS_TARGET)
                             )
