@@ -35,7 +35,7 @@ try {
 
     // REDIRECTION HEADER
     //header('Location: ' . TOOL_PARAMS_TARGET, true, 302);
-    header('Location: ' . TOOL_PARAMS_TARGET . "?id_token=" . $post_param, true, 302);
+    header('Location: ' . TOOL_PARAMS_TARGET . "?id_token=" . $_REQUEST['id_token'], true, 302);
     die;
 
     // CORS HEADER
