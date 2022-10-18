@@ -33,7 +33,7 @@ define("TOOL_PARAMS_LTI", ($_REQUEST['lti_message_hint'] ? $_REQUEST['lti_messag
 define("TOOL_REDIR",
     // Tareas publicadas en abierto en Plataformas simuladas
     (preg_match("/00000000000000000000000[a,c-f,0-9]{1}/", TOOL_PARAMS_ISS)
-    ? (TOOL_HOST . "/launch.php". "?iss=" . TOOL_PARAMS_ISS . "&target_link_uri=" . TOOL_PARAMS_TARGET)
+    ? (TOOL_HOST . "/launch.php" . "?iss=" . TOOL_PARAMS_ISS . "&target_link_uri=" . TOOL_PARAMS_TARGET)
         // Tareas publicadas en abierto
     : (preg_match("/\/publicacion\/[a-f,0-9]{24}/", TOOL_PARAMS_TARGET)
         // Tareas publicadas en abierto en Ágora
@@ -62,7 +62,7 @@ define("TOOL_REDIR",
                         ? (TOOL_HOST . "/lms/publish.php")
                         // Tareas publicadas en abierto por CTU
                         : (preg_match("/\/publicacion\/102/", TOOL_PARAMS_TARGET)
-                            ? (TOOL_HOST . "/launch.php")
+                            ? (TOOL_PARAMS_TARGET . "?id_token=" . $post_param)
                             // Tareas publicadas en abierto por Resto
                             : (TOOL_PARAMS_TARGET)
                             )
