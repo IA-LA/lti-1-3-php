@@ -58,7 +58,7 @@ try {
         padding: 0;
         overflow: hidden;
         z-index: 999999;
-        height: 100%;"><script>var \$_REQUEST["id_token"] = '. json_encode($post_param). '</script></iframe>
+        height: 100%;"><script>var $_REQUEST["id_token"] = '. json_encode($post_param). '</script></iframe>
         <!--
         <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
         allowfullscreen="true" allowpaymentrequest="true"
