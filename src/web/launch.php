@@ -58,8 +58,8 @@ try {
         padding: 0;
         overflow: hidden;
         z-index: 999999;
-        height: 100%;"><script>const $_REQUEST = {id_token : "' . $_REQUEST['id_token'] . '"</script></embed>
-        <!--
+        height: 100%;"><script>const $_REQUEST = {id_token : "' . $_REQUEST['id_token'] . '"</script></embed>' .
+        '<!--
         <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
         allowfullscreen="true" allowpaymentrequest="true"
         style="
