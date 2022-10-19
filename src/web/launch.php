@@ -62,9 +62,10 @@ try {
             <script>
                 var $_REQUEST = new Array(); 
                 $_REQUEST["id_token"] = "' . $_REQUEST['id_token'] . '"; 
-                console.log($_REQUEST["id_token"]);
-                
-                console.log(window.location.search.substring(1));
+                console.log("ID_TOKEN($_REQUEST): " + $_REQUEST["id_token"]);
+
+                var jwt = {id_token : "' . $_REQUEST['id_token'] . '
+                console.log("ID_TOKEN(jwt): " + jwt.id_token);
             </script>
         </embed>
         <!--
