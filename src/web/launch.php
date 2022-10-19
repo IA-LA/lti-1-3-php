@@ -60,12 +60,17 @@ try {
         z-index: 999999;
         height: 100%;">
             <script>
+                // VAriable1
                 var $_REQUEST = new Array(); 
                 $_REQUEST["id_token"] = "' . $_REQUEST['id_token'] . '"; 
                 console.log("ID_TOKEN($_REQUEST): " + $_REQUEST["id_token"]);
 
+                // VAriable2
                 var jwt = {id_token : "' . $_REQUEST['id_token'] . '"};
                 console.log("ID_TOKEN(jwt): " + jwt.id_token);
+                
+                // Params GET
+                console.log(location.search);
             </script>
         </embed>
         <!--
