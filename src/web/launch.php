@@ -64,7 +64,7 @@ try {
                 $_REQUEST["id_token"] = "' . $_REQUEST['id_token'] . '"; 
                 console.log("ID_TOKEN($_REQUEST): " + $_REQUEST["id_token"]);
 
-                var jwt = {id_token : "' . $_REQUEST['id_token'] . '";
+                var jwt = {id_token : "' . $_REQUEST['id_token'] . '"};
                 console.log("ID_TOKEN(jwt): " + jwt.id_token);
             </script>
         </embed>
