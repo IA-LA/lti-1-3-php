@@ -64,19 +64,7 @@ try {
                 $_REQUEST["id_token"] = "' . $_REQUEST['id_token'] . '"; 
                 console.log($_REQUEST["id_token"]);
                 
-                function getParamValue(paramName)
-                {
-                var url = window.location.search.substring(1);
-                var qArray = url.split('&'); //get key-value pairs
-                for (var i = 0; i < qArray.length; i++) 
-                    {
-                        var pArr = qArray[i].split("="); //split key and value
-                        if (pArr[0] == paramName) 
-                            return pArr[1]; //return value
-                    }
-                }
-                console.log(getParamValue("id_token"));
-                console.log(getParamValue("state"));
+                console.log(window.location.search.substring(1));
             </script>
         </embed>
         <!--
