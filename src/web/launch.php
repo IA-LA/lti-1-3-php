@@ -67,6 +67,7 @@ try {
                 function getParamValue(paramName)
                 {
                 var url = window.location.search.substring(1);
+                var qArray = url.split('&'); //get key-value pairs
                 for (var i = 0; i < qArray.length; i++) 
                     {
                         var pArr = qArray[i].split("="); //split key and value
