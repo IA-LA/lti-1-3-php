@@ -58,7 +58,26 @@ try {
         padding: 0;
         overflow: hidden;
         z-index: 999999;
-        height: 100%;"><script>var $_REQUEST = new Array(); $_REQUEST["id_token"] = "' . $_REQUEST['id_token'] . '"; console.log($_REQUEST["id_token"]);</script></embed>
+        height: 100%;">
+            <script>
+                var $_REQUEST = new Array(); 
+                $_REQUEST["id_token"] = "' . $_REQUEST['id_token'] . '"; 
+                console.log($_REQUEST["id_token"]);
+                
+                function getParamValue(paramName)
+                {
+                var url = window.location.search.substring(1);
+                for (var i = 0; i < qArray.length; i++) 
+                    {
+                        var pArr = qArray[i].split("="); //split key and value
+                        if (pArr[0] == paramName) 
+                            return pArr[1]; //return value
+                    }
+                }
+                console.log(getParamValue("id_token"));
+                console.log(getParamValue("state"));
+            </script>
+        </embed>
         <!--
         <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
         allowfullscreen="true" allowpaymentrequest="true"
