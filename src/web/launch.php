@@ -59,7 +59,7 @@ try {
         overflow: hidden;
         z-index: 999999;
         height: 100%;">
-         '. file_get_contents(__DIR__ . '/uploads/publicacion/10220210903095251000000a/index.html') .'
+         '. file_get_contents('http://ailanto-dev.intecca.uned.es/uploads/publicacion/10220210903095251000000a/index.html') .'
             <script>
                 // VAriable1
                 var $_REQUEST = new Array(); 
