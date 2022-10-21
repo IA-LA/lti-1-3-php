@@ -46,7 +46,7 @@ try {
     // ALTERNATIVES
     //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
     echo '<!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
-        <embed id="embedL" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token='. $_REQUEST['id_token'] .'&state=' . $_REQUEST['state'] .'"
+        <embed id="embedL" src=""
         style="
         position: fixed;
         top: 0;
@@ -59,7 +59,7 @@ try {
         overflow: hidden;
         z-index: 999999;
         height: 100%;">
-         '. file_get_contents('http://ailanto-dev.intecca.uned.es/uploads/publicacion/10220210903095251000000a/index.html') .'
+         '. file_get_contents('https://ailanto-dev.intecca.uned.es/lti/publicacion/10220210903095251000000a/index.html') .'
             <script>
                 // VAriable1
                 var $_REQUEST = new Array(); 
