@@ -130,7 +130,7 @@ try {
 
                 //https://carstenbehrens.com/how-to-send-request-headers-iframe/
                 async function getSrc() {
-                  const res = await fetch("https://ailanto-dev.intecca.uned.es", {
+                  const res = await fetch("https://ailanto-dev.intecca.uned.es/lti/publicacion/10220210903095251000000a/index.html", {
                     method: \'GET\',
                     headers: {
                       // Here you can set any headers you want
