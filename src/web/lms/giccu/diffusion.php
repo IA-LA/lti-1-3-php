@@ -87,7 +87,11 @@ try {
             //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
             echo '
             <div id="htmlTest"></div>' .
-                '<!--',
+
+            // Inyección de publicación HTML
+            file_get_contents('https://ailanto-dev.intecca.uned.es/lti/publicacion/10220210903095251000000a/index.html') .
+
+            '<!--',
             '<p>VARIABLES GET:</p>', $_SERVER['HTTP_ORIGIN'], $_SERVER['HTTP_REFERER'], $_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
             '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
             '<hr/>',
@@ -108,6 +112,7 @@ try {
             echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
                 '<script>
                 // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html
+                // https://stackoverflow.com/questions/9245133/how-to-hide-iframe-src
                 var blobMe= URL["createObjectURL"](new Blob([""], {type: "text/html"}));
                 var elIframe = document["createElement"]("iframe");
                 elIframe["setAttribute"]("frameborder", "0");
@@ -122,9 +127,10 @@ try {
                 document.getElementById("htmlTest").appendChild(elIframe);
                 const iframeHere= "";
                 document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
-                
+
+                //https://carstenbehrens.com/how-to-send-request-headers-iframe/
                 async function getSrc() {
-                  const res = await fetch("http://ailanto-dev.intecca.uned.es", {
+                  const res = await fetch("https://ailanto-dev.intecca.uned.es", {
                     method: \'GET\',
                     headers: {
                       // Here you can set any headers you want
