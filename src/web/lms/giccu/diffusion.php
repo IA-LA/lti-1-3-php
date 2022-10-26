@@ -74,14 +74,16 @@ try {
         // Obtiene la configuración de las actividades con una llamada de lectura `GET`
         // al servidor de SERVICIOS
         ///////////////////////////
+        /// Platform ('HTTP_ORIGIN' o 'HTTP_REFERER')
         $iss_GET =  $serv->service('read', 'Platform', 'id_actividad', $_SERVER['HTTP_ORIGIN'], $_REQUEST);
+        /// Lti Activity ()
+        $activity_GET =   $serv->service('read', 'Lti', 'id_actividad', $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], $_REQUEST);
 
         // LLAMADA OK
         // Contenido Resultado de las llamadas existe
         //if(($json_obj['result'] === "ok")){
-        if(($iss_GET['result'] === "ok")) {
+        if(($iss_GET['result'] === "ok") && ($activity_GET['result'] === "ok")) {
 
-            $target_link_uri=(string)$post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"];
             // IFRAME FULL PAGE cross-browser and fully responsive
             //  https://stackoverflow.com/questions/17710039/full-page-iframe
             // ALTERNATIVES
@@ -127,7 +129,7 @@ try {
                 elIframe["setAttribute"]("id", idOne);
                 document.getElementById("htmlTest").appendChild(elIframe);
                 const iframeHere= "";
-                document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'http://ailanto-dev.intecca.uned.es/publication?id=10220210903095251000000a&actividad=' . explode('/publicacion/', $target_link_uri, true)[1] . '\'\x3c/script>");
+                document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'http://ailanto-dev.intecca.uned.es/publication?id=10220210903095251000000a&actividad=' . $activity_GET['id_actividad'] . '\'\x3c/script>");
 
                 //https://carstenbehrens.com/how-to-send-request-headers-iframe/
                 async function getSrc() {
