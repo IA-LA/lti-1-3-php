@@ -39,6 +39,7 @@ try {
     //die;
 
     // CORS HEADER
+    // https://ubiq.co/tech-blog/set-access-control-allow-origin-cors-headers-apache/
     //header('Access-Control-Allow-Headers: *', true, 200);
 
     // IFRAME FULL PAGE cross-browser and fully responsive
