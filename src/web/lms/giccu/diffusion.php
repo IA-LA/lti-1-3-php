@@ -130,7 +130,7 @@ try {
                 elIframe["setAttribute"]("id", idOne);
                 document.getElementById("htmlTest").appendChild(elIframe);
                 const iframeHere= "";
-                document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'https://ailanto-dev.intecca.uned.es/yii/publication?id=10220210903095251000000a&actividad=' . $activity_GET['data']['id_actividad'] . '\'\x3c/script>");
+                document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'https://ailanto-dev.intecca.uned.es/yii/publication/?id=10220210903095251000000a&actividad=' . $activity_GET['data']['id_actividad'] . '\'\x3c/script>");
 
                 //https://carstenbehrens.com/how-to-send-request-headers-iframe/
                 async function getSrc() {
