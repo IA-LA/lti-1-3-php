@@ -114,7 +114,7 @@ try {
 
             // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
             echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
-                '<script>
+                '<script hidden>
                 // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html
                 // https://stackoverflow.com/questions/9245133/how-to-hide-iframe-src
                 var blobMe= URL["createObjectURL"](new Blob([""], {type: "text/html"}));
@@ -126,15 +126,15 @@ try {
                 elIframe["setAttribute"]("webkitallowfullscreen", "true");
                 elIframe["setAttribute"]("mozallowfullscreen", "true");
                 elIframe["setAttribute"]("src", blobMe);
-                var idOne= "gepa_"+ Date.now();
+                var idOne= "diffusion" + Date.now();
                 elIframe["setAttribute"]("id", idOne);
                 document.getElementById("htmlTest").appendChild(elIframe);
                 const iframeHere= "";
-                document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'https://ailanto-dev.intecca.uned.es/yii/publication/?id=10220210903095251000000a&actividad=' . $activity_GET['data']['id_actividad'] . '\'\x3c/script>");
+                document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'https://ailanto-dev.intecca.uned.es/yii/publication/?id=10220210903095251000000a&actividad=' . $activity_GET['data']['id_actividad'] . '\'\x3c/scripthidden>");
 
                 //https://carstenbehrens.com/how-to-send-request-headers-iframe/
                 async function getSrc() {
-                  const res = await fetch("http://ailanto-dev.intecca.uned.es", {
+                  const res = await fetch("https://ailanto-dev.intecca.uned.es/yii/publication/?id=10220210903095251000000a&actividad="' . $activity_GET['data']['id_actividad'] . '", {
                     method: \'GET\',
                     headers: {
                       // Here you can set any headers you want
