@@ -78,7 +78,7 @@ try {
         /// Platform ('HTTP_ORIGIN' o 'HTTP_REFERER')
         $iss_GET =  $serv->service('read', 'Platform', 'id_actividad', $_SERVER['HTTP_ORIGIN'], $_REQUEST);
         /// Lti Activity ()
-        $activity_GET = $serv->service('read', 'Lti', 'id_actividad', $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], $_REQUEST);
+        $activity_GET = $serv->service('read', 'Lti', 'url_actividad', (string)$post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], $_REQUEST);
 
         // LLAMADA OK
         // Contenido Resultado de las llamadas existe
