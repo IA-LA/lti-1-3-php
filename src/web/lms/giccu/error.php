@@ -27,7 +27,9 @@ try {
     //print('<p>' . $_REQUEST['state'] . '</p>');
     //print_r($post_param);
     // Imprime variables de Servidor (HTTP_REFERER)
-    //print_r($_SERVER);
+    echo '<!--';
+    print_r($_SERVER);
+    echo '-->';
     //die;
 
     ////$login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database())
