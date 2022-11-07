@@ -33,46 +33,54 @@ define("TOOL_PARAMS_LTI", ($_REQUEST['lti_message_hint'] ? $_REQUEST['lti_messag
 define("TOOL_REDIR",
     // Tareas publicadas en abierto en Plataformas simuladas
     (preg_match("/00000000000000000000000[a,c-f,0-9]{1}/", TOOL_PARAMS_ISS)
-    ? (TOOL_HOST . "/launch.php" . "?iss=" . TOOL_PARAMS_ISS . "&target_link_uri=" . TOOL_PARAMS_TARGET)
-        // Tareas publicadas en abierto
-    : (preg_match("/\/publicacion\/[a-f,0-9]{24}/", TOOL_PARAMS_TARGET)
-        // Tareas publicadas en abierto en Ágora
-        ? (preg_match("/https:\/\/agora\.uned\.es/", TOOL_PARAMS_ISS)
-            // Tareas publicadas en abierto por DEMO
-            ? (preg_match("/\/publicacion\/101/", TOOL_PARAMS_TARGET)
-                ? (TOOL_HOST . "/lms/giccu/diffusion.php")
-                    // Actividades publicadas en abierto como administrador de H5P
-                : (preg_match("/(\/publicacion\/10020220629094|\/publicacion\/10020221104221027000000a)/", TOOL_PARAMS_TARGET)
-                    ? (TOOL_HOST . "/lms/publish.php")
-                    // Tareas publicadas en abierto por CTU
-                    : (preg_match("/\/publicacion\/102/", TOOL_PARAMS_TARGET)
+        ? (TOOL_HOST . "/launch.php" . "?iss=" . TOOL_PARAMS_ISS . "&target_link_uri=" . TOOL_PARAMS_TARGET)
+        // Tareas internas publicadas en cerrado
+        : (preg_match("/\/publicacion\/[a-f,0-9]{24}/", TOOL_PARAMS_TARGET)
+            // Tareas publicadas en Ágora
+            ? (preg_match("/https:\/\/agora\.uned\.es/", TOOL_PARAMS_ISS)
+                // Actividades publicadas como administrador
+                ? (preg_match("/\/publicacion\/100/", TOOL_PARAMS_TARGET)
+                    // Actividades publicadas de H5P
+                    ? (preg_match("/(\/publicacion\/10020220629094514000000a|\/publicacion\/10020220629094531000000a|\/publicacion\/10020220629094440000000a)/", TOOL_PARAMS_TARGET)
+                            ? (TOOL_HOST . "/lms/publish.php")
+                            // Resto Tareas publicadas por administrador
+                            : (TOOL_PARAMS_TARGET)
+                        )
+                    // Tareas publicadas por DEMO
+                    : (preg_match("/\/publicacion\/101/", TOOL_PARAMS_TARGET)
+                        ? (preg_match("/(\/publicacion\/10120221104132002000000a)/", TOOL_PARAMS_TARGET)
+                            ? (TOOL_HOST . "/lms/publish.php")
+                                    : (TOOL_HOST . "/lms/giccu/diffusion.php")
+                        )
+                        // Tareas publicadas por CTU
+                        : (preg_match("/\/publicacion\/102/", TOOL_PARAMS_TARGET)
                             ? (TOOL_HOST . "/launch.php")
                             // Tareas publicadas por Resto
                             : (TOOL_PARAMS_TARGET)
-                            )
                         )
+                    )
                 )
-            // Tareas publicadas en abierto en Plataforma Local
-            : (preg_match("/:\/\/ailanto-dev\.intecca\.uned\.es/", TOOL_PARAMS_ISS)
-                // Tareas publicadas en abierto por DEMO
-                ? (preg_match("/\/publicacion\/100/", TOOL_PARAMS_TARGET)
-                    ? (TOOL_HOST . "/lms/giccu/diffusion.php")
-                    // Tareas publicadas en abierto como administrador
-                    : (preg_match("/\/publicacion\/101/", TOOL_PARAMS_TARGET)
-                        ? (TOOL_HOST . "/lms/publish.php")
-                        // Tareas publicadas en abierto por CTU
-                        : (preg_match("/\/publicacion\/102/", TOOL_PARAMS_TARGET)
-                            ? (TOOL_HOST . "/launch.php")
-                            // Tareas publicadas en abierto por Resto
-                            : (TOOL_PARAMS_TARGET)
+                // Tareas publicadas en cerrado en Plataforma Local
+                : (preg_match("/:\/\/ailanto-dev\.intecca\.uned\.es/", TOOL_PARAMS_ISS)
+                    // Tareas publicadas por administrador
+                    ? (preg_match("/\/publicacion\/100/", TOOL_PARAMS_TARGET)
+                        // Tareas publicadas por DEMO
+                        ? (TOOL_HOST . "/lms/giccu/diffusion.php")
+                        : (preg_match("/\/publicacion\/101/", TOOL_PARAMS_TARGET)
+                            ? (TOOL_HOST . "/lms/publish.php")
+                            // Tareas publicadas por CTU
+                            : (preg_match("/\/publicacion\/102/", TOOL_PARAMS_TARGET)
+                                ? (TOOL_HOST . "/launch.php")
+                                // Tareas publicadas por Resto
+                                : (TOOL_PARAMS_TARGET)
+                                )
                             )
-                        )
+                    )
+                    // Tareas publicadas en cerrado REsto Plataformas
+                    : (TOOL_PARAMS_TARGET)
                 )
-                // Tareas publicadas en abierto en REsto Plataformas
-                : (TOOL_PARAMS_TARGET)
             )
-        )
-        // Tareas publicadas en cerrado
+        // Tareas publicadas en abierto Externas
         : (TOOL_PARAMS_TARGET)
         )
     )
