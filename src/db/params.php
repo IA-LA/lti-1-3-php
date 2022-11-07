@@ -42,7 +42,7 @@ define("TOOL_REDIR",
             ? (preg_match("/\/publicacion\/101/", TOOL_PARAMS_TARGET)
                 ? (TOOL_HOST . "/lms/giccu/diffusion.php")
                     // Actividades publicadas en abierto como administrador de H5P
-                : (preg_match("/(\/publicacion\/10020220629094|\/publicacion\/10120221104132002000000a)/", TOOL_PARAMS_TARGET)
+                : (preg_match("/(\/publicacion\/10020220629094|\/publicacion\/10020221104221027000000a)/", TOOL_PARAMS_TARGET)
                     ? (TOOL_HOST . "/lms/publish.php")
                     // Tareas publicadas en abierto por CTU
                     : (preg_match("/\/publicacion\/102/", TOOL_PARAMS_TARGET)
