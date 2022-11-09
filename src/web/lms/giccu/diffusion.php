@@ -125,7 +125,7 @@ try {
                 '<script hidden>
                     //https://carstenbehrens.com/how-to-send-request-headers-iframe/
                     async function getSrc() {
-                      const res = await fetch("' . $activity_GET['data']['url_actividad'] . '", {
+                      const res = await fetch("https://www.imsglobal.org/spec/security/v1p0/#step-4-resource-is-displayed", {
                         method: \'GET\',
                         headers: {
                           // Here you can set any headers you want
