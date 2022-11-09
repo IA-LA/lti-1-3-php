@@ -134,7 +134,7 @@ try {
 
                 //https://carstenbehrens.com/how-to-send-request-headers-iframe/
                 async function getSrc() {
-                  const res = await fetch("' . $activity_GET['data']['url_actividad'] . '", {
+                  const res = await fetch("http://ailanto-dev.intecca.uned.es/", {
                     method: \'GET\',
                     headers: {
                       // Here you can set any headers you want
