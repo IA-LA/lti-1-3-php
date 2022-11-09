@@ -130,7 +130,7 @@ try {
                 elIframe["setAttribute"]("id", idOne);
                 document.getElementById("htmlTest").appendChild(elIframe);
                 const iframeHere= "";
-                document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'' . $activity_GET['data']['url_actividad'] . '\'\x3c/scripthidden>");
+                document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'' . $activity_GET['data']['url_actividad'] . '\'\x3c/script>");
 
             </script>';
         }
