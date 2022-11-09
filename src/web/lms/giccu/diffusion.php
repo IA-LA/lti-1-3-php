@@ -89,50 +89,55 @@ try {
             //  https://stackoverflow.com/questions/17710039/full-page-iframe
             // ALTERNATIVES
             //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
-            echo '
-            <div id="htmlTest"></div>' .
+            echo '<embed id="embedD" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '"
+                style="
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                width: 100%;
+                border: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                z-index: 999999;
+                height: 100%;"/>' .
 
-            // Inyección de publicación HTML
-            //file_get_contents('https://ailanto-dev.intecca.uned.es/lti/publicacion/10220210903095251000000a/index.html') .
-
-            '<!--',
-            '<p>VARIABLES GET:</p>', $_SERVER['HTTP_ORIGIN'], $_SERVER['HTTP_REFERER'], $_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
-            '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
-            '<hr/>',
-            '<br/><b>PLATFORM:</b> <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/tool_platform']['name'], '</a></b>',
-            '<hr/>',
-            '<br/><b>ISS: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', $post_param['iss'], '</a></b>',
-            '<br/><b>LOGIN_HINT: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', "no disponible", '</a></b>',
-            '<br/><b>TARGET_LINK_URI: <a href="http://Hecho.que.Lti_Database.tome.TARGET_LINK_URI.de.la.llamada.GET/POST">', $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'], '</a></b>',
-            '<br/><b>LTI_MESSAGE_HINT: <a href="http://Hecho.que.Lti_Database.tome.LTI_MESSAGE_HINT.de.la.llamada.GET/POST">', $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"], '</a></b>',
-            '<br/><b>TYPE: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/message_type'], '</a></b>',
-            '<br/><b>VERSION: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/version'], '</a></b>',
-            '<br/><b>USER: <a href="http://">', $post_param['name'], '</a></b>',
-            '<br/><b>EMAIL: <a href="http://">', $post_param['email'], '</a></b>',
-            '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>',
-            '-->';
+                '<!--',
+                '<p>VARIABLES GET:</p>', $_SERVER['HTTP_ORIGIN'], $_SERVER['HTTP_REFERER'], $_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
+                '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
+                '<hr/>',
+                '<br/><b>PLATFORM:</b> <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/tool_platform']['name'], '</a></b>',
+                '<hr/>',
+                '<br/><b>ISS: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', $post_param['iss'], '</a></b>',
+                '<br/><b>LOGIN_HINT: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', "no disponible", '</a></b>',
+                '<br/><b>TARGET_LINK_URI: <a href="http://Hecho.que.Lti_Database.tome.TARGET_LINK_URI.de.la.llamada.GET/POST">', $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'], '</a></b>',
+                '<br/><b>LTI_MESSAGE_HINT: <a href="http://Hecho.que.Lti_Database.tome.LTI_MESSAGE_HINT.de.la.llamada.GET/POST">', $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"], '</a></b>',
+                '<br/><b>TYPE: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/message_type'], '</a></b>',
+                '<br/><b>VERSION: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/version'], '</a></b>',
+                '<br/><b>USER: <a href="http://">', $post_param['name'], '</a></b>',
+                '<br/><b>EMAIL: <a href="http://">', $post_param['email'], '</a></b>',
+                '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>',
+                '-->';
 
             // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
             echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
                 '<script hidden>
-                // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html
-                // https://stackoverflow.com/questions/9245133/how-to-hide-iframe-src
-                var blobMe= URL["createObjectURL"](new Blob([""], {type: "text/html"}));
-                var elIframe = document["createElement"]("iframe");
-                elIframe["setAttribute"]("frameborder", "0");
-                elIframe["setAttribute"]("width", "100%");
-                elIframe["setAttribute"]("height", "500px");
-                elIframe["setAttribute"]("allowfullscreen", "true");
-                elIframe["setAttribute"]("webkitallowfullscreen", "true");
-                elIframe["setAttribute"]("mozallowfullscreen", "true");
-                elIframe["setAttribute"]("src", blobMe);
-                var idOne= "diffusion" + Date.now();
-                elIframe["setAttribute"]("id", idOne);
-                document.getElementById("htmlTest").appendChild(elIframe);
-                const iframeHere= "";
-                document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'' . $activity_GET['data']['url_actividad'] . '\'\x3c/script>");
-
-            </script>';
+                    //https://carstenbehrens.com/how-to-send-request-headers-iframe/
+                    async function getSrc() {
+                      const res = await fetch("' . $activity_GET['data']['url_actividad'] . '", {
+                        method: \'GET\',
+                        headers: {
+                          // Here you can set any headers you want
+                          "Access-Control-Allow-Headers": "Accept"
+                        }
+                      });
+                      const blob = await res.blob();
+                      const urlObject = URL.createObjectURL(blob);
+                      document.querySelector(\'embed\').setAttribute("src", urlObject)
+                    }
+                    getSrc();
+                </script>';
         }
         else
             echo '¡¡¡¡NOOOO AMIGO NO!!!!';
