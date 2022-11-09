@@ -132,20 +132,6 @@ try {
                 const iframeHere= "";
                 document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'' . $activity_GET['data']['url_actividad'] . '\'\x3c/scripthidden>");
 
-                //https://carstenbehrens.com/how-to-send-request-headers-iframe/
-                async function getSrc() {
-                  const res = await fetch("http://ailanto-dev.intecca.uned.es/", {
-                    method: \'GET\',
-                    headers: {
-                      // Here you can set any headers you want
-                      "Access-Control-Allow-Headers": "Accept"
-                    }
-                  });
-                  const blob = await res.blob();
-                  const urlObject = URL.createObjectURL(blob);
-                  document.querySelector(\'iframe\').setAttribute("src", urlObject)
-                }
-                getSrc();
             </script>';
         }
         else
