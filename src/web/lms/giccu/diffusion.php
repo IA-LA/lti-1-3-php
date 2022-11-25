@@ -24,10 +24,10 @@ try {
     // JWT Claims decode
     // https://auth0.com/blog/id-token-access-token-what-is-the-difference/
     $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
-    print('<p>' . $_REQUEST['state'] . '</p>');
-    print_r($post_param);
+    //print('<p>' . $_REQUEST['state'] . '</p>');
+    //print_r($post_param);
     // Imprime variables de Servidor (HTTP_REFERER, REQUEST_URI, ...)
-    print_r($_SERVER);
+    //print_r($_SERVER);
     //die;
 
     ////$login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database())
@@ -51,9 +51,9 @@ try {
         //->validate($post_param);
 
 ?>
-    <!-- Contenido de JWT 1
+    <!-- Contenido de JWT 1 -->
     <p>Hola <?php echo $post_param["given_name"]; ?>, bienvenid@ al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ como <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?> </p>
-    -->
+    <!-- -->
 <?php
     //LAUNCH TYPE:
     //  - LtiResourceLinkRequest
