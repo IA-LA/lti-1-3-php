@@ -104,7 +104,8 @@ try {
                 </form>
                 ';
                 echo '
-                <form id="edit" action="https://www.intecca.uned.es/difusiongiccu/extension/' . explode('/', ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]))[5] . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="POST">
+                <!-- <form id="edit" action="https://www.intecca.uned.es/giccu/trabajos/' . explode('/', ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]))[5] . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="POST"> -->
+                <form id="edit" action="https://www.intecca.uned.es/giccu/trabajos/61810f9c74d032d10c623378" method="POST">
                     <input type="hidden" name="id_token" value="' . $_REQUEST['id_token'] . '" />
                     <input type="hidden" name="state" value="' . $_REQUEST['state'] . '" />
                     <button type="submit">Editar Actividad</button>
