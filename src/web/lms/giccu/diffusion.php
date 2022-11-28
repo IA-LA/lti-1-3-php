@@ -52,8 +52,7 @@ try {
 
 ?>
     <!-- Contenido de JWT 1 -->
-    <p>Hola <?php echo $post_param["given_name"]; ?>, bienvenid@ al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ como <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?>. </p>
-    <p>Escoge una opción para acceder a la Actividad:</p>
+    <p>Hola <b><?php echo $post_param["given_name"]; ?></b>, bienvenid@ al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ como <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?>. </p>
     <!-- -->
 <?php
     //LAUNCH TYPE:
@@ -97,7 +96,8 @@ try {
         //
         if(($iss_GET['result'] === "ok") && ($activity_GET['result'] === "ok")) {
             if(in_array("http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor", $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'])) {
-                echo '
+                echo '               
+                <p><b>Escoge una opción para acceder a la Actividad:</b></p>
                 <!-- FORMULARIO -->
                 <ul>
                     <li>
