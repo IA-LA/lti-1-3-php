@@ -98,33 +98,33 @@ try {
             if(in_array("http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor", $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'])) {
                 echo '
                 <!-- BOOTSTRAP  -->
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
                 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
                 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-                <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <form role="form" method="post" action="' . htmlspecialchars($_SERVER["PHP_SELF"]) . '">
                   <div class="form-group row">
-                    <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Nombre</label>
                     <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
+                      <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" value="' . htmlspecialchars($post_param["name"]) . '>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputUser" class="col-sm-2 col-form-label">User Name</label>
+                    <label for="inputUser" class="col-sm-2 col-form-label">Rol</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputUser" name="user" placeholder="Username">
+                      <input type="text" class="form-control" id="inputUser" name="user" placeholder="Username" value="' . htmlspecialchars(explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]) . '>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">email</label>
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
+                      <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" value="' . htmlspecialchars($post_param["email"]) . '>
                     </div>
                   </div>
                   <div class="form-group row">
                     <div class="offset-sm-2 col-sm-10">
-                      <input type="submit" value="Sign in" name="submit" class="btn btn-primary"/>
+                      <input type="submit" value="Editar" name="submit" class="btn btn-primary"/>
                     </div>
                   </div>
                 </form>
