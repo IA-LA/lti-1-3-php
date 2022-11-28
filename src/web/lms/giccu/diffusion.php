@@ -133,7 +133,7 @@ try {
                   <div class="form-group row">
                     <label for="inputUser" class="col-sm-2 col-form-label">User Name</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputUser" name="user" placeholder="Username" value="' . htmlspecialchars($post_param["email"]) . '">
+                      <input type="text" class="form-control" id="inputUser" name="user" placeholder="Username" value="' . htmlspecialchars($post_param["name"]) . '">
                     </div>
                   </div>
                   <div class="form-group row">
