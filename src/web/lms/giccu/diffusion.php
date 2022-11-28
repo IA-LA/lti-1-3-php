@@ -102,7 +102,7 @@ try {
                 <ul>
                     <li>
                         <!-- <form id="view" action="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="POST"> -->
-                        <form id="view" action="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '" method="GET">
+                        <form id="view" action="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="GET">
                             <input type="hidden" name="id_token" value="' . $_REQUEST['id_token'] . '" />
                             <input type="hidden" name="state" value="' . $_REQUEST['state'] . '" />
                             <button type="submit" class="btn btn-success">Ver Actividad</button>
