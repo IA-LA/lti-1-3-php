@@ -99,24 +99,26 @@ try {
             if(in_array("http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor", $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'])) {
                 echo '
                 <!-- FORMULARIO -->
-                <div>
-                    <!-- <form id="view" action="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="POST"> -->
-                    <form id="view" action="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '" method="GET">
-                        <input type="hidden" name="id_token" value="' . $_REQUEST['id_token'] . '" />
-                        <input type="hidden" name="state" value="' . $_REQUEST['state'] . '" />
-                        <button type="submit" class="btn btn-success">Ver Actividad</button>
-                    </form>
-                
+                <ul>
+                    <li>
+                        <!-- <form id="view" action="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="POST"> -->
+                        <form id="view" action="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '" method="GET">
+                            <input type="hidden" name="id_token" value="' . $_REQUEST['id_token'] . '" />
+                            <input type="hidden" name="state" value="' . $_REQUEST['state'] . '" />
+                            <button type="submit" class="btn btn-success">Ver Actividad</button>
+                        </form>
+                    </li>
                 ';
                 echo '
-                
-                    <!-- <form id="edit" action="https://www.intecca.uned.es/giccu/trabajos/' . explode('/', ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]))[5] . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="POST"> -->
-                    <form id="edit" action="https://www.intecca.uned.es/giccu/trabajos/628f467031e62395f35638b5" method="GET">
-                        <input type="hidden" name="id_token" value="' . $_REQUEST['id_token'] . '" />
-                        <input type="hidden" name="state" value="' . $_REQUEST['state'] . '" />
-                        <button type="submit" class="btn btn-Warning">Editar Actividad</button>
-                    </form>
-                </div>                
+                    <li>
+                        <!-- <form id="edit" action="https://www.intecca.uned.es/giccu/trabajos/' . explode('/', ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]))[5] . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="POST"> -->
+                        <form id="edit" action="https://www.intecca.uned.es/giccu/trabajos/628f467031e62395f35638b5" method="GET">
+                            <input type="hidden" name="id_token" value="' . $_REQUEST['id_token'] . '" />
+                            <input type="hidden" name="state" value="' . $_REQUEST['state'] . '" />
+                            <button type="submit" class="btn btn-Warning">Editar Actividad</button>
+                        </form>
+                    </li>
+                </ul>                
                 <!-- BOOTSTRAP  -->
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
                 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
