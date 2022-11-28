@@ -98,9 +98,11 @@ try {
             if(in_array("http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor", $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'])) {
                 echo '               
                 <p><b>Escoge una opción para acceder a la Actividad:</b></p>
-                <!-- VIEW -->
+                ';
+                echo '
                 <ul>
-                    <li>
+                    <li>               
+                        <!-- VIEW -->
                         <!-- <form id="view" action="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="POST"> -->
                         <!-- <form id="view" action="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '" method="GET"> -->
                         <form id="view" action="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="GET">
@@ -110,19 +112,18 @@ try {
                         </form>
                     </li>
                 ';
-                echo '                
-                <!-- EDIT  -->
-                    <li>
+                echo '   
+                    <li>         
+                        <!-- EDIT  -->    
                         <!-- <form id="edit" action="https://www.intecca.uned.es/giccu/trabajos/' . explode('/', ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]))[5] . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="POST"> -->
-                        <form id="edit" action="https://www.intecca.uned.es/giccu/trabajos/628f467031e62395f35638b5" method="GET">
-                        <!-- <form id="edit" action="' . ((isset($activity_GET["trabajo_actividad"]) && !empty($activity_GET["trabajo_actividad"]) && ($activity_GET["trabajo_actividad"] !== '')) ? "https://www.intecca.uned.es/giccu/trabajos/" . $activity_GET["trabajo_actividad"] : "https://www.intecca.uned.es/giccu/") . '" method="GET"> -->
+                        <!--  <form id="edit" action="https://www.intecca.uned.es/giccu/trabajos/628f467031e62395f35638b5" method="GET"> -->
+                        <form id="edit" action="' . ((isset($activity_GET["trabajo_actividad"]) && !empty($activity_GET["trabajo_actividad"]) && ($activity_GET["trabajo_actividad"] !== '')) ? "https://www.intecca.uned.es/giccu/trabajos/" . $activity_GET["trabajo_actividad"] : "https://www.intecca.uned.es/giccu/") . '" method="GET">
                             <input type="hidden" name="id_token" value="' . $_REQUEST['id_token'] . '" />
                             <input type="hidden" name="state" value="' . $_REQUEST['state'] . '" />
                             <button type="submit" class="btn btn-Warning">Editar Actividad</button>
                         </form>
                     </li>
                 </ul>';
-                print_r($activity_GET);
                 echo '                
                 <!-- BOOTSTRAP  -->
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
