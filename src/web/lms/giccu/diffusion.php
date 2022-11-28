@@ -137,9 +137,9 @@ try {
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Recurso</label>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Resource description</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputPassword" name="password" placeholder="Password" value="' . htmlspecialchars($post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]) . '">
+                      <input type="text" class="form-control" id="inputPassword" name="password" placeholder="Password" value="' . htmlspecialchars($post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["description"]) . '">
                     </div>
                   </div>
                   <div class="form-group row">
