@@ -52,7 +52,8 @@ try {
 
 ?>
     <!-- Contenido de JWT 1 -->
-    <p>Hola <?php echo $post_param["given_name"]; ?>, bienvenid@ al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ como <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?> </p>
+    <p>Hola <?php echo $post_param["given_name"]; ?>, bienvenid@ al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ como <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?>. </p>
+    <p>Escoge una opción para acceder a la Actividad:</p>
     <!-- -->
 <?php
     //LAUNCH TYPE:
@@ -129,7 +130,7 @@ try {
                   <div class="form-group row">
                     <label for="inputUser" class="col-sm-2 col-form-label">User Name</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputUser" name="user" placeholder="Username"' . htmlspecialchars($post_param["email"]) . '>
+                      <input type="text" class="form-control" id="inputUser" name="user" placeholder="Username" value="' . htmlspecialchars($post_param["email"]) . '">
                     </div>
                   </div>
                   <div class="form-group row">
