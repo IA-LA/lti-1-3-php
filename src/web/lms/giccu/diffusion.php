@@ -108,7 +108,7 @@ try {
                         <form id="view" action="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="GET">
                             <input type="hidden" name="id_token" value="' . $_REQUEST['id_token'] . '" />
                             <input type="hidden" name="state" value="' . $_REQUEST['state'] . '" />
-                            <button type="submit" class="btn btn-success">Ver Actividad</button>
+                            <button type="submit" class="btn btn-success">Ver Actividad (' . $activity_GET["data"]["id_actividad"] . ')</button>
                         </form>
                     </li>
                 ';
@@ -120,7 +120,7 @@ try {
                         <form id="edit" action="' . ((isset($activity_GET["data"]["trabajo_actividad"]) && !empty($activity_GET["data"]["trabajo_actividad"]) && ($activity_GET["data"]["trabajo_actividad"] !== '')) ? "https://www.intecca.uned.es/giccu/trabajos/" . $activity_GET["data"]["trabajo_actividad"] : "https://www.intecca.uned.es/giccu/") . '" method="GET">
                             <input type="hidden" name="id_token" value="' . $_REQUEST['id_token'] . '" />
                             <input type="hidden" name="state" value="' . $_REQUEST['state'] . '" />
-                            <button type="submit" class="btn btn-Warning">' . ((isset($activity_GET["data"]["trabajo_actividad"]) && !empty($activity_GET["data"]["trabajo_actividad"]) && ($activity_GET["data"]["trabajo_actividad"] !== '')) ? "Editar Actividad " . $activity_GET["data"]["trabajo_actividad"] : "Ir a GICCU") . '</button>
+                            <button type="submit" class="btn btn-Warning">' . ((isset($activity_GET["data"]["trabajo_actividad"]) && !empty($activity_GET["data"]["trabajo_actividad"]) && ($activity_GET["data"]["trabajo_actividad"] !== '')) ? "Editar Actividad (" . $activity_GET["data"]["trabajo_actividad"] .")" : "Ir a GICCU") . '</button>
                         </form>
                     </li>
                 </ul>';
