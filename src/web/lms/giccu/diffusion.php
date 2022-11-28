@@ -117,10 +117,10 @@ try {
                         <!-- EDIT  -->    
                         <!-- <form id="edit" action="https://www.intecca.uned.es/giccu/trabajos/' . explode('/', ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]))[5] . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="POST"> -->
                         <!--  <form id="edit" action="https://www.intecca.uned.es/giccu/trabajos/628f467031e62395f35638b5" method="GET"> -->
-                        <form id="edit" action="' . ((isset($activity_GET["trabajo_actividad"]) && !empty($activity_GET["trabajo_actividad"])) ? "https://www.intecca.uned.es/giccu/trabajos/" . $activity_GET["trabajo_actividad"] : "https://www.intecca.uned.es/giccu/") . '" method="GET">
+                        <form id="edit" action="' . ((isset($activity_GET["data"]["trabajo_actividad"]) && !empty($activity_GET["data"]["trabajo_actividad"]) && ($activity_GET["data"]["trabajo_actividad"] !== '')) ? "https://www.intecca.uned.es/giccu/trabajos/" . $activity_GET["trabajo_actividad"] : "https://www.intecca.uned.es/giccu/") . '" method="GET">
                             <input type="hidden" name="id_token" value="' . $_REQUEST['id_token'] . '" />
                             <input type="hidden" name="state" value="' . $_REQUEST['state'] . '" />
-                            <button type="submit" class="btn btn-Warning">Editar Actividad</button>
+                            <button type="submit" class="btn btn-Warning">' . ((isset($activity_GET["data"]["trabajo_actividad"]) && !empty($activity_GET["data"]["trabajo_actividad"]) && ($activity_GET["data"]["trabajo_actividad"] !== '')) ? "Editar Actividad " . $activity_GET["trabajo_actividad"] : "Ir a GICCU") . '</button>
                         </form>
                     </li>
                 </ul>';
