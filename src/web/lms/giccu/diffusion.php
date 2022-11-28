@@ -133,9 +133,9 @@ try {
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Picture</label>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputPassword" name="password" placeholder="Password" value="' . htmlspecialchars($post_param["picture"]) . '>
+                      <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
                     </div>
                   </div>
                   <div class="form-group row">
