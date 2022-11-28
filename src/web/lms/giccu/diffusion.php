@@ -99,22 +99,22 @@ try {
             if(in_array("http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor", $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'])) {
                 echo '
                 <!-- FORMULARIO -->
-                <p>
+                <div>
                     <!-- <form id="view" action="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="POST"> -->
                     <form id="view" action="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '" method="GET">
                         <input type="hidden" name="id_token" value="' . $_REQUEST['id_token'] . '" />
                         <input type="hidden" name="state" value="' . $_REQUEST['state'] . '" />
-                        <button type="submit">Ver Actividad</button>
+                        <button type="submit" class="btn btn-success">Ver Actividad</button>
                     </form>
-                </p>
+                
                 ';
                 echo '
-                <div>
+                
                     <!-- <form id="edit" action="https://www.intecca.uned.es/giccu/trabajos/' . explode('/', ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]))[5] . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '" method="POST"> -->
                     <form id="edit" action="https://www.intecca.uned.es/giccu/trabajos/628f467031e62395f35638b5" method="GET">
                         <input type="hidden" name="id_token" value="' . $_REQUEST['id_token'] . '" />
                         <input type="hidden" name="state" value="' . $_REQUEST['state'] . '" />
-                        <button type="submit">Editar Actividad</button>
+                        <button type="submit" class="btn btn-Warning">Editar Actividad</button>
                     </form>
                 </div>                
                 <!-- BOOTSTRAP  -->
