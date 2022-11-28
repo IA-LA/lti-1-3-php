@@ -129,13 +129,13 @@ try {
                   <div class="form-group row">
                     <label for="inputUser" class="col-sm-2 col-form-label">User Name</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputUser" name="user" placeholder="Username">
+                      <input type="text" class="form-control" id="inputUser" name="user" placeholder="Username" value="' . htmlspecialchars($post_param["name"]) . '>
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Picture</label>
                     <div class="col-sm-10">
-                      <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password">
+                      <input type="text" class="form-control" id="inputPassword" name="password" placeholder="Password" value="' . htmlspecialchars($post_param["picture"]) . '>
                     </div>
                   </div>
                   <div class="form-group row">
