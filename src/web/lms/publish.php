@@ -37,7 +37,7 @@ try {
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database()) //;
     // Usa una Cookie pero falla al evitar el ERROR ´State not found´
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database(), null, $cookie);
-    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
+    $launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
     // Intenta evitar ERROR ´State not found´ en NAVEGACION PRIVADA
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
