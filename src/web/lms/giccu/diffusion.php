@@ -50,17 +50,17 @@ try {
         ->validate($_REQUEST);
         //->validate($post_param);
 
-?>
-    <!-- Contenido de JWT 1 -->
-    <p>Hola <b><?php echo $post_param["given_name"]; ?></b>, bienvenid@ al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ como <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?>. </p>
-    <!-- -->
-<?php
     //LAUNCH TYPE:
     //  - LtiResourceLinkRequest
     //  - LtiDeepLinkingRequest
     //  - Otros tipos!!!
     if ($launch->is_resource_launch()) {
 
+?>
+        <!-- Contenido de JWT 1 RESOURCE LINK
+        <p>Hola <b><?php echo $post_param["given_name"]; ?></b>, bienvenid@ al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ como <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?>. </p>
+        -->
+<?php
         // CLASE SERVICIOS
         // Conectar con servicios CRUD
         //  get_iss($iss);
@@ -96,6 +96,11 @@ try {
         //
         if(($iss_GET['result'] === "ok") && ($activity_GET['result'] === "ok")) {
             if(in_array("http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor", $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'])) {
+?>
+                <!-- Contenido de JWT 1.1 RESOURCE LINK Instructor-->
+                <p>Hola <b><?php echo $post_param["given_name"]; ?></b>, bienvenid@ al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ como <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?>. </p>
+                <!-- -->
+<?php
                 echo '               
                 <p><b>Escoge una opción para acceder a la Actividad:</b></p>
                 ';
@@ -467,7 +472,7 @@ try {
         </div>
      -->
 
-    <!-- Contenido de JWT 2
+    <!-- Contenido de JWT 2 DEEP LINK
     <p>Hola <?php echo $post_param["given_name"]; ?>, bienvenid@ al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ como <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?> </p>
     -->
 <?php
