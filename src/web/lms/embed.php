@@ -41,9 +41,9 @@ try {
     // Intenta evitar ERROR ´State not found´ en NAVEGACION PRIVADA
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($_REQUEST))//;
     //$launch = LTI\LTI_Message_Launch::new(new Iss_Target_Lti_Database($post_param))//;
-    ->validate($_REQUEST);
+    //->validate();
     //->validate($_REQUEST);
-    //->validate($post_param);
+    ->validate($post_param);
 
     // RELOCATION HEADER
     //header('X-Frame-Options: ' . 'SAMEORIGIN', true);
@@ -73,7 +73,7 @@ try {
     //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
     // TODO+NE Incidencia `$_REQUEST is not defined`
     // Creadas variables y parámetros para enviar al CLiente el JWT
-    echo '<embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
+    echo '<embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['jwt_token'] . '&state=' . $_REQUEST['state'] . '"
         style="
         position: fixed;
         top: 0;
