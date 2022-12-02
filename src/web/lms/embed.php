@@ -22,7 +22,7 @@ try {
     $post_param = json_decode(JWT::urlsafeB64Decode(explode('.', $_REQUEST['id_token'])[1]), true);
     //print_r($post_param);
     //print('<p>' . $_REQUEST['state']);
-    $post_parm = array_push([], $_REQUEST['state']);
+    $post_parm['state'] = REQUEST['state'];
     //die;
 
     ////$login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database())
