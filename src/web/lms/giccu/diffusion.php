@@ -162,6 +162,218 @@ try {
                   </div>
                 </form>
                 ';
+
+                // ERROR file_get_content()
+                ///////////////////////////
+                $w = stream_get_wrappers();
+                echo 'openssl: ', extension_loaded('openssl') ? 'yes' : 'no', "\n";
+                echo 'http wrapper: ', in_array('http', $w) ? 'yes' : 'no', "\n";
+                echo 'https wrapper: ', in_array('https', $w) ? 'yes' : 'no', "\n";
+                echo 'wrappers: ', var_export($w);
+
+                //LAUNCH ID
+                ///////////
+                $launch_id = $launch->get_launch_id();
+                echo '<br/><br/><b>LAUNCH ID:</b>' . json_encode($launch_id);
+                print_r($launch_id);
+                $launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
+
+                //SERVICES
+                //////////
+                // NPRS (Names and Role Provisioning Services)
+                if (!$launch->has_nrps()) {
+                    throw new Exception("Don't have names and roles!");
+                }
+                $nrps = $launch->get_nrps();
+                echo '<br/><br/><b>NRPS:</b>' . json_encode($nrps);
+                print_r($nrps);
+                $members = $launch->get_nrps()->get_members();
+                echo '<br/><br/><b>MEMBERS:</b>' . json_encode(($members ? $members : '[]'));
+                print_r(($members ? $members : []));
+
+                // AGS (Assignment and Grade Services)
+                if (!$launch->has_ags()) {
+                    throw new Exception("Don't have grades!");
+                }
+                $grades = $launch->get_ags();
+                echo '<br/><br/><b>GRADES1:</b>' . json_encode($grades);
+                print_r($grades);
+
+                $score = LTI\LTI_Grade::new()
+                    ->set_score_given(120)
+                    ->set_score_maximum(100)
+                    ->set_timestamp(date(DateTime::ISO8601))
+                    ->set_activity_progress('Completed')
+                    ->set_grading_progress('FullyGraded')
+                    ->set_user_id($launch->get_launch_data()['sub']);
+                $score_lineitem = LTI\LTI_Lineitem::new()
+                    ->set_tag('score')
+                    ->set_score_maximum(100)
+                    ->set_label('Score')
+                    ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+                echo '<br/><br/><b>GRADES->PUT_GRADE()0</b>:';
+                echo json_encode($grades->put_grade($score, $score_lineitem));
+
+                $grade = LTI\LTI_Grade::new()
+                    ->set_score_given(20)
+                    ->set_score_maximum(100)
+                    ->set_timestamp(date(DateTime::ISO8601))
+                    ->set_activity_progress('Completed')
+                    ->set_grading_progress('FullyGraded')
+                    ->set_user_id($launch->get_launch_data()['sub']);
+                echo '<br/><br/><b>GRADE</b>:' . json_encode($grade);
+                //print_r($grade);
+
+                echo '<br/><br/><b>GRADES->PUT_GRADE()1</b>:';
+                echo json_encode($grades->put_grade($grade));
+                print_r($grades);
+
+                $score_lineitem = LTI\LTI_Lineitem::new()
+                    ->set_tag('score')
+                    ->set_score_maximum(100)
+                    ->set_label('Score')
+                    ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+
+                $scores = $grades->get_grades($score_lineitem);
+
+                $time_lineitem = LTI\LTI_Lineitem::new()
+                    ->set_tag('time')
+                    ->set_score_maximum(999)
+                    ->set_label('Time Taken')
+                    ->set_resource_id('time'.$launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+                $times = $grades->get_grades($time_lineitem);
+
+                $members = $launch->get_nrps()->get_members();
+
+                $scoreboard = [];
+
+                foreach ($scores as $score) {
+                    $result = ['score' => $score['resultScore']];
+                    foreach ($times as $time) {
+                        if ($time['userId'] === $score['userId']) {
+                            $result['time'] = $time['resultScore'];
+                            break;
+                        }
+                    }
+                    foreach ($members as $member) {
+                        if ($member['user_id'] === $score['userId']) {
+                            $result['name'] = $member['name'];
+                            break;
+                        }
+                    }
+                    $scoreboard[] = $result;
+                }
+                echo json_encode($scoreboard);
+
+                $grades = $launch->get_ags();
+                echo '<br/><br/><b>GRADES2</b>:' . json_encode($grades);
+                //print_r($grades);
+
+                $lineitem = LTI\LTI_Lineitem::new()
+                    ->set_id(2121)
+                    ->set_tag(['grade1'])
+                    ->set_score_maximum(100)
+                    ->set_label('Grade');
+                echo '<br/><br/><b>LINEITEM1</b>:' . json_encode($lineitem);
+                print_r($lineitem);
+
+                echo '<br/><br/><b>ENDPOINT</b>:';
+                print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
+
+                echo '<br/><br/><b>GRADES->PUT_GRADE()2</b>:';
+                echo json_encode($grades->put_grade($grade, $lineitem));
+                //print_r($grades);
+
+                $grades = $launch->get_ags();
+                echo '<br/><br/><b>GRADES3</b>:' . json_encode($grades);
+                //print_r($grades);
+
+                $lineitem = LTI\LTI_Lineitem::new()
+                    ->set_tag('grade2')
+                    ->set_score_maximum(100)
+                    ->set_label('Grade');
+                echo '<br/><br/><b>LINEITEM2</b>:' . json_encode($lineitem);
+                //print_r($lineitem);
+
+                echo '<br/><br/><b>ENDPOINT</b>:';
+                //print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
+
+                echo '<br/><br/><b>GRADES->PUT_GRADE()3</b>:';
+                echo json_encode($grades->put_grade($grade, $lineitem));
+                //print_r($grades);
+
+                $grades = $launch->get_ags();
+                echo '<br/><br/><b>GRADES4</b>:' . json_encode($grades);
+                //print_r($grades);
+
+                /*
+                    $score = LTI\LTI_Grade::new()
+                        ->set_score_given($_REQUEST['score'])
+                        ->set_score_maximum(100)
+                        ->set_timestamp(date(DateTime::ISO8601))
+                        ->set_activity_progress('Completed')
+                        ->set_grading_progress('FullyGraded')
+                        ->set_user_id($launch->get_launch_data()['sub']);
+                    $score_lineitem = LTI\LTI_Lineitem::new()
+                        ->set_tag('score')
+                        ->set_score_maximum(100)
+                        ->set_label('Score')
+                        ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+                    $grades->put_grade($score, $score_lineitem);
+
+
+                    $time = LTI\LTI_Grade::new()
+                        ->set_score_given($_REQUEST['time'])
+                        ->set_score_maximum(999)
+                        ->set_timestamp(date(DateTime::ISO8601))
+                        ->set_activity_progress('Completed')
+                        ->set_grading_progress('FullyGraded')
+                        ->set_user_id($launch->get_launch_data()['sub']);
+                    $time_lineitem = LTI\LTI_Lineitem::new()
+                        ->set_tag('time')
+                        ->set_score_maximum(999)
+                        ->set_label('Time Taken')
+                        ->set_resource_id('time'.$launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+                    $grades->put_grade($time, $time_lineitem);
+
+                    $ags = $launch->get_ags();
+
+                    $score_lineitem = LTI\LTI_Lineitem::new()
+                        ->set_tag('score')
+                        ->set_score_maximum(100)
+                        ->set_label('Score')
+                        ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+                    $scores = $ags->get_grades($score_lineitem);
+
+                    $time_lineitem = LTI\LTI_Lineitem::new()
+                        ->set_tag('time')
+                        ->set_score_maximum(999)
+                        ->set_label('Time Taken')
+                        ->set_resource_id('time'.$launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+                    $times = $ags->get_grades($time_lineitem);
+
+                    $members = $launch->get_nrps()->get_members();
+
+                    $scoreboard = [];
+
+                    foreach ($scores as $score) {
+                        $result = ['score' => $score['resultScore']];
+                        foreach ($times as $time) {
+                            if ($time['userId'] === $score['userId']) {
+                                $result['time'] = $time['resultScore'];
+                                break;
+                            }
+                        }
+                        foreach ($members as $member) {
+                            if ($member['user_id'] === $score['userId']) {
+                                $result['name'] = $member['name'];
+                                break;
+                            }
+                        }
+                        $scoreboard[] = $result;
+                    }
+                    echo json_encode($scoreboard);
+                */
             }
             else {
                 // DIV cross-browser and fully responsive
@@ -215,218 +427,6 @@ try {
         }
         else
             echo '405 No permitido';
-
-        // ERROR file_get_content()
-        ///////////////////////////
-        $w = stream_get_wrappers();
-        echo 'openssl: ', extension_loaded('openssl') ? 'yes' : 'no', "\n";
-        echo 'http wrapper: ', in_array('http', $w) ? 'yes' : 'no', "\n";
-        echo 'https wrapper: ', in_array('https', $w) ? 'yes' : 'no', "\n";
-        echo 'wrappers: ', var_export($w);
-
-        //LAUNCH ID
-        ///////////
-        $launch_id = $launch->get_launch_id();
-        echo '<br/><br/><b>LAUNCH ID:</b>' . json_encode($launch_id);
-        print_r($launch_id);
-        $launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
-
-        //SERVICES
-        //////////
-        // NPRS (Names and Role Provisioning Services)
-        if (!$launch->has_nrps()) {
-            throw new Exception("Don't have names and roles!");
-        }
-        $nrps = $launch->get_nrps();
-        echo '<br/><br/><b>NRPS:</b>' . json_encode($nrps);
-        print_r($nrps);
-        $members = $launch->get_nrps()->get_members();
-        echo '<br/><br/><b>MEMBERS:</b>' . json_encode(($members ? $members : '[]'));
-        print_r(($members ? $members : []));
-        
-        // AGS (Assignment and Grade Services)
-        if (!$launch->has_ags()) {
-            throw new Exception("Don't have grades!");
-        }
-        $grades = $launch->get_ags();
-        echo '<br/><br/><b>GRADES1:</b>' . json_encode($grades);
-        print_r($grades);
-
-        $score = LTI\LTI_Grade::new()
-            ->set_score_given(120)
-            ->set_score_maximum(100)
-            ->set_timestamp(date(DateTime::ISO8601))
-            ->set_activity_progress('Completed')
-            ->set_grading_progress('FullyGraded')
-            ->set_user_id($launch->get_launch_data()['sub']);
-        $score_lineitem = LTI\LTI_Lineitem::new()
-            ->set_tag('score')
-            ->set_score_maximum(100)
-            ->set_label('Score')
-            ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-        echo '<br/><br/><b>GRADES->PUT_GRADE()0</b>:';
-        echo json_encode($grades->put_grade($score, $score_lineitem));
-
-        $grade = LTI\LTI_Grade::new()
-            ->set_score_given(20)
-            ->set_score_maximum(100)
-            ->set_timestamp(date(DateTime::ISO8601))
-            ->set_activity_progress('Completed')
-            ->set_grading_progress('FullyGraded')
-            ->set_user_id($launch->get_launch_data()['sub']);
-        echo '<br/><br/><b>GRADE</b>:' . json_encode($grade);
-        //print_r($grade);
-
-        echo '<br/><br/><b>GRADES->PUT_GRADE()1</b>:';
-        echo json_encode($grades->put_grade($grade));
-        print_r($grades);
-
-        $score_lineitem = LTI\LTI_Lineitem::new()
-            ->set_tag('score')
-            ->set_score_maximum(100)
-            ->set_label('Score')
-            ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-
-        $scores = $grades->get_grades($score_lineitem);
-
-        $time_lineitem = LTI\LTI_Lineitem::new()
-            ->set_tag('time')
-            ->set_score_maximum(999)
-            ->set_label('Time Taken')
-            ->set_resource_id('time'.$launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-        $times = $grades->get_grades($time_lineitem);
-
-        $members = $launch->get_nrps()->get_members();
-
-        $scoreboard = [];
-
-        foreach ($scores as $score) {
-            $result = ['score' => $score['resultScore']];
-            foreach ($times as $time) {
-                if ($time['userId'] === $score['userId']) {
-                    $result['time'] = $time['resultScore'];
-                    break;
-                }
-            }
-            foreach ($members as $member) {
-                if ($member['user_id'] === $score['userId']) {
-                    $result['name'] = $member['name'];
-                    break;
-                }
-            }
-            $scoreboard[] = $result;
-        }
-        echo json_encode($scoreboard);
-
-        $grades = $launch->get_ags();
-        echo '<br/><br/><b>GRADES2</b>:' . json_encode($grades);
-        //print_r($grades);
-
-        $lineitem = LTI\LTI_Lineitem::new()
-            ->set_id(2121)
-            ->set_tag(['grade1'])
-            ->set_score_maximum(100)
-            ->set_label('Grade');
-        echo '<br/><br/><b>LINEITEM1</b>:' . json_encode($lineitem);
-        print_r($lineitem);
-
-        echo '<br/><br/><b>ENDPOINT</b>:';
-        print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
-
-        echo '<br/><br/><b>GRADES->PUT_GRADE()2</b>:';
-        echo json_encode($grades->put_grade($grade, $lineitem));
-        //print_r($grades);
-
-        $grades = $launch->get_ags();
-        echo '<br/><br/><b>GRADES3</b>:' . json_encode($grades);
-        //print_r($grades);
-
-        $lineitem = LTI\LTI_Lineitem::new()
-            ->set_tag('grade2')
-            ->set_score_maximum(100)
-            ->set_label('Grade');
-        echo '<br/><br/><b>LINEITEM2</b>:' . json_encode($lineitem);
-        //print_r($lineitem);
-
-        echo '<br/><br/><b>ENDPOINT</b>:';
-        //print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
-
-        echo '<br/><br/><b>GRADES->PUT_GRADE()3</b>:';
-        echo json_encode($grades->put_grade($grade, $lineitem));
-        //print_r($grades);
-
-        $grades = $launch->get_ags();
-        echo '<br/><br/><b>GRADES4</b>:' . json_encode($grades);
-        //print_r($grades);
-
-        /*
-            $score = LTI\LTI_Grade::new()
-                ->set_score_given($_REQUEST['score'])
-                ->set_score_maximum(100)
-                ->set_timestamp(date(DateTime::ISO8601))
-                ->set_activity_progress('Completed')
-                ->set_grading_progress('FullyGraded')
-                ->set_user_id($launch->get_launch_data()['sub']);
-            $score_lineitem = LTI\LTI_Lineitem::new()
-                ->set_tag('score')
-                ->set_score_maximum(100)
-                ->set_label('Score')
-                ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-            $grades->put_grade($score, $score_lineitem);
-
-
-            $time = LTI\LTI_Grade::new()
-                ->set_score_given($_REQUEST['time'])
-                ->set_score_maximum(999)
-                ->set_timestamp(date(DateTime::ISO8601))
-                ->set_activity_progress('Completed')
-                ->set_grading_progress('FullyGraded')
-                ->set_user_id($launch->get_launch_data()['sub']);
-            $time_lineitem = LTI\LTI_Lineitem::new()
-                ->set_tag('time')
-                ->set_score_maximum(999)
-                ->set_label('Time Taken')
-                ->set_resource_id('time'.$launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-            $grades->put_grade($time, $time_lineitem);
-
-            $ags = $launch->get_ags();
-
-            $score_lineitem = LTI\LTI_Lineitem::new()
-                ->set_tag('score')
-                ->set_score_maximum(100)
-                ->set_label('Score')
-                ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-            $scores = $ags->get_grades($score_lineitem);
-
-            $time_lineitem = LTI\LTI_Lineitem::new()
-                ->set_tag('time')
-                ->set_score_maximum(999)
-                ->set_label('Time Taken')
-                ->set_resource_id('time'.$launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-            $times = $ags->get_grades($time_lineitem);
-
-            $members = $launch->get_nrps()->get_members();
-
-            $scoreboard = [];
-
-            foreach ($scores as $score) {
-                $result = ['score' => $score['resultScore']];
-                foreach ($times as $time) {
-                    if ($time['userId'] === $score['userId']) {
-                        $result['time'] = $time['resultScore'];
-                        break;
-                    }
-                }
-                foreach ($members as $member) {
-                    if ($member['user_id'] === $score['userId']) {
-                        $result['name'] = $member['name'];
-                        break;
-                    }
-                }
-                $scoreboard[] = $result;
-            }
-            echo json_encode($scoreboard);
-        */
 
         // REDIRECCTION
         ///////////////
