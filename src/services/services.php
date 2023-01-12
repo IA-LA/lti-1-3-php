@@ -169,13 +169,13 @@ class Services {
             ];
 
             // Function to get HTTP response code
-            function get_http_response_code($domain) {
+            function get_http_response_code1($domain) {
                 $headers = get_headers($domain);
                 return substr($headers[0], 9, 3);
             }
             foreach ($domains as $key => $domain) {
                 // Function call
-                $get_http_response_code = get_http_response_code($this->protocol . $domain);
+                $get_http_response_code = get_http_response_code1($this->protocol . $domain);
 
                 // Display the HTTP response code
                 //echo $get_http_response_code;
