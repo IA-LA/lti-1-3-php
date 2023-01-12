@@ -160,11 +160,11 @@ class Services {
             // https://www.geeksforgeeks.org/how-to-send-http-response-code-in-php/
             // Initialize a variable list into domains name
             $domains = [
-                'localLethernet'=>'http://192.168.0.31',
                 'localHwifi'=>'http://192.168.43.130',
                 //'localHusb'=>'http://192.168.42.0',
                 //'localLwifi'=>'http://192.168.43.0',
                 'localLusb'=>'http://192.168.42.10',
+                'local_ethernet'=>'http://192.168.0.31',
                 'local'=>$this->url,
             ];
 
