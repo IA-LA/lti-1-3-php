@@ -160,11 +160,12 @@ class Services {
             // https://www.geeksforgeeks.org/how-to-send-http-response-code-in-php/
             // Initialize a variable list into domains name
             $domains = [
+                'localL'=>'127.0.0.1',
                 'localHwifi'=>'http://192.168.43.130',
                 //'localHusb'=>'http://192.168.42.0',
                 //'localLwifi'=>'http://192.168.43.0',
                 'localLusb'=>'http://192.168.42.10',
-                'local_ethernet'=>'http://192.168.0.31',
+                'localLethernet'=>'http://192.168.0.31',
                 'local'=>$this->url,
             ];
 
@@ -275,9 +276,15 @@ class Services {
                         // ERROR LA ABRIR EL FLUJO
                         if(!$stream) {
                             //echo ' STREAM ERROR 15: ' . $stream;
-                            // URL Servicios no encontrada
-                            return ['result' => 'error', 'data' => 'URL de Servicios no disponible'];
-                            exit(0);
+                            // Wifi L
+                            $stream = fopen($protocol . "127.0.0.1" . $ruta, 'r', false, $context);
+                            // ERROR LA ABRIR EL FLUJO
+                            if(!$stream) {
+                                //echo ' STREAM ERROR 16: ' . $stream;
+                                // URL Servicios no encontrada
+                                return ['result' => 'error', 'data' => 'URL de Servicios no disponible'];
+                                exit(0);
+                            }
                         }
                     }
                 }
