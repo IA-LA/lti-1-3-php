@@ -142,14 +142,13 @@ class Services {
      *
      * @return array|string Returns a redirect object containing the fully formed OIDC login URL.
      */
-
-    // Function to get HTTP response code
-    function get_http_response_code($domain) {
-        $headers = get_headers($domain);
-        return substr($headers[0], 9, 3);
-    }
-
     public function url(array $request = null) {
+
+        // Function to get HTTP response code
+        function get_http_response_code($domain) {
+            $headers = get_headers($domain);
+            return substr($headers[0], 9, 3);
+        }
 
         // Append the host(domain name, ip) to the URL.
         if(strpos($_SERVER['HTTP_HOST'], '.intecca.uned.es') || strpos($_SERVER['HTTP_HOST'], '193.146.230.217')){
@@ -174,6 +173,7 @@ class Services {
                 'local_ethernet'=>'http://192.168.0.31',
                 'local'=>$this->url,
             ];
+
             foreach ($domains as $key => $domain) {
                 // Function call
                 $get_http_response_code = get_http_response_code($this->protocol . $domain);
