@@ -183,7 +183,7 @@ class Services {
 
             foreach ($domains as $key => $domain) {
                 // Function call
-                $get_http_response_code = $this.get_http_response_code($this->protocol . $domain);
+                $get_http_response_code = $this->get_http_response_code($this->protocol . $domain);
 
                 // Display the HTTP response code
                 //echo $get_http_response_code;
