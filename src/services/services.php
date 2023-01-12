@@ -136,6 +136,19 @@ class Services {
     }
 
     /**
+     * Get headers from a domain REST request.
+     *
+     * @param array|string  $request    An array of request parameters. If not set will default to $_REQUEST.
+     *
+     * @return array|string Returns a redirect object containing the fully formed OIDC login URL.
+     */
+    // Function to get HTTP response code
+    private function get_http_response_code($domain) {
+        $headers = get_headers($domain);
+        return substr($headers[0], 9, 3);
+    }
+
+    /**
      * Calculate the redirect URL to return to a REST request.
      *
      * @param array|string  $request    An array of request parameters. If not set will default to $_REQUEST.
@@ -143,12 +156,6 @@ class Services {
      * @return array|string Returns a redirect object containing the fully formed OIDC login URL.
      */
     public function url(array $request = null) {
-
-        // Function to get HTTP response code
-        function get_http_response_code($domain) {
-            $headers = get_headers($domain);
-            return substr($headers[0], 9, 3);
-        }
 
         // Append the host(domain name, ip) to the URL.
         if(strpos($_SERVER['HTTP_HOST'], '.intecca.uned.es') || strpos($_SERVER['HTTP_HOST'], '193.146.230.217')){
@@ -176,7 +183,7 @@ class Services {
 
             foreach ($domains as $key => $domain) {
                 // Function call
-                $get_http_response_code = get_http_response_code($this->protocol . $domain);
+                $get_http_response_code = $this.get_http_response_code($this->protocol . $domain);
 
                 // Display the HTTP response code
                 //echo $get_http_response_code;
