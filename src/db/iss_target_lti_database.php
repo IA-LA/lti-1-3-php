@@ -13,7 +13,7 @@ $_SESSION['target_link_uri'] = [];
 use \IMSGlobal\LTI;
 
 // SERVICIOS
-//use Services\services;
+use Services\Services;
 
 try{
 
@@ -23,7 +23,7 @@ try{
     // Ej.: http://192.168.0.31:9002/login.php?iss=5fd9e0b286cb7926b85375e5&login_hint=123456&target_link_uri=http://192.168.0.31:8000/uploads/publicacion/10020210506073929000000a/&lti_message_hint=123456
     /////////////////////////////
     $serv = new Services($_REQUEST);
-    $serv = Services::new($_REQUEST);
+    //$serv = Services::new($_REQUEST);
 
     // VARIABLES DE SERVICIOS
     // Contenido Issuer (Audience o Iss)
