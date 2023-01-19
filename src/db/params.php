@@ -21,6 +21,12 @@ define("TOOL_PARAMS_LOGIN", ($_REQUEST['login_hint'] ? ($_REQUEST['login_hint'])
 define("TOOL_PARAMS_TARGET", ($_REQUEST['target_link_uri'] ? $_REQUEST['target_link_uri'] : ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]?$post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]:($post_param["redirect_uri"]?$post_param["redirect_uri"]:explode('&', explode('target_link_uri=', $_REQUEST['redirect_uri'])[1])[0]))) );
 define("TOOL_PARAMS_LTI", ($_REQUEST['lti_message_hint'] ? $_REQUEST['lti_message_hint'] : ($post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"]?$post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"]:$post_param["lti_message_hint"]) ) );
 
+// PARAMETROS GICCU
+define("TOOL_GICCU", "https://www.intecca.uned.es/giccu/");
+define("TOOL_GICCU_TRA", "https://www.intecca.uned.es/giccu/trabajos/");
+define("TOOL_GICCU_PRE", "https://www.intecca.uned.es/giccu/salidaweb/");
+define("TOOL_GICCU_EXT", "https://www.intecca.uned.es/difusiongiccu/extension/");
+
 // LLAMADA REDIRECCION
 //  GET: construye la llamada a LAUNCH/PUBLISH
 //      PLATAFORMA real que emebebe eContent del Generador de Contenidos alojados y publicados (publicacion/) en el Servidor LTI
@@ -40,22 +46,28 @@ define("TOOL_REDIR",
             ? (preg_match("/https:\/\/agora\.uned\.es/", TOOL_PARAMS_ISS)
                 // Actividades publicadas como administrador
                 ? (preg_match("/\/publicacion\/100/", TOOL_PARAMS_TARGET)
-                    // Actividades publicadas de H5P
-                    ? (preg_match("/(\/publicacion\/10020220629094514000000a|\/publicacion\/10020220629094531000000a|\/publicacion\/10020220629094440000000a)/", TOOL_PARAMS_TARGET)
+                    // Actividades publicadas de H5P, 405 e Italiano I
+                    ? (preg_match("/(\/publicacion\/10020220629094|\/publicacion\/10020220606125826000000a|\/publicacion\/10020221104221027000000a)/", TOOL_PARAMS_TARGET)
                             ? (TOOL_HOST . "/lms/publish.php")
-                            // Resto Tareas publicadas por administrador
-                            : (TOOL_PARAMS_TARGET)
-                        )
+                    // Actividades publicadas de H5P, 405 e Italiano I
+                        : (preg_match("/https:\/\/www\.intecca\.uned\.es\/difusiongiccu\//", TOOL_PARAMS_TARGET)
+                                ? (TOOL_PARAMS_TARGET)
+                                // Resto Tareas
+                                : (TOOL_HOST . "/lms/giccu/diffusion.php")
+                            )
+                    )
                     // Tareas publicadas por DEMO
                     : (preg_match("/\/publicacion\/101/", TOOL_PARAMS_TARGET)
+                        // Actividades publicadas de Italiano I y
                         ? (preg_match("/(\/publicacion\/10120221104132002000000a)/", TOOL_PARAMS_TARGET)
                             ? (TOOL_HOST . "/lms/publish.php")
-                                    : (TOOL_HOST . "/lms/giccu/diffusion.php")
+                            // Resto Tareas
+                            : (TOOL_HOST . "/lms/giccu/diffusion.php")
                         )
                         // Tareas publicadas por CTU
                         : (preg_match("/\/publicacion\/102/", TOOL_PARAMS_TARGET)
                             ? (TOOL_HOST . "/launch.php")
-                            // Tareas publicadas por Resto
+                            // Tareas publicadas por Resto Usuarios
                             : (TOOL_PARAMS_TARGET)
                         )
                     )
@@ -71,16 +83,16 @@ define("TOOL_REDIR",
                             // Tareas publicadas por CTU
                             : (preg_match("/\/publicacion\/102/", TOOL_PARAMS_TARGET)
                                 ? (TOOL_HOST . "/launch.php")
-                                // Tareas publicadas por Resto
+                                // Tareas publicadas por Resto Usuarios
                                 : (TOOL_PARAMS_TARGET)
                                 )
                             )
                     )
                     // Tareas publicadas en cerrado REsto Plataformas
-                    : (TOOL_PARAMS_TARGET)
+                    : (TOOL_HOST . "/launch.php")
                 )
             )
-        // Tareas publicadas en abierto Externas
+        // Tareas externas publicadas en abierto
         : (TOOL_PARAMS_TARGET)
         )
     )
