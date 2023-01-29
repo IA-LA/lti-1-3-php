@@ -175,10 +175,11 @@ try {
                 ///////////
                 $launch_id = $launch->get_launch_id();
                 echo '<br/><br/><b>LAUNCH ID:</b>' . json_encode($launch_id);
-                print_r($launch_id);
                 //CAMBIAR SERVICIO LINEITEMS
                 ////////////////////////////
+                print_r($post_param);
                 $post_param["https://purl.imsglobal.org/spec/lti-ags/claim/endpoint"]["lineitems"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/type_id=3';
+                print_r($post_param);
                 $launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
 
                 //SERVICES
