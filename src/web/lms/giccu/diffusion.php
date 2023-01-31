@@ -175,13 +175,21 @@ try {
                 ///////////
                 $launch_id = $launch->get_launch_id();
                 echo '<br/><br/><b>LAUNCH ID:</b>' . json_encode($launch_id);
-                //CAMBIAR SERVICIO LINEITEMS
-                ////////////////////////////
+                //CAMBIAR SERVICIOS LINEITEMS
+                /////////////////////////////
+                /// NPRS
                 print_r($post_param);
                 // https://moodle.org/mod/forum/discuss.php?d=391538#p1606269
-                $post_param["https://purl.imsglobal.org/spec/lti-ags/claim/endpoint"]["lineitems"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3';
+                $post_param["https://purl.imsglobal.org/spec/lti-nrps/claim/namesroleservice"]["context_memberships_url"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3';
+                //$post_param["https://purl.imsglobal.org/spec/lti-nrps/claim/namesroleservice"]["service_versions"]='2.0';
+                print_r($post_param);
+                /// AGS
+                print_r($post_param);
+                // https://moodle.org/mod/forum/discuss.php?d=391538#p1606269
+                $post_param["https://purl.imsglobal.org/spec/lti-ags/claim/endpoint"]["lineitem"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3';
                 //$post_param["https://purl.imsglobal.org/spec/lti-ags/claim/endpoint"]["lineitems"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/scores?type_id=3';
                 print_r($post_param);
+
                 $launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
 
                 //SERVICES

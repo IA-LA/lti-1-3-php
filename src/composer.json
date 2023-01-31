@@ -23,6 +23,7 @@
     ],
     "require": {
         "imsglobal/lti-1p3-tool": "dev-master",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-curl": "*"
     }
 }
