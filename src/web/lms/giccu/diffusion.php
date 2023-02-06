@@ -246,7 +246,7 @@ try {
                 ];
 
                 // Sign the JWT with our private key (given by the platform on registration)
-                $jwt = JWT::encode($jwt_claim, $grades["service_connector:IMSGlobal\LTI\LTI_Assignments_Grades_Service:private"]->get_tool_private_key(), 'RS256', $grades["service_connector:IMSGlobal\LTI\LTI_Assignments_Grades_Service:private"]->get_kid());
+                $jwt = JWT::encode($jwt_claim, $grades->service_connector->tool_private_key, 'RS256', $grades->service_connector->kid);
 
                 // Build auth token request headers
                 $auth_request = [
