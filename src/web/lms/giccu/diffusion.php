@@ -224,7 +224,8 @@ try {
                     ->set_tag('score')
                     ->set_score_maximum(100)
                     ->set_label('Score')
-                    ->set_resource_id(['resourceId' => ["title" => "Sistema LTI Publicación NO EDICION (10020220606125826000000a)", "id" => 9 ]]);
+                    //->set_resource_id(['resourceId' => ["title" => "Sistema LTI Publicación NO EDICION (10020220606125826000000a)", "id" => 9 ]])
+                    ;
                 echo '<br/><br/><b>GRADES->PUT_GRADE()0</b>:';
                 echo json_encode($grades->put_grade($score, $score_lineitem));
 
