@@ -211,7 +211,7 @@ try {
                 }
                 $grades = $launch->get_ags();
                 echo '<br/><br/><b>GRADES1:</b>' . json_encode($grades);
-                print_r($grades);
+                print_r($grades['service_connector:IMSGlobal\LTI\LTI_Assignments_Grades_Service:private']);
 
                 $score = LTI\LTI_Grade::new()
                     ->set_score_given(120)
