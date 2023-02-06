@@ -211,7 +211,7 @@ try {
                 }
                 $grades = $launch->get_ags();
                 echo '<br/><br/><b>GRADES1:</b>' . json_encode($grades);
-                print_r($grades->put_grade());
+                var_export($grades);
 
                 $score = LTI\LTI_Grade::new()
                     ->set_score_given(120)
