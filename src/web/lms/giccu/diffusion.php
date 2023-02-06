@@ -224,7 +224,7 @@ try {
                     ->set_tag('score')
                     ->set_score_maximum(100)
                     ->set_label('Score')
-                    ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+                    ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']);
                 echo '<br/><br/><b>GRADES->PUT_GRADE()0</b>:';
                 echo json_encode($grades->put_grade($score, $score_lineitem));
 
