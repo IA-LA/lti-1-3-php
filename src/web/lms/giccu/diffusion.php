@@ -220,12 +220,13 @@ try {
                     ->set_activity_progress('Completed')
                     ->set_grading_progress('FullyGraded')
                     ->set_user_id($launch->get_launch_data()['sub']);
-                $score_lineitem = LTI\LTI_Lineitem::new()
+                $score_lineitem = null;
+                    //LTI\LTI_Lineitem::new()
                     //->set_tag('score')
-                    ->set_score_maximum(100)
-                    ->set_label('Score')
+                    //->set_score_maximum(100)
+                    //->set_label('Score')
                     //->set_resource_id(['resourceId' => ["title" => "Sistema LTI Publicación NO EDICION (10020220606125826000000a)", "id" => 9 ]])
-                    ;
+                    //
                 echo '<br/><br/><b>GRADES->PUT_GRADE()0</b>:';
                 echo json_encode($grades->put_grade($score, $score_lineitem));
 
