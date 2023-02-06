@@ -230,6 +230,50 @@ try {
                 echo '<br/><br/><b>GRADES->PUT_GRADE()0</b>:';
                 echo json_encode($grades->put_grade($score, $score_lineitem));
 
+                ///////////////////////////////////////////////
+                /// ACCESS TOKEN (INICIO)
+                ///
+
+                // Build up JWT to exchange for an auth token
+                $client_id = $post_param['client_id'];
+                $jwt_claim = [
+                    "iss" => $client_id,
+                    "sub" => $client_id,
+                    "aud" => $post_param['auth_login_url'],
+                    "iat" => time() - 5,
+                    "exp" => time() + 60,
+                    "jti" => 'lti-service-token' . hash('sha256', random_bytes(64))
+                ];
+
+                // Sign the JWT with our private key (given by the platform on registration)
+                $jwt = JWT::encode($jwt_claim, 'MIIEowIBAAKCAQEA8osiSa75nmqmakwNNocLA2N2huWM9At/tjSZOFX1r4+PDclS zxhMw+ZcgHH+E/05Ec6Vcfd75i8Z+Bxu4ctbYk2FNIvRMN5UgWqxZ5Pf70n8UFxj GqdwhUA7/n5KOFoUd9F6wLKa6Oh3OzE6v9+O3y6qL40XhZxNrJjCqxSEkLkOK3xJ 0J2npuZ59kipDEDZkRTWz3al09wQ0nvAgCc96DGH+jCgy0msA0OZQ9SmDE9CCMbD T86ogLugPFCvo5g5zqBBX9Ak3czsuLS6Ni9Wco8ZSxoaCIsPXK0RJpt6Jvbjclqb 4imsobifxy5LsAV0l/weNWmU2DpzJsLgeK6VVwIDAQABAoIBAQC2R1RUdfjJUrOQ rWk8so7XVBfO15NwEXhAkhUYnpmPAF/tZ4EhfMysaWLZcVIW6bbLKCtuRCVMX9ev fIbkkLU0ErhqPi3QATcXL/z1r8+bAUprhpNAg9fvfM/ZukXDRged6MPNMC11nseE p8HUU4oHNwXVyL6FvmstrHyYoEnkjIiMk34O2MFjAavoIJhM0gkoXVnxRP5MNi1n GPVhK+TfZyRri20x1Rh3CsIq36PUyxCICWkD7jftLGqVdQBfuii600LP5v7nuHz9 LDsCeY7xRJu0eLdDk7/9ukb8fuq6/+3VYMYChYWvpw4DaH8qDHxZfWzMyaI489ma l27lhgdxAoGBAPkxH6WuZM/GOowjySuruRjAVyJ4stfe9l/x8MrqnFA2Q8stqK69 60Y9LDrSaAx7QutvzZ64br2WMlvnGdJw868z4/JmvoAqW3IHUXzqRAHgOk/8Y3ze Sjd7t3R0O3v6qAbQjyRYYgfAMZo7PzXW8FKNGsakAedEKW0b94HYndKpAoGBAPkr grtARp2nnd1WGuxgQMjX++HjT0p9x7fTMCtfvYhZguU9AlCx53VHFeGc6fqsDkUm BFv0dqMnw0TPzEQqLElBIh87TGS4JSXmcbQcejIx+ry2kMFuyMZIPuvZCnLfB/d7 Qu2DU6mdeIBME/8AX5kBqn1ekddioESdSkHkkif/AoGAaPCeAjjZ7YHuP/wGCOUN UvYU+8hWkIAtwyPxIpMAdusTS6oTwlrqjK7QRIk9FhyGhv2TWwcSY7avyHIfNrco eBzjHr7T9MdhsTiRwYgqUZvrEqoX/4rhOFJaZKlaL5DUV+JWlZi+18LBYNEYgoTc ufcAUqzYvFrBE1jWt5DQjdkCgYATs6sMn1J2GNDUtYA/fITi3KEgBVc5rqRiFqLS aymTZHCDK8XJF6gTj+FdC4k8tuoR8aWal8Phtr0r7bpbEXKbADlwesHZnO3jB0uq UC4hVe5biZv8j4P0mbXP9ENtPdFlciuimCW/XaIvktRp71+fu4/9hcLGYxgFFOLQ PwCHhQKBgGMCxIcueUkLnI9r0KkjtXap9mIgdgERwQPN0Cm9Tx35ZEzRp95kf4C6 MPsVOwZk5gNvvQngx4iaw9fNYG+PF2yNuDZ+EFwI0vpmGCKRQEke9/VCOFucMsjg jMhbU+jrqRIJKisP7MCE1NRhymCPpQf/stEPl0nS5rj+mZJHQEGq', 'RS256', 'ff25d970a021ff7cdad1');
+
+                // Build auth token request headers
+                $auth_request = [
+                    'grant_type' => 'client_credentials',
+                    'client_assertion_type' => 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+                    'client_assertion' => $jwt,
+                    'scope' => implode(' ', [[0] => "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", [1] => "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", [2] => "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", [3] => "https://purl.imsglobal.org/spec/lti-ags/scope/score"])
+                ];
+
+                // Make request to get auth token
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $post_param['auth_token_url']);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($auth_request));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                $resp = curl_exec($ch);
+                $token_data = json_decode($resp, true);
+                curl_close ($ch);
+
+                echo "ACCESS TOKEN: ";
+                print_r($token_data['access_token']);
+
+                ///
+                /// ACCESS TOKEN    (FIN)
+                ///////////////////////////////////////////////
+
                 $grade = LTI\LTI_Grade::new()
                     ->set_score_given(20)
                     ->set_score_maximum(100)
