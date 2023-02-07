@@ -74,7 +74,7 @@ try {
     echo '
         <script>
             $(document).ready(function() {
-                var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV = $(document).querySelectorAll("#embedP");
+                var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV = document.querySelectorAll("#embedP");
                 var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV1 = qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV.attr("src", "https://ailanto-dev.intecca.uned.es/publicacion/10220210903095251000000a");
                 //qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV1.delay( 10 );
                 //var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV2= qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV1.attr("src", "http://ailanto-dev.intecca.uned.es/publication?id=10220210903095251000000a&actividad=https://ailanto-dev.intecca.uned.es/lti/publicacion/10220210903095251000000a");
