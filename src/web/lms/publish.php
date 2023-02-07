@@ -75,7 +75,7 @@ try {
         <script>
             $(document).ready(function() {
                 $("#embedP").attr("src", " ");
-            }).delay( 10 );
+            });
         </script>
         <!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
         <embed id="embedP" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '"
