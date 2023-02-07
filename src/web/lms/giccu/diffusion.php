@@ -238,8 +238,8 @@ try {
                 $client_id = $post_param['client_id'];
                 $jwt_claim = [
                     "iss" => $client_id,
-                    "sub" => $client_id,
-                    "aud" => $post_param['auth_login_url'],
+                    "sub" => $post_param['auth_login_url'],
+                    "aud" => $client_id,
                     "iat" => time() - 5,
                     "exp" => time() + 60,
                     //"jti" => 'lti-service-token' . hash('sha256', random_bytes(64))
