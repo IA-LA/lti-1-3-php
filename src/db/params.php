@@ -58,7 +58,7 @@ define("TOOL_REDIR",
                     )
                     // Tareas publicadas por DEMO
                     : (preg_match("/\/publicacion\/101/", TOOL_PARAMS_TARGET)
-                        // Actividades publicadas de Italiano I y
+                        // Actividades publicadas de Italiano I y Lengua Italiana Interactiva
                         ? (preg_match("/(\/publicacion\/10120221104132002000000a)/", TOOL_PARAMS_TARGET)
                             ? (TOOL_HOST . "/lms/publish.php")
                             // Resto Tareas
