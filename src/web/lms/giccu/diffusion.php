@@ -268,7 +268,7 @@ try {
                 curl_close ($ch);
 
                 echo "<br/><br/><b>ACCESS TOKEN: </b>";
-                print_r($ch);
+                //print_r($ch);
                 print_r($resp);
                 print_r($token_data);
                 echo($token_data['access_token']);
