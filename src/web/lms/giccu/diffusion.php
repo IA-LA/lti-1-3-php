@@ -247,7 +247,7 @@ try {
                 ];
 
                 // Sign the JWT with our private key (given by the platform on registration)
-                $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/platform.key'), 'RS256', 'ff25d970a021ff7cdad1');
+                $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/platform.key'), 'RS256', ['ff25d970a021ff7cdad1']);
 
                 // Build auth token request headers
                 $auth_request = [
@@ -259,7 +259,7 @@ try {
 
                 // Make request to get auth token
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $post_param['auth_token_url']);
+                curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/token.php');
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($auth_request));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
