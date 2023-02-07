@@ -74,7 +74,8 @@ try {
     echo '
         <script>
             $(document).ready(function() {
-                $("#embedP").attr("src", " ");
+                $("#embedP").attr("src", "sample.js");
+                $("#embedP").attr("src", "").delay( 10000 );
             });
         </script>
         <!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
