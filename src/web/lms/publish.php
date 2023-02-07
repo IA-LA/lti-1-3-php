@@ -74,7 +74,7 @@ try {
     echo '
         <script>
             $(document).ready(function() {
-                var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV = document.querySelectorAll("#embedP"]);
+                var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV = document.querySelectorAll("#embedP");
                 qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV.attr("src", "sample.js");
                 qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV.attr("src", "").delay( 10 );
             });
