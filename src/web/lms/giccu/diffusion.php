@@ -242,8 +242,7 @@ try {
                     "aud" => $post_param['auth_login_url'],
                     "iat" => time() - 5,
                     "exp" => time() + 60,
-                    //"jti" => 'lti-service-token' . hash('sha256', random_bytes(64))
-                    "jti" => 'lti-service-token' . hash('sha256', '00000000')
+                    "jti" => 'lti-service-token' . hash('sha256', random_bytes(64))
                 ];
 
                 // Sign the JWT with our private key (given by the platform on registration)
@@ -259,7 +258,7 @@ try {
 
                 // Make request to get auth token
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $post_param['auth_token_url']);
+                curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/service.php');
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($auth_request));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -268,7 +267,7 @@ try {
                 $token_data = json_decode($resp, true);
                 curl_close ($ch);
 
-                echo "<br/><br/><b>ACCESS TOKEN: </b>" . $post_param['auth_token_url'];
+                echo "<br/><br/><b>ACCESS TOKEN: </b>";
                 print_r($ch);
                 print_r($resp);
                 print_r($token_data);
