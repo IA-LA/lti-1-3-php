@@ -246,7 +246,7 @@ try {
                 ];
 
                 // Sign the JWT with our private key (given by the platform on registration)
-                $jwt = JWT::encode($jwt_claim, $grades->service_connector->get_tool_private_key(), 'RS256', $grades->service_connector->get_kid());
+                $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/platform.key'), 'RS256', $grades->service_connector->get_kid());
 
                 // Build auth token request headers
                 $auth_request = [
