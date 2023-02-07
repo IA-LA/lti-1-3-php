@@ -259,7 +259,7 @@ try {
 
                 // Make request to get auth token
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/token.php');
+                curl_setopt($ch, CURLOPT_URL, $post_param['auth_token_url']);
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($auth_request));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -268,7 +268,7 @@ try {
                 $token_data = json_decode($resp, true);
                 curl_close ($ch);
 
-                echo "<br/><br/><b>ACCESS TOKEN: </b>";
+                echo "<br/><br/><b>ACCESS TOKEN: </b>" . $post_param['auth_token_url'];
                 print_r($ch);
                 print_r($resp);
                 print_r($token_data);
