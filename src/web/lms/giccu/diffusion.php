@@ -258,7 +258,7 @@ try {
 
                 // Make request to get auth token
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/service.php');
+                curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php');
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($auth_request));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
