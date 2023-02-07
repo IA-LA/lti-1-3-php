@@ -267,8 +267,10 @@ try {
                 $token_data = json_decode($resp, true);
                 curl_close ($ch);
 
-                echo "ACCESS TOKEN: ";
+                echo "<br/><b>ACCESS TOKEN: </b>";
                 print_r($token_data['access_token']);
+                print_r($token_data);
+                echo($token_data['access_token']);
 
                 ///
                 /// ACCESS TOKEN    (FIN)
