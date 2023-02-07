@@ -76,13 +76,13 @@ try {
             document.ready(function() {
                 var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV = document.querySelectorAll("#embedP");
                 var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV1 = qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV.attr("src", "sample.js");
-                qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV1.delay( 1 );
-                var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV2= qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV1.attr("src", "");
+                qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV1.delay( 10 );
+                var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV2= qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV1.attr("src", "http://ailanto-dev.intecca.uned.es/publication?id=10220210903095251000000a&actividad=https://ailanto-dev.intecca.uned.es/lti/publicacion/10220210903095251000000a");
                 qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV2.delay( 10 );
             });
         </script>
         <!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '" -->
-        <embed id="embedP" src="http://ailanto-dev.intecca.uned.es/publication?id=10220210903095251000000a&actividad=https://ailanto-dev.intecca.uned.es/lti/publicacion/10220210903095251000000a"
+        <embed id="embedP" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '"
         style="
         position: fixed;
         top: 0;
