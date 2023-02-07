@@ -242,7 +242,8 @@ try {
                     "aud" => $post_param['auth_login_url'],
                     "iat" => time() - 5,
                     "exp" => time() + 60,
-                    "jti" => 'lti-service-token' . hash('sha256', random_bytes(64))
+                    //"jti" => 'lti-service-token' . hash('sha256', random_bytes(64))
+                    "jti" => 'lti-service-token' . hash('sha256', '00000000')
                 ];
 
                 // Sign the JWT with our private key (given by the platform on registration)
@@ -268,7 +269,7 @@ try {
                 curl_close ($ch);
 
                 echo "<br/><br/><b>ACCESS TOKEN: </b>";
-                //print_r($ch);
+                print_r($ch);
                 print_r($resp);
                 print_r($token_data);
                 echo($token_data['access_token']);
