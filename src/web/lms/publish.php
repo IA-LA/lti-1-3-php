@@ -73,7 +73,7 @@ try {
     //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
     echo '
         <script>
-            $(document).ready(function() {
+            document.ready(function() {
                 var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV = document.querySelectorAll("#embedP");
                 var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV1 = qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV.attr("src", "sample.js");
                 qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV1.delay( 1 );
