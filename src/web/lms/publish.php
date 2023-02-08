@@ -108,11 +108,11 @@ try {
                         elIframe["setAttribute"]("webkitallowfullscreen", "true");
                         elIframe["setAttribute"]("mozallowfullscreen", "true");
                         elIframe["setAttribute"]("src", blobMe);
-                        var idOne= "diffusion" + Date.now();
+                        var idOne= "publish" + Date.now();
                         elIframe["setAttribute"]("id", idOne);
                         document.getElementById("divP").appendChild(elIframe);
                         const iframeHere= "";
-                        document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
+                        document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'https://ailanto-dev.intecca.uned.es/yii/publication?id=10220210903095251000000a&actividad=' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
                     </script>';
 
 ?>
