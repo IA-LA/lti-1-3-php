@@ -67,53 +67,18 @@ try {
     //header('Location: ' . TOOL_PARAMS_TARGET, true, 302);
     //die;
 
-    // IFRAME FULL PAGE cross-browser and fully responsive
-    //  https://stackoverflow.com/questions/17710039/full-page-iframe
+    // DIV cross-browser and fully responsive
+    // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html
     // ALTERNATIVES
-    //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
+    // https://stackoverflow.com/questions/9245133/how-to-hide-iframe-src
     echo '
-        <script>
-            $(document).ready(function() {
-                var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV = document.querySelectorAll("#embedP");
-                //var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV1 = qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV.attr("src", "https://ailanto-dev.intecca.uned.es/publicacion/10220210903095251000000a");
-                //qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV1.delay( 10 );
-                //var qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV2= qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV1.attr("src", "http://ailanto-dev.intecca.uned.es/publication?id=10220210903095251000000a&actividad=https://ailanto-dev.intecca.uned.es/lti/publicacion/10220210903095251000000a");
-                //qRlhGXpAjYCmwyVlAnbJmUABkGzIavYdkcVArRvICzLhaeJbbV2.delay( 10 );
-            });
-        </script>
-        <!-- <embed id="frame1" src="https://ailanto-dev.intecca.uned.es/publicacion/' . $post_param['iss'] . '"
-        <embed id="embedP" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '" -->
-        <embed id="embedP" src="http://ailanto-dev.intecca.uned.es/publication?id=10220210903095251000000a&actividad=' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '"
-        style="
-        position: fixed;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        width: 100%;
-        border: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        z-index: 999999;
-        height: 100%;"/>
-        <!--
-        <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
-        allowfullscreen="true" allowpaymentrequest="true"
-        style="
-        position: fixed;
-        top: 0px;
-        bottom: 0px;
-        right: 0px;
-        width: 100%;
-        border: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        z-index: 999999;
-        height: 100%;"></iframe>
-        -->' .
+                <div id="divP"></div>' .
+
+        // Inyección de publicación HTML
+        //file_get_contents('https://ailanto-dev.intecca.uned.es/lti/publicacion/10220210903095251000000a/index.html') .
+
         '<!--',
-        '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
+        '<p>VARIABLES GET:</p>', $_SERVER['HTTP_ORIGIN'], $_SERVER['HTTP_REFERER'], $_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
         '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
         '<hr/>',
         '<br/><b>PLATFORM:</b> <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/tool_platform']['name'], '</a></b>',
@@ -127,8 +92,28 @@ try {
         '<br/><b>USER: <a href="http://">', $post_param['name'], '</a></b>',
         '<br/><b>EMAIL: <a href="http://">', $post_param['email'], '</a></b>',
         '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>',
-        '-->'
-      ;
+        '-->';
+
+    // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
+    echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
+        '<script hidden>
+                        // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html
+                        // https://stackoverflow.com/questions/9245133/how-to-hide-iframe-src
+                        var blobMe= URL["createObjectURL"](new Blob([""], {type: "text/html"}));
+                        var elIframe = document["createElement"]("iframe");
+                        elIframe["setAttribute"]("frameborder", "0");
+                        elIframe["setAttribute"]("width", "100%");
+                        elIframe["setAttribute"]("height", "500px");
+                        elIframe["setAttribute"]("allowfullscreen", "true");
+                        elIframe["setAttribute"]("webkitallowfullscreen", "true");
+                        elIframe["setAttribute"]("mozallowfullscreen", "true");
+                        elIframe["setAttribute"]("src", blobMe);
+                        var idOne= "diffusion" + Date.now();
+                        elIframe["setAttribute"]("id", idOne);
+                        document.getElementById("htmlTest").appendChild(elIframe);
+                        const iframeHere= "";
+                        document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'' . $activity_GET['data']['url_actividad'] . '\'\x3c/script>");
+                    </script>';
 
 ?>
     <!-- Contenido
