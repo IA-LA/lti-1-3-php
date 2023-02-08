@@ -48,7 +48,7 @@ define("TOOL_REDIR",
                 ? (preg_match("/\/publicacion\/100/", TOOL_PARAMS_TARGET)
                     // Actividades publicadas de H5P, 405 e Italiano I
                     ? (preg_match("/(\/publicacion\/10020220629094|\/publicacion\/10020220606125826000000a|\/publicacion\/10020221104221027000000a)/", TOOL_PARAMS_TARGET)
-                            ? (TOOL_PARAMS_TARGET)
+                            ? (TOOL_HOST . "/launch.php")
                     // Actividades publicadas de H5P, 405 e Italiano I
                         : (preg_match("/https:\/\/www\.intecca\.uned\.es\/difusiongiccu\//", TOOL_PARAMS_TARGET)
                                 ? (TOOL_PARAMS_TARGET)
