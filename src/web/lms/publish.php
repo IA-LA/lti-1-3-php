@@ -73,7 +73,7 @@ try {
     // https://stackoverflow.com/questions/9245133/how-to-hide-iframe-src
     echo '<div id="divP"></div>' .
         // Inyección de publicación HTML
-        file_get_contents('https://ailanto-dev.intecca.uned.es/cliente/yii/publication?id=' . explode('.', $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], true)[count(explode('.', $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], true))-2] . '&actividad=' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) .
+        file_get_contents('https://ailanto-dev.intecca.uned.es/cliente/yii/publication?id=' . explode('.', $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], true)[count(explode('.', $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"], true))-1] . '&actividad=' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) .
         '<!--',
         '<p>VARIABLES GET:</p>', $_SERVER['HTTP_ORIGIN'], $_SERVER['HTTP_REFERER'], $_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
         '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
@@ -109,7 +109,7 @@ try {
                         elIframe["setAttribute"]("id", idOne);
                         document.getElementById("divP").appendChild(elIframe);
                         const iframeHere= "";
-                        document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'https://ailanto-dev.intecca.uned.es/cliente/yii/publication?id=10120221104132002000000a&actividad=' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
+                        document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'https://ailanto-dev.intecca.uned.es/cliente/yii/publication?id=cacadelavaca&actividad=' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
                     </script>';
 
 ?>
