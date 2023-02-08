@@ -99,7 +99,7 @@ try {
         '<script hidden>
                         // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html
                         // https://stackoverflow.com/questions/9245133/how-to-hide-iframe-src
-                        var blobMe= URL["createObjectURL"](new Blob([""], {type: "text/html"}));
+                        var blobMe= URL["createObjectURL"](new Blob(["up"], {type: "text/html"}));
                         var elIframe = document["createElement"]("iframe");
                         elIframe["setAttribute"]("frameborder", "0");
                         elIframe["setAttribute"]("width", "100%");
