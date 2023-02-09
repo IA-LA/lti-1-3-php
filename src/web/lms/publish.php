@@ -109,7 +109,7 @@ try {
             elIframe["setAttribute"]("id", idOne);
             document.getElementById("divP").appendChild(elIframe);
             const iframeHere= "";
-            document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'https://ailanto-dev.intecca.uned.es/cliente/yii/publication?id=10120221104132002000000a&actividad=' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
+            document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'https://ailanto-dev.intecca.uned.es/cliente/yii/publication/?id=10120221104132002000000a&actividad=' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
         </script>';
 
 ?>
