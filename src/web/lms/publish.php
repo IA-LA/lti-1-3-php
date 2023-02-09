@@ -94,23 +94,23 @@ try {
     // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
     echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
         '<script hidden>
-                        // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html
-                        // https://stackoverflow.com/questions/9245133/how-to-hide-iframe-src
-                        var blobMe= URL["createObjectURL"](new Blob([""], {type: "text/html"}));
-                        var elIframe = document["createElement"]("iframe");
-                        elIframe["setAttribute"]("frameborder", "0");
-                        elIframe["setAttribute"]("width", "100%");
-                        elIframe["setAttribute"]("height", "500px");
-                        elIframe["setAttribute"]("allowfullscreen", "true");
-                        elIframe["setAttribute"]("webkitallowfullscreen", "true");
-                        elIframe["setAttribute"]("mozallowfullscreen", "true");
-                        elIframe["setAttribute"]("src", blobMe);
-                        var idOne= "publish" + Date.now();
-                        elIframe["setAttribute"]("id", idOne);
-                        document.getElementById("divP").appendChild(elIframe);
-                        const iframeHere= "";
-                        document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'https://ailanto-dev.intecca.uned.es/cliente/yii/publication?id=cacadelavaca&actividad=' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
-                    </script>';
+            // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html
+            // https://stackoverflow.com/questions/9245133/how-to-hide-iframe-src
+            var blobMe= URL["createObjectURL"](new Blob([""], {type: "text/html"}));
+            var elIframe = document["createElement"]("iframe");
+            elIframe["setAttribute"]("frameborder", "0");
+            elIframe["setAttribute"]("width", "100%");
+            elIframe["setAttribute"]("height", "500px");
+            elIframe["setAttribute"]("allowfullscreen", "true");
+            elIframe["setAttribute"]("webkitallowfullscreen", "true");
+            elIframe["setAttribute"]("mozallowfullscreen", "true");
+            elIframe["setAttribute"]("src", blobMe);
+            var idOne= "publish" + Date.now();
+            elIframe["setAttribute"]("id", idOne);
+            document.getElementById("divP").appendChild(elIframe);
+            const iframeHere= "";
+            document["getElementById"](idOne)["contentWindow"]["document"].write("<script type=\'text/javascript\'>location.href = \'https://ailanto-dev.intecca.uned.es/cliente/yii/publication?id=10120221104132002000000a&actividad=' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '\'\x3c/script>");
+        </script>';
 
 ?>
     <!-- Contenido
