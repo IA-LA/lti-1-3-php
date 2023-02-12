@@ -214,7 +214,7 @@ try {
                 print_r($grades);
 
                 $score = LTI\LTI_Grade::new()
-                    ->set_score_given(120)
+                    ->set_score_given(12)
                     ->set_score_maximum(100)
                     ->set_timestamp(date(DateTime::ISO8601))
                     ->set_activity_progress('Completed')
@@ -237,9 +237,9 @@ try {
                 // Build up JWT to exchange for an auth token
                 $client_id = $post_param['client_id'];
                 $jwt_claim = [
-                    "iss" => $client_id,
-                    "sub" => $client_id,
-                    "aud" => $post_param['auth_login_url'],
+                    "iss" => 'http://ailanto-dev.intecca.uned.es',
+                    "sub" => '',
+                    "aud" => $client_id,
                     "iat" => time() - 5,
                     "exp" => time() + 60,
                     "jti" => 'lti-service-token' . hash('sha256', random_bytes(64))
@@ -252,7 +252,7 @@ try {
                 $auth_request = [
                     'grant_type' => 'client_credentials',
                     'client_assertion_type' => 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
-                    'client_assertion' => $jwt,
+                    'client_assertion' => $_REQUEST['id_token'],
                     'scope' => implode(' ', ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"])
                 ];
 
