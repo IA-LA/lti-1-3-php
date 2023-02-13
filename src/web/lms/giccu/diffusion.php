@@ -250,7 +250,7 @@ try {
 
                 // Build auth token request headers
                 $auth_request = [
-                    'grant_type' => 'client_credentials',
+                    'grant_type' => 'private_key_jwt',
                     'client_assertion_type' => 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
                     'client_assertion' => $jwt,
                     'scope' => implode(' ', ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"])
@@ -258,7 +258,7 @@ try {
 
                 // Make request to get auth token
                 $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php');
+                curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/token.php');
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($auth_request));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
