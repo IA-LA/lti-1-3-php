@@ -237,9 +237,9 @@ try {
                 // Build up JWT to exchange for an auth token
                 $client_id = $post_param['client_id'];
                 $jwt_claim = [
-                    "iss" => 'http://ailanto-dev.intecca.uned.es',
-                    "sub" => '77df17076ec16a4ca9d1',
-                    "aud" => $client_id,
+                    "iss" => $client_id,
+                    "sub" => $client_id,
+                    "aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
                     "iat" => time() - 5,
                     "exp" => time() + 60,
                     "jti" => 'lti-service-token' . hash('sha256', random_bytes(64))
