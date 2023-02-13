@@ -238,7 +238,7 @@ try {
                 $client_id = $post_param['aud'];
                 $jwt_claim = [
                     "iss" => $client_id,
-                    "sub" => $client_id,
+                    "sub" => 'ff25d970a021ff7cdad1',
                     "aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
                     "iat" => time() - 5,
                     "exp" => time() + 60,
@@ -246,7 +246,7 @@ try {
                 ];
 
                 // Sign the JWT with our private key (given by the platform on registration)
-                $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/tool.key'), 'RS256', 'ff25d970a021ff7cdad1');
+                $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/tool.key'), 'RS256', ['ff25d970a021ff7cdad1']);
 
                 // Build auth token request headers
                 $auth_request = [
