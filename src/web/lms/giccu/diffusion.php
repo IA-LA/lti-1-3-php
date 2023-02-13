@@ -287,7 +287,7 @@ try {
                     //'Authorization: Bearer ' . '97c8ba884cb1886204b0346f4ac34367', // LTI Services
                     'Accept:' . 'application/json',
                 ];
-                curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3');
+                curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_HEADER, 1);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
