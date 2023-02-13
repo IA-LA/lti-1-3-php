@@ -237,8 +237,8 @@ try {
                 // Build up JWT to exchange for an auth token
                 $client_id = $post_param['aud'];
                 $jwt_claim = [
-                    "iss" => $client_id,
-                    "sub" => 'ff25d970a021ff7cdad1',
+                    "iss" => 'ff25d970a021ff7cdad1',
+                    "sub" => $client_id,
                     "aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
                     "iat" => time() - 5,
                     "exp" => time() + 60,
