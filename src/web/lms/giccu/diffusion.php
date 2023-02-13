@@ -285,7 +285,7 @@ try {
                     //'Authorization: Bearer ' . $this->get_access_token($scopes),
                     //'Authorization: Bearer ' . '383fbc2711788ea4cc3e8cd7b902c355', // Moodle Mobile Web Service
                     'Authorization: Bearer ' . '97c8ba884cb1886204b0346f4ac34367', // LTI Services
-                    'Accept:' . 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                    'Accept:' . 'application/json; charset=utf-8',
                 ];
                 curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
