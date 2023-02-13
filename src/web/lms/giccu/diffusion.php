@@ -239,7 +239,7 @@ try {
                 $jwt_claim = [
                     "iss" => $client_id,
                     "sub" => $client_id,
-                    "aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/token.php',
+                    "aud" => 'HC7nuFC53ZV5Yyp',
                     "iat" => time() - 5,
                     "exp" => time() + 60,
                     "jti" => 'lti-service-token_' . '733df072c7224745b3e7fd7e63e921c2'
@@ -314,7 +314,7 @@ try {
                 //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/10/lineitem?type_id=3');
                 //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/10/lineitem/results?type_id=3');
                 //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3');
-                curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/webservice/rest/server.php?wstoken=');
+                curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/webservice/rest/server.php?wstoken=383fbc2711788ea4cc3e8cd7b902c355');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_HEADER, 1);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
