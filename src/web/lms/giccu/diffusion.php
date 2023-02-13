@@ -292,8 +292,8 @@ try {
 
                 $headers = [
                     //'Authorization: Bearer ' . $this->get_access_token($scopes),
-                    'Authorization: Bearer ' . $access_tokens[$scope_key] = '383fbc2711788ea4cc3e8cd7b902c355', // Moodle Mobile Web Service
-                    //'Authorization: Bearer ' . $access_tokens[$scope_key] = '97c8ba884cb1886204b0346f4ac34367', // LTI Services
+                    //'Authorization: Bearer ' . $access_tokens[$scope_key] = '383fbc2711788ea4cc3e8cd7b902c355', // Moodle Mobile Web Service
+                    'Authorization: Bearer ' . $access_tokens[$scope_key] = '97c8ba884cb1886204b0346f4ac34367', // LTI Services
                     // NRPS accept
                     //'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
                     // AGS accept
