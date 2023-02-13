@@ -239,14 +239,14 @@ try {
                 $jwt_claim = [
                     "iss" => $client_id,
                     "sub" => $client_id,
-                    "aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
+                    "aud" => 'https://ailanto-dev.intecca.uned.es/lti/lti13/jwks.php',
                     "iat" => time() - 5,
                     "exp" => time() + 60,
                     "jti" => 'lti-service-token' . hash('sha256', random_bytes(64))
                 ];
 
                 // Sign the JWT with our private key (given by the platform on registration)
-                $jwt = JWT::encode($_REQUEST['id_token'], file_get_contents(__DIR__ . '/../../../db/platform.key'), 'RS256', ['ff25d970a021ff7cdad1']);
+                $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/platform.key'), 'RS256', ['ff25d970a021ff7cdad1']);
 
                 // Build auth token request headers
                 $auth_request = [
