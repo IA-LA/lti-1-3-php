@@ -239,10 +239,10 @@ try {
                 $jwt_claim = [
                     "iss" => $client_id,
                     "sub" => $client_id,
-                    "aud" => 'https://ailanto-dev.intecca.uned.es/lti/lti13/jwks.php',
+                    "aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
                     "iat" => time() - 5,
                     "exp" => time() + 60,
-                    "jti" => 'lti-service-token' . hash('sha256', date(64))
+                    "jti" => 'lti-service-token' . hash('sha256', random_bytes(64))
                 ];
 
                 // Sign the JWT with our private key (given by the platform on registration)
