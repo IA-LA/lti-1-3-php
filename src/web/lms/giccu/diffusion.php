@@ -239,10 +239,10 @@ try {
                 $jwt_claim = [
                     "iss" => $client_id,
                     "sub" => $client_id,
-                    "aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
+                    "aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/token.php',
                     "iat" => time() - 5,
                     "exp" => time() + 60,
-                    "jti" => 'lti-service-token' . hash('sha256', random_bytes(64))
+                    "jti" => 'lti-service-token_' . '733df072c7224745b3e7fd7e63e921c2'
                 ];
 
                 // Sign the JWT with our private key (given by the platform on registration)
@@ -250,7 +250,7 @@ try {
 
                 // Build auth token request headers
                 $auth_request = [
-                    'grant_type' => 'client_credentials',
+                    'grant_type' => 'client_credentials_ssssss',
                     'client_assertion_type' => 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
                     'client_assertion' => $jwt,
                     'scope' => implode(' ', ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"])
@@ -272,6 +272,46 @@ try {
                 print_r($resp);
                 print_r($token_data);
                 echo($token_data['access_token']);
+
+
+                ///////////////////////////////////////////////
+                ///  Service Request
+                ///  BEARER TOKEN (INICIO)
+                ///
+                $method = 'POST';
+                $body = null;
+                $ch = curl_init();
+                $headers = [
+                    //'Authorization: Bearer ' . $this->get_access_token($scopes),
+                    'Authorization: Bearer ' . '383fbc2711788ea4cc3e8cd7b902c355', // Moodle Mobile Web Service
+                    //'Authorization: Bearer ' . '97c8ba884cb1886204b0346f4ac34367', // LTI Services
+                    'Accept:' . 'application/json',
+                ];
+                curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_HEADER, 1);
+                curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+                if ($method === 'POST') {
+                    curl_setopt($ch, CURLOPT_POST, 1);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
+                    $headers[] = 'Content-Type: ' . 'application/json';
+                }
+                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+                $response = curl_exec($ch);
+                if (curl_errno($ch)){
+                    echo 'Request Error:' . curl_error($ch);
+                }
+                $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+                curl_close ($ch);
+
+                $resp_headers = substr($response, 0, $header_size);
+                $resp_body = substr($response, $header_size);
+                echo('<b>BEARER TOKEN:</b>');
+                //return
+                print_r([
+                    'headers' => array_filter(explode("\r\n", $resp_headers)),
+                    'body' => json_decode($resp_body, true),
+                ]);
 
                 ///
                 /// ACCESS TOKEN    (FIN)
