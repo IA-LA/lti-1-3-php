@@ -287,7 +287,7 @@ try {
                     'Authorization: Bearer ' . '97c8ba884cb1886204b0346f4ac34367', // LTI Services
                     'Accept:' . 'application/json',
                 ];
-                curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3 [lineitem] => http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem');
+                curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_HEADER, 1);
                 curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
@@ -306,7 +306,7 @@ try {
 
                 $resp_headers = substr($response, 0, $header_size);
                 $resp_body = substr($response, $header_size);
-                echo('<b>BEARER TOKEN:</b>');
+                echo('<br/><br/><b>BEARER TOKEN:</b>');
                 //return
                 print_r([
                     'headers' => array_filter(explode("\r\n", $resp_headers)),
