@@ -238,7 +238,7 @@ try {
                 $client_id = $post_param['client_id'];
                 $jwt_claim = [
                     "iss" => 'http://ailanto-dev.intecca.uned.es',
-                    "sub" => '',
+                    "sub" => '77df17076ec16a4ca9d1',
                     "aud" => $client_id,
                     "iat" => time() - 5,
                     "exp" => time() + 60,
@@ -246,13 +246,13 @@ try {
                 ];
 
                 // Sign the JWT with our private key (given by the platform on registration)
-                $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/platform.key'), 'RS256', ['ff25d970a021ff7cdad1']);
+                $jwt = JWT::encode($_REQUEST['id_token'], file_get_contents(__DIR__ . '/../../../db/platform.key'), 'RS256', ['ff25d970a021ff7cdad1']);
 
                 // Build auth token request headers
                 $auth_request = [
                     'grant_type' => 'client_credentials',
                     'client_assertion_type' => 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
-                    'client_assertion' => $_REQUEST['id_token'],
+                    'client_assertion' => $jwt,
                     'scope' => implode(' ', ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"])
                 ];
 
