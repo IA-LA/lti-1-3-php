@@ -242,7 +242,7 @@ try {
                     "aud" => 'https://ailanto-dev.intecca.uned.es/lti/lti13/jwks.php',
                     "iat" => time() - 5,
                     "exp" => time() + 60,
-                    "jti" => 'lti-service-token' . hash('sha256', random_bytes(64))
+                    "jti" => 'lti-service-token' . hash('sha256', date(64))
                 ];
 
                 // Sign the JWT with our private key (given by the platform on registration)
@@ -250,7 +250,7 @@ try {
 
                 // Build auth token request headers
                 $auth_request = [
-                    'grant_type' => 'client_credential',
+                    'grant_type' => 'client_credentials',
                     'client_assertion_type' => 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
                     'client_assertion' => $jwt,
                     'scope' => implode(' ', ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"])
