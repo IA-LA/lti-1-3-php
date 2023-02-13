@@ -281,11 +281,17 @@ try {
                 $method = 'GET';
                 $body = null;
                 $ch = curl_init();
+
+                $scopes = ['https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly'];
+                sort($scopes);
+                $scope_key = md5(implode('|', $scopes));
+                $access_tokens = [];
+
                 $headers = [
                     //'Authorization: Bearer ' . $this->get_access_token($scopes),
                     //'Authorization: Bearer ' . '383fbc2711788ea4cc3e8cd7b902c355', // Moodle Mobile Web Service
-                    'Authorization: Bearer ' . '97c8ba884cb1886204b0346f4ac34367', // LTI Services
-                    'Accept:' . 'application/json; charset=utf-8',
+                    'Authorization: Bearer ' . $access_tokens[$scope_key] = '97c8ba884cb1886204b0346f4ac34367', // LTI Services
+                    'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
                 ];
                 curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -306,7 +312,7 @@ try {
 
                 $resp_headers = substr($response, 0, $header_size);
                 $resp_body = substr($response, $header_size);
-                echo('<br/><br/><b>BEARER TOKEN:</b>');
+                echo('<br/><br/><b>BEARER TOKEN: </b>');
                 //return
                 print_r([
                     'headers' => array_filter(explode("\r\n", $resp_headers)),
