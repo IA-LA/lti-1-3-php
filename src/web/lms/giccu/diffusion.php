@@ -239,7 +239,7 @@ try {
                 $jwt_claim = [
                     "iss" => $client_id,
                     "sub" => $client_id,
-                    "aud" => 'HC7nuFC53ZV5Yyp',
+                    "aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
                     "iat" => time() - 5,
                     "exp" => time() + 60,
                     "jti" => 'lti-service-token_' . '733df072c7224745b3e7fd7e63e921c2'
