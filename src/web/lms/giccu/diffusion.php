@@ -183,6 +183,9 @@ try {
 
                 //
                 // ERROR:  { "error" : ""kid" empty, unable to lookup correct key" }
+                $headers = [
+                    'kid: ff25d970a021ff7cdad1',
+                ];
                 $kid=[];
                 $kid[0]='ff25d970a021ff7cdad1';
                 // Sign the JWT with our private key (given by the platform on registration)
@@ -195,10 +198,6 @@ try {
                     'client_assertion_type' => 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
                     'client_assertion' => $jwt,
                     'scope' => implode(' ', ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"])
-                ];
-
-                $headers = [
-                    'kid:ff25d970a021ff7cdad1',
                 ];
 
                 // Make request to get auth token
