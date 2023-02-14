@@ -183,9 +183,9 @@ try {
 
                 //
                 // ERROR:  { "error" : ""kid" empty, unable to lookup correct key" }
-                $headers = [
-                    'kid: ff25d970a021ff7cdad1',
-                ];
+                //$headers = [
+                //    'kid: ff25d970a021ff7cdad1',
+                //];
                 $kid=[];
                 $kid[0]='ff25d970a021ff7cdad1';
                 // Sign the JWT with our private key (given by the platform on registration)
