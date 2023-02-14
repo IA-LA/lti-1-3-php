@@ -362,6 +362,8 @@ try {
             if(in_array("http://purl.imsglobal.org/vocab/lis/v2/membership#Instructor", $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'])) {
 ?>
                 <!-- Contenido de JWT 1.1 RESOURCE LINK Instructor-->
+                <br/><br/>
+                <hr/>
                 <p>Hola <b><?php echo $post_param["given_name"]; ?></b>, bienvenid@ al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ como <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?>. </p>
                 <!-- -->
 <?php
