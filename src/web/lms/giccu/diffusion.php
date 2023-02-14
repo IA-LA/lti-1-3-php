@@ -448,7 +448,8 @@ try {
                 // https://moodle.org/mod/forum/discuss.php?d=391538#p1606269
                 //$post_param["https://purl.imsglobal.org/spec/lti-ags/claim/endpoint"]["lineitem"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3';
                 //$post_param["https://purl.imsglobal.org/spec/lti-ags/claim/endpoint"]["lineitems"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/scores?type_id=3';
-                echo '<br/><br/><b>JWT :</b>' . print_r($post_param);
+                echo '<br/><br/><b>JWT :</b>';
+                print_r($post_param);
 
                 //LAUNCH ID
                 ///////////
@@ -515,7 +516,7 @@ try {
 
                 echo '<br/><br/><b>GRADES->PUT_GRADE()1</b>:';
                 echo json_encode($grades->put_grade($grade));
-                print_r($grades);
+                //print_r($grades);
 
                 $score_lineitem = LTI\LTI_Lineitem::new()
                     ->set_tag('score')
