@@ -189,7 +189,7 @@ try {
                 $kid=[];
                 $kid[0]='ff25d970a021ff7cdad1';
                 // Sign the JWT with our private key (given by the platform on registration)
-                $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/private.key'), 'RS256', 'TRwtvqCcefOWuXU3-Dt4d26vCQExxh14vTO7_A375Pw');
+                $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/private.key'), 'RS256', 'TRwtvqCcefOWuXU3-Dt4d26vCQExxh14vTO7_A375P');
                 //$jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/tool.key'), 'RS256');
 
                 // Build auth token request headers
@@ -331,10 +331,11 @@ try {
                 }
                 $nrps = $launch->get_nrps();
                 echo '<br/><br/><b>NRPS:</b>' . json_encode($nrps);
-                print_r($nrps);
+                //print_r($nrps);
+
                 $members = $nrps->get_members();
                 echo '<br/><br/><b>MEMBERS:</b>' . json_encode(($members ? $members : '[]'));
-                print_r(($members ? $members : []));
+                //print_r(($members ? $members : []));
 
                 // AGS (Assignment and Grade Services)
                 if (!$launch->has_ags()) {
@@ -342,7 +343,7 @@ try {
                 }
                 $grades = $launch->get_ags();
                 echo '<br/><br/><b>GRADES1:</b>' . json_encode($grades);
-                print_r($grades);
+                //print_r($grades);
 
                 $score = LTI\LTI_Grade::new()
                     ->set_score_given(12)
