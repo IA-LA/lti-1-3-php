@@ -173,7 +173,7 @@ try {
                 // Build up JWT to exchange for an auth token
                 $client_id = $post_param['aud'];
                 $jwt_claim = [
-                    "iss" => $client_id,
+                    "iss" => '$client_id',
                     "sub" => '$client_id',
                     "aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
                     "iat" => time() - 5,
@@ -182,7 +182,9 @@ try {
                 ];
 
                 //
-                // ERROR:  { "error" : ""kid" empty, unable to lookup correct key" }
+                // ERROR:
+                // ERROR: { "error" : "invalid_client" }Array ( [error] => invalid_client )
+                // ERROR: { "error" : ""kid" empty, unable to lookup correct key" }
                 //$headers = [
                 //    'kid: ff25d970a021ff7cdad1',
                 //];
