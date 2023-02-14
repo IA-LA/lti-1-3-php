@@ -112,8 +112,8 @@ try {
             ];
 
             //
-            // ERROR:
-            // ERROR: { "error" : "invalid_client" }Array ( [error] => invalid_client )
+            // ERROR: { "error" : "invalid_request" }
+            // ERROR: { "error" : "invalid_client" }
             // ERROR: { "error" : ""kid" empty, unable to lookup correct key" }
             //$headers = [
             //    'kid: ff25d970a021ff7cdad1',
@@ -212,6 +212,137 @@ try {
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
             echo('<br/><br/><b>(NRPS) BEARER TOKEN: </b>');
+            //return
+            print_r([
+                'headers' => array_filter(explode("\r\n", $resp_headers)),
+                'body' => json_decode($resp_body, true),
+            ]);
+            ///
+            ///  Service Request
+            ///  BEARER TOKEN (INICIO)
+            ///////////////////////////////////////////////
+
+            ///
+            /// ACCESS TOKEN    (FIN)
+            ///////////////////////////////////////////////
+
+
+            ///////////////////////////////////////////////
+            /// ACCESS TOKEN (INICIO)
+            /// AGS
+
+            // Build up JWT to exchange for an auth token
+            $client_id = $post_param['aud'];
+            $jwt_claim = [
+                "iss" => '$client_id',
+                "sub" => $client_id,
+                "aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
+                "iat" => time() - 5,
+                "exp" => time() + 60,
+                "jti" => 'lti-service-token_' . hash('sha256', random_bytes(64))
+            ];
+
+            //
+            // ERROR: { "error" : "invalid_request" }
+            // ERROR: { "error" : "invalid_client" }
+            // ERROR: { "error" : ""kid" empty, unable to lookup correct key" }
+            //$headers = [
+            //    'kid: ff25d970a021ff7cdad1',
+            //];
+            $kid=[];
+            $kid[0]='ff25d970a021ff7cdad1';
+            // Sign the JWT with our private key (given by the platform on registration)
+            $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/private.key'), 'RS256', 'TRwtvqCcefOWuXU3-Dt4d26vCQExxh14vTO7_A375Pw');
+            //$jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/tool.key'), 'RS256');
+
+            // Build auth token request headers
+            $auth_request = [
+                'grant_type' => 'client_credentials',
+                'client_assertion_type' => 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+                'client_assertion' => $jwt,
+                //'scope' => 'https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly',
+                'scope' => implode(' ', ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"])
+            ];
+
+            // Make request to get auth token
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/token.php');
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($auth_request));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            $resp = curl_exec($ch);
+            $token_data_ags = json_decode($resp, true);
+            curl_close ($ch);
+
+            echo "<br/><br/><b>(AGS) ACCESS TOKEN: </b>";
+            print_r($ch);
+            print_r($resp);
+            print_r($token_data_ags);
+            echo($token_data_ags['access_token']);
+
+
+            ///////////////////////////////////////////////
+            ///  Service Request
+            ///  BEARER TOKEN (INICIO)
+            ///
+            $method = 'GET';
+            $body = null;
+            $ch = curl_init();
+
+            // NRPS scopes
+            $scopes = ['https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly'];
+            // AGS scopes
+            //$scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
+            sort($scopes);
+            $scope_key = md5(implode('|', $scopes));
+            $access_tokens = [];
+
+            $headers = [
+                //'Authorization: Bearer ' . $this->get_access_token($scopes),
+                'Authorization: Bearer ' . $access_tokens[$scope_key] = $token_data_ags['access_token'],
+                //'Authorization: Bearer ' . $access_tokens[$scope_key] = '383fbc2711788ea4cc3e8cd7b902c355', // Moodle Mobile Web Service
+                //'Authorization: Bearer ' . $access_tokens[$scope_key] = '97c8ba884cb1886204b0346f4ac34367', // LTI Services
+                // NRPS accept
+                //'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
+                // AGS accept
+                //'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
+                //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
+                //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
+                'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET
+                // GROUPS?? accept
+                //'Accept:' . 'application/vnd.ims.lti-gs.v1.contextgroupcontainer+json',
+                // GENERALES accept
+                //'Accept:' . 'application/xml; charset=utf-8',
+                //'Accept:' . 'application/json;
+            ];
+            // NRPS service
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
+            // AGS services
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/10/lineitem/scores?type_id=3');
+            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/10/lineitem?type_id=3');
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/10/lineitem/results?type_id=3');
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3');
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/webservice/rest/server.php?wstoken=383fbc2711788ea4cc3e8cd7b902c355');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            if ($method === 'POST') {
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
+                $headers[] = 'Content-Type: ' . 'application/json';
+            }
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            $response = curl_exec($ch);
+            if (curl_errno($ch)){
+                echo 'Request Error:' . curl_error($ch);
+            }
+            $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+            curl_close ($ch);
+
+            $resp_headers = substr($response, 0, $header_size);
+            $resp_body = substr($response, $header_size);
+            echo('<br/><br/><b>(AGS) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
@@ -570,7 +701,7 @@ try {
                           {
                             "id_token": ' . $_REQUEST['jwt_token'] . ',
                             "auth_token_nrps": ' . $token_data . ',
-                            "auth_token_ags": ' . $token_data . '
+                            "auth_token_ags": ' . $token_data_ags . '
                           }
                         </script>
                          <script blocking="render">
