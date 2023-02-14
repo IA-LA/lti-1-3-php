@@ -101,6 +101,9 @@ try {
                 <p>Hola <b><?php echo $post_param["given_name"]; ?></b>, bienvenid@ al eContent ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["title"]; ?>´ del curso ´<?php echo $post_param["https://purl.imsglobal.org/spec/lti/claim/context"]["title"]; ?>´ como <?php echo explode('#', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0])[1]; ?>. </p>
                 <!-- -->
 <?php
+                ///////////////////////////////////////////////////////////
+                /// Formulario Edición
+                ///
                 echo '               
                 <p><b>Escoge una opción para acceder a la Actividad:</b></p>
                 ';
@@ -163,73 +166,6 @@ try {
                 </form>
                 ';
 
-                // ERROR file_get_content()
-                ///////////////////////////
-                $w = stream_get_wrappers();
-                echo 'openssl: ', extension_loaded('openssl') ? 'yes' : 'no', "\n";
-                echo 'http wrapper: ', in_array('http', $w) ? 'yes' : 'no', "\n";
-                echo 'https wrapper: ', in_array('https', $w) ? 'yes' : 'no', "\n";
-                echo 'wrappers: ', var_export($w);
-
-                //LAUNCH ID
-                ///////////
-                $launch_id = $launch->get_launch_id();
-                echo '<br/><br/><b>LAUNCH ID:</b>' . json_encode($launch_id);
-                //CAMBIAR SERVICIOS LINEITEMS
-                /////////////////////////////
-                /// NPRS
-                print_r($post_param);
-                // https://moodle.org/mod/forum/discuss.php?d=391538#p1606269
-                $post_param["https://purl.imsglobal.org/spec/lti-nrps/claim/namesroleservice"]["context_memberships_url"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3';
-                //$post_param["https://purl.imsglobal.org/spec/lti-nrps/claim/namesroleservice"]["service_versions"]='2.0';
-                print_r($post_param);
-                /// AGS
-                print_r($post_param);
-                // https://moodle.org/mod/forum/discuss.php?d=391538#p1606269
-                $post_param["https://purl.imsglobal.org/spec/lti-ags/claim/endpoint"]["lineitem"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3';
-                //$post_param["https://purl.imsglobal.org/spec/lti-ags/claim/endpoint"]["lineitems"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/scores?type_id=3';
-                print_r($post_param);
-
-                $launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
-
-                //SERVICES
-                //////////
-                // NPRS (Names and Role Provisioning Services)
-                if (!$launch->has_nrps()) {
-                    throw new Exception("Don't have names and roles!");
-                }
-                $nrps = $launch->get_nrps();
-                echo '<br/><br/><b>NRPS:</b>' . json_encode($nrps);
-                print_r($nrps);
-                $members = $nrps->get_members();
-                echo '<br/><br/><b>MEMBERS:</b>' . json_encode(($members ? $members : '[]'));
-                print_r(($members ? $members : []));
-
-                // AGS (Assignment and Grade Services)
-                if (!$launch->has_ags()) {
-                    throw new Exception("Don't have grades!");
-                }
-                $grades = $launch->get_ags();
-                echo '<br/><br/><b>GRADES1:</b>' . json_encode($grades);
-                print_r($grades);
-
-                $score = LTI\LTI_Grade::new()
-                    ->set_score_given(12)
-                    ->set_score_maximum(100)
-                    ->set_timestamp(date(DateTime::ISO8601))
-                    ->set_activity_progress('Completed')
-                    ->set_grading_progress('FullyGraded')
-                    ->set_user_id($launch->get_launch_data()['sub']);
-                $score_lineitem = null;
-                    //LTI\LTI_Lineitem::new()
-                    //->set_tag('score')
-                    //->set_score_maximum(100)
-                    //->set_label('Score')
-                    //->set_resource_id(['resourceId' => ["title" => "Sistema LTI Publicación NO EDICION (10020220606125826000000a)", "id" => 9 ]])
-                    //
-                echo '<br/><br/><b>GRADES->PUT_GRADE()0</b>:';
-                echo json_encode($grades->put_grade($score, $score_lineitem));
-
                 ///////////////////////////////////////////////
                 /// ACCESS TOKEN (INICIO)
                 ///
@@ -244,6 +180,9 @@ try {
                     "exp" => time() + 60,
                     "jti" => 'lti-service-token_' . '733df072c7224745b3e7fd7e63e921c2'
                 ];
+
+                //
+                // ERROR:  { "error" : ""kid" empty, unable to lookup correct key" }
                 $kid=[];
                 $kid[0]='ff25d970a021ff7cdad1';
                 // Sign the JWT with our private key (given by the platform on registration)
@@ -256,6 +195,10 @@ try {
                     'client_assertion_type' => 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
                     'client_assertion' => $jwt,
                     'scope' => implode(' ', ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"])
+                ];
+
+                $headers = [
+                    'kid:ff25d970a021ff7cdad1',
                 ];
 
                 // Make request to get auth token
@@ -341,10 +284,81 @@ try {
                     'headers' => array_filter(explode("\r\n", $resp_headers)),
                     'body' => json_decode($resp_body, true),
                 ]);
+                ///
+                ///  Service Request
+                ///  BEARER TOKEN (INICIO)
+                ///////////////////////////////////////////////
 
                 ///
                 /// ACCESS TOKEN    (FIN)
                 ///////////////////////////////////////////////
+
+                // ERROR file_get_content()
+                ///////////////////////////
+                $w = stream_get_wrappers();
+                echo 'openssl: ', extension_loaded('openssl') ? 'yes' : 'no', "\n";
+                echo 'http wrapper: ', in_array('http', $w) ? 'yes' : 'no', "\n";
+                echo 'https wrapper: ', in_array('https', $w) ? 'yes' : 'no', "\n";
+                echo 'wrappers: ', var_export($w);
+
+                //LAUNCH ID
+                ///////////
+                $launch_id = $launch->get_launch_id();
+                echo '<br/><br/><b>LAUNCH ID:</b>' . json_encode($launch_id);
+                //CAMBIAR SERVICIOS LINEITEMS
+                /////////////////////////////
+                /// NPRS
+                print_r($post_param);
+                // https://moodle.org/mod/forum/discuss.php?d=391538#p1606269
+                $post_param["https://purl.imsglobal.org/spec/lti-nrps/claim/namesroleservice"]["context_memberships_url"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3';
+                //$post_param["https://purl.imsglobal.org/spec/lti-nrps/claim/namesroleservice"]["service_versions"]='2.0';
+                print_r($post_param);
+                /// AGS
+                print_r($post_param);
+                // https://moodle.org/mod/forum/discuss.php?d=391538#p1606269
+                $post_param["https://purl.imsglobal.org/spec/lti-ags/claim/endpoint"]["lineitem"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3';
+                //$post_param["https://purl.imsglobal.org/spec/lti-ags/claim/endpoint"]["lineitems"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/scores?type_id=3';
+                print_r($post_param);
+
+                $launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
+
+                //SERVICES
+                //////////
+                // NPRS (Names and Role Provisioning Services)
+                if (!$launch->has_nrps()) {
+                    throw new Exception("Don't have names and roles!");
+                }
+                $nrps = $launch->get_nrps();
+                echo '<br/><br/><b>NRPS:</b>' . json_encode($nrps);
+                print_r($nrps);
+                $members = $nrps->get_members();
+                echo '<br/><br/><b>MEMBERS:</b>' . json_encode(($members ? $members : '[]'));
+                print_r(($members ? $members : []));
+
+                // AGS (Assignment and Grade Services)
+                if (!$launch->has_ags()) {
+                    throw new Exception("Don't have grades!");
+                }
+                $grades = $launch->get_ags();
+                echo '<br/><br/><b>GRADES1:</b>' . json_encode($grades);
+                print_r($grades);
+
+                $score = LTI\LTI_Grade::new()
+                    ->set_score_given(12)
+                    ->set_score_maximum(100)
+                    ->set_timestamp(date(DateTime::ISO8601))
+                    ->set_activity_progress('Completed')
+                    ->set_grading_progress('FullyGraded')
+                    ->set_user_id($launch->get_launch_data()['sub']);
+                $score_lineitem = null;
+                    //LTI\LTI_Lineitem::new()
+                    //->set_tag('score')
+                    //->set_score_maximum(100)
+                    //->set_label('Score')
+                    //->set_resource_id(['resourceId' => ["title" => "Sistema LTI Publicación NO EDICION (10020220606125826000000a)", "id" => 9 ]])
+                    //
+                echo '<br/><br/><b>GRADES->PUT_GRADE()0</b>:';
+                echo json_encode($grades->put_grade($score, $score_lineitem));
 
                 $grade = LTI\LTI_Grade::new()
                     ->set_score_given(20)
