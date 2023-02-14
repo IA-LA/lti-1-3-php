@@ -227,16 +227,16 @@ try {
                 $ch = curl_init();
 
                 // NRPS scopes
-                //$scopes = ['https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly'];
+                $scopes = ['https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly'];
                 // AGS scopes
-                $scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
+                //$scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
                 sort($scopes);
                 $scope_key = md5(implode('|', $scopes));
                 $access_tokens = [];
 
                 $headers = [
                     //'Authorization: Bearer ' . $this->get_access_token($scopes),
-                    'Authorization: Bearer ' . $token_data['access_token'],
+                    'Authorization: Bearer ' . $access_tokens[$scope_key] = $token_data['access_token'],
                     //'Authorization: Bearer ' . $access_tokens[$scope_key] = '383fbc2711788ea4cc3e8cd7b902c355', // Moodle Mobile Web Service
                     //'Authorization: Bearer ' . $access_tokens[$scope_key] = '97c8ba884cb1886204b0346f4ac34367', // LTI Services
                     // NRPS accept
