@@ -244,9 +244,10 @@ try {
                     "exp" => time() + 60,
                     "jti" => 'lti-service-token_' . '733df072c7224745b3e7fd7e63e921c2'
                 ];
-
+                $kid=[];
+                $kid[0]='ff25d970a021ff7cdad1';
                 // Sign the JWT with our private key (given by the platform on registration)
-                $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/platform.key'), 'RS256', 'ff25d970a021ff7cdad1');
+                $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/tool.key'), 'RS256', $kid);
 
                 // Build auth token request headers
                 $auth_request = [
