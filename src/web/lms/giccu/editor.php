@@ -98,7 +98,7 @@ try {
 
             ///////////////////////////////////////////////
             /// ACCESS TOKEN (INICIO)
-            ///
+            /// NRPS
 
             // Build up JWT to exchange for an auth token
             $client_id = $post_param['aud'];
@@ -144,83 +144,11 @@ try {
             $token_data = json_decode($resp, true);
             curl_close ($ch);
 
-            echo "<br/><br/><b>(NRPS) ACCESS TOKEN: </b>";
-            print_r($ch);
-            print_r($resp);
-            print_r($token_data);
-            echo($token_data['access_token']);
-
-
-            ///////////////////////////////////////////////
-            ///  Service Request
-            ///  BEARER TOKEN (INICIO)
-            ///
-            $method = 'GET';
-            $body = null;
-            $ch = curl_init();
-
-            // NRPS scopes
-            $scopes = ['https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly'];
-            // AGS scopes
-            //$scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
-            sort($scopes);
-            $scope_key = md5(implode('|', $scopes));
-            $access_tokens = [];
-
-            $headers = [
-                //'Authorization: Bearer ' . $this->get_access_token($scopes),
-                'Authorization: Bearer ' . $access_tokens[$scope_key] = $token_data['access_token'],
-                //'Authorization: Bearer ' . $access_tokens[$scope_key] = '383fbc2711788ea4cc3e8cd7b902c355', // Moodle Mobile Web Service
-                //'Authorization: Bearer ' . $access_tokens[$scope_key] = '97c8ba884cb1886204b0346f4ac34367', // LTI Services
-                // NRPS accept
-                'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
-                // AGS accept
-                //'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
-                //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
-                //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
-                //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET
-                // GROUPS?? accept
-                //'Accept:' . 'application/vnd.ims.lti-gs.v1.contextgroupcontainer+json',
-                // GENERALES accept
-                //'Accept:' . 'application/xml; charset=utf-8',
-                //'Accept:' . 'application/json;
-            ];
-            // NRPS service
-            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
-            // AGS services
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/10/lineitem/scores?type_id=3');
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/10/lineitem?type_id=3');
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/10/lineitem/results?type_id=3');
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3');
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/webservice/rest/server.php?wstoken=383fbc2711788ea4cc3e8cd7b902c355');
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HEADER, 1);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            if ($method === 'POST') {
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
-                $headers[] = 'Content-Type: ' . 'application/json';
-            }
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-            $response = curl_exec($ch);
-            if (curl_errno($ch)){
-                echo 'Request Error:' . curl_error($ch);
-            }
-            $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-            curl_close ($ch);
-
-            $resp_headers = substr($response, 0, $header_size);
-            $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(NRPS) BEARER TOKEN: </b>');
-            //return
-            print_r([
-                'headers' => array_filter(explode("\r\n", $resp_headers)),
-                'body' => json_decode($resp_body, true),
-            ]);
-            ///
-            ///  Service Request
-            ///  BEARER TOKEN (FIN)
-            ///////////////////////////////////////////////
+            //echo "<br/><br/><b>(NRPS) ACCESS TOKEN: </b>";
+            //print_r($ch);
+            //print_r($resp);
+            //print_r($token_data);
+            //echo($token_data['access_token']);
 
             ///
             /// ACCESS TOKEN    (FIN)
@@ -276,157 +204,13 @@ try {
             $token_data_ags = json_decode($resp_ags, true);
             curl_close ($ch);
 
-            echo "<br/><br/><b>(AGS) ACCESS TOKEN: </b>";
-            print_r($ch);
-            print_r($resp_ags);
-            print_r($token_data_ags);
-            echo($token_data_ags['access_token']);
+            //echo "<br/><br/><b>(AGS) ACCESS TOKEN: </b>";
+            //print_r($ch);
+            //print_r($resp_ags);
+            //print_r($token_data_ags);
+            //echo($token_data_ags['access_token']);
 
-
-            ///////////////////////////////////////////////
-            ///  Service Request (AGS GET)
-            ///  BEARER TOKEN (INICIO)
-            ///
-            $method = 'GET';
-            $body = null;
-            $ch = curl_init();
-
-            // NRPS scopes
-            $scopes = ['https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly'];
-            // AGS scopes
-            //$scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
-            sort($scopes);
-            $scope_key = md5(implode('|', $scopes));
-            $access_tokens = [];
-
-            $headers = [
-                //'Authorization: Bearer ' . $this->get_access_token($scopes),
-                'Authorization: Bearer ' . $access_tokens[$scope_key] = $token_data_ags['access_token'],
-                //'Authorization: Bearer ' . $access_tokens[$scope_key] = '383fbc2711788ea4cc3e8cd7b902c355', // Moodle Mobile Web Service
-                //'Authorization: Bearer ' . $access_tokens[$scope_key] = '97c8ba884cb1886204b0346f4ac34367', // LTI Services
-                // NRPS accept
-                //'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
-                // AGS accept
-                //'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
-                //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
-                //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
-                'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET
-                // GROUPS?? accept
-                //'Accept:' . 'application/vnd.ims.lti-gs.v1.contextgroupcontainer+json',
-                // GENERALES accept
-                //'Accept:' . 'application/xml; charset=utf-8',
-                //'Accept:' . 'application/json;
-            ];
-            // NRPS service
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
-            // AGS services
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3');
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3');
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/results?type_id=3');
-            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3');
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/webservice/rest/server.php?wstoken=383fbc2711788ea4cc3e8cd7b902c355');
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HEADER, 1);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            if ($method === 'POST') {
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
-                $headers[] = 'Content-Type: ' . 'application/json';
-            }
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-            $response = curl_exec($ch);
-            if (curl_errno($ch)){
-                echo 'Request Error:' . curl_error($ch);
-            }
-            $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-            curl_close ($ch);
-
-            $resp_headers = substr($response, 0, $header_size);
-            $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS GET) BEARER TOKEN: </b>');
-            //return
-            print_r([
-                'headers' => array_filter(explode("\r\n", $resp_headers)),
-                'body' => json_decode($resp_body, true),
-            ]);
-            ///
-            ///  Service Request  (AGS GET)
-            ///  BEARER TOKEN (FIN)
-            ///////////////////////////////////////////////
-
-            ///////////////////////////////////////////////
-            ///  Service Request AGS(POST)
-            ///  BEARER TOKEN (INICIO)
-            ///
-            $method = 'POST';
-            $body = null;
-            $ch = curl_init();
-
-            // NRPS scopes
-            $scopes = ['https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly'];
-            // AGS scopes
-            //$scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
-            sort($scopes);
-            $scope_key = md5(implode('|', $scopes));
-            $access_tokens = [];
-
-            $headers = [
-                //'Authorization: Bearer ' . $this->get_access_token($scopes),
-                'Authorization: Bearer ' . $access_tokens[$scope_key] = $token_data_ags['access_token'],
-                //'Authorization: Bearer ' . $access_tokens[$scope_key] = '383fbc2711788ea4cc3e8cd7b902c355', // Moodle Mobile Web Service
-                //'Authorization: Bearer ' . $access_tokens[$scope_key] = '97c8ba884cb1886204b0346f4ac34367', // LTI Services
-                // NRPS accept
-                //'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
-                // AGS accept
-                //'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
-                'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
-                //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
-                //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET
-                // GROUPS?? accept
-                //'Accept:' . 'application/vnd.ims.lti-gs.v1.contextgroupcontainer+json',
-                // GENERALES accept
-                //'Accept:' . 'application/xml; charset=utf-8',
-                //'Accept:' . 'application/json;
-            ];
-            // NRPS service
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
-            // AGS services
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3');
-            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3');
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/results?type_id=3');
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3');
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/webservice/rest/server.php?wstoken=383fbc2711788ea4cc3e8cd7b902c355');
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_HEADER, 1);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            if ($method === 'POST') {
-                curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
-                $headers[] = 'Content-Type: ' . 'application/json';
-            }
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-            $response = curl_exec($ch);
-            if (curl_errno($ch)){
-                echo 'Request Error:' . curl_error($ch);
-            }
-            $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-            curl_close ($ch);
-
-            $resp_headers = substr($response, 0, $header_size);
-            $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS POST) BEARER TOKEN: </b>');
-            //return
-            print_r([
-                'headers' => array_filter(explode("\r\n", $resp_headers)),
-                'body' => json_decode($resp_body, true),
-            ]);
-            ///
-            ///  Service Request AGS(POST)
-            ///  BEARER TOKEN (FIN)
-            ///////////////////////////////////////////////
-
-
-            ///
+            /// AGS
             /// ACCESS TOKEN    (FIN)
             ///////////////////////////////////////////////
 
@@ -508,181 +292,6 @@ try {
                 /// Formulario Edición Instructor
                 ///////////////////////////////////////////////////////////
 
-                //CAMBIAR SERVICIOS LINEITEMS
-                /////////////////////////////
-                /// NPRS
-                //print_r($post_param);
-                // https://moodle.org/mod/forum/discuss.php?d=391538#p1606269
-                //$post_param["https://purl.imsglobal.org/spec/lti-nrps/claim/namesroleservice"]["context_memberships_url"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3';
-                //$post_param["https://purl.imsglobal.org/spec/lti-nrps/claim/namesroleservice"]["service_versions"]='2.0';
-                //print_r($post_param);
-                /// AGS
-                //print_r($post_param);
-                // https://moodle.org/mod/forum/discuss.php?d=391538#p1606269
-                //$post_param["https://purl.imsglobal.org/spec/lti-ags/claim/endpoint"]["lineitem"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3';
-                //$post_param["https://purl.imsglobal.org/spec/lti-ags/claim/endpoint"]["lineitems"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/scores?type_id=3';
-                echo '<br/><br/><b>JWT:</b>';
-                print_r($post_param);
-
-                //LAUNCH ID
-                ///////////
-                $launch_id = $launch->get_launch_id();
-                echo '<br/><br/><b>LAUNCH ID:</b>' . json_encode($launch_id);
-
-                //$launch = LTI\LTI_Message_Launch::from_cache($launch_id, new Iss_Target_Lti_Database($post_param));
-
-                //SERVICES
-                //////////
-                // NPRS (Names and Role Provisioning Services)
-                if (!$launch->has_nrps()) {
-                    throw new Exception("Don't have names and roles!");
-                }
-                $nrps = $launch->get_nrps();
-                echo '<br/><br/><b>NRPS:</b>' . json_encode($nrps);
-                //print_r($nrps);
-
-                echo '<br/><br/><b>CUSTOM (CONTEXT)</b>:';
-                print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/custom']);
-
-                $members = $nrps->get_members();
-                echo '<br/><br/><b>MEMBERS:</b>' . json_encode(($members ? $members : '[]'));
-                //print_r(($members ? $members : []));
-
-                // AGS (Assignment and Grade Services)
-                if (!$launch->has_ags()) {
-                    throw new Exception("Don't have grades!");
-                }
-
-                echo '<br/><br/><b>ENDPOINT (SCOPE)</b>:';
-                print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
-
-                $grades = $launch->get_ags();
-                echo '<br/><br/><b>GRADES1:</b>' . json_encode($grades);
-                //print_r($grades);
-
-                $time = LTI\LTI_Grade::new()
-                    ->set_score_given(1)
-                    ->set_score_maximum(999)
-                    ->set_timestamp(date(DateTime::ISO8601))
-                    ->set_activity_progress('Completed')
-                    ->set_grading_progress('FullyGraded')
-                    ->set_submission_review(0)
-                    ->set_user_id($launch->get_launch_data()['sub']);
-                $time_lineitem = LTI\LTI_Lineitem::new()
-                    ->set_tag('time')
-                    ->set_score_maximum(999)
-                    ->set_label('Time Taken')
-                    ->set_resource_id('time'.$launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-                echo '<br/><br/><b>GRADES->PUT_GRADE(TIME)0</b>:';
-                echo json_encode($grades->put_grade($time, $time_lineitem));
-
-                $score = LTI\LTI_Grade::new()
-                    ->set_score_given(60)
-                    ->set_score_maximum(100)
-                    ->set_timestamp(date(DateTime::ISO8601))
-                    ->set_activity_progress('Completede')
-                    ->set_grading_progress('FullyGradede')
-                    ->set_user_id($launch->get_launch_data()['sub']);
-                $score_lineitem = LTI\LTI_Lineitem::new()
-                    ->set_id('score' . date(DateTime::ISO8601))
-                    ->set_tag('score')
-                    ->set_score_maximum(100)
-                    ->set_label('Score')
-                    ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']+1);
-                    //->set_resource_id(['resourceId' => ["title" => "Sistema LTI Publicación NO EDICION (10020220606125826000000a)", "id" => 9 ]])
-
-                echo '<br/><br/><b>GRADES->PUT_GRADE()0</b>:';
-                echo json_encode($grades->put_grade($score, $score_lineitem));
-
-                $grade = LTI\LTI_Grade::new()
-                    ->set_score_given(20)
-                    ->set_score_maximum(100)
-                    ->set_timestamp(date(DateTime::ISO8601))
-                    ->set_activity_progress('Completed')
-                    ->set_grading_progress('FullyGraded')
-                    ->set_user_id($launch->get_launch_data()['sub']);
-                echo '<br/><br/><b>GRADE</b>:' . json_encode($grade);
-                //print_r($grade);
-
-                echo '<br/><br/><b>GRADES->PUT_GRADE()1</b>:';
-                echo json_encode($grades->put_grade($grade));
-                //print_r($grades);
-
-                $score_lineitem = LTI\LTI_Lineitem::new()
-                    ->set_tag('score')
-                    ->set_score_maximum(100)
-                    ->set_label('Score')
-                    ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-
-                $scores = $grades->get_grades($score_lineitem);
-
-                $time_lineitem = LTI\LTI_Lineitem::new()
-                    ->set_tag('time')
-                    ->set_score_maximum(999)
-                    ->set_label('Time Taken')
-                    ->set_resource_id('time'.$launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
-                $times = $grades->get_grades($time_lineitem);
-
-                $members = $launch->get_nrps()->get_members();
-
-                $scoreboard = [];
-
-                foreach ($scores as $score) {
-                    $result = ['score' => $score['resultScore']];
-                    foreach ($times as $time) {
-                        if ($time['userId'] === $score['userId']) {
-                            $result['time'] = $time['resultScore'];
-                            break;
-                        }
-                    }
-                    foreach ($members as $member) {
-                        if ($member['user_id'] === $score['userId']) {
-                            $result['name'] = $member['name'];
-                            break;
-                        }
-                    }
-                    $scoreboard[] = $result;
-                }
-                echo json_encode($scoreboard);
-
-                $grades = $launch->get_ags();
-                echo '<br/><br/><b>GRADES2</b>:' . json_encode($grades);
-                //print_r($grades);
-
-                $lineitem = LTI\LTI_Lineitem::new()
-                    ->set_id(2121)
-                    ->set_tag(['grade1'])
-                    ->set_score_maximum(100)
-                    ->set_label('Grade');
-                echo '<br/><br/><b>LINEITEM1</b>:' . json_encode($lineitem);
-                print_r($lineitem);
-
-                echo '<br/><br/><b>GRADES->PUT_GRADE()2</b>:';
-                echo json_encode($grades->put_grade($grade, $lineitem));
-                //print_r($grades);
-
-                $grades = $launch->get_ags();
-                echo '<br/><br/><b>GRADES3</b>:' . json_encode($grades);
-                //print_r($grades);
-
-                $lineitem = LTI\LTI_Lineitem::new()
-                    ->set_tag('grade2')
-                    ->set_score_maximum(100)
-                    ->set_label('Grade');
-                echo '<br/><br/><b>LINEITEM2</b>:' . json_encode($lineitem);
-                //print_r($lineitem);
-
-                echo '<br/><br/><b>ENDPOINT</b>:';
-                //print_r($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']);
-
-                echo '<br/><br/><b>GRADES->PUT_GRADE()3</b>:';
-                echo json_encode($grades->put_grade($grade, $lineitem));
-                //print_r($grades);
-
-                $grades = $launch->get_ags();
-                echo '<br/><br/><b>GRADES4</b>:' . json_encode($grades);
-                //print_r($grades);
-
             }
             ///////////////
             /// Alumno
@@ -692,12 +301,12 @@ try {
 
                 // ERROR file_get_content()
                 ///////////////////////////
-                $w = stream_get_wrappers();
-                echo '<br/><br/>';
-                echo 'openssl: ', extension_loaded('openssl') ? 'yes' : 'no', "\n";
-                echo 'http wrapper: ', in_array('http', $w) ? 'yes' : 'no', "\n";
-                echo 'https wrapper: ', in_array('https', $w) ? 'yes' : 'no', "\n";
-                echo 'wrappers: ', var_export($w);
+                //$w = stream_get_wrappers();
+                //echo '<br/><br/>';
+                //echo 'openssl: ', extension_loaded('openssl') ? 'yes' : 'no', "\n";
+                //echo 'http wrapper: ', in_array('http', $w) ? 'yes' : 'no', "\n";
+                //echo 'https wrapper: ', in_array('https', $w) ? 'yes' : 'no', "\n";
+                //echo 'wrappers: ', var_export($w);
 
                 // DIV cross-browser and fully responsive
                 // https://www.nodejsauto.com/2020/08/iframe-where-src-what-is-blob.html

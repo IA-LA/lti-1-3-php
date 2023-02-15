@@ -42,7 +42,7 @@ define("TOOL_REDIR",
         ? (TOOL_HOST . "/launch.php" . "?iss=" . TOOL_PARAMS_ISS . "&target_link_uri=" . TOOL_PARAMS_TARGET)
         // Tareas internas publicadas en cerrado
         : (preg_match("/\/publicacion\/[a-f,0-9]{24}/", TOOL_PARAMS_TARGET)
-            // Tareas publicadas en Ágora
+            // Tareas publicadas en Ágora UNED
             ? (preg_match("/https:\/\/agora\.uned\.es/", TOOL_PARAMS_ISS)
                 // Actividades publicadas como administrador
                 ? (preg_match("/\/publicacion\/100/", TOOL_PARAMS_TARGET)
@@ -72,12 +72,15 @@ define("TOOL_REDIR",
                         )
                     )
                 )
-                // Tareas publicadas en cerrado en Plataforma Local
+                // Tareas publicadas en Plataforma LOCAL
                 : (preg_match("/:\/\/ailanto-dev\.intecca\.uned\.es/", TOOL_PARAMS_ISS)
                     // Tareas publicadas por administrador
                     ? (preg_match("/\/publicacion\/100/", TOOL_PARAMS_TARGET)
                         // Tareas publicadas por DEMO
-                        ? (TOOL_HOST . "/lms/giccu/diffusion.php")
+                        ? preg_match("/\/publicacion\/100202206/", TOOL_PARAMS_TARGET)
+                            // Tareas publicadas para pruebas AGS
+                            ? (TOOL_HOST . "/lms/giccu/diffusion.php")
+                            : (TOOL_HOST . "/lms/giccu/editor.php")
                         : (preg_match("/\/publicacion\/101/", TOOL_PARAMS_TARGET)
                             ? (TOOL_HOST . "/lms/publish.php")
                             // Tareas publicadas por CTU
@@ -88,7 +91,7 @@ define("TOOL_REDIR",
                                 )
                             )
                     )
-                    // Tareas publicadas en cerrado REsto Plataformas
+                    // Tareas publicadas REsto Plataformas
                     : (TOOL_HOST . "/launch.php")
                 )
             )
