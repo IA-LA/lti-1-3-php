@@ -493,7 +493,7 @@ try {
                     ->set_timestamp(date(DateTime::ISO8601))
                     ->set_activity_progress('Completede')
                     ->set_grading_progress('FullyGradede')
-                    ->set_user_id($launch->get_launch_data()['sub']);
+                    ->set_user_id(4);
                 $score_lineitem = LTI\LTI_Lineitem::new()
                     ->set_id('score' . date(DateTime::ISO8601))
                     ->set_tag('score')
