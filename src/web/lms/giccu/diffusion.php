@@ -271,13 +271,13 @@ try {
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($auth_request));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            $resp = curl_exec($ch);
-            $token_data_ags = json_decode($resp, true);
+            $resp_ags = curl_exec($ch);
+            $token_data_ags = json_decode($resp_ags, true);
             curl_close ($ch);
 
             echo "<br/><br/><b>(AGS) ACCESS TOKEN: </b>";
             print_r($ch);
-            print_r($resp);
+            print_r($resp_ags);
             print_r($token_data_ags);
             echo($token_data_ags['access_token']);
 
@@ -488,11 +488,11 @@ try {
                 //print_r($grades);
 
                 $score = LTI\LTI_Grade::new()
-                    ->set_score_given('12')
+                    ->set_score_given('60')
                     ->set_score_maximum(100)
                     ->set_timestamp(date(DateTime::ISO8601))
-                    ->set_activity_progress('Completed')
-                    ->set_grading_progress('FullyGraded')
+                    ->set_activity_progress('Completede')
+                    ->set_grading_progress('FullyGradede')
                     ->set_user_id($launch->get_launch_data()['sub']);
                 $score_lineitem = LTI\LTI_Lineitem::new()
                     ->set_id('score' . date(DateTime::ISO8601))
@@ -704,9 +704,9 @@ try {
                     echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
                         '<script id="data" type="application/json">
                           {
-                            "id_token": ' . print_r($_REQUEST['jwt_token']) . ',
-                            "auth_token_nrps": ' . print_r($token_data) . ',
-                            "auth_token_ags": ' . print_r($token_data_ags) . '
+                            "id_token": ' . $_REQUEST['jwt_token'] . ',
+                            "auth_token_nrps": ' . $resp . ',
+                            "auth_token_ags": ' . $resp_ags . '
                           }
                         </script>
                          <script blocking="render">
