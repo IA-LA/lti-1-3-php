@@ -357,7 +357,7 @@ try {
             ///  Service Request AGS(PUT)
             ///  BEARER TOKEN (INICIO)
             ///
-            $method = 'GET';
+            $method = 'POST';
             $body = null;
             $ch = curl_init();
 
