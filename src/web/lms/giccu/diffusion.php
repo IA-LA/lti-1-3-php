@@ -488,7 +488,7 @@ try {
                 //print_r($grades);
 
                 $time = LTI\LTI_Grade::new()
-                    ->set_score_given(0)
+                    ->set_score_given(1)
                     ->set_score_maximum(999)
                     ->set_timestamp(date(DateTime::ISO8601))
                     ->set_activity_progress('Completed')
