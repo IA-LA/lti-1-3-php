@@ -704,7 +704,7 @@ try {
                     echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
                         '<script id="data" type="application/json">
                           {
-                            "id_token": ' . $_REQUEST['jwt_token'] . ',
+                            "id_token": ' . $_REQUEST['idt_token'] . ',
                             "auth_token_nrps": ' . $resp . ',
                             "auth_token_ags": ' . $resp_ags . '
                           }
