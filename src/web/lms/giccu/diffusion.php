@@ -243,9 +243,9 @@ try {
             ];
 
             //
-            // ERROR: { "error" : "invalid_request" }
-            // ERROR: { "error" : "invalid_client" }
-            // ERROR: { "error" : ""kid" empty, unable to lookup correct key" }
+            // ERROR:
+            // ERROR:
+            // ERROR: {"status":401,"reason":"Unauthorized","request":{"method":"POST","url":"\/mod\/lti\/services.php\/2\/lineitems\/32\/lineitem\/scores?type_id=3","accept":"application\/json","contentType":"application\/vnd.ims.lis.v1.score+json"}}}
             //$headers = [
             //    'kid: ff25d970a021ff7cdad1',
             //];
@@ -448,7 +448,7 @@ try {
                 // https://moodle.org/mod/forum/discuss.php?d=391538#p1606269
                 //$post_param["https://purl.imsglobal.org/spec/lti-ags/claim/endpoint"]["lineitem"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3';
                 //$post_param["https://purl.imsglobal.org/spec/lti-ags/claim/endpoint"]["lineitems"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/scores?type_id=3';
-                echo '<br/><br/><b>JWT :</b>';
+                echo '<br/><br/><b>JWT:</b>';
                 print_r($post_param);
 
                 //LAUNCH ID
@@ -494,13 +494,13 @@ try {
                     ->set_activity_progress('Completed')
                     ->set_grading_progress('FullyGraded')
                     ->set_user_id($launch->get_launch_data()['sub']);
-                $score_lineitem = null;
-                    //LTI\LTI_Lineitem::new()
-                    //->set_tag('score')
-                    //->set_score_maximum(100)
-                    //->set_label('Score')
+                $score_lineitem = LTI\LTI_Lineitem::new()
+                    ->set_tag('score')
+                    ->set_score_maximum(100)
+                    ->set_label('Score')
+                    ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
                     //->set_resource_id(['resourceId' => ["title" => "Sistema LTI Publicación NO EDICION (10020220606125826000000a)", "id" => 9 ]])
-                    //
+
                 echo '<br/><br/><b>GRADES->PUT_GRADE()0</b>:';
                 echo json_encode($grades->put_grade($score, $score_lineitem));
 
