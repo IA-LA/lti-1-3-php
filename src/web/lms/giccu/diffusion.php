@@ -489,7 +489,7 @@ try {
 
                 $score = LTI\LTI_Grade::new()
                     ->set_score_given('60')
-                    ->set_score_maximum(100)
+                    ->set_score_maximum('100')
                     ->set_timestamp(date(DateTime::ISO8601))
                     ->set_activity_progress('Completede')
                     ->set_grading_progress('FullyGradede')
@@ -497,7 +497,7 @@ try {
                 $score_lineitem = LTI\LTI_Lineitem::new()
                     ->set_id('score' . date(DateTime::ISO8601))
                     ->set_tag('score')
-                    ->set_score_maximum(100)
+                    ->set_score_maximum('100')
                     ->set_label('Score')
                     ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']+1);
                     //->set_resource_id(['resourceId' => ["title" => "Sistema LTI Publicación NO EDICION (10020220606125826000000a)", "id" => 9 ]])
@@ -700,6 +700,9 @@ try {
                     '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>',
                     '-->';
 
+                    //
+                    // TOKENS CLIENTE (json)
+                    ////////////////////////
                     // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiResourceLinkRequest
                     echo '<!-- <hr/><br/><b>Resource Link Request Launch!</b> -->',
                         '<script id="data" type="application/json">
