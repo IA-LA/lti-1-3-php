@@ -488,11 +488,12 @@ try {
                 //print_r($grades);
 
                 $time = LTI\LTI_Grade::new()
-                    ->set_score_given($_REQUEST['time'])
+                    ->set_score_given(0)
                     ->set_score_maximum(999)
                     ->set_timestamp(date(DateTime::ISO8601))
                     ->set_activity_progress('Completed')
                     ->set_grading_progress('FullyGraded')
+                    ->set_submission_review(0)
                     ->set_user_id($launch->get_launch_data()['sub']);
                 $time_lineitem = LTI\LTI_Lineitem::new()
                     ->set_tag('time')
