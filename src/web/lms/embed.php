@@ -215,13 +215,12 @@ try {
                 var iframe = document.getElementById("embedE");
                 //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
                 var scriptSource = ' . $authTokenData . ';
-                //var script = iframeDocument.createElement("script");
                 var script = document.createElement("script");
                 script.setAttribute("id","data");
                 script.setAttribute("type","application/json");
-                var source = iframeDocument.createTextNode(scriptSource);
+                var source = document.createTextNode(scriptSource);
                 script.appendChild(source);
-                iframeDocument.body.appendChild(script);
+                document.body.appendChild(script);
             }
         </script>
         <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
