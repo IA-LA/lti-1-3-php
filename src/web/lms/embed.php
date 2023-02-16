@@ -211,10 +211,10 @@ try {
                 var iframe = document.getElementById("embedE");
                 //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
                 var scriptSource = ' . $authTokenData . ';
-                var script = iframe.contentDocument.createElement("script");
+                var script = iframe.createElement("script");
                 //script.setAttribute("id","data");
                 //script.setAttribute("type","application/json");
-                var source = iframe.contentDocument.createTextNode(scriptSource);
+                var source = iframe.createTextNode(scriptSource);
                 script.appendChild(source);
                 // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
                 //var body = iframe.contentDocument.getElementsByTagName("body");
