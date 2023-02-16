@@ -200,8 +200,7 @@ try {
     $authTokenScript='function loadToken() {
                             var iframe = document.getElementById(\'embedE\');
                             var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-                            var scriptSource = ' . $authTokenData . '
-                                  };
+                            var scriptSource = ' . $authTokenData . ';
                             var script = iframeDocument.createElement(\'script\');
                             script.setAttribute(\'id\',\'data\');
                             script.setAttribute(\'type\',\'application/json\');
