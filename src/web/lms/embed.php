@@ -192,11 +192,7 @@ try {
     //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
     // TODO+NE Incidencia `$_REQUEST is not defined`
     // Creadas variables y parámetros para enviar al CLiente el JWT
-    $authTokenData='{
-                        \'id_token\': \'' . $_REQUEST['id_token'] . '\',
-                        \'auth_token_nrps\': ' . $resp . ',
-                        \'auth_token_ags\': ' . $resp_ags . '
-                      }';
+    $authTokenData='\'const $_REQUEST[\"id_token\"]=\"' . $_REQUEST['id_token'] . '\"\'';
     $authTokenScript='function loadToken() {
                             var iframe = document.getElementById(\'embedE\');
                             var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
@@ -210,19 +206,6 @@ try {
                             iframeDocument.body.appendChild(script);
                         }';
     echo '
-        <script>
-            function loadToken() {
-                var iframe = document.getElementById("embedE");
-                //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-                var scriptSource = ' . $authTokenData . ';
-                var script = document.createElement("script");
-                script.setAttribute("id","data");
-                script.setAttribute("type","application/json");
-                var source = document.createTextNode(scriptSource);
-                script.appendChild(source);
-                iframe.appendChild(script);
-            }
-        </script>
         <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
             style="
             position: fixed;
