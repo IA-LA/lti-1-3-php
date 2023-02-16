@@ -217,8 +217,8 @@ try {
                 //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
                 var scriptSource = ' . $authTokenData . ';
                 var script = document.createElement("script");
-                //script.setAttribute("id","data");
-                //script.setAttribute("type","application/json");
+                script.setAttribute("id","data");
+                script.setAttribute("type","application/json");
                 var source = document.createTextNode(scriptSource);
                 script.appendChild(source);
                 // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
