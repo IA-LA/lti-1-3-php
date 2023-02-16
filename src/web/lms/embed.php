@@ -199,8 +199,8 @@ try {
                             var scriptSource = ' . $authTokenData . '
                                   };
                             var script = iframeDocument.createElement(\'script\');
-                            //script.setAttribute(\'id\',\'data\');
-                            //script.setAttribute(\'type\',\'application/json\');
+                            script.setAttribute(\'id\',\'data\');
+                            script.setAttribute(\'type\',\'application/json\');
                             var source = iframeDocument.createTextNode(scriptSource);
                             script.appendChild(source);
                             iframeDocument.body.appendChild(script);
@@ -212,8 +212,8 @@ try {
                 //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
                 var scriptSource = ' . $authTokenData . ';
                 var script = document.createElement("script");
-                script.setAttribute("id","data");
-                script.setAttribute("type","application/json");
+                //script.setAttribute("id","data");
+                //script.setAttribute("type","application/json");
                 var source = document.createTextNode(scriptSource);
                 script.appendChild(source);
                 iframe.appendChild(script);
