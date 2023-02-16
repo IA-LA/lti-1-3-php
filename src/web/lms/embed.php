@@ -218,6 +218,9 @@ try {
     echo '
         <script>
             function loadToken() {
+                /* 
+                    https://javascript.info/cross-window-communication
+                 */
                 var iframe = document.getElementById("embedE");
                 //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
                 //var scriptSource = ' . '$authTokenData' . ';
@@ -233,7 +236,7 @@ try {
                 // var body = innerDoc.getElementsByTagName("body");
                 // body.appendChild(script);
                 iframe.appendChild(script);
-                document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
+                //document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
             }
         </script>
         <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
