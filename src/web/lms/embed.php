@@ -198,7 +198,7 @@ try {
                         "id_token\":\"' . $resp . '\",
                         "id_token\":\"' . $resp_ags . '\"
                     };\'';
-    $authTokenData='{
+    $authTokenData='var $_REQUEST = {
                     "id_token": "' . $_REQUEST['id_token'] . '",
                     "auth_token_nrps": ' . $resp . ',
                     "auth_token_ags": ' . $resp_ags . '
