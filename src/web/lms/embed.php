@@ -217,7 +217,7 @@ try {
                 var source = document.createTextNode(scriptSource);
                 script.appendChild(source);
                 var body = iframe.getElementsByTagName("body");
-                body[0].appendChild(script);
+                body.appendChild(script);
                 //iframe.appendChild(script);
             }
         </script>
@@ -226,7 +226,7 @@ try {
             position: fixed;
             top: 0;
             bottom: 0;
-            right: 0;au
+            right: 0;
             width: 100%;
             border: none;
             margin: 0;
