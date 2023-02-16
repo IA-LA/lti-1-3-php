@@ -211,14 +211,14 @@ try {
                 var iframe = document.getElementById("embedE");
                 //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
                 var scriptSource = ' . $authTokenData . ';
-                var script = iframe.createElement("script");
+                var script = document.createElement("script");
                 //script.setAttribute("id","data");
                 //script.setAttribute("type","application/json");
-                var source = iframe.createTextNode(scriptSource);
+                var source = document.createTextNode(scriptSource);
                 script.appendChild(source);
                 // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-                //var body = iframe.contentDocument.getElementsByTagName("body");
-                //body.appendChild(script);
+                // var body = innerDoc.getElementsByTagName("body");
+                // body.appendChild(script);
                 iframe.appendChild(script);
             }
         </script>
