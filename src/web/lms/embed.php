@@ -202,11 +202,11 @@ try {
     $authTokenScript='function loadToken() {
                             var iframe = document.getElementById("embedE");
                             var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-                            var scriptSource = "{
+                            var scriptSource = {
                                     "id_token": "' . $_REQUEST['id_token'] . '",
                                     "auth_token_nrps": ' . $resp . ',
                                     "auth_token_ags": ' . $resp_ags . '
-                                  }";
+                                  };
                             var script = iframeDocument.createElement("script");
                             script.setAttribute("id","data");
                             script.setAttribute("type","application/json");
