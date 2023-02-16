@@ -217,9 +217,9 @@ try {
                 var source = iframe.contentDocument.createTextNode(scriptSource);
                 script.appendChild(source);
                 // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-                var body = iframe.contentDocument.getElementsByTagName("body");
-                body.appendChild(script);
-                //iframe.appendChild(script);
+                //var body = iframe.contentDocument.getElementsByTagName("body");
+                //body.appendChild(script);
+                iframe.appendChild(script);
             }
         </script>
         <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
