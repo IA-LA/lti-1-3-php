@@ -213,9 +213,10 @@ try {
         <script>
             function loadToken() {
                 var iframe = document.getElementById("embedE");
-                var iframeDocument = iframe.contentDocument;// || iframe.contentWindow.document;
+                //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
                 var scriptSource = ' . $authTokenData . ';
-                var script = iframeDocument.createElement("script");
+                //var script = iframeDocument.createElement("script");
+                var script = document.createElement("script");
                 script.setAttribute("id","data");
                 script.setAttribute("type","application/json");
                 var source = iframeDocument.createTextNode(scriptSource);
