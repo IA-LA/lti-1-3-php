@@ -98,7 +98,7 @@ try {
 
             ///////////////////////////////////////////////
             /// ACCESS TOKEN (INICIO)
-            ///
+            /// NRPS
 
             // Build up JWT to exchange for an auth token
             $client_id = $post_param['aud'];
@@ -222,7 +222,7 @@ try {
             ///  BEARER TOKEN (FIN)
             ///////////////////////////////////////////////
 
-            ///
+            /// NRPS
             /// ACCESS TOKEN    (FIN)
             ///////////////////////////////////////////////
 
@@ -426,7 +426,7 @@ try {
             ///////////////////////////////////////////////
 
 
-            ///
+            /// AGS
             /// ACCESS TOKEN    (FIN)
             ///////////////////////////////////////////////
 
@@ -510,7 +510,7 @@ try {
 
                 //CAMBIAR SERVICIOS LINEITEMS
                 /////////////////////////////
-                /// NPRS
+                /// NRPS
                 //print_r($post_param);
                 // https://moodle.org/mod/forum/discuss.php?d=391538#p1606269
                 //$post_param["https://purl.imsglobal.org/spec/lti-nrps/claim/namesroleservice"]["context_memberships_url"]='http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3';
@@ -533,7 +533,7 @@ try {
 
                 //SERVICES
                 //////////
-                // NPRS (Names and Role Provisioning Services)
+                // NRPS (Names and Role Provisioning Services)
                 if (!$launch->has_nrps()) {
                     throw new Exception("Don't have names and roles!");
                 }

@@ -170,7 +170,7 @@ try {
 
         //SERVICES
         //////////
-        // NPRS (Names and Role Provisioning Services)
+        // NRPS (Names and Role Provisioning Services)
         if (!$launch->has_nrps()) {
             throw new Exception("Don't have names and roles!");
         }

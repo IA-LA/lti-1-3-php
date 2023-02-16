@@ -68,6 +68,124 @@ try {
     //header('Location: ' . TOOL_PARAMS_TARGET, true, 302);
     //die;
 
+    ///////////////////////////////////////////////
+    /// ACCESS TOKEN (INICIO)
+    /// NRPS
+
+    // Build up JWT to exchange for an auth token
+    $client_id = $post_param['aud'];
+    $jwt_claim = [
+        "iss" => '$client_id',
+        "sub" => $client_id,
+        "aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
+        "iat" => time() - 5,
+        "exp" => time() + 60,
+        "jti" => 'lti-service-token_' . hash('sha256', random_bytes(64))
+    ];
+
+    //
+    // ERROR: { "error" : "invalid_request" }
+    // ERROR: { "error" : "invalid_client" }
+    // ERROR: { "error" : ""kid" empty, unable to lookup correct key" }
+    //$headers = [
+    //    'kid: ff25d970a021ff7cdad1',
+    //];
+    $kid=[];
+    $kid[0]='ff25d970a021ff7cdad1';
+    // Sign the JWT with our private key (given by the platform on registration)
+    $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/private.key'), 'RS256', 'TRwtvqCcefOWuXU3-Dt4d26vCQExxh14vTO7_A375Pw');
+    //$jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/tool.key'), 'RS256');
+
+    // Build auth token request headers
+    $auth_request = [
+        'grant_type' => 'client_credentials',
+        'client_assertion_type' => 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+        'client_assertion' => $jwt,
+        'scope' => 'https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly',
+        //'scope' => implode(' ', ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"])
+    ];
+
+    // Make request to get auth token
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/token.php');
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($auth_request));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    $resp = curl_exec($ch);
+    $token_data = json_decode($resp, true);
+    curl_close ($ch);
+
+    //echo "<br/><br/><b>(NRPS) ACCESS TOKEN: </b>";
+    //print_r($ch);
+    //print_r($resp);
+    //print_r($token_data);
+    //echo($token_data['access_token']);
+
+    /// NRPS
+    /// ACCESS TOKEN    (FIN)
+    ///////////////////////////////////////////////
+
+
+    ///////////////////////////////////////////////
+    /// ACCESS TOKEN (INICIO)
+    /// AGS
+
+    // Build up JWT to exchange for an auth token
+    $client_id = $post_param['aud'];
+    $jwt_claim = [
+        "iss" => '$client_id',
+        "sub" => $client_id,
+        "aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
+        "iat" => time() - 5,
+        "exp" => time() + 60,
+        "jti" => 'lti-service-token_' . hash('sha256', random_bytes(64))
+    ];
+
+    //
+    // ERROR:
+    // ERROR: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/json
+    // ERROR: HTTP/1.1 400 Incorrect score received
+    // ERROR: {"status":401,"reason":"Unauthorized","request":{"method":"POST","url":"\/mod\/lti\/services.php\/2\/lineitems\/32\/lineitem\/scores?type_id=3","accept":"application\/json","contentType":"application\/vnd.ims.lis.v1.score+json"}}}
+    //$headers = [
+    //    'kid: ff25d970a021ff7cdad1',
+    //];
+    $kid=[];
+    $kid[0]='ff25d970a021ff7cdad1';
+    // Sign the JWT with our private key (given by the platform on registration)
+    $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/private.key'), 'RS256', 'TRwtvqCcefOWuXU3-Dt4d26vCQExxh14vTO7_A375Pw');
+    //$jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../../db/tool.key'), 'RS256');
+
+    // Build auth token request headers
+    $auth_request = [
+        'grant_type' => 'client_credentials',
+        'client_assertion_type' => 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+        'client_assertion' => $jwt,
+        //'scope' => 'https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly',
+        'scope' => implode(' ', ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"])
+    ];
+
+    // Make request to get auth token
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/token.php');
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($auth_request));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    $resp_ags = curl_exec($ch);
+    $token_data_ags = json_decode($resp_ags, true);
+    curl_close ($ch);
+
+    //echo "<br/><br/><b>(AGS) ACCESS TOKEN: </b>";
+    //print_r($ch);
+    //print_r($resp_ags);
+    //print_r($token_data_ags);
+    //echo($token_data_ags['access_token']);
+
+    /// AGS
+    /// ACCESS TOKEN    (FIN)
+    ///////////////////////////////////////////////
+
     // IFRAME FULL PAGE cross-browser and fully responsive
     //  https://stackoverflow.com/questions/17710039/full-page-iframe
     // ALTERNATIVES
@@ -86,7 +204,15 @@ try {
         padding: 0;
         overflow: hidden;
         z-index: 999999;
-        height: 100%;"/>
+        height: 100%;">
+            <script id="data" type="application/json">
+              {
+                "id_token": "' . $_REQUEST['id_token'] . '",
+                "auth_token_nrps": ' . $resp . ',
+                "auth_token_ags": ' . $resp_ags . '
+              }
+            </script>    
+        <embed/>
         <!--
         <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
         allowfullscreen="true" allowpaymentrequest="true"
@@ -104,22 +230,22 @@ try {
         height: 100%;"></iframe>
         -->' .
         '<!--',
-    '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
-    '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
-    '<hr/>',
-    '<br/><b>PLATFORM:</b> <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/tool_platform']['name'], '</a></b>',
-    '<hr/>',
-    '<br/><b>ISS: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', $post_param['iss'], '</a></b>',
-    '<br/><b>LOGIN_HINT: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', "no disponible", '</a></b>',
-    '<br/><b>TARGET_LINK_URI: <a href="http://Hecho.que.Lti_Database.tome.TARGET_LINK_URI.de.la.llamada.GET/POST">', $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'], '</a></b>',
-    '<br/><b>LTI_MESSAGE_HINT: <a href="http://Hecho.que.Lti_Database.tome.LTI_MESSAGE_HINT.de.la.llamada.GET/POST">', $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"], '</a></b>',
-    '<br/><b>TYPE: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/message_type'], '</a></b>',
-    '<br/><b>VERSION: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/version'], '</a></b>',
-    '<br/><b>USER: <a href="http://">', $post_param['name'], '</a></b>',
-    '<br/><b>EMAIL: <a href="http://">', $post_param['email'], '</a></b>',
-    '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>',
-    '-->'
-    ;
+        '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
+        '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
+        '<hr/>',
+        '<br/><b>PLATFORM:</b> <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/tool_platform']['name'], '</a></b>',
+        '<hr/>',
+        '<br/><b>ISS: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', $post_param['iss'], '</a></b>',
+        '<br/><b>LOGIN_HINT: <a href="http://Hecho.que.Lti_Database.tome.este.parámetro.ISS.de.la.llamada.GET/POST">', "no disponible", '</a></b>',
+        '<br/><b>TARGET_LINK_URI: <a href="http://Hecho.que.Lti_Database.tome.TARGET_LINK_URI.de.la.llamada.GET/POST">', $post_param['https://purl.imsglobal.org/spec/lti/claim/target_link_uri'], '</a></b>',
+        '<br/><b>LTI_MESSAGE_HINT: <a href="http://Hecho.que.Lti_Database.tome.LTI_MESSAGE_HINT.de.la.llamada.GET/POST">', $post_param["https://purl.imsglobal.org/spec/lti/claim/resource_link"]["id"], '</a></b>',
+        '<br/><b>TYPE: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/message_type'], '</a></b>',
+        '<br/><b>VERSION: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/version'], '</a></b>',
+        '<br/><b>USER: <a href="http://">', $post_param['name'], '</a></b>',
+        '<br/><b>EMAIL: <a href="http://">', $post_param['email'], '</a></b>',
+        '<br/><b>ROL: <a href="http://">', $post_param['https://purl.imsglobal.org/spec/lti/claim/roles'][0], '</a></b>',
+        '-->'
+        ;
 
     ?>
     <!-- Contenido
