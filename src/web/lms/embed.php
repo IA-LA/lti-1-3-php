@@ -192,11 +192,7 @@ try {
     //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
     // TODO+NE Incidencia `$_REQUEST is not defined`
     // Creadas variables y parámetros para enviar al CLiente el JWT
-    $authTokenData='\'{
-                        \'id_token\': \'' . $_REQUEST['id_token'] . '\',
-                        \'auth_token_nrps\': ' . $resp . ',
-                        \'auth_token_ags\': ' . $resp_ags . '
-                      }\'';
+    $authTokenData='\'' . $_REQUEST['id_token'] . '\'';
     $authTokenScript='function loadToken() {
                             var iframe = document.getElementById(\'embedE\');
                             var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
