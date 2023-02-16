@@ -192,25 +192,47 @@ try {
     //  https://www.geeksforgeeks.org/alternative-to-iframes-in-html5/
     // TODO+NE Incidencia `$_REQUEST is not defined`
     // Creadas variables y parámetros para enviar al CLiente el JWT
+    $authTokenData='<script id="data" type="application/json">
+                          {
+                            "id_token": "' . $_REQUEST['id_token'] . '",
+                            "auth_token_nrps": ' . $resp . ',
+                            "auth_token_ags": ' . $resp_ags . '
+                          }
+                        </script>';
+    $authTokenScript='function loadToken() {
+                            var iframe = document.getElementById("embedE");
+                            var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+                            var scriptSource = "{
+                                    "id_token": "' . $_REQUEST['id_token'] . '",
+                                    "auth_token_nrps": ' . $resp . ',
+                                    "auth_token_ags": ' . $resp_ags . '
+                                  }";
+                            var script = iframeDocument.createElement("script");
+                            script.setAttribute("id","data");
+                            script.setAttribute("type","application/json");
+                            var source = iframeDocument.createTextNode(scriptSource);
+                            script.appendChild(source);
+                            iframeDocument.body.appendChild(script);
+                        }';
     echo '
         <script>
-        function loadToken() {
-            var iframe = document.getElementById("embedE");
-            var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-            var scriptSource = "{
-                    "id_token": "' . $_REQUEST['id_token'] . '",
-                    "auth_token_nrps": ' . $resp . ',
-                    "auth_token_ags": ' . $resp_ags . '
-                  }";
-            var script = iframeDocument.createElement("script");
-            script.setAttribute("id","data");
-            script.setAttribute("type","application/json");
-            var source = iframeDocument.createTextNode(scriptSource);
-            script.appendChild(source);
-            iframeDocument.body.appendChild(script);
+            function loadToken() {
+                var iframe = document.getElementById("embedE");
+                var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+                var scriptSource = "{
+                        "id_token": "' . $_REQUEST['id_token'] . '",
+                        "auth_token_nrps": ' . $resp . ',
+                        "auth_token_ags": ' . $resp_ags . '
+                      }";
+                var script = iframeDocument.createElement("script");
+                script.setAttribute("id","data");
+                script.setAttribute("type","application/json");
+                var source = iframeDocument.createTextNode(scriptSource);
+                script.appendChild(source);
+                iframeDocument.body.appendChild(script);
             }
         </script>
-        <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
+        <embed id="embede" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
             style="
             position: fixed;
             top: 0;
@@ -223,21 +245,7 @@ try {
             overflow: hidden;
             z-index: 999999;
             height: 100%;"
-            onload="loadToken() {
-            var iframe = document.getElementById("embedE");
-            var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-            var scriptSource = "{
-                    "id_token": "' . $_REQUEST['id_token'] . '",
-                    "auth_token_nrps": ' . $resp . ',
-                    "auth_token_ags": ' . $resp_ags . '
-                  }";
-            var script = iframeDocument.createElement("script");
-            script.setAttribute("id","data");
-            script.setAttribute("type","application/json");
-            var source = iframeDocument.createTextNode(scriptSource);
-            script.appendChild(source);
-            iframeDocument.body.appendChild(script);
-            }"/>
+            onload="' . $authTokenScript . '"/>
             <!--
             <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
             allowfullscreen="true" allowpaymentrequest="true"
