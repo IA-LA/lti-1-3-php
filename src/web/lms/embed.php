@@ -216,7 +216,8 @@ try {
                 //script.setAttribute("type","application/json");
                 var source = document.createTextNode(scriptSource);
                 script.appendChild(source);
-                iframe.appendChild(script);
+                iframe.getElementsByTagName("body").appendChild(script);
+                //iframe.appendChild(script);
             }
         </script>
         <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
