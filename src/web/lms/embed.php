@@ -221,7 +221,7 @@ try {
                 var iframe = document.getElementById("embedE");
                 //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
                 var scriptSource = ' . $authTokenData . ';
-                //var scriptSource = JSON.stringify(' . $authTokenData . ');
+                //var scriptSource = JSON.stringify(' . '$authTokenData' . ');
                 var script = document.createElement("script");
                 script.setAttribute("id","data");
                 script.setAttribute("type","application/json");
