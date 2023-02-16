@@ -236,7 +236,7 @@ try {
             overflow: hidden;
             z-index: 999999;
             height: 100%;"
-            onload="' . $authTokenScript . '"/>
+            onload="loadToken();"/>
             <!--
             <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
             allowfullscreen="true" allowpaymentrequest="true"
