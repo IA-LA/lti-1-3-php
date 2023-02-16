@@ -223,7 +223,21 @@ try {
             overflow: hidden;
             z-index: 999999;
             height: 100%;"
-            onload="loadToken()"/>
+            onload="loadToken() {
+            var iframe = document.getElementById("embedE");
+            var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+            var scriptSource = "{
+                    "id_token": "' . $_REQUEST['id_token'] . '",
+                    "auth_token_nrps": ' . $resp . ',
+                    "auth_token_ags": ' . $resp_ags . '
+                  }";
+            var script = iframeDocument.createElement("script");
+            script.setAttribute("id","data");
+            script.setAttribute("type","application/json");
+            var source = iframeDocument.createTextNode(scriptSource);
+            script.appendChild(source);
+            iframeDocument.body.appendChild(script);
+            }"/>
             <!--
             <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
             allowfullscreen="true" allowpaymentrequest="true"
