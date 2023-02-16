@@ -198,7 +198,7 @@ try {
                         "id_token\":\"' . $resp . '\",
                         "id_token\":\"' . $resp_ags . '\"
                     };\'';
-    $authTokenData='var $_REQUEST = {
+    $authTokenData='{
                     "id_token": "' . $_REQUEST['id_token'] . '",
                     "auth_token_nrps": ' . $resp . ',
                     "auth_token_ags": ' . $resp_ags . '
@@ -221,7 +221,7 @@ try {
                 var iframe = document.getElementById("embedE");
                 //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
                 //var scriptSource = ' . '$authTokenData' . ';
-                var scriptSource = JSON.stringify(' . $authTokenData . ');
+                var scriptSource = "var $_REQUEST = " + JSON.stringify(' . $authTokenData . ');
                 var script = document.createElement("script");
                 script.setAttribute("id","data");
                 script.setAttribute("type","application/json");
