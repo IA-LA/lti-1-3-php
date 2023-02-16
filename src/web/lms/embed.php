@@ -195,7 +195,7 @@ try {
     $authTokenData='{
                         \'id_token\': \'' . $_REQUEST['id_token'] . '\',
                         \'auth_token_nrps\': ' . $resp . ',
-                        \'auth_token_ags\': ' . $resp_ags . '
+                        \'auth_token_ags\': 0
                       }';
     $authTokenScript='function loadToken() {
                             var iframe = document.getElementById(\'embedE\');
