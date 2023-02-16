@@ -205,10 +205,9 @@ try {
         overflow: hidden;
         z-index: 999999;
         height: 100%;"/>
-        <scipt>
+        <script>
             var iframe = document.getElementById("embedE");
             var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-    
             var scriptSource = "{
                     "id_token": "' . $_REQUEST['id_token'] . '",
                     "auth_token_nrps": ' . $resp . ',
@@ -220,7 +219,7 @@ try {
             var source = iframeDocument.createTextNode(scriptSource);
             script.appendChild(source);
             iframeDocument.body.appendChild(script);
-        </scipt>
+        </script>
         <!--
         <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
         allowfullscreen="true" allowpaymentrequest="true"
