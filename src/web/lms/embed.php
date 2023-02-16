@@ -216,7 +216,8 @@ try {
                 //script.setAttribute("type","application/json");
                 var source = document.createTextNode(scriptSource);
                 script.appendChild(source);
-                var body = iframe.contentDocument.getElementsByTagName("body");
+                // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+                var body = iframe.contentWindow.document.getElementsByTagName("body");
                 body.appendChild(script);
                 //iframe.appendChild(script);
             }
