@@ -204,8 +204,10 @@ try {
         padding: 0;
         overflow: hidden;
         z-index: 999999;
-        height: 100%;"/>
+        height: 100%;"
+        onload="loadToken()"/>
         <script>
+        function loadToken() {
             var iframe = document.getElementById("embedE");
             var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
             var scriptSource = "{
@@ -219,6 +221,7 @@ try {
             var source = iframeDocument.createTextNode(scriptSource);
             script.appendChild(source);
             iframeDocument.body.appendChild(script);
+            }
         </script>
         <!--
         <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
