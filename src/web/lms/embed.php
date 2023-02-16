@@ -215,6 +215,8 @@ try {
                     "auth_token_ags": ' . $resp_ags . '
                   }";
             var script = iframeDocument.createElement("script");
+            script.setAttribute("id","data");
+            script.setAttribute("type","application/json");
             var source = iframeDocument.createTextNode(scriptSource);
             script.appendChild(source);
             iframeDocument.body.appendChild(script);
