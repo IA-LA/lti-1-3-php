@@ -223,7 +223,7 @@ try {
                 script.appendChild(source);
                 // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
                 var innerDoc = iframe.contentWindow;
-                document.write(JSON.stringify(script));
+                //document.write(JSON.stringify(script));
                 // var body = innerDoc.getElementsByTagName("body");
                 // body.appendChild(script);
                 iframe.appendChild(script);
