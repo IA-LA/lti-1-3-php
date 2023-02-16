@@ -235,7 +235,7 @@ try {
             overflow: hidden;
             z-index: 999999;
             height: 100%;"
-            onfinish=\'loadToken();\'/>
+            onload=\'loadToken();\'/>
             <!--
             <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
             allowfullscreen="true" allowpaymentrequest="true"
@@ -250,7 +250,8 @@ try {
             padding: 0;
             overflow: hidden;
             z-index: 999999;
-            height: 100%;"></iframe>
+            height: 100%;" 
+            onload=\'loadToken();\'></iframe>
             -->' .
             '<!--',
             '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
