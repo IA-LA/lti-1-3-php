@@ -193,18 +193,18 @@ try {
     // TODO+NE Incidencia `$_REQUEST is not defined`
     // Creadas variables y parámetros para enviar al CLiente el JWT
     $authTokenData='{
-                        "id_token": "' . $_REQUEST['id_token'] . '",
-                        "auth_token_nrps": ' . $resp . ',
-                        "auth_token_ags": ' . $resp_ags . '
+                        \'id_token\': \'' . $_REQUEST['id_token'] . '\',
+                        \'auth_token_nrps\': ' . $resp . ',
+                        \'auth_token_ags\': ' . $resp_ags . '
                       }';
     $authTokenScript='function loadToken() {
-                            var iframe = document.getElementById("embedE");
+                            var iframe = document.getElementById(\'embedE\');
                             var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
                             var scriptSource = ' . $authTokenData . '
                                   };
                             var script = iframeDocument.createElement("script");
-                            script.setAttribute("id","data");
-                            script.setAttribute("type","application/json");
+                            script.setAttribute(\'id\',\'data\');
+                            script.setAttribute(\'type\',\'application/json\');
                             var source = iframeDocument.createTextNode(scriptSource);
                             script.appendChild(source);
                             iframeDocument.body.appendChild(script);
