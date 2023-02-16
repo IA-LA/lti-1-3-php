@@ -232,7 +232,7 @@ try {
             overflow: hidden;
             z-index: 999999;
             height: 100%;"
-            onload=\'loadToken();document.write($_REQUEST["id_token"]);\'/>
+            onload=\'loadToken();\'/>
             <!--
             <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
             allowfullscreen="true" allowpaymentrequest="true"
