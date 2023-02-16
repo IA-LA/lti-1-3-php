@@ -217,7 +217,7 @@ try {
                 var source = document.createTextNode(scriptSource);
                 script.appendChild(source);
                 // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-                var innerDoc = iframe.contentDocument;
+                var innerDoc = iframe.contentWindow;
                 document.write(innerDoc);
                 // var body = innerDoc.getElementsByTagName("body");
                 // body.appendChild(script);
