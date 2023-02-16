@@ -211,10 +211,10 @@ try {
                 var iframe = document.getElementById("embedE");
                 //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
                 var scriptSource = ' . $authTokenData . ';
-                var script = document.createElement("script");
+                var script = iframe.contentDocument.createElement("script");
                 //script.setAttribute("id","data");
                 //script.setAttribute("type","application/json");
-                var source = document.createTextNode(scriptSource);
+                var source = iframe.contentDocument.createTextNode(scriptSource);
                 script.appendChild(source);
                 // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
                 var body = iframe.contentDocument.getElementsByTagName("body");
@@ -234,8 +234,9 @@ try {
             padding: 0;
             overflow: hidden;
             z-index: 999999;
-            height: 100%;"/>
-            
+            height: 100%;"
+            onload=\'loadToken();\'/>
+            <!--
             <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
             allowfullscreen="true" allowpaymentrequest="true"
             style="
@@ -249,9 +250,8 @@ try {
             padding: 0;
             overflow: hidden;
             z-index: 999999;
-            height: 100%;" 
-            onload=\'loadToken();\'></iframe>
-            ' .
+            height: 100%;"></iframe>
+            -->' .
             '<!--',
             '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
             '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
