@@ -194,8 +194,8 @@ try {
     // Creadas variables y parámetros para enviar al CLiente el JWT
     $authTokenData='{
                         \'id_token\': \'' . $_REQUEST['id_token'] . '\',
-                        \'auth_token_nrps\': \'' . $resp . '\',
-                        \'auth_token_ags\': \'' . $resp_ags . '\'
+                        \'auth_token_nrps\': ' . $resp . ',
+                        \'auth_token_ags\': ' . $resp_ags . '
                       }';
     $authTokenScript='function loadToken() {
                             var iframe = document.getElementById(\'embedE\');
