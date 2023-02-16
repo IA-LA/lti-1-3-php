@@ -220,7 +220,7 @@ try {
                 script.setAttribute("type","application/json");
                 var source = document.createTextNode(scriptSource);
                 script.appendChild(source);
-                document.body.appendChild(script);
+                iframe.appendChild(script);
             }
         </script>
         <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
@@ -228,7 +228,7 @@ try {
             position: fixed;
             top: 0;
             bottom: 0;
-            right: 0;
+            right: 0;au
             width: 100%;
             border: none;
             margin: 0;
