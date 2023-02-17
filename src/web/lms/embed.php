@@ -237,7 +237,7 @@ try {
                     // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
                     // var innerDoc = iframe.contentDocument;
                     // var body = innerDoc.getElementsByTagName("body");
-                    $(\'#frameID\').contents().find(\'body\').html(\'Hey, I have changed content of <body>! Yay!!!\');
+                    \$(\'#embedE\').contents().find(\'body\').html(\'Hey, I have changed content of <body>! Yay!!!\');
                     // body.appendChild(script);
                     iframe.appendChild(script);
                  }
