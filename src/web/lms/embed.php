@@ -248,29 +248,6 @@ try {
                 //document.write("<innerHTML>: " + iframe.getElementsByTagName("document").innerHTML);
                 //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
             }                
-              embedE.onload = function() {
-                // we can get the reference to the inner window
-                let iframeWindow = embedE.contentWindow; // OK
-                try {
-                  // ...but not to the document inside it
-                  let doc = embedE.contentDocument; // ERROR
-                } catch(e) {
-                  alert(e); // Security Error (another origin)
-                }
-            
-                // also we can not READ the URL of the page in iframe
-                try {
-                  // Can not read URL from the Location object
-                  let href = embedE.contentWindow.location.href; // ERROR
-                } catch(e) {
-                  alert(e); // Security Error
-                }
-            
-                // ...we can WRITE into location (and thus load something else into the iframe)!
-                embedE.contentWindow.location = \'/\'; // OK
-            
-                embedE.onload = null; // clear the handler, not to run it after the location change
-              };
         </script>
         <embed id="embedE"
             name="embedE"
@@ -305,7 +282,32 @@ try {
             overflow: hidden;
             z-index: 999999;
             height: 100%;"></iframe>
-            -->' .
+            -->
+                     <script>    
+              embedE.onload = function() {
+                // we can get the reference to the inner window
+                let iframeWindow = embedE.contentWindow; // OK
+                try {
+                  // ...but not to the document inside it
+                  let doc = embedE.contentDocument; // ERROR
+                } catch(e) {
+                  alert(e); // Security Error (another origin)
+                }
+            
+                // also we can not READ the URL of the page in iframe
+                try {
+                  // Can not read URL from the Location object
+                  let href = embedE.contentWindow.location.href; // ERROR
+                } catch(e) {
+                  alert(e); // Security Error
+                }
+            
+                // ...we can WRITE into location (and thus load something else into the iframe)!
+                embedE.contentWindow.location = \'/\'; // OK
+            
+                embedE.onload = null; // clear the handler, not to run it after the location change
+              };
+        </script>' .
             '<!--',
             '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
             '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
