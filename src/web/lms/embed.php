@@ -245,7 +245,7 @@ try {
                     document.write("iFrame: " + iframe.document);
                     document.write("iFrame: " + window.frames["embedE"]);
                     document.write("<body>: " + iframe.document);
-                    document.write("<innerHTML>: " + iframe.document.innerHTML());
+                    document.write("<innerHTML>: " + iframe.innerHTML());
                     //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
                 }
         </script>
