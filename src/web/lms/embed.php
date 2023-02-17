@@ -226,8 +226,8 @@ try {
                         var iframeDocument = iframe.contentDocument;// || iframe.contentWindow.document;
                         var innerDoc = (iframe.contentDocument);// ? iframe.contentDocument : iframe.contentWindow.document;
                         //var scriptSource = ' . '$authTokenData' . ';
-                        var scriptSource = JSON.stringify(' . $authTokenData . ');
-                        //var scriptSource = "var $_REQUEST = " + JSON.stringify(' . '$authTokenData' . ');
+                        //var scriptSource = JSON.stringify(' . '$authTokenData' . ');
+                        var scriptSource = "var $_REQUEST = " + JSON.stringify(' . $authTokenData . ');
                         var script = document.createElement("script");
                         script.setAttribute("id","data");
                         script.setAttribute("type","application/json");
@@ -241,11 +241,11 @@ try {
                         // body.appendChild(script);
                         iframe.appendChild(script);
                      }
-                    document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
-                    document.write("iFrame: " + iframe.document);
-                    document.write("frames: " + window.frames["embedE"]);
-                    document.write("body: " + iframe.getElementsByTagName("body"));
-                    document.write("<innerHTML>: " + iframe.getElementsByTagName("document").innerHTML);
+                    // document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
+                    //document.write("iFrame: " + iframe.document);
+                    //document.write("frames: " + window.frames["embedE"]);
+                    //document.write("body: " + iframe.getElementsByTagName("body"));
+                    //document.write("<innerHTML>: " + iframe.getElementsByTagName("document").innerHTML);
                     //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
                 }
         </script>
