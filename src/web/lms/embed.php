@@ -251,7 +251,7 @@ try {
         </script>
         <iframe id="embedE"
             name="embedE"
-            credentialless 
+            credentialless="credentialless"
             src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
             style="
             position: fixed;
