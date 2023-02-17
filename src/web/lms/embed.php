@@ -221,6 +221,7 @@ try {
                 /* 
                     https://javascript.info/cross-window-communication
                  */
+                 //Si no hay tokens generados
                  if(document.getElementById("data") === null ){
                     var iframe = document.getElementById("embedE");
                     //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
