@@ -226,7 +226,7 @@ try {
                         var iframeDocument = iframe.contentDocument;// || iframe.contentWindow.document;
                         var innerDoc = (iframe.contentDocument);// ? iframe.contentDocument : iframe.contentWindow.document;
                         //var scriptSource = ' . '$authTokenData' . ';
-                        var scriptSource = "JSON.stringify(' . $authTokenData . ');
+                        var scriptSource = JSON.stringify(' . $authTokenData . ');
                         //var scriptSource = "var $_REQUEST = " + JSON.stringify(' . '$authTokenData' . ');
                         var script = document.createElement("script");
                         script.setAttribute("id","data");
