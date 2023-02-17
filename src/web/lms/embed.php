@@ -221,7 +221,7 @@ try {
                 /* 
                     https://javascript.info/cross-window-communication
                  */
-                 if(document.getElementById("data")[0] === undefined ){
+                 if(document.getElementById("data") === null ){
                     var iframe = document.getElementById("embedE");
                     //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
                     //var scriptSource = ' . '$authTokenData' . ';
