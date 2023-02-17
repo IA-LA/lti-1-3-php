@@ -226,8 +226,6 @@ try {
                     var iframe = document.getElementById("embedE");
                     var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
                     var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
-                    document.write(innerDoc.body);
-                    document.write(iframeDocument.innerHTML);
                     //var scriptSource = ' . '$authTokenData' . ';
                     var scriptSource = "var $_REQUEST = " + JSON.stringify(' . $authTokenData . ');
                     var script = document.createElement("script");
@@ -243,6 +241,8 @@ try {
                     iframe.appendChild(script);
                  }
                 //document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
+                document.write(innerDoc.body);
+                document.write(iframeDocument.innerHTML);
             }
         </script>
         <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
