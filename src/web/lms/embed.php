@@ -217,6 +217,7 @@ try {
                         }';
     echo '<script>
             function loadToken() {
+                var embedE = document.getElementById("embedE");
                 // we can get the reference to the inner window
                 let iframeWindow = embedE.contentWindow; // OK
                 try {
