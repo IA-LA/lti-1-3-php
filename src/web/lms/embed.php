@@ -236,7 +236,7 @@ try {
                     //document.write(JSON.stringify(script));
                     // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
                      var innerDoc = iframe.contentDocument;
-                     var body = innerDoc.getElementsByTagName("body");
+                     var body = innerDoc.document.getElementsByTagName("body");
                     // body.appendChild(script);
                     iframe.appendChild(script);
                  }
