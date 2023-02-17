@@ -248,26 +248,7 @@ try {
                 //document.write("<innerHTML>: " + iframe.getElementsByTagName("document").innerHTML);
                 //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
             }                
-        </script>
-        <embed id="embedE"
-            name="embedE"
-            credentialless 
-            src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
-            style="
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            width: 100%;
-            border: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            z-index: 999999;
-            height: 100%;"
-            onload=\'setTimeout(function () {
-                                    loadToken();
-                                }, 5000);\'/>
+        </script>' . file_get_contents($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '
             <!--
             <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
             allowfullscreen="true" allowpaymentrequest="true"
