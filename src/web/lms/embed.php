@@ -239,7 +239,6 @@ try {
                     // var body = innerDoc.getElementsByTagName("body");
                     //$(\'#embedE\').contents().find(\'body\').html(\'Hey, I have changed content of <body>! Yay!!!\');
                     // body.appendChild(script);
-                    iframe.open(); iframe.write(\'PRUEV¿BAAAAAAAAA\'); iframe.close();
                     iframe.appendChild(script);
                  }
                 // document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
@@ -250,7 +249,7 @@ try {
                 //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
             }                
         </script>
-        <embed id="embedE"
+        <iframe id="embedE"
             name="embedE"
             credentialless 
             src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
