@@ -222,6 +222,7 @@ try {
                  */
                 //Si no hay tokens generados
                 if(document.getElementById("data") === null ){
+                    driver.switchTo().frame("embedE");
                     var iframe = document.getElementById("carga_pagina");
                     //var iframeDocument = iframe.contentDocument;// || iframe.contentWindow.document;
                     //var innerDoc = (iframe.contentDocument);// ? iframe.contentDocument : iframe.contentWindow.document;
@@ -251,6 +252,7 @@ try {
         </script>
         <embed id="embedE"
             name="embedE"
+            credentialless 
             src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
             style="
             position: fixed;
