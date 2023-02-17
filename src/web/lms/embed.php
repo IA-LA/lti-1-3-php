@@ -221,21 +221,23 @@ try {
                 /* 
                     https://javascript.info/cross-window-communication
                  */
-                var iframe = document.getElementById("embedE");
-                //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-                //var scriptSource = ' . '$authTokenData' . ';
-                var scriptSource = "var $_REQUEST = " + JSON.stringify(' . $authTokenData . ');
-                var script = document.createElement("script");
-                script.setAttribute("id","data");
-                script.setAttribute("type","application/json");
-                var source = document.createTextNode(scriptSource);
-                script.appendChild(source);
-                // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-                var innerDoc = iframe.contentWindow;
-                //document.write(JSON.stringify(script));
-                // var body = innerDoc.getElementsByTagName("body");
-                // body.appendChild(script);
-                iframe.appendChild(script);
+                 if(empty(document.getElementById("data"))){
+                    var iframe = document.getElementById("embedE");
+                    //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+                    //var scriptSource = ' . '$authTokenData' . ';
+                    var scriptSource = "var $_REQUEST = " + JSON.stringify(' . $authTokenData . ');
+                    var script = document.createElement("script");
+                    script.setAttribute("id","data");
+                    script.setAttribute("type","application/json");
+                    var source = document.createTextNode(scriptSource);
+                    script.appendChild(source);
+                    // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    var innerDoc = iframe.contentWindow;
+                    //document.write(JSON.stringify(script));
+                    // var body = innerDoc.getElementsByTagName("body");
+                    // body.appendChild(script);
+                    iframe.appendChild(script);
+                 }
                 //document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
             }
         </script>
