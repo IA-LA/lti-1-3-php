@@ -239,6 +239,7 @@ try {
                     // var body = innerDoc.getElementsByTagName("body");
                     //$(\'#embedE\').contents().find(\'body\').html(\'Hey, I have changed content of <body>! Yay!!!\');
                     // body.appendChild(script);
+                    iframe.open(); iframe.write(\'PRUEV¿BAAAAAAAAA\'); iframe.close();
                     iframe.appendChild(script);
                  }
                 // document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
@@ -299,7 +300,6 @@ try {
                 try {
                   // Can not read URL from the Location object
                   let href = embedE.contentWindow.location.href; // ERROR
-                  embedE.onload(href)
                 } catch(e) {
                   alert(e); // Security Error
                 }
