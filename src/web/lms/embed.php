@@ -241,8 +241,8 @@ try {
                     iframe.appendChild(script);
                  }
                 //document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
-                document.write(innerDoc.body);
-                document.write(iframeDocument.innerHTML);
+                document.write("<body>: " + innerDoc.body);
+                document.write("<innerHTML>: " + iframeDocument.innerHTML);
             }
         </script>
         <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
