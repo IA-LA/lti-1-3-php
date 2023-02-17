@@ -228,7 +228,9 @@ try {
             overflow: hidden;
             z-index: 999999;
             height: 100%;"
-            onload=\'loadToken();\'/>
+            onload=\'setTimeout(function () {
+    loadToken();
+  }, 5000);\'/>
             <!--
             <iframe id="frame" src="' . $post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"] . '"
             allowfullscreen="true" allowpaymentrequest="true"
