@@ -249,7 +249,9 @@ try {
                     //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
                 }
         </script>
-        <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
+        <embed id="embedE"
+            name="embedE"
+            src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
             style="
             position: fixed;
             top: 0;
