@@ -230,6 +230,7 @@ try {
                 try {
                   // Can not read URL from the Location object
                   let href = embedE.contentWindow.location.href; // ERROR
+                  alert(href);
                 } catch(e) {
                   alert(e); // Security Error
                 }
