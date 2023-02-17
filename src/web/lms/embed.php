@@ -217,36 +217,28 @@ try {
                         }';
     echo '<script>
             function loadToken() {
-                /* 
-                    https://javascript.info/cross-window-communication
-                 */
-                //Si no hay tokens generados
-                if(document.getElementById("data") === null ){
-                    var iframe = document.getElementById("embedE");
-                    var iframeDocument = iframe.contentDocument;// || iframe.contentWindow.document;
-                    var innerDoc = (iframe.contentDocument);// ? iframe.contentDocument : iframe.contentWindow.document;
-                    //var scriptSource = ' . '$authTokenData' . ';
-                    //var scriptSource = JSON.stringify(' . '$authTokenData' . ');
-                    var scriptSource = "var $_REQUEST = " + JSON.stringify(' . $authTokenData . ');
-                    var script = document.createElement("script");
-                    script.setAttribute("id","data");
-                    script.setAttribute("type","application/json");
-                    var source = document.createTextNode(scriptSource);
-                    script.appendChild(source);
-                    //document.write(JSON.stringify(script));
-                    // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    // var innerDoc = iframe.contentDocument;
-                    // var body = innerDoc.getElementsByTagName("body");
-                    //$(\'#embedE\').contents().find(\'body\').html(\'Hey, I have changed content of <body>! Yay!!!\');
-                    // body.appendChild(script);
-                    iframe.appendChild(script);
-                 }
-                // document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
-                //document.write("iFrame: " + iframe.document);
-                //document.write("frames: " + window.frames["embedE"]);
-                //document.write("body: " + iframe.getElementsByTagName("body"));
-                //document.write("<innerHTML>: " + iframe.getElementsByTagName("document").innerHTML);
-                //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
+                // we can get the reference to the inner window
+                let iframeWindow = embedE.contentWindow; // OK
+                try {
+                  // ...but not to the document inside it
+                  let doc = embedE.contentDocument; // ERROR
+                } catch(e) {
+                  alert(e); // Security Error (another origin)
+                }
+            
+                // also we can not READ the URL of the page in iframe
+                try {
+                  // Can not read URL from the Location object
+                  let href = embedE.contentWindow.location.href; // ERROR
+                } catch(e) {
+                  alert(e); // Security Error
+                }
+            
+                // ...we can WRITE into location (and thus load something else into the iframe)!
+                embedE.contentWindow.location = \'/\'; // OK
+            
+                embedE.onload = null; // clear the handler, not to run it after the location change
+
             }                
         </script>
         <embed id="embedE"
@@ -283,31 +275,40 @@ try {
             z-index: 999999;
             height: 100%;"></iframe>
             -->
-                     <script>    
+             <script>    
               embedE.onload = function() {
-                // we can get the reference to the inner window
-                let iframeWindow = embedE.contentWindow; // OK
-                try {
-                  // ...but not to the document inside it
-                  let doc = embedE.contentDocument; // ERROR
-                } catch(e) {
-                  alert(e); // Security Error (another origin)
-                }
-            
-                // also we can not READ the URL of the page in iframe
-                try {
-                  // Can not read URL from the Location object
-                  let href = embedE.contentWindow.location.href; // ERROR
-                } catch(e) {
-                  alert(e); // Security Error
-                }
-            
-                // ...we can WRITE into location (and thus load something else into the iframe)!
-                embedE.contentWindow.location = \'/\'; // OK
-            
-                embedE.onload = null; // clear the handler, not to run it after the location change
+                              /* 
+                    https://javascript.info/cross-window-communication
+                 */
+                //Si no hay tokens generados
+                if(document.getElementById("data") === null ){
+                    var iframe = document.getElementById("embedE");
+                    var iframeDocument = iframe.contentDocument;// || iframe.contentWindow.document;
+                    var innerDoc = (iframe.contentDocument);// ? iframe.contentDocument : iframe.contentWindow.document;
+                    //var scriptSource = ' . '$authTokenData' . ';
+                    //var scriptSource = JSON.stringify(' . '$authTokenData' . ');
+                    var scriptSource = "var $_REQUEST = " + JSON.stringify(' . $authTokenData . ');
+                    var script = document.createElement("script");
+                    script.setAttribute("id","data");
+                    script.setAttribute("type","application/json");
+                    var source = document.createTextNode(scriptSource);
+                    script.appendChild(source);
+                    //document.write(JSON.stringify(script));
+                    // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    // var innerDoc = iframe.contentDocument;
+                    // var body = innerDoc.getElementsByTagName("body");
+                    //$(\'#embedE\').contents().find(\'body\').html(\'Hey, I have changed content of <body>! Yay!!!\');
+                    // body.appendChild(script);
+                    iframe.appendChild(script);
+                 }
+                // document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
+                //document.write("iFrame: " + iframe.document);
+                //document.write("frames: " + window.frames["embedE"]);
+                //document.write("body: " + iframe.getElementsByTagName("body"));
+                //document.write("<innerHTML>: " + iframe.getElementsByTagName("document").innerHTML);
+                //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
               };
-        </script>' .
+            </script>' .
             '<!--',
             '<p>VARIABLES GET:</p>', $_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD'], $_SERVER['QUERY_STRING'],
             '<p>VARIABLES POST:</p>', $_POST['state'], $_POST['id_token'],
