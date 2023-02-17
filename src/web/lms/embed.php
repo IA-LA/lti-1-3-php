@@ -225,7 +225,7 @@ try {
                  if(document.getElementById("data") === null ){
                     var iframe = document.getElementById("embedE");
                     var iframeDocument = iframe.contentDocument;// || iframe.contentWindow.document;
-                    var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
+                    var innerDoc = (iframe.contentDocument);// ? iframe.contentDocument : iframe.contentWindow.document;
                     //var scriptSource = ' . '$authTokenData' . ';
                     var scriptSource = "var $_REQUEST = " + JSON.stringify(' . $authTokenData . ');
                     var script = document.createElement("script");
