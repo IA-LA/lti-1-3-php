@@ -242,7 +242,7 @@ try {
                  }
                 //document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
                 document.write("<body>: " + innerDoc);
-                document.write("<innerHTML>: " + iframeDocument.innerHTML);
+                document.write("<innerHTML>: " + iframeDocument);
                 document.write("<var $_REQUEST>: " + $_REQUEST);
             }
         </script>
