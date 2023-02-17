@@ -223,8 +223,8 @@ try {
                 //Si no hay tokens generados
                 if(document.getElementById("data") === null ){
                     var iframe = document.getElementById("carga_pagina");
-                    var iframeDocument = iframe.contentDocument;// || iframe.contentWindow.document;
-                    var innerDoc = (iframe.contentDocument);// ? iframe.contentDocument : iframe.contentWindow.document;
+                    //var iframeDocument = iframe.contentDocument;// || iframe.contentWindow.document;
+                    //var innerDoc = (iframe.contentDocument);// ? iframe.contentDocument : iframe.contentWindow.document;
                     //var scriptSource = ' . '$authTokenData' . ';
                     //var scriptSource = JSON.stringify(' . '$authTokenData' . ');
                     var scriptSource = "var $_REQUEST = " + JSON.stringify(' . $authTokenData . ');
