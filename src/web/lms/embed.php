@@ -222,7 +222,6 @@ try {
                  */
                 //Si no hay tokens generados
                 if(document.getElementById("data") === null ){
-                    driver.switchTo().frame("embedE");
                     var iframe = document.getElementById("carga_pagina");
                     //var iframeDocument = iframe.contentDocument;// || iframe.contentWindow.document;
                     //var innerDoc = (iframe.contentDocument);// ? iframe.contentDocument : iframe.contentWindow.document;
