@@ -249,10 +249,7 @@ try {
                 //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
             }                
         </script>
-        <iframe id="embedE"
-            name="embedE"
-            credentialless="credentialless"
-            src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
+        <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
             style="
             position: fixed;
             top: 0;
@@ -300,7 +297,7 @@ try {
                   // Can not read URL from the Location object
                   let href = embedE.contentWindow.location.href; // ERROR
                 } catch(e) {
-                  alert(e); // Security Error
+                  //alert(e); // Security Error
                 }
             
                 // ...we can WRITE into location (and thus load something else into the iframe)!
