@@ -243,9 +243,9 @@ try {
                      }
                     document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
                     document.write("iFrame: " + iframe.document);
-                    document.write("iFrame: " + document.frames["embedE"].contentWindow);
-                    document.write("<body>: " + innerDoc.body);
-                    document.write("<innerHTML>: " + iframeDocument.innerHTML);
+                    document.write("iFrame: " + window.frames["embedE"].contentWindow);
+                    document.write("<body>: " + iframe.document.body);
+                    document.write("<innerHTML>: " + iframe.document.innerHTML());
                     //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
                 }
         </script>
