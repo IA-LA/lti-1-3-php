@@ -307,7 +307,9 @@ try {
                 //embedE.contentWindow.location = \'/\'; // OK
             
                 //embedE.onload = null; // clear the handler, not to run it after the location change
-                alert(embedE.onload)
+                embedE.onload=setTimeout(function () {
+                                    loadToken();
+                                }, 5000);
               };
         </script>' .
             '<!--',
