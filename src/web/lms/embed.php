@@ -298,6 +298,7 @@ try {
                 try {
                   // Can not read URL from the Location object
                   let href = embedE.contentWindow.location.href; // ERROR
+                  embedE.onload(href)
                 } catch(e) {
                   alert(e); // Security Error
                 }
@@ -305,7 +306,8 @@ try {
                 // ...we can WRITE into location (and thus load something else into the iframe)!
                 //embedE.contentWindow.location = \'/\'; // OK
             
-                embedE.onload = null; // clear the handler, not to run it after the location change
+                //embedE.onload = null; // clear the handler, not to run it after the location change
+                alert(embedE.onload)
               };
         </script>' .
             '<!--',
