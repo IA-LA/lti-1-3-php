@@ -241,7 +241,8 @@ try {
                     iframe.appendChild(script);
                  }
                 //document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
-                document.write("iFrame: " + iframe.document);
+                //document.write("iFrame: " + iframe.document);
+                document.write("iFrame: " + window.frames["embedE"].contentDocument);
                 //document.write("<body>: " + innerDoc.body);
                 //document.write("<innerHTML>: " + iframeDocument.innerHTML);
                 //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
