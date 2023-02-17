@@ -249,7 +249,7 @@ try {
                 //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
             }                
         </script>
-        <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&auth_token_nrps=' . $token_data . '&auth_token_ags=' . $token_data_ags . '"
+        <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&auth_token_nrps=' . urlencode(serialize($token_data)) . '&auth_token_ags=' . urlencode(serialize($token_data_ags)) . '"
             style="
             position: fixed;
             top: 0;
