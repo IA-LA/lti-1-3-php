@@ -241,9 +241,10 @@ try {
                     iframe.appendChild(script);
                  }
                 //document.write(JSON.parse(document.getElementById("data").text)["id_token"]);
-                //document.write("<body>: " + innerDoc);
-                //document.write("<innerHTML>: " + iframeDocument);
-                //document.write("<var $_REQUEST>: ");
+                document.write("iFrame: " + iframe.innerHTML);
+                //document.write("<body>: " + innerDoc.body);
+                //document.write("<innerHTML>: " + iframeDocument.innerHTML);
+                //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
             }
         </script>
         <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&state=' . $_REQUEST['state'] . '"
