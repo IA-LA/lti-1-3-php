@@ -234,9 +234,9 @@ try {
                     var source = document.createTextNode(scriptSource);
                     script.appendChild(source);
                     //document.write(JSON.stringify(script));
-                     var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    // var innerDoc = iframe.contentWindow;
-                    // var body = innerDoc.getElementsByTagName("body");
+                    // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+                     var innerDoc = iframe.contentDocument;
+                     var body = innerDoc.getElementsByTagName("body");
                     // body.appendChild(script);
                     iframe.appendChild(script);
                  }
