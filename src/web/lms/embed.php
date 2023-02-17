@@ -303,7 +303,7 @@ try {
                 }
             
                 // ...we can WRITE into location (and thus load something else into the iframe)!
-                embedE.contentWindow.location = \'/\'; // OK
+                //embedE.contentWindow.location = \'/\'; // OK
             
                 embedE.onload = null; // clear the handler, not to run it after the location change
               };
