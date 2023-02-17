@@ -224,7 +224,10 @@ try {
                  //Si no hay tokens generados
                  if(document.getElementById("data") === null ){
                     var iframe = document.getElementById("embedE");
-                    //var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+                    var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+                    var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
+                    document.write(innerDoc.body);
+                    document.write(iframeDocument.innerHTML);
                     //var scriptSource = ' . '$authTokenData' . ';
                     var scriptSource = "var $_REQUEST = " + JSON.stringify(' . $authTokenData . ');
                     var script = document.createElement("script");
@@ -233,7 +236,7 @@ try {
                     var source = document.createTextNode(scriptSource);
                     script.appendChild(source);
                     // var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    var innerDoc = iframe.contentWindow;
+                    // var innerDoc = iframe.contentWindow;
                     //document.write(JSON.stringify(script));
                     // var body = innerDoc.getElementsByTagName("body");
                     // body.appendChild(script);
