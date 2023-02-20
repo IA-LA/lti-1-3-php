@@ -361,6 +361,7 @@ try {
             $method = 'POST';
             // TODO-NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
             $body = [
+                    'data' => [
                     "id" => '$client_id',
                     "userId" => 2,
                     "scoreGiven" => 200,
@@ -368,6 +369,7 @@ try {
                     "activityProgress" => "OK",
                     "gradingProgress" => "OK",
                     "Date" => date(DateTime::ISO8601)
+                    ]
             ];
             $ch = curl_init();
 
