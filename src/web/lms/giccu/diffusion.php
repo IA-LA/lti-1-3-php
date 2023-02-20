@@ -512,7 +512,7 @@ try {
                 // AGS accept
                 // TODO-NE https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html#The_JSON-LD_Context
                 'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
-                'Accept:' . 'application/vnd.ims.lis.v1.scorecontariner+json', //POST
+                //'Accept:' . 'application/vnd.ims.lis.v1.scorecontariner+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
@@ -537,7 +537,7 @@ try {
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             if ($method === 'POST') {
                 curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 //array_push($headers, 'Content-Type: ' . 'application/json');
                 // TODO Incidencia: HTTP/1.1 400 Incorrect score received
@@ -553,7 +553,7 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS POST) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>(AGS POST /scores) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
