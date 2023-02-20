@@ -367,14 +367,14 @@ try {
              * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v2/result+json/index.html
              *
              */
-            $body = [
+            $body = array(
                       "scoreMaximum" => 60,
                       "label" => "Chapter 5 Test",
                       "resourceId" => "quiz-231",
                       "tag" => "grade",
                       "startDateTime" => "2018-03-06T20:05:02Z",
                       "endDateTime" => "2018-04-06T22:05:03Z"
-            ];
+            );
             $ch = curl_init();
 
             // NRPS scopes
