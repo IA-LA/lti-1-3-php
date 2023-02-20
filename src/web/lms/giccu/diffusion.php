@@ -459,6 +459,114 @@ try {
             ///  BEARER TOKEN (FIN)
             ///////////////////////////////////////////////
 
+
+
+            ///////////////////////////////////////////////
+            ///  Service Request AGS(POST)
+            ///  BEARER TOKEN (INICIO)
+            ///
+            $method = 'POST';
+            // TODO-NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
+            /**
+             * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html
+             * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/score+json/index.html
+             * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v2/lineitem+json/index.html
+             * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v2/result+json/index.html
+             *
+             */
+            $body = [
+                'score' => [
+                    "id" => 2,
+                    "userId" => 2,
+                    "scoreGiven" => 20,
+                    "scoreMaximum" => 100,
+                    "comment" => "This is fake work.",
+                    "activityProgress" => "Started",
+                    "timestamp" => "2017-02-07T23:45:01+00:00",
+                    "resultAgent" => [
+                        "userId" => "2"
+                    ]
+                ]
+            ];
+            $ch = curl_init();
+
+            // NRPS scopes
+            //$scopes = ['https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly'];
+            // AGS scopes
+            //$scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
+            // TODO-NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
+            /** @var  $scopes https://tracker.moodle.org/browse/MDL-67926 */
+            $scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
+            sort($scopes);
+            $scope_key = md5(implode('|', $scopes));
+            $access_tokens = [];
+
+            $headers = [
+                //'Authorization: Bearer ' . $this->get_access_token($scopes),
+                'Authorization: Bearer ' . $access_tokens[$scope_key] = $token_data_ags['access_token'],
+                //'Authorization: Bearer ' . $access_tokens[$scope_key] = '383fbc2711788ea4cc3e8cd7b902c355', // Moodle Mobile Web Service
+                //'Authorization: Bearer ' . $access_tokens[$scope_key] = '97c8ba884cb1886204b0346f4ac34367', // LTI Services
+                //////////////////
+                // Tipos aceptados
+                /** https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/uml/purl.imsglobal.org/vocab/lis/v2/outcomes/index.html */
+                // NRPS accept
+                //'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
+                // AGS accept
+                // TODO-NE https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html#The_JSON-LD_Context
+                'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
+                //'Accept:' . 'application/vnd.ims.lis.v1.scorecontariner+json', //POST
+                //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //POST
+                //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
+                //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
+                //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET
+                // GROUPS?? accept
+                //'Accept:' . 'application/vnd.ims.lti-gs.v1.contextgroupcontainer+json',
+                // GENERALES accept
+                //'Accept:' . 'application/xml; charset=utf-8',
+                //'Accept:' . 'application/json'
+            ];
+            // NRPS service
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
+            // AGS services
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3/scores');
+            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3');
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3');
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/results?type_id=3');
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3');
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/webservice/rest/server.php?wstoken=383fbc2711788ea4cc3e8cd7b902c355');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            if ($method === 'POST') {
+                curl_setopt($ch, CURLOPT_POST, 1);
+                // TODO Incidencia: HTTP/1.1 400 Incorrect score received
+                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
+                // TODO Incidencia:  HTTP/1.1 100 Continue y HTTP/1.1 200 OK
+                //curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+                //$headers[] = 'Content-Type: ' . 'application/json';
+                //array_push($headers, 'Content-Type: ' . 'application/json');
+                array_push($headers, 'Content-Type: application/vnd.ims.lis.v1.score+json');
+            }
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            $response = curl_exec($ch);
+            if (curl_errno($ch)){
+                echo 'Request Error:' . curl_error($ch);
+            }
+            $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+            curl_close ($ch);
+
+            $resp_headers = substr($response, 0, $header_size);
+            $resp_body = substr($response, $header_size);
+            echo('<br/><br/><b>(AGS POST /scores 400) BEARER TOKEN: </b>');
+            //return
+            print_r([
+                'headers' => array_filter(explode("\r\n", $resp_headers)),
+                'body' => json_decode($resp_body, true),
+            ]);
+            ///
+            ///  Service Request AGS(POST)
+            ///  BEARER TOKEN (FIN)
+            ///////////////////////////////////////////////
             ///////////////////////////////////////////////
             ///  Service Request AGS(POST)
             ///  BEARER TOKEN (INICIO)
@@ -539,7 +647,7 @@ try {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 // TODO Incidencia: HTTP/1.1 400 Incorrect score received
                 //curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
-                // TODO Incidencia: HTTP/1.1 400 Incorrect score received
+                // TODO Incidencia:  HTTP/1.1 100 Continue y HTTP/1.1 200 OK
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 //array_push($headers, 'Content-Type: ' . 'application/json');
@@ -555,7 +663,7 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS POST /scores) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>(AGS POST /scores 100/200) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
