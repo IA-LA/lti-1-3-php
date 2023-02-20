@@ -683,12 +683,13 @@ try {
                     ->set_submission_review(null)
                     ->set_user_id("5"); //userid "5"
                 $prueba_lineitem = LTI\LTI_Lineitem::new()
+                    ->set_id('http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/4/lineitem?type_id=3')
                     ->set_tag('prueba')
                     ->set_score_maximum(111)
                     ->set_label('Prueba Taken')
-                    //->set_resource_id('prueba' . $launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']); //LO CREA PERO DA ERROR: HTTP/1.1 400 Incorrect score received
+                    ->set_resource_id('prueba' . $launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']); //LO CREA PERO DA ERROR: HTTP/1.1 400 Incorrect score received
                     //->set_resource_id('prueba9'); //FALLA
-                    ->set_resource_id('http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/4/lineitem?type_id=3');
+                    //->set_resource_id('http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/4/lineitem?type_id=3');
                 echo '<br/><br/><b>GRADES->PUT_GRADE(PRUEBA)0</b>:';
                 echo json_encode($grades->put_grade($prueba, $prueba_lineitem));
 
