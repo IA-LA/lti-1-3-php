@@ -359,8 +359,8 @@ try {
             ///  BEARER TOKEN (INICIO)
             ///
             $method = 'POST';
+            // TODO-NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
             $body = [
-                'data' => [
                     "id" => '$client_id',
                     "userId" => 2,
                     "scoreGiven" => 200,
@@ -368,13 +368,14 @@ try {
                     "activityProgress" => "OK",
                     "gradingProgress" => "OK",
                     "Date" => date(DateTime::ISO8601)
-                ]
             ];
             $ch = curl_init();
 
             // NRPS scopes
             //$scopes = ['https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly'];
             // AGS scopes
+            //$scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
+            // TODO-NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
             $scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
             sort($scopes);
             $scope_key = md5(implode('|', $scopes));
@@ -416,6 +417,7 @@ try {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 //array_push($headers, 'Content-Type: ' . 'application/json');
+                // TODO Incidencia: HTTP/1.1 400 Incorrect score received
                 array_push($headers, 'Content-Type: application/vnd.ims.lis.v1.score+json');
             }
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
