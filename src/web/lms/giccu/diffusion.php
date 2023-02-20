@@ -309,8 +309,8 @@ try {
                 // AGS accept
                 //'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST.1
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST.2
-                //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET.1
-                'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET.2
+                'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET.1
+                //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET.2
                 // GROUPS?? accept
                 //'Accept:' . 'application/vnd.ims.lti-gs.v1.contextgroupcontainer+json',
                 // GENERALES accept
@@ -322,8 +322,8 @@ try {
             // AGS services
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3'); //POST.1
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3'); //POST.2
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/results?type_id=3'); // GET.1
-            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3'); // GET.2
+            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/results?type_id=3'); // GET.1
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3'); // GET.2
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/webservice/rest/server.php?wstoken=383fbc2711788ea4cc3e8cd7b902c355');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HEADER, 1);
@@ -343,7 +343,7 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS GET) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>(AGS GET /lineitems) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
@@ -429,7 +429,7 @@ try {
             curl_setopt($ch, CURLOPT_HEADER, 1);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             if ($method === 'POST') {
-                //curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
                 // TODO Incidencia: HTTP/1.1 400 Incorrect score received
                 // TODO Incidencia: HTTP/1.1 405 Method Not Allowed
@@ -448,7 +448,7 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS POST) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>(AGS POST /lineitem) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
@@ -633,7 +633,7 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS PUT) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>(AGS PUT /lineitem) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
