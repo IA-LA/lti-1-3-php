@@ -763,6 +763,9 @@ try {
                 $members = $launch->get_nrps()->get_members();
 
                 $scoreboard = [];
+                echo '<br/><br/><b>SCOREBOARDS(scores)</b>:' . json_encode($scores,$times,$members);
+                echo '<br/><br/><b>SCOREBOARDS(times)</b>:' . json_encode($times);
+                echo '<br/><br/><b>SCOREBOARDS(members)</b>:' . json_encode($members);
 
                 foreach ($scores as $score) {
                     $result = ['score' => $score['resultScore']];
