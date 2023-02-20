@@ -360,15 +360,13 @@ try {
             ///
             $method = 'PUT';
             $body = [
-                    'data' => [
-                        "id" => '$client_id',
-                        "userId" => 2,
-                        "scoreGiven" => 200,
-                        "scoreMaximum" => 100,
-                        "activityProgress" => "OK",
-                        "gradingProgress" => "OK",
-                        "Date" => date(DateTime::ISO8601)
-                    ]
+                "id" => '$client_id',
+                "userId" => 2,
+                "scoreGiven" => 200,
+                "scoreMaximum" => 100,
+                "activityProgress" => "OK",
+                "gradingProgress" => "OK",
+                "Date" => date(DateTime::ISO8601)
             ];
             $ch = curl_init();
 
@@ -388,8 +386,7 @@ try {
                 // NRPS accept
                 //'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
                 // AGS accept
-                'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
-                //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //POST
+                'Accept:' . 'application/vnd.ims.lis.v2.score+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET
@@ -413,8 +410,7 @@ try {
             if ($method === 'POST') {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
-                //$headers[] = 'Content-Type: ' . 'application/json';
-                //array_push($headers[], 'Content-Type: ' . 'application/json')
+                $headers[] = 'Content-Type: ' . 'application/json';
             }
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             $response = curl_exec($ch);
