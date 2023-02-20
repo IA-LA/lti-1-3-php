@@ -372,8 +372,8 @@ try {
                       "label" => "Chapter 5 Test",
                       "resourceId" => "quiz-231",
                       "tag" => "grade",
-                      "startDateTime" => "2018-03-06T20:05:02Z",
-                      "endDateTime" => "2018-04-06T22:05:03Z"
+                      "startDateTime" => "2023-02-06T20:05:02Z",
+                      "endDateTime" => "2023-04-06T22:05:03Z"
             );
             $ch = curl_init();
 
