@@ -358,7 +358,7 @@ try {
             ///  Service Request AGS(POST)
             ///  BEARER TOKEN (INICIO)
             ///
-            $method = 'POST';
+            $method = 'PUT';
             // TODO-NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
             /**
              * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html
