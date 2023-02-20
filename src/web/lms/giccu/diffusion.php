@@ -429,8 +429,8 @@ try {
             curl_setopt($ch, CURLOPT_HEADER, 1);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             if ($method === 'POST') {
-                //curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
                 // TODO Incidencia: HTTP/1.1 400 Incorrect score received
                 // TODO Incidencia: HTTP/1.1 405 Method Not Allowed
                 // TODO Incidencia: HTTP/1.1 100 Continue [2]
@@ -537,7 +537,7 @@ try {
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             if ($method === 'POST') {
                 curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 //array_push($headers, 'Content-Type: ' . 'application/json');
                 // TODO Incidencia: HTTP/1.1 400 Incorrect score received
