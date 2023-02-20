@@ -360,7 +360,7 @@ try {
             ///
             $method = 'PUT';
             $body = [
-                    'data' => [
+
                         "id" => '$client_id',
                         "userId" => 2,
                         "scoreGiven" => 200,
@@ -368,7 +368,7 @@ try {
                         "activityProgress" => "OK",
                         "gradingProgress" => "OK",
                         "Date" => date(DateTime::ISO8601)
-                    ]
+
             ];
             $ch = curl_init();
 
