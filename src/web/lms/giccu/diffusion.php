@@ -683,7 +683,7 @@ try {
                     ->set_submission_review(null)
                     ->set_user_id($launch->get_launch_data()['sub']); //userid "5"
                 $prueba_lineitem = LTI\LTI_Lineitem::new()
-                    ->set_id('http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/70/lineitem?type_id=3')
+                    ->set_id('http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/68/lineitem?type_id=3')
                     ->set_tag('prueba')
                 ;
                     //->set_score_maximum(111)
