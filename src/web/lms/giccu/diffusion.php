@@ -675,13 +675,13 @@ try {
 
                 // TIME
                 $prueba = LTI\LTI_Grade::new()
-                    ->set_score_given(11)
+                    ->set_score_given(22)
                     ->set_score_maximum(111)
                     ->set_timestamp(date(DateTime::ISO8601))
                     ->set_activity_progress('InProgress')
                     ->set_grading_progress('NotReady')
                     ->set_submission_review(null)
-                    ->set_user_id($launch->get_launch_data()['sub']);
+                    ->set_user_id("5"); //userid "5"
                 $prueba_lineitem = LTI\LTI_Lineitem::new()
                     ->set_tag('prueba')
                     ->set_score_maximum(111)
