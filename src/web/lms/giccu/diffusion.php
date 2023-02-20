@@ -386,15 +386,15 @@ try {
                 // NRPS accept
                 //'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
                 // AGS accept
-                'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
-                //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
+                //'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
+                'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET
                 // GROUPS?? accept
                 //'Accept:' . 'application/vnd.ims.lti-gs.v1.contextgroupcontainer+json',
                 // GENERALES accept
                 //'Accept:' . 'application/xml; charset=utf-8',
-                //'Accept:' . 'application/json'
+                //'Accept:' . 'application/json;
             ];
             // NRPS service
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
