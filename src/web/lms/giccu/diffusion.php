@@ -361,8 +361,11 @@ try {
             $method = 'POST';
             // TODO-NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
             /**
-             * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/score+json/index.html
              * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html
+             * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/score+json/index.html
+             * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v2/lineitem+json/index.html
+             * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v2/result+json/index.html
+             *
              */
             $body = [
                     'score' => [
@@ -385,6 +388,7 @@ try {
             // AGS scopes
             //$scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
             // TODO-NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
+            /** @var  $scopes https://tracker.moodle.org/browse/MDL-67926 */
             $scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
             sort($scopes);
             $scope_key = md5(implode('|', $scopes));
@@ -397,12 +401,13 @@ try {
                 //'Authorization: Bearer ' . $access_tokens[$scope_key] = '97c8ba884cb1886204b0346f4ac34367', // LTI Services
                 //////////////////
                 // Tipos aceptados
-                // TODO https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/uml/purl.imsglobal.org/vocab/lis/v2/outcomes/index.html
+                /** https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/uml/purl.imsglobal.org/vocab/lis/v2/outcomes/index.html */
                 // NRPS accept
                 //'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
                 // AGS accept
                 // TODO-NE https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html#The_JSON-LD_Context
                 'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
+                'Accept:' . 'application/vnd.ims.lis.v1.scorecontariner+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
@@ -668,8 +673,28 @@ try {
                 echo '<br/><br/><b>GRADES1:</b>' . json_encode($grades);
                 //print_r($grades);
 
+                // TIME
+                $prueba = LTI\LTI_Grade::new()
+                    ->set_score_given(11)
+                    ->set_score_maximum(111)
+                    ->set_timestamp(date(DateTime::ISO8601))
+                    ->set_activity_progress('InProgress')
+                    ->set_grading_progress('NotReady')
+                    ->set_submission_review(0)
+                    ->set_user_id($launch->get_launch_data()['sub']);
+                $prueba_lineitem = LTI\LTI_Lineitem::new()
+                    ->set_tag('prueba')
+                    ->set_score_maximum(111)
+                    ->set_label('Prueba Taken')
+                    ->set_resource_id('prueba' . $launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+                echo '<br/><br/><b>GRADES->PUT_GRADE(PRUEBA)0</b>:';
+                echo json_encode($grades->put_grade($prueba, $prueba_lineitem));
+
+                // SCORE
+
+                // prueba
                 $time = LTI\LTI_Grade::new()
-                    ->set_score_given(1)
+                    ->set_score_given(99)
                     ->set_score_maximum(999)
                     ->set_timestamp(date(DateTime::ISO8601))
                     ->set_activity_progress('Completed')
@@ -680,23 +705,24 @@ try {
                     ->set_tag('time')
                     ->set_score_maximum(999)
                     ->set_label('Time Taken')
-                    ->set_resource_id('time'.$launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+                    ->set_resource_id('time' . $launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
                 echo '<br/><br/><b>GRADES->PUT_GRADE(TIME)0</b>:';
                 echo json_encode($grades->put_grade($time, $time_lineitem));
 
+                // SCORE
                 $score = LTI\LTI_Grade::new()
-                    ->set_score_given(60)
+                    ->set_score_given(10)
                     ->set_score_maximum(100)
                     ->set_timestamp(date(DateTime::ISO8601))
-                    ->set_activity_progress('Completede')
+                    ->set_activity_progress('Completed')
                     ->set_grading_progress('FullyGradede')
                     ->set_user_id($launch->get_launch_data()['sub']);
                 $score_lineitem = LTI\LTI_Lineitem::new()
                     ->set_id('score' . date(DateTime::ISO8601))
                     ->set_tag('score')
                     ->set_score_maximum(100)
-                    ->set_label('Score')
-                    ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']+1);
+                    ->set_label('Score Taken')
+                    ->set_resource_id('score' . $launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']+1);
                     //->set_resource_id(['resourceId' => ["title" => "Sistema LTI Publicación NO EDICION (10020220606125826000000a)", "id" => 9 ]])
 
                 echo '<br/><br/><b>GRADES->PUT_GRADE()0</b>:';
