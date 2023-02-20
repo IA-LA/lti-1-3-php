@@ -343,7 +343,7 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS GET /lineitems) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>(AGS GET /results) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
@@ -430,7 +430,7 @@ try {
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             if ($method === 'POST') {
                 curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
                 // TODO Incidencia: HTTP/1.1 400 Incorrect score received
                 // TODO Incidencia: HTTP/1.1 405 Method Not Allowed
                 // TODO Incidencia: HTTP/1.1 100 Continue [2]
