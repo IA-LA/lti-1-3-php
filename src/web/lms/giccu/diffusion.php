@@ -358,7 +358,7 @@ try {
             ///  Service Request AGS(POST)
             ///  BEARER TOKEN (INICIO)
             ///
-            $method = 'PUT';
+            $method = 'POST';
             $body = [
                 "id" => '$client_id',
                 "userId" => 2,
