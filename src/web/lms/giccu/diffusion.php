@@ -675,18 +675,18 @@ try {
 
                 // TIME
                 $prueba = LTI\LTI_Grade::new()
-                    ->set_score_given(11)
+                    ->set_score_given(22)
                     ->set_score_maximum(111)
                     ->set_timestamp(date(DateTime::ISO8601))
                     ->set_activity_progress('InProgress')
                     ->set_grading_progress('NotReady')
-                    ->set_submission_review(0)
+                    ->set_submission_review(null)
                     ->set_user_id($launch->get_launch_data()['sub']);
                 $prueba_lineitem = LTI\LTI_Lineitem::new()
                     ->set_tag('prueba')
                     ->set_score_maximum(111)
                     ->set_label('Prueba Taken')
-                    ->set_resource_id('prueba' . $launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
+                    ->set_resource_id('prueba9');
                 echo '<br/><br/><b>GRADES->PUT_GRADE(PRUEBA)0</b>:';
                 echo json_encode($grades->put_grade($prueba, $prueba_lineitem));
 
@@ -722,7 +722,7 @@ try {
                     ->set_tag('score')
                     ->set_score_maximum(100)
                     ->set_label('Score Taken')
-                    ->set_resource_id('score' . $launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']+1);
+                    ->set_resource_id('score' . $launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
                     //->set_resource_id(['resourceId' => ["title" => "Sistema LTI Publicación NO EDICION (10020220606125826000000a)", "id" => 9 ]])
 
                 echo '<br/><br/><b>GRADES->PUT_GRADE()0</b>:';
