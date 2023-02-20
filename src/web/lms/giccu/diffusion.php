@@ -368,18 +368,12 @@ try {
              *
              */
             $body = [
-                    'score' => [
-                        "id" => 2,
-                        "userId" => 2,
-                        "scoreGiven" => 20,
-                        "scoreMaximum" => 100,
-                        "comment" => "This is fake work.",
-                        "activityProgress" => "Started",
-                        "timestamp" => "2017-02-07T23:45:01+00:00",
-                        "resultAgent" => [
-                                                "userId" => "2"
-                                          ]
-                    ]
+                      "scoreMaximum" => 60,
+                      "label" => "Chapter 5 Test",
+                      "resourceId" => "quiz-231",
+                      "tag" => "grade",
+                      "startDateTime" => "2018-03-06T20:05:02Z",
+                      "endDateTime" => "2018-04-06T22:05:03Z"
             ];
             $ch = curl_init();
 
@@ -401,15 +395,17 @@ try {
                 //'Authorization: Bearer ' . $access_tokens[$scope_key] = '97c8ba884cb1886204b0346f4ac34367', // LTI Services
                 //////////////////
                 // Tipos aceptados
-                /** https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/uml/purl.imsglobal.org/vocab/lis/v2/outcomes/index.html */
+                /**
+                 * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/uml/purl.imsglobal.org/vocab/lis/v2/outcomes/index.html
+                 */
                 // NRPS accept
                 //'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
                 // AGS accept
+                //'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
                 // TODO-NE https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html#The_JSON-LD_Context
-                'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
-                'Accept:' . 'application/vnd.ims.lis.v1.scorecontariner+json', //POST
-                //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //POST
-                //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
+                //'Accept:' . 'application/vnd.ims.lis.v1.scorecontariner+json', //pruebas
+                //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //pruebas
+                'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET
                 // GROUPS?? accept
@@ -436,7 +432,7 @@ try {
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 //array_push($headers, 'Content-Type: ' . 'application/json');
                 // TODO Incidencia: HTTP/1.1 400 Incorrect score received
-                array_push($headers, 'Content-Type: application/vnd.ims.lis.v1.score+json');
+                array_push($headers, 'Content-Type: application/vnd.ims.lis.v2.lineitem+json');
             }
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             $response = curl_exec($ch);
