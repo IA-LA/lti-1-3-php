@@ -410,7 +410,8 @@ try {
             if ($method === 'POST') {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
-                $headers[] = 'Content-Type: ' . 'application/json';
+                //$headers[] = 'Content-Type: ' . 'application/json';
+                //array_push($headers[], 'Content-Type: ' . 'application/json')
             }
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             $response = curl_exec($ch);
