@@ -360,7 +360,7 @@ try {
             ///
             $method = 'POST';
             $body = [
-                    data => [
+                    'data' => [
                         "id" => '$client_id',
                         "userId" => 2,
                         "scoreGiven" => 200,
