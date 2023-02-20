@@ -537,10 +537,12 @@ try {
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             if ($method === 'POST') {
                 curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
+                // TODO Incidencia: HTTP/1.1 400 Incorrect score received
+                //curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
+                // TODO Incidencia: HTTP/1.1 400 Incorrect score received
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 //array_push($headers, 'Content-Type: ' . 'application/json');
-                // TODO Incidencia: HTTP/1.1 400 Incorrect score received
                 array_push($headers, 'Content-Type: application/vnd.ims.lis.v1.score+json');
             }
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
