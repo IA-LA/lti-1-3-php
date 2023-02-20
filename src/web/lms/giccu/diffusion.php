@@ -416,6 +416,7 @@ try {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 //array_push($headers, 'Content-Type: ' . 'application/json');
+                array_push($headers, 'Content-Type: application/vnd.ims.lis.v1.score+json');
             }
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             $response = curl_exec($ch);
