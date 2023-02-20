@@ -681,7 +681,7 @@ try {
                     ->set_activity_progress('InProgress')
                     ->set_grading_progress('NotReady')
                     ->set_submission_review(null)
-                    ->set_user_id($launch->get_launch_data()['sub']);
+                    ->set_user_id('4');
                 $prueba_lineitem = LTI\LTI_Lineitem::new()
                     ->set_tag('prueba')
                     ->set_score_maximum(111)
