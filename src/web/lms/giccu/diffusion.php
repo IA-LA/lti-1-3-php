@@ -156,15 +156,7 @@ try {
             ///  BEARER TOKEN (INICIO)
             ///
             $method = 'GET';
-            $body = [
-                "id" => '$client_id',
-                "userId" => 2,
-                "scoreGiven" => $client_id,
-                "scoreMaximum" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
-                "activityProgress" => time() - 5,
-                "gradingProgress" => time() + 60,
-                "Date" => date(DateTime::ISO8601)
-            ];;
+            $body = null;
             $ch = curl_init();
 
             // NRPS scopes
@@ -367,7 +359,15 @@ try {
             ///  BEARER TOKEN (INICIO)
             ///
             $method = 'POST';
-            $body = null;
+            $body = [
+                "id" => '$client_id',
+                "userId" => 2,
+                "scoreGiven" => $client_id,
+                "scoreMaximum" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
+                "activityProgress" => time() - 5,
+                "gradingProgress" => time() + 60,
+                "Date" => date(DateTime::ISO8601)
+            ];
             $ch = curl_init();
 
             // NRPS scopes
