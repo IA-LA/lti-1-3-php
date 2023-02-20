@@ -307,10 +307,10 @@ try {
                 // NRPS accept
                 //'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
                 // AGS accept
-                //'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
-                //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
-                'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
-                //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET
+                //'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST.1
+                //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST.2
+                //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET.1
+                'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET.2
                 // GROUPS?? accept
                 //'Accept:' . 'application/vnd.ims.lti-gs.v1.contextgroupcontainer+json',
                 // GENERALES accept
@@ -320,10 +320,10 @@ try {
             // NRPS service
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
             // AGS services
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3');
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3');
-            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/results?type_id=3');
-            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3');
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3'); //POST.1
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3'); //POST.2
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/results?type_id=3'); // GET.1
+            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3'); // GET.2
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/webservice/rest/server.php?wstoken=383fbc2711788ea4cc3e8cd7b902c355');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HEADER, 1);
@@ -360,15 +360,22 @@ try {
             ///
             $method = 'POST';
             // TODO-NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
+            /**
+             * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/score+json/index.html
+             * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html
+             */
             $body = [
-                    'data' => [
-                    "id" => 2,
-                    "userId" => 2,
-                    "scoreGiven" => 200,
-                    "scoreMaximum" => 100,
-                    "activityProgress" => "OK",
-                    "gradingProgress" => "OK",
-                    "Date" => date(DateTime::ISO8601)
+                    'score' => [
+                        "id" => 2,
+                        "userId" => 2,
+                        "scoreGiven" => 20,
+                        "scoreMaximum" => 100,
+                        "comment" => "This is fake work.",
+                        "activityProgress" => "Started",
+                        "timestamp" => "2017-02-07T23:45:01+00:00",
+                        "resultAgent" => [
+                                                "userId" => "2"
+                                          ]
                     ]
             ];
             $ch = curl_init();
@@ -388,9 +395,13 @@ try {
                 'Authorization: Bearer ' . $access_tokens[$scope_key] = $token_data_ags['access_token'],
                 //'Authorization: Bearer ' . $access_tokens[$scope_key] = '383fbc2711788ea4cc3e8cd7b902c355', // Moodle Mobile Web Service
                 //'Authorization: Bearer ' . $access_tokens[$scope_key] = '97c8ba884cb1886204b0346f4ac34367', // LTI Services
+                //////////////////
+                // Tipos aceptados
+                // TODO https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/uml/purl.imsglobal.org/vocab/lis/v2/outcomes/index.html
                 // NRPS accept
                 //'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
                 // AGS accept
+                // TODO-NE https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html#The_JSON-LD_Context
                 'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
