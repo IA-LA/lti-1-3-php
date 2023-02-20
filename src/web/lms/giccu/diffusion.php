@@ -373,7 +373,7 @@ try {
             // NRPS scopes
             //$scopes = ['https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly'];
             // AGS scopes
-            $scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
+            $scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
             sort($scopes);
             $scope_key = md5(implode('|', $scopes));
             $access_tokens = [];
