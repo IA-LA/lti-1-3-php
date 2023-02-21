@@ -342,7 +342,7 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS GET /results) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>(AGS GET /lineitems) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
@@ -392,7 +392,7 @@ try {
             // AGS services
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3'); //POST.1
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3'); //POST.2
-            curl_setopt($ch, CURLOPT_URL, $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem']); // GET.1
+            curl_setopt($ch, CURLOPT_URL, $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'] . '/results'); // GET.1
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3'); // GET.2
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/webservice/rest/server.php?wstoken=383fbc2711788ea4cc3e8cd7b902c355');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
