@@ -309,8 +309,8 @@ try {
                 //'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST.1
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST.2
                 //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET.1
-                //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET.2
-                'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //GET.3
+                'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET.2
+                //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //GET.3 FALLA single item: https://www.imsglobal.org/spec/lti-ags/v2p0#example-getting-a-single-line-item
                 // GROUPS?? accept
                 //'Accept:' . 'application/vnd.ims.lti-gs.v1.contextgroupcontainer+json',
                 // GENERALES accept
@@ -501,7 +501,7 @@ try {
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             if ($method === 'POST') {
                 curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
                 // TODO Incidencia: HTTP/1.1 400 Incorrect score received
                 // TODO Incidencia: HTTP/1.1 405 Method Not Allowed
                 // TODO Incidencia: HTTP/1.1 100 Continue [2]
