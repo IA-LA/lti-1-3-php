@@ -392,7 +392,7 @@ try {
             // AGS services
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3'); //POST.1
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3'); //POST.2
-            curl_setopt($ch, CURLOPT_URL, $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'] . '/results'); // GET.1
+            curl_setopt($ch, CURLOPT_URL, substr_replace($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '/results', strpos($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '?'), 0)); // GET.1
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3'); // GET.2
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/webservice/rest/server.php?wstoken=383fbc2711788ea4cc3e8cd7b902c355');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
