@@ -678,15 +678,15 @@ try {
             ///  BEARER TOKEN (INICIO)
             ///
             $method = 'PUT';
-
-            $body = array(
-                "scoreMaximum" => 60,
-                "label" => "Chapter 5 Test",
-                "resourceId" => "quiz-231",
-                "tag" => "grade",
-                "startDateTime" => "2023-02-06T20:05:02Z",
-                "endDateTime" => "2023-04-06T22:05:03Z"
-            );
+            $body = [
+                "id" => '$client_id',
+                "userId" => 2,
+                "scoreGiven" => 200,
+                "scoreMaximum" => 100,
+                "activityProgress" => "OK",
+                "gradingProgress" => "OK",
+                "Date" => date(DateTime::ISO8601)
+            ];
             $ch = curl_init();
 
             // NRPS scopes
@@ -726,9 +726,9 @@ try {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HEADER, 1);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            if ($method === 'PUT') {
-                curl_setopt($ch, CURLOPT_PUT, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+            if ($method === 'POST') {
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 array_push($headers, 'Content-Type: application/vnd.ims.lis.v2.lineitem+json');
             }
