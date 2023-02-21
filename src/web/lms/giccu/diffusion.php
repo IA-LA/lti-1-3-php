@@ -679,13 +679,12 @@ try {
             ///
             $method = 'PUT';
             $body = [
-                "id" => '$client_id',
-                "userId" => 2,
-                "scoreGiven" => 200,
-                "scoreMaximum" => 100,
-                "activityProgress" => "OK",
-                "gradingProgress" => "OK",
-                "Date" => date(DateTime::ISO8601)
+                "id" => 'prueba5',
+                "userId" => "5",
+                "label" => "Prueba5",
+                "scoreMaximum" => 1000,
+                "resourceId" => "prueba5",
+                "tag" => "prueba5",
             ];
             $ch = curl_init();
 
@@ -726,9 +725,10 @@ try {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HEADER, 1);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            if ($method === 'PUT') {
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($body));
+            if ($method === 'POST') {
                 curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($body));
+                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 array_push($headers, 'Content-Type: application/vnd.ims.lis.v2.lineitem+json');
             }
