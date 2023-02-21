@@ -309,7 +309,8 @@ try {
                 //'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST.1
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST.2
                 //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET.1
-                'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET.2
+                //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET.2
+                'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //GET.3
                 // GROUPS?? accept
                 //'Accept:' . 'application/vnd.ims.lti-gs.v1.contextgroupcontainer+json',
                 // GENERALES accept
