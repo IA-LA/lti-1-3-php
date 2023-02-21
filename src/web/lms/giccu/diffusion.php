@@ -726,9 +726,9 @@ try {
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HEADER, 1);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            if ($method === 'POST') {
+            if ($method === 'PUT') {
                 curl_setopt($ch, CURLOPT_POST, 1);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
+                curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($body));
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 array_push($headers, 'Content-Type: application/vnd.ims.lis.v2.lineitem+json');
             }
