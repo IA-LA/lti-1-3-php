@@ -608,7 +608,7 @@ try {
             if ($method === 'POST') {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 // TODO Incidencia: HTTP/1.1 400 Incorrect score received
-                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
                 // TODO Incidencia:  HTTP/1.1 100 Continue y HTTP/1.1 200 OK
                 //curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
                 //$headers[] = 'Content-Type: ' . 'application/json';
