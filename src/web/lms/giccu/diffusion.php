@@ -717,7 +717,8 @@ try {
                 // TODO Incidencia: HTTP/1.1 400 Incorrect score received
                 //curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
                 // TODO Incidencia:  HTTP/1.1 100 Continue y HTTP/1.1 200 OK
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+                //curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 //array_push($headers, 'Content-Type: ' . 'application/json');
                 array_push($headers, 'Content-Type: application/vnd.ims.lis.v1.score+json');
