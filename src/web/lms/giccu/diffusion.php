@@ -355,7 +355,7 @@ try {
             ///////////////////////////////////////////////
 
             ///////////////////////////////////////////////
-            ///  Service Request AGS(POST)
+            ///  Service Request AGS(POST1)
             ///  BEARER TOKEN (INICIO)
             ///
             $method = 'POST';
@@ -455,14 +455,12 @@ try {
                 'body' => json_decode($resp_body, true),
             ]);
             ///
-            ///  Service Request AGS(POST)
+            ///  Service Request AGS(POST1)
             ///  BEARER TOKEN (FIN)
             ///////////////////////////////////////////////
 
-
-
             ///////////////////////////////////////////////
-            ///  Service Request AGS(POST)
+            ///  Service Request AGS(POST2)
             ///  BEARER TOKEN (INICIO)
             ///
             $method = 'POST';
@@ -564,11 +562,12 @@ try {
                 'body' => json_decode($resp_body, true),
             ]);
             ///
-            ///  Service Request AGS(POST)
+            ///  Service Request AGS(POST2)
             ///  BEARER TOKEN (FIN)
             ///////////////////////////////////////////////
+
             ///////////////////////////////////////////////
-            ///  Service Request AGS(POST)
+            ///  Service Request AGS(POST3)
             ///  BEARER TOKEN (INICIO)
             ///
             $method = 'POST';
@@ -663,14 +662,14 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS POST /scores 100/200) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>(AGS POST /scores 100+200) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
                 'body' => json_decode($resp_body, true),
             ]);
             ///
-            ///  Service Request AGS(POST)
+            ///  Service Request AGS(POST3)
             ///  BEARER TOKEN (FIN)
             ///////////////////////////////////////////////
 
@@ -679,15 +678,15 @@ try {
             ///  BEARER TOKEN (INICIO)
             ///
             $method = 'PUT';
-            $body = [
-                "id" => '$client_id',
-                "userId" => 2,
-                "scoreGiven" => 200,
-                "scoreMaximum" => 100,
-                "activityProgress" => "OK",
-                "gradingProgress" => "OK",
-                "Date" => date(DateTime::ISO8601)
-            ];
+
+            $body = array(
+                "scoreMaximum" => 60,
+                "label" => "Chapter 5 Test",
+                "resourceId" => "quiz-231",
+                "tag" => "grade",
+                "startDateTime" => "2023-02-06T20:05:02Z",
+                "endDateTime" => "2023-04-06T22:05:03Z"
+            );
             $ch = curl_init();
 
             // NRPS scopes
