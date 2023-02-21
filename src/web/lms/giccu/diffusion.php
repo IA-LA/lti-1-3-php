@@ -440,7 +440,7 @@ try {
              */
             $body = array(
                       "scoreMaximum" => 60,
-                      "label" => "Chapter 5 Test",
+                      "label" => "Chapter " . random_int(1,99) . " Test",
                       "resourceId" => "quiz-231",
                       "tag" => "grade",
                       "startDateTime" => "2023-02-06T20:05:02Z",
