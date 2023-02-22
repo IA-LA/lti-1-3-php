@@ -546,10 +546,10 @@ try {
              */
             $body = [
                 'score' => [
-                    "id" => 2,
-                    "userId" => 2,
+                    "id" => 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/83/lineitem?type_id=3',
+                    "userId" => "2",
                     "scoreGiven" => 20,
-                    "scoreMaximum" => 100,
+                    "scoreMaximum" => 60,
                     "comment" => "This is fake work.",
                     "activityProgress" => "Started",
                     "timestamp" => "2017-02-07T23:45:01+00:00",
