@@ -652,8 +652,8 @@ try {
              *
              */
             $body = array(
-                "timestamp" => "2023-02-22T10:54:36.736+00:00",
-                "scoreGiven" => 83,
+                "timestamp" => date(DateTime::ISO8601),
+                "scoreGiven" => 38,
                 "scoreMaximum" => 60,
                 "comment" => "This is exceptional work.",
                 "activityProgress" => "Completed",
