@@ -501,10 +501,11 @@ try {
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             if ($method === 'POST') {
                 curl_setopt($ch, CURLOPT_POST, 1);
+                // TODO_NE Incidencia: HTTP/1.1 400 Incorrect score received
+                // TODO_NE Incidencia: HTTP/1.1 405 Method Not Allowed
+                // TODO_NE Incidencia: HTTP/1.1 100 Continue
+                // TODO HTTP/1.1 201 Created
                 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
-                // TODO Incidencia: HTTP/1.1 400 Incorrect score received
-                // TODO Incidencia: HTTP/1.1 405 Method Not Allowed
-                // TODO Incidencia: HTTP/1.1 100 Continue [2]
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 //array_push($headers, 'Content-Type: ' . 'application/json');
                 array_push($headers, 'Content-Type: application/vnd.ims.lis.v2.lineitem+json');
@@ -543,20 +544,15 @@ try {
              * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v2/result+json/index.html
              *
              */
-            $body = [
-                'score' => [
-                    "id" => 2,
-                    "userId" => 2,
-                    "scoreGiven" => 20,
-                    "scoreMaximum" => 100,
-                    "comment" => "This is fake work.",
-                    "activityProgress" => "Started",
-                    "timestamp" => "2017-02-07T23:45:01+00:00",
-                    "resultAgent" => [
-                        "userId" => "2"
-                    ]
-                ]
-            ];
+            $body = array(
+                      "timestamp" => "2023-02-22T10:54:36.736+00:00",
+                      "scoreGiven" => 83,
+                      "scoreMaximum" => 100,
+                      "comment" => "This is exceptional work.",
+                      "activityProgress" => "Completed",
+                      "gradingProgress" => "FullyGraded",
+                      "userId" => "2"
+            );
             $ch = curl_init();
 
             // NRPS scopes
@@ -598,7 +594,7 @@ try {
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
             // AGS services
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3/scores');
-            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3');
+            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/78/lineitem/scores?type_id=3');
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3');
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/results?type_id=3');
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3');
