@@ -546,8 +546,8 @@ try {
              */
             $body = [
                 'score' => [
-                    "id" => 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/83/lineitem?type_id=3',
-                    "userId" => "2",
+                    "id" => $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitems'],
+                    "userId" => $post_param['sub'],
                     "scoreGiven" => 20,
                     "scoreMaximum" => 60,
                     "comment" => "This is fake work.",
