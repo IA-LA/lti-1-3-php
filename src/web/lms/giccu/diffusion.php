@@ -600,7 +600,7 @@ try {
             // AGS services
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3/scores');
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/77/lineitem/scores?type_id=3');
-            curl_setopt($ch, CURLOPT_URL, substr_replace($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitems'], '/scores', strpos($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitems'], '?'), 0));
+            curl_setopt($ch, CURLOPT_URL, substr_replace($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '/scores', strpos($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '?'), 0));
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3');
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/results?type_id=3');
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3');
