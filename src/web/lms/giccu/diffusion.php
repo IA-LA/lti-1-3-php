@@ -546,7 +546,7 @@ try {
              */
             $body = [
                 'score' => [
-                    "id" => $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitems'],
+                    "id" => $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'],
                     "userId" => $post_param['sub'],
                     "scoreGiven" => 20,
                     "scoreMaximum" => 60,
@@ -599,7 +599,8 @@ try {
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
             // AGS services
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3/scores');
-            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/77/lineitem/scores?type_id=3');
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/77/lineitem/scores?type_id=3');
+            curl_setopt($ch, CURLOPT_URL, substr_replace($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '/scores', strpos($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '?'), 0));
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3');
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/results?type_id=3');
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3');
@@ -714,9 +715,9 @@ try {
                 // TODONE Incidencia: HTTP/1.1 400 Incorrect score received
                 //curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
                 // TODO Incidencia:  HTTP/1.1 100 Continue y HTTP/1.1 200 OK
-                //curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
                 // TODO Incidencia: HTTP/1.1 400 Incorrect score received
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
+                //curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
                 //curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 //array_push($headers, 'Content-Type: ' . 'application/json');
