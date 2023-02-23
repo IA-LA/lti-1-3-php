@@ -536,7 +536,7 @@ try {
             ///  BEARER TOKEN (INICIO)
             ///
             $method = 'POST';
-            // TODO-NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
+            // TODO_NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
             /**
              * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html
              * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/score+json/index.html
@@ -564,7 +564,7 @@ try {
             //$scopes = ['https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly'];
             // AGS scopes
             //$scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
-            // TODO-NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
+            // TODO_NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
             /** @var  $scopes https://tracker.moodle.org/browse/MDL-67926 */
             $scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
             sort($scopes);
@@ -611,6 +611,11 @@ try {
             if ($method === 'POST') {
                 curl_setopt($ch, CURLOPT_POST, 1);
                 // TODO Incidencia: HTTP/1.1 400 Incorrect score received
+                /**
+                 * Error message suppressed when sending incorrect score request to LTI gradebook service from external tool
+                 * https://tracker.moodle.org/browse/CONTRIB-9200
+                 * https://github.com/moodle/moodle/blob/880462a1685f710ed4f6628d31c2fd7e67e0df73/mod/lti/service/gradebookservices/classes/local/resources/scores.php#L186
+                 */
                 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
                 // TODO Incidencia:  HTTP/1.1 100 Continue y HTTP/1.1 200 OK
                 //curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
@@ -644,22 +649,24 @@ try {
             ///  BEARER TOKEN (INICIO)
             ///
             $method = 'POST';
-            // TODO-NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
+            // TODO_NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
             /**
              * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html
              * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/score+json/index.html
              * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v2/lineitem+json/index.html
              * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v2/result+json/index.html
              *
+             * How to POST and Receive JSON Data using PHP cURL
+             * https://www.codexworld.com/post-receive-json-data-using-php-curl/
              */
             $body = array(
+                "userId" => $post_param['sub'],
                 "timestamp" => date(DateTime::ISO8601),
-                "scoreGiven" => 38,
-                "scoreMaximum" => 60,
-                "comment" => "This is exceptional work.",
-                "activityProgress" => "Completed",
                 "gradingProgress" => "FullyGraded",
-                "userId" => $post_param['sub']
+                "activityProgress" => "Completed",
+                //"scoreGiven" => 38,
+                //"scoreMaximum" => 60,
+                "comment" => "This is exceptional work.",
             );
             $ch = curl_init();
 
@@ -717,8 +724,8 @@ try {
                 // TODO Incidencia:  HTTP/1.1 100 Continue y HTTP/1.1 200 OK
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
                 // TODO Incidencia: HTTP/1.1 400 Incorrect score received
-                //curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
-                //curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
+                //curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 //array_push($headers, 'Content-Type: ' . 'application/json');
                 array_push($headers, 'Content-Type: application/vnd.ims.lis.v1.score+json');
