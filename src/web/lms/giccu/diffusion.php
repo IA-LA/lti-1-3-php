@@ -545,7 +545,6 @@ try {
              *
              */
             $body = [
-                'score' => [
                     "id" => $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'],
                     "userId" => $post_param['sub'],
                     "scoreGiven" => 20,
@@ -556,7 +555,6 @@ try {
                     "resultAgent" => [
                         "userId" => "2"
                     ]
-                ]
             ];
             $ch = curl_init();
 
