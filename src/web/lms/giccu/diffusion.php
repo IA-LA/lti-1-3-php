@@ -548,8 +548,8 @@ try {
             $body = [
                     "id" => $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'],
                     "userId" => $post_param['sub'],
-                    "scoreGiven" => 20.0,
-                    "scoreMaximum" => 60.0,
+                    "scoreGiven" => 30.0,
+                    "scoreMaximum" => 70.0,
                     "comment" => "This is fake work.",
                     "gradingProgress" => "FullyGraded",
                     "activityProgress" => "Started",
