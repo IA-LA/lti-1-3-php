@@ -550,6 +550,7 @@ try {
                     "scoreGiven" => 20,
                     "scoreMaximum" => 60,
                     "comment" => "This is fake work.",
+                    "gradingProgress" => "FullyGraded",
                     "activityProgress" => "Started",
                     "timestamp" => "2017-02-07T23:45:01+00:00",
                     "resultAgent" => [
