@@ -544,15 +544,20 @@ try {
              * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v2/result+json/index.html
              *
              */
-            $body = array(
-                "userId" => $post_param['sub'],
-                "timestamp" => date(DateTime::ISO8601),
-                "gradingProgress" => "FullyGraded",
-                "activityProgress" => "Completed",
-                "scoreGiven" => 38,
-                "scoreMaximum" => 60
-                //"comment" => "This is exceptional work."
-            );
+            $body = [
+                'score' => [
+                    "id" => $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'],
+                    "userId" => $post_param['sub'],
+                    "scoreGiven" => 20,
+                    "scoreMaximum" => 60,
+                    "comment" => "This is fake work.",
+                    "activityProgress" => "Started",
+                    "timestamp" => "2017-02-07T23:45:01+00:00",
+                    "resultAgent" => [
+                        "userId" => "2"
+                    ]
+                ]
+            ];
             $ch = curl_init();
 
             // NRPS scopes
