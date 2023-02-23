@@ -553,7 +553,9 @@ try {
                     "comment" => "This is fake work.",
                     "gradingProgress" => "FullyGraded",
                     "activityProgress" => "Started",
-                    "timestamp" => "2017-02-07T23:45:01+00:00",
+                    // TODO Incidencia: HTTP/1.1 409 Refusing score with an earlier timestamp for item 10 and user 2
+                    //"timestamp" => "2017-02-07T23:45:01+00:00",
+                    "timestamp" => date(DateTime::ISO8601),
                     "resultAgent" => [
                         "userId" => "2"
                     ]
