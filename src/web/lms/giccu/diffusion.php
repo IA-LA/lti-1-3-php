@@ -664,8 +664,8 @@ try {
                 "timestamp" => date(DateTime::ISO8601),
                 "gradingProgress" => "FullyGraded",
                 "activityProgress" => "Completed",
-                //"scoreGiven" => 38,
-                //"scoreMaximum" => 60,
+                "scoreGiven" => 38,
+                "scoreMaximum" => 60,
                 "comment" => "This is exceptional work.",
             );
             $ch = curl_init();
