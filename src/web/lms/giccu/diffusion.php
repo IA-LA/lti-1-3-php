@@ -550,8 +550,8 @@ try {
                 "gradingProgress" => "FullyGraded",
                 "activityProgress" => "Completed",
                 "scoreGiven" => 38,
-                "scoreMaximum" => 60,
-                "comment" => "This is exceptional work.",
+                "scoreMaximum" => 60
+                //"comment" => "This is exceptional work."
             );
             $ch = curl_init();
 
