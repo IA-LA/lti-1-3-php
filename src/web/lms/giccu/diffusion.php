@@ -454,7 +454,7 @@ try {
             //$scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
             // TODO-NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
             /** @var  $scopes https://tracker.moodle.org/browse/MDL-67926 */
-            $scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
+            $scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
             sort($scopes);
             $scope_key = md5(implode('|', $scopes));
             $access_tokens = [];
@@ -555,8 +555,10 @@ try {
                     "activityProgress" => "Started",
                     // TODO Incidencia: HTTP/1.1 409 Refusing score with an earlier timestamp for item 10 and user 2
                     //"timestamp" => "2017-02-07T23:45:01+00:00",
-                    "timestamp" => date(DateTime::ISO8601)
-
+                    "timestamp" => date(DateTime::ISO8601),
+                    "resultAgent" => [
+                        "userId" => "2"
+                    ]
             ];
             $ch = curl_init();
 
@@ -566,7 +568,7 @@ try {
             //$scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
             // TODO_NE Indidencia: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/x-www-form-urlencoded
             /** @var  $scopes https://tracker.moodle.org/browse/MDL-67926 */
-            $scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
+            $scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
             sort($scopes);
             $scope_key = md5(implode('|', $scopes));
             $access_tokens = [];
@@ -600,7 +602,8 @@ try {
             // AGS services
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3/scores');
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/77/lineitem/scores?type_id=3');
-            curl_setopt($ch, CURLOPT_URL, substr_replace($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '/scores', strpos($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '?'), 0));
+            curl_setopt($ch, CURLOPT_URL, $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitems']);
+            //curl_setopt($ch, CURLOPT_URL, substr_replace($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '/scores', strpos($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '?'), 0));
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3');
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/results?type_id=3');
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3');
