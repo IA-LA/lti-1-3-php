@@ -544,20 +544,15 @@ try {
              * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v2/result+json/index.html
              *
              */
-            $body = [
-                'score' => [
-                    "id" => $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'],
-                    "userId" => $post_param['sub'],
-                    "scoreGiven" => 20,
-                    "scoreMaximum" => 60,
-                    "comment" => "This is fake work.",
-                    "activityProgress" => "Started",
-                    "timestamp" => "2017-02-07T23:45:01+00:00",
-                    "resultAgent" => [
-                        "userId" => "2"
-                    ]
-                ]
-            ];
+            $body = array(
+                "userId" => $post_param['sub'],
+                "timestamp" => date(DateTime::ISO8601),
+                "gradingProgress" => "FullyGraded",
+                "activityProgress" => "Completed",
+                "scoreGiven" => 38,
+                "scoreMaximum" => 60,
+                "comment" => "This is exceptional work.",
+            );
             $ch = curl_init();
 
             // NRPS scopes
@@ -659,15 +654,20 @@ try {
              * How to POST and Receive JSON Data using PHP cURL
              * https://www.codexworld.com/post-receive-json-data-using-php-curl/
              */
-            $body = array(
-                "userId" => $post_param['sub'],
-                "timestamp" => date(DateTime::ISO8601),
-                "gradingProgress" => "FullyGraded",
-                "activityProgress" => "Completed",
-                "scoreGiven" => 38,
-                "scoreMaximum" => 60,
-                "comment" => "This is exceptional work.",
-            );
+            $body = [
+                'score' => [
+                    "id" => $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'],
+                    "userId" => $post_param['sub'],
+                    "scoreGiven" => 20,
+                    "scoreMaximum" => 60,
+                    "comment" => "This is fake work.",
+                    "activityProgress" => "Started",
+                    "timestamp" => "2017-02-07T23:45:01+00:00",
+                    "resultAgent" => [
+                        "userId" => "2"
+                    ]
+                ]
+            ];
             $ch = curl_init();
 
             // NRPS scopes
@@ -725,7 +725,7 @@ try {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
                 // TODO Incidencia: HTTP/1.1 400 Incorrect score received
                 //curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
-                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
+                //curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($body));
                 //$headers[] = 'Content-Type: ' . 'application/json';
                 //array_push($headers, 'Content-Type: ' . 'application/json');
                 array_push($headers, 'Content-Type: application/vnd.ims.lis.v1.score+json');
