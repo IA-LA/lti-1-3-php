@@ -556,7 +556,7 @@ try {
                     // TODO Incidencia: HTTP/1.1 409 Refusing score with an earlier timestamp for item 10 and user 2
                     //"timestamp" => "2017-02-07T23:45:01+00:00",
                     "timestamp" => date(DateTime::ISO8601),
-                    "https://econtent.uned.es/lti/cap" => [
+                    "submissionReview" => [
                         "originality" => 25,
                         "originalityURL" => "https://econtent.uned.es/lti/cap/01/05/"
                     ]
