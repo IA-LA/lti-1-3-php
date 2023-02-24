@@ -552,12 +552,13 @@ try {
                     "scoreMaximum" => 100.0,
                     "comment" => "This is fake work POST 2.",
                     "gradingProgress" => "FullyGraded",
-                    "activityProgress" => "Started",
+                    "activityProgress" => "InProgress ",
                     // TODO Incidencia: HTTP/1.1 409 Refusing score with an earlier timestamp for item 10 and user 2
                     //"timestamp" => "2017-02-07T23:45:01+00:00",
                     "timestamp" => date(DateTime::ISO8601),
-                    "resultAgent" => [
-                        "userId" => "2"
+                    "https://econtent.uned.es/lti/cap" => [
+                        "originality" => 25,
+                        "originalityURL" => "https://econtent.uned.es/lti/cap/01/05/"
                     ]
             ];
             $ch = curl_init();
@@ -1050,7 +1051,7 @@ try {
                 $score_lineitem = LTI\LTI_Lineitem::new()
                     ->set_tag('score')
                     ->set_score_maximum(100)
-                    ->set_label('Score Taken')
+                    ->set_label('Score')
                     ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
 
                 $scores = $grades->get_grades($score_lineitem);
