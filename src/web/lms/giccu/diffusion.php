@@ -414,7 +414,7 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS GET /results?type_id=&user_id=) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>(AGS GET /results?type_id=X&user_id=X) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
@@ -1050,7 +1050,7 @@ try {
                 $score_lineitem = LTI\LTI_Lineitem::new()
                     ->set_tag('score')
                     ->set_score_maximum(100)
-                    ->set_label('Score')
+                    ->set_label('Score Taken')
                     ->set_resource_id($launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id']);
 
                 $scores = $grades->get_grades($score_lineitem);
