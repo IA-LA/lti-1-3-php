@@ -440,8 +440,8 @@ try {
              */
             $body = array(
                       "scoreMaximum" => 60,
-                      "label" => "Chapter " . random_int(1,99) . " Test",
-                      "resourceId" => "quiz-" . random_int(1,999) . " test",
+                      "label" => "Chapter " . random_int(1,99) . "_" . $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'],
+                      "resourceId" => "quiz-" . random_int(1,999) . "_" . $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'],
                       "tag" => "grade",
                       "startDateTime" => "2023-02-06T20:05:02Z",
                       "endDateTime" => "2023-04-06T22:05:03Z"
@@ -552,7 +552,7 @@ try {
                     "scoreMaximum" => 100.0,
                     "comment" => "This is fake work POST 2.",
                     "gradingProgress" => "FullyGraded",
-                    "activityProgress" => "InProgress ",
+                    "activityProgress" => "InProgress",
                     // TODO Incidencia: HTTP/1.1 409 Refusing score with an earlier timestamp for item 10 and user 2
                     //"timestamp" => "2017-02-07T23:45:01+00:00",
                     "timestamp" => date(DateTime::ISO8601),
