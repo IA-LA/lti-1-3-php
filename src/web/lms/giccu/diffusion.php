@@ -393,7 +393,7 @@ try {
             // AGS services
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3'); //POST.1
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3'); //POST.2
-            curl_setopt($ch, CURLOPT_URL, substr_replace($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '/results', strpos($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '?'), 0)); // GET.1
+            curl_setopt($ch, CURLOPT_URL, substr_replace($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '/results', strpos($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '?'), 0). "&user_id=". $post_param['sub']); // GET.1
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3'); // GET.2
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/webservice/rest/server.php?wstoken=383fbc2711788ea4cc3e8cd7b902c355');
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -414,7 +414,7 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS GET /results) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>(AGS GET /results?type_id=&user_id=) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
@@ -550,80 +550,7 @@ try {
                     "userId" => $post_param['sub'],
                     "scoreGiven" => 30.0,
                     "scoreMaximum" => 100.0,
-                    "comment" => " Módulo 1: Introducción a H5P
- Inicio Módulo 1: Introducción a H5P
-cmi.core.lesson_location => capitulo_04_03
-cmi.core.lesson_status => incomplete
-cmi.core.score.raw => 92
-cmi.core.total_time => 00:07:42.00
-cmi.objectives_0.id => capitulo_01
-cmi.objectives_0.score.max => 100
-cmi.objectives_0.score.min => 0
-cmi.objectives_0.score.raw => 100
-cmi.objectives_0.status => completed
-cmi.objectives_1.id => capitulo_02
-cmi.objectives_1.score.max => 100
-cmi.objectives_1.score.min => 0
-cmi.objectives_1.score.raw => 100
-cmi.objectives_1.status => completed
-cmi.objectives_10.id => capitulo_04_01
-cmi.objectives_10.score.max => 100
-cmi.objectives_10.score.min => 0
-cmi.objectives_10.score.raw => 100
-cmi.objectives_10.status => completed
-cmi.objectives_11.id => capitulo_04_02
-cmi.objectives_11.score.max => 100
-cmi.objectives_11.score.min => 0
-cmi.objectives_11.score.raw => 100
-cmi.objectives_11.status => completed
-cmi.objectives_12.id => capitulo_04_03
-cmi.objectives_12.score.max => 100
-cmi.objectives_12.score.min => 0
-cmi.objectives_12.score.raw => 100
-cmi.objectives_12.status => completed
-cmi.objectives_2.id => capitulo_02_01
-cmi.objectives_2.score.max => 100
-cmi.objectives_2.score.min => 0
-cmi.objectives_2.score.raw => 100
-cmi.objectives_2.status => completed
-cmi.objectives_3.id => capitulo_02_02
-cmi.objectives_3.score.max => 100
-cmi.objectives_3.score.min => 0
-cmi.objectives_3.score.raw => 100
-cmi.objectives_3.status => completed
-cmi.objectives_4.id => capitulo_02_03
-cmi.objectives_4.score.max => 100
-cmi.objectives_4.score.min => 0
-cmi.objectives_4.score.raw => 100
-cmi.objectives_4.status => completed
-cmi.objectives_5.id => capitulo_02_04
-cmi.objectives_5.score.max => 100
-cmi.objectives_5.score.min => 0
-cmi.objectives_5.score.raw => 100
-cmi.objectives_5.status => completed
-cmi.objectives_6.id => capitulo_03
-cmi.objectives_6.score.max => 100
-cmi.objectives_6.score.min => 0
-cmi.objectives_6.score.raw => 100
-cmi.objectives_6.status => completed
-cmi.objectives_7.id => capitulo_03_01
-cmi.objectives_7.score.max => 100
-cmi.objectives_7.score.min => 0
-cmi.objectives_7.score.raw => 100
-cmi.objectives_7.status => completed
-cmi.objectives_8.id => capitulo_03_02
-cmi.objectives_8.score.max => 100
-cmi.objectives_8.score.min => 0
-cmi.objectives_8.score.raw => 100
-cmi.objectives_8.status => completed
-cmi.objectives_9.id => capitulo_04
-cmi.objectives_9.score.max => 100
-cmi.objectives_9.score.min => 0
-cmi.objectives_9.score.raw => 100
-cmi.objectives_9.status => completed
-cmi.student_preference.language => null
-cmi.suspend_data => general|>iniciado=26/3/2022;itemActual=capitulo_04_03;idCurso=1648491057322_623df7d3545f2f50307dcd52_Módulo 1: Introducción a H5P;cookies_aceptadas=NO;contenido_visitado=108||contenidosScorm|>capitulo_01=1;capitulo_02=1;capitulo_02_01=1;capitulo_02_02=1;capitulo_02_03=1;capitulo_02_04=1;capitulo_03=1;capitulo_03_01=1;capitulo_03_02=1;capitulo_04=1;capitulo_04_01=1;capitulo_04_02=1;capitulo_04_03=1||actividadesScorm|>
-",
+                    "comment" => "This is fake work POST 2.",
                     "gradingProgress" => "FullyGraded",
                     "activityProgress" => "Started",
                     // TODO Incidencia: HTTP/1.1 409 Refusing score with an earlier timestamp for item 10 and user 2
