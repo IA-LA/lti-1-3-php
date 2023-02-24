@@ -550,7 +550,7 @@ try {
                     "userId" => $post_param['sub'],
                     "scoreGiven" => 30.0,
                     "scoreMaximum" => 70.0,
-                    "comment" => "This is fake work.",
+                    "comment" => "This is fake work POST 2.",
                     "gradingProgress" => "FullyGraded",
                     "activityProgress" => "Started",
                     // TODO Incidencia: HTTP/1.1 409 Refusing score with an earlier timestamp for item 10 and user 2
@@ -668,7 +668,7 @@ try {
                     "userId" => $post_param['sub'],
                     "scoreGiven" => 20,
                     "scoreMaximum" => 60,
-                    "comment" => "This is fake work.",
+                    "comment" => "This is fake work POST 3.",
                     "activityProgress" => "Started",
                     "timestamp" => "2017-02-07T23:45:01+00:00",
                     "resultAgent" => [
