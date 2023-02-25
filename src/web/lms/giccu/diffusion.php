@@ -439,14 +439,14 @@ try {
              *
              */
             $body = array(
-                      "scoreMaximum" => 60,
-                      "label" => "Chapter " . random_int(1,99) . "_" . $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'],
-                      "resourceId" => "quiz-" . random_int(1,999) . "_" . $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'],
-                      "tag" => "grade",
-                      "comment" => "This is fake lineitem POST 1.",
-                      "startDateTime" => "2023-02-06T20:05:02Z",
-                      "endDateTime" => "2023-04-06T22:05:03Z",
-                "submissionReview" => [
+                "scoreMaximum" => 60,
+                "label" => "Chapter " . random_int(1,99) . "_" . $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'],
+                "resourceId" => "quiz-" . random_int(1,999) . "_" . $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'],
+                "tag" => "grade",
+                "comment" => "This is fake lineitem POST 1.",
+                "startDateTime" => "2023-02-06T20:05:02Z",
+                "endDateTime" => "2023-04-06T22:05:03Z",
+                "https://econtent.uned.es/lti/cap/01/05/" => [
                     "originality" => 25,
                     "originalityURL" => "https://econtent.uned.es/lti/cap/01/05/"
                 ]
