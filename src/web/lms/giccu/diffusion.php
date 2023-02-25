@@ -443,6 +443,7 @@ try {
                       "label" => "Chapter " . random_int(1,99) . "_" . $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'],
                       "resourceId" => "quiz-" . random_int(1,999) . "_" . $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'],
                       "tag" => "grade",
+                      "comment" => "This is fake lineitem POST 1.",
                       "startDateTime" => "2023-02-06T20:05:02Z",
                       "endDateTime" => "2023-04-06T22:05:03Z"
             );
@@ -550,7 +551,7 @@ try {
                     "userId" => $post_param['sub'],
                     "scoreGiven" => 30.0,
                     "scoreMaximum" => 100.0,
-                    "comment" => "This is fake work POST 2.",
+                    "comment" => "This is fake grade POST 2.",
                     "gradingProgress" => "FullyGraded",
                     "activityProgress" => "InProgress",
                     // TODO Incidencia: HTTP/1.1 409 Refusing score with an earlier timestamp for item 10 and user 2
@@ -669,7 +670,7 @@ try {
                     "userId" => $post_param['sub'],
                     "scoreGiven" => 20,
                     "scoreMaximum" => 60,
-                    "comment" => "This is fake work POST 3.",
+                    "comment" => "This is fake grade POST 3.",
                     "activityProgress" => "Started",
                     "timestamp" => "2017-02-07T23:45:01+00:00",
                     "resultAgent" => [
