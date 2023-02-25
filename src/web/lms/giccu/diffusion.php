@@ -445,7 +445,11 @@ try {
                       "tag" => "grade",
                       "comment" => "This is fake lineitem POST 1.",
                       "startDateTime" => "2023-02-06T20:05:02Z",
-                      "endDateTime" => "2023-04-06T22:05:03Z"
+                      "endDateTime" => "2023-04-06T22:05:03Z",
+                "submissionReview" => [
+                    "originality" => 25,
+                    "originalityURL" => "https://econtent.uned.es/lti/cap/01/05/"
+                ]
             );
             $ch = curl_init();
 
