@@ -1045,7 +1045,9 @@ try {
                     ->set_timestamp(date(DateTime::ISO8601))
                     ->set_activity_progress('Completed')
                     ->set_grading_progress('FullyGraded')
-                    ->set_user_id($launch->get_launch_data()['sub']);
+                    ->set_user_id($launch->get_launch_data()['sub'])
+                    ->set_comment('Put_grade()0')
+                    ->set_submission_review(array('Capítulo05'=>'Título Capítulo5'));
                 echo '<br/><br/><b>GRADE</b>:' . json_encode($grade);
                 //print_r($grade);
 
