@@ -482,7 +482,7 @@ try {
                  * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html#The_JSON-LD_Context
                  */
                 //'Accept:' . 'application/vnd.ims.lis.v1.scorecontariner+json', //pruebas
-                //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //pruebas
+                //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //POST
                 'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET
@@ -591,8 +591,8 @@ try {
                 //'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
                 // AGS accept
                 // TODO-NE https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html#The_JSON-LD_Context
-                //'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
-                'Accept:' . 'application/vnd.ims.lis.v1.scorecontariner+json', //POST
+                'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
+                //'Accept:' . 'application/vnd.ims.lis.v1.scorecontariner+json', //pruebas
                 //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
@@ -707,7 +707,7 @@ try {
                 // AGS accept
                 // https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html#The_JSON-LD_Context
                 'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
-                //'Accept:' . 'application/vnd.ims.lis.v1.scorecontariner+json', //POST
+                //'Accept:' . 'application/vnd.ims.lis.v1.scorecontariner+json', //pruebas
                 //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
