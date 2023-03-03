@@ -250,7 +250,7 @@ try {
             }                
         </script>
         <!-- https://stackoverflow.com/questions/1763508/passing-arrays-as-url-parameter -->
-        <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&auth_token_nrps=' . urlencode(serialize($token_data)) . '&auth_token_ags=' . urlencode(serialize($token_data_ags)) . '"
+        <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&auth_token_nrps=' . urlencode(json_encode($token_data)) . '&auth_token_ags=' . urlencode(json_encode($token_data_ags)) . '"
             style="
             position: fixed;
             top: 0;
