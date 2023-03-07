@@ -482,7 +482,7 @@ try {
                  * https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html#The_JSON-LD_Context
                  */
                 //'Accept:' . 'application/vnd.ims.lis.v1.scorecontariner+json', //pruebas
-                //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //POST
+                //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //pruebas
                 'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET
@@ -590,10 +590,10 @@ try {
                 // NRPS accept
                 //'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
                 // AGS accept
-                // TODO-NE https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html#The_JSON-LD_Context
-                //'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
+                // DO-NE https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html#The_JSON-LD_Context
+                'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v1.scorecontariner+json', //pruebas
-                'Accept:' . 'application/vnd.ims.lis.v2.score+json', //POST
+                //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //pruebas
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET
@@ -619,7 +619,7 @@ try {
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             if ($method === 'POST') {
                 curl_setopt($ch, CURLOPT_POST, 1);
-                // TODO Incidencia: HTTP/1.1 400 Incorrect score received
+                // DO-NE Incidencia: HTTP/1.1 400 Incorrect score received
                 /**
                  * Error message suppressed when sending incorrect score request to LTI gradebook service from external tool
                  * https://tracker.moodle.org/browse/CONTRIB-9200
@@ -642,7 +642,7 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS POST /scores 400) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>(AGS POST /scores 400) BEARER TOKEN: </b>' . substr_replace($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '/scores', strpos($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '?'), 0));
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
@@ -708,7 +708,7 @@ try {
                 // https://www.imsglobal.org/sites/default/files/lti/ltiv2p1/model/mediatype/application/vnd/ims/lis/v1/scorecontainer+json/index.html#The_JSON-LD_Context
                 'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v1.scorecontariner+json', //pruebas
-                //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //POST
+                //'Accept:' . 'application/vnd.ims.lis.v2.score+json', //pruebas
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST
                 //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET
                 //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET
