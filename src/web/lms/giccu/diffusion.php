@@ -144,7 +144,7 @@ try {
             $token_data = json_decode($resp, true);
             curl_close ($ch);
 
-            echo "<br/><br/><b>(NRPS) ACCESS TOKEN: </b>";
+            echo "<br/><br/><b>NRPS (ACCESS TOKEN): </b>";
             print_r($ch);
             print_r($resp);
             print_r($token_data);
@@ -211,7 +211,7 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(NRPS) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>NRPS (BEARER TOKEN): </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
@@ -276,14 +276,14 @@ try {
             $token_data_ags = json_decode($resp_ags, true);
             curl_close ($ch);
 
-            echo "<br/><br/><b>(AGS) ACCESS TOKEN: </b>";
+            echo "<br/><br/><b>AGS (ACCESS TOKEN): </b>";
             print_r($ch);
             print_r($resp_ags);
             print_r($token_data_ags);
             echo($token_data_ags['access_token']);
 
             ///////////////////////////////////////////////
-            ///  Service Request (AGS GET1)
+            ///  Service Request AGS (GET1)
             ///  BEARER TOKEN (INICIO)
             ///
             $method = 'GET';
@@ -343,19 +343,19 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS GET /lineitems) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>AGS GET /lineitems (BEARER TOKEN): </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
                 'body' => json_decode($resp_body, true),
             ]);
             ///
-            ///  Service Request  (AGS GET1)
+            ///  Service Request  AGS (GET1)
             ///  BEARER TOKEN (FIN)
             ///////////////////////////////////////////////
 
             ///////////////////////////////////////////////
-            ///  Service Request (AGS GET2)
+            ///  Service Request AGS (GET2)
             ///  BEARER TOKEN (INICIO)
             ///
             $method = 'GET';
@@ -414,19 +414,91 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS GET /results?type_id=X&user_id=X) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>AGS (GET /results?type_id=X&user_id=X) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
                 'body' => json_decode($resp_body, true),
             ]);
             ///
-            ///  Service Request  (AGS GET2)
+            ///  Service Request  AGS (GET2)
             ///  BEARER TOKEN (FIN)
             ///////////////////////////////////////////////
 
             ///////////////////////////////////////////////
-            ///  Service Request AGS(POST1)
+            ///  Service Request AGS (GET3)
+            ///  BEARER TOKEN (INICIO)
+            ///
+            $method = 'GET';
+            $body = null;
+            $ch = curl_init();
+
+            // NRPS scopes
+            //$scopes = ['https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly'];
+            // AGS scopes
+            $scopes = ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"];
+            sort($scopes);
+            $scope_key = md5(implode('|', $scopes));
+            $access_tokens = [];
+
+            $headers = [
+                //'Authorization: Bearer ' . $this->get_access_token($scopes),
+                'Authorization: Bearer ' . $access_tokens[$scope_key] = $token_data_ags['access_token'],
+                //'Authorization: Bearer ' . $access_tokens[$scope_key] = '383fbc2711788ea4cc3e8cd7b902c355', // Moodle Mobile Web Service
+                //'Authorization: Bearer ' . $access_tokens[$scope_key] = '97c8ba884cb1886204b0346f4ac34367', // LTI Services
+                // NRPS accept
+                //'Accept:' . 'application/vnd.ims.lti-nrps.v2.membershipcontainer+json',
+                // AGS accept
+                //'Accept:' . 'application/vnd.ims.lis.v1.score+json', //POST.1
+                'Accept:' . 'application/vnd.ims.lis.v2.lineitem+json', //POST.2
+                //'Accept:' . 'application/vnd.ims.lis.v2.resultcontainer+json', //GET.1
+                //'Accept:' . 'application/vnd.ims.lis.v2.lineitemcontainer+json', //GET.2
+                // GROUPS?? accept
+                //'Accept:' . 'application/vnd.ims.lti-gs.v1.contextgroupcontainer+json',
+                // GENERALES accept
+                //'Accept:' . 'application/xml; charset=utf-8',
+                //'Accept:' . 'application/json;
+            ];
+            // NRPS service
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
+            // AGS services
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem/scores?type_id=3'); //POST.1
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/32/lineitem?type_id=3'); //POST.2
+            //curl_setopt($ch, CURLOPT_URL, substr_replace($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '/results', strpos($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '?'), 0). "&user_id=". $post_param['sub']); // GET.1
+            curl_setopt($ch, CURLOPT_URL, $post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem']); // GET.3
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems?type_id=3'); // GET.2
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/webservice/rest/server.php?wstoken=383fbc2711788ea4cc3e8cd7b902c355');
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HEADER, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            if ($method === 'POST') {
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, strval($body));
+                $headers[] = 'Content-Type: ' . 'application/json';
+            }
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            $response = curl_exec($ch);
+            if (curl_errno($ch)){
+                echo 'Request Error:' . curl_error($ch);
+            }
+            $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+            curl_close ($ch);
+
+            $resp_headers = substr($response, 0, $header_size);
+            $resp_body = substr($response, $header_size);
+            echo('<br/><br/><b>AGS (GET /lineitem) BEARER TOKEN: </b>');
+            //return
+            print_r([
+                'headers' => array_filter(explode("\r\n", $resp_headers)),
+                'body' => json_decode($resp_body, true),
+            ]);
+            ///
+            ///  Service Request  AGS (GET3)
+            ///  BEARER TOKEN (FIN)
+            ///////////////////////////////////////////////
+            ///
+            ///////////////////////////////////////////////
+            ///  Service Request AGS (POST1)
             ///  BEARER TOKEN (INICIO)
             ///
             $method = 'POST';
@@ -525,19 +597,19 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS POST /lineitem) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>AGS (POST /lineitem) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
                 'body' => json_decode($resp_body, true),
             ]);
             ///
-            ///  Service Request AGS(POST1)
+            ///  Service Request AGS (POST1)
             ///  BEARER TOKEN (FIN)
             ///////////////////////////////////////////////
 
             ///////////////////////////////////////////////
-            ///  Service Request AGS(POST2)
+            ///  Service Request AGS (POST2)
             ///  BEARER TOKEN (INICIO)
             ///
             $method = 'POST';
@@ -642,14 +714,14 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS POST /scores 400) BEARER TOKEN: </b>' . substr_replace($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '/scores', strpos($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '?'), 0));
+            echo('<br/><br/><b>AGS (POST /scores 400) BEARER TOKEN: </b>' . substr_replace($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '/scores', strpos($post_param['https://purl.imsglobal.org/spec/lti-ags/claim/endpoint']['lineitem'], '?'), 0));
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
                 'body' => json_decode($resp_body, true),
             ]);
             ///
-            ///  Service Request AGS(POST2)
+            ///  Service Request AGS (POST2)
             ///  BEARER TOKEN (FIN)
             ///////////////////////////////////////////////
 
@@ -754,7 +826,7 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS POST /scores 100+200) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>AGS (POST /scores 100+200) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
@@ -833,7 +905,7 @@ try {
 
             $resp_headers = substr($response, 0, $header_size);
             $resp_body = substr($response, $header_size);
-            echo('<br/><br/><b>(AGS PUT /lineitem) BEARER TOKEN: </b>');
+            echo('<br/><br/><b>AGS (PUT /lineitem) BEARER TOKEN: </b>');
             //return
             print_r([
                 'headers' => array_filter(explode("\r\n", $resp_headers)),
