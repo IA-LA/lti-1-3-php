@@ -73,19 +73,20 @@ try{
     }
     else if ($launch->is_deep_link_launch()) {
         // MENU
-        //  Listar los recursos
+        //  Listar los recursos con título
         //  Botonera para escoger cuál insertar (responde con un mensaje y un Recurso )
-        //  Y una posible configuración...
+        //  Y una posible configuración vía custom_params...
         //
         // https://purl.imsglobal.org/spec/lti/claim/message_type === LtiDeepLinkingRequest
         echo '<!-- <hr/><br/><b>Deep Linking Request (' . $launch_id . ') Launch!</b> -->';
         $dl = $launch->get_deep_link();
         $resource = LTI\LTI_Deep_Link_Resource::new()
             ->set_type("LtiResourceLinkRequest")
+            ->set_title('My Resource')
             ->set_url("https://my.tool/launch")
-            ->set_custom_params(['my_param' => 'value'])
-            ->set_title('My Resource');
-        $dl->get_response_jwt([$resource]);
+            ->set_lineitem('NombreLineitem')
+            ->set_custom_params(['my_param' => 'value']);
+        //$dl->get_response_jwt([$resource]);
         $dl->output_response_form([$resource]);
         //die;
     }
