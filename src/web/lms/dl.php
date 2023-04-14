@@ -19,9 +19,9 @@ try{
     //die;
 
     // LOGIN
-    $login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database());
+    //$login = LTI\LTI_OIDC_Login::new(new Iss_Target_Lti_Database());
     // REDIRECT
-    $redirect = $login->do_oidc_login_redirect($post_param['https://purl.imsglobal.org/spec/lti-dl/claim/deep_linking_settings']['deep_link_return_url']);
+    //$redirect = $login->do_oidc_login_redirect($post_param['https://purl.imsglobal.org/spec/lti-dl/claim/deep_linking_settings']['deep_link_return_url']);
     print('<p><b>JWT (Deep Linking)</b>: ');
     print_r($post_param['https://purl.imsglobal.org/spec/lti-dl/claim/deep_linking_settings']);
     print('</p>');
@@ -72,7 +72,12 @@ try{
 
     }
     else if ($launch->is_deep_link_launch()) {
-        // https://purl.imsglobal.org/spec/lti/claim/message_type ==== LtiDeepLinkingRequest
+        // MENU
+        //  Listar los recursos
+        //  Botonera para escoger cuál insertar (responde con un mensaje y un Recurso )
+        //  Y una posible configuración...
+        //
+        // https://purl.imsglobal.org/spec/lti/claim/message_type === LtiDeepLinkingRequest
         echo '<!-- <hr/><br/><b>Deep Linking Request (' . $launch_id . ') Launch!</b> -->';
         $dl = $launch->get_deep_link();
         $resource = LTI\LTI_Deep_Link_Resource::new()
