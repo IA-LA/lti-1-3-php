@@ -84,7 +84,13 @@ try{
             ->set_type("LtiResourceLinkRequest")
             ->set_title('My Resource')
             ->set_url("https://my.tool/launch")
-            ->set_lineitem('NombreLineitem')
+            ->set_lineitem(LTI\LTI_Lineitem::new()
+                ->set_id('My_Resource_' . date(DateTime::ISO8601))
+                ->set_tag('score')
+                ->set_score_maximum(100)
+                ->set_label('My Resource')
+                ->set_resource_id('My_Resource_' . $launch->get_launch_data()['https://purl.imsglobal.org/spec/lti/claim/resource_link']['id'])
+            )
             ->set_custom_params(['my_param' => 'value']);
         //$dl->get_response_jwt([$resource]);
         $dl->output_response_form([$resource]);
