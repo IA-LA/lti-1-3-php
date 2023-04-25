@@ -106,7 +106,7 @@ try {
                 "iss" => '$client_id',
                 "sub" => $client_id,
                 //"aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
-                "aud" => $iss_GET['result']['credentials']['auth_login_url'],
+                "aud" => $iss_GET['data']['credentials']['auth_login_url'],
                 "iat" => time() - 5,
                 "exp" => time() + 60,
                 "jti" => 'lti-service-token_' . hash('sha256', random_bytes(64))
