@@ -83,7 +83,7 @@ try{
         $resource = LTI\LTI_Deep_Link_Resource::new()
             ->set_type("LtiResourceLinkRequest")
             ->set_title('My Resource')
-            ->set_url("https://my.tool/launch")
+            ->set_url("https://ailanto-dev.intecca.uned.es/publicacion/launch")
             ->set_lineitem(LTI\LTI_Lineitem::new()
                 ->set_id('My_Resource_' . date(DateTime::ISO8601))
                 ->set_tag('score')
