@@ -66,7 +66,7 @@ define("TOOL_REDIR",
                         )
                         // Tareas publicadas por CTU
                         : (preg_match("/\/publicacion\/102/", TOOL_PARAMS_TARGET)
-                            ? (TOOL_HOST . "/launch.php")
+                            ? (TOOL_HOST . "/lms/embed.php")
                             // Tareas publicadas por Resto Usuarios
                             : (TOOL_PARAMS_TARGET)
                         )
