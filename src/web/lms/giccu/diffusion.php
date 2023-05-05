@@ -136,7 +136,8 @@ try {
 
             // Make request to get auth token
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/token.php');
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/token.php');
+            curl_setopt($ch, CURLOPT_URL, $iss_GET['data']['credentials']['auth_token_url']);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($auth_request));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -187,7 +188,8 @@ try {
                 //'Accept:' . 'application/json;
             ];
             // NRPS service
-            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/CourseSection/2/bindings/3/memberships');
+            curl_setopt($ch, CURLOPT_URL, $post_param['https://purl.imsglobal.org/spec/lti-nrps/claim/namesroleservice']['context_memberships_url']);
             // AGS services
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/10/lineitem/scores?type_id=3');
             //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/services.php/2/lineitems/10/lineitem?type_id=3');
@@ -237,7 +239,8 @@ try {
             $jwt_claim = [
                 "iss" => '$client_id',
                 "sub" => $client_id,
-                "aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
+                //"aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
+                "aud" => $iss_GET['data']['credentials']['auth_login_url'],
                 "iat" => time() - 5,
                 "exp" => time() + 60,
                 "jti" => 'lti-service-token_' . hash('sha256', random_bytes(64))
@@ -268,7 +271,8 @@ try {
 
             // Make request to get auth token
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/token.php');
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/token.php');
+            curl_setopt($ch, CURLOPT_URL, $iss_GET['data']['credentials']['auth_token_url']);
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($auth_request));
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
