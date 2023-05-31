@@ -6,7 +6,7 @@ use Firebase\JWT\JWT;
 // HOST
 //  HTTPS: puertos 80(redir)|443
 //  HTTP : cualquier otro puerto
-define("TOOL_HOST", (preg_match("/(80|443)/", $_SERVER['SERVER_PORT']) ? ('https://' . $_SERVER['HTTP_HOST']. '/lti/lti13') : ($_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'])));
+define("TOOL_HOST", (preg_match("/(80|443)/", $_SERVER['SERVER_PORT']) ? ('https://' . $_SERVER['HTTP_HOST'] . '/lti/lti13') : ($_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST']. '/lti')));
 
 // ID TOKEN
 // Open ID Connect (OIDC)
