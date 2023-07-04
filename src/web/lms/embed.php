@@ -263,6 +263,7 @@ try {
                             iframeDocument.body.appendChild(script);
                         }';
     echo '<script>
+            document.domain = "agora.uned.es";
             function loadToken() {
                 /* 
                     https://javascript.info/cross-window-communication
