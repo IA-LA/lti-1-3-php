@@ -263,7 +263,10 @@ try {
                             iframeDocument.body.appendChild(script);
                         }';
     echo '<script>
+            // Same-Origin Policy (SOP)
+            // Cross-Origin Resource Sharing (CORS)
             document.domain = "agora.uned.es";
+            
             function loadToken() {
                 /* 
                     https://javascript.info/cross-window-communication
