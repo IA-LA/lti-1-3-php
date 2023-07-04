@@ -262,10 +262,11 @@ try {
                             script.appendChild(source);
                             iframeDocument.body.appendChild(script);
                         }';
-    echo '<script>
+    echo '<script type="text/javascript" src="https://agora.uned.es/mod/lti/services.php/16/lineitems?type_id=10"/>
+          <script>
             // Same-Origin Policy (SOP)
             // Cross-Origin Resource Sharing (CORS)
-            document.domain = "agora.uned.es";
+            document.domain = "uned.es";
             
             function loadToken() {
                 /* 
