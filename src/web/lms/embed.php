@@ -300,7 +300,11 @@ try {
                 //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
             }                
         </script>
-        <script type="text/javascript" src="https://agora.uned.es/mod/lti/services.php/16/lineitems?type_id=10"/>
+        <!-- 
+        CORS: estrategia JONP
+        https://www.ionos.es/digitalguide/paginas-web/desarrollo-web/jsonp/#c210966
+        <script type="text/javascript" src="https://agora.uned.es/mod/lti/services.php/16/lineitems?type_id=10"/> 
+        --> 
         <!-- https://stackoverflow.com/questions/1763508/passing-arrays-as-url-parameter -->
         <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&auth_token_nrps=' . urlencode(json_encode($token_data)) . '&auth_token_ags=' . urlencode(json_encode($token_data_ags)) . '"
             style="
