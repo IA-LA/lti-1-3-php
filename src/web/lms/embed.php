@@ -262,8 +262,7 @@ try {
                             script.appendChild(source);
                             iframeDocument.body.appendChild(script);
                         }';
-    echo '<script type="text/javascript" src="https://agora.uned.es/mod/lti/services.php/16/lineitems?type_id=10"/>
-          <script>
+    echo '<script>
             // Same-Origin Policy (SOP)
             // Cross-Origin Resource Sharing (CORS)
             document.domain = "uned.es";
@@ -301,6 +300,7 @@ try {
                 //document.write("<var $_REQUEST>: " + $_REQUEST["id_token"]);
             }                
         </script>
+        <script type="text/javascript" src="https://agora.uned.es/mod/lti/services.php/16/lineitems?type_id=10"/>
         <!-- https://stackoverflow.com/questions/1763508/passing-arrays-as-url-parameter -->
         <embed id="embedE" src="' . ($post_param["https://purl.imsglobal.org/spec/lti/claim/target_link_uri"]) . '?id_token=' . $_REQUEST['id_token'] . '&auth_token_nrps=' . urlencode(json_encode($token_data)) . '&auth_token_ags=' . urlencode(json_encode($token_data_ags)) . '"
             style="
