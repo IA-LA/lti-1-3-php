@@ -167,7 +167,10 @@ try {
             /// ACCESS TOKEN    (FIN)
             ///////////////////////////////////////////////
 
-
+        ///////////////////////////////////////////////
+        /// TOKENS (INICIO)
+        /// AGS
+        ///
             ///////////////////////////////////////////////
             /// ACCESS TOKEN (INICIO)
             /// AGS
@@ -228,7 +231,75 @@ try {
             /// AGS
             /// ACCESS TOKEN    (FIN)
             ///////////////////////////////////////////////
+
+            ///////////////////////////////////////////////
+            /// REFRESH TOKEN (INICIO)
+            /// AGS
+
+            // Build up JWT to exchange for an auth token
+            $client_id = $post_param['aud'];
+            $jwt_claim = [
+                "iss" => '$client_id',
+                "sub" => $client_id,
+                //"aud" => 'http://ailanto-dev.intecca.uned.es/mod/lti/auth.php',
+                "aud" => $iss_GET['data']['credentials']['auth_login_url'],
+                "iat" => time() - 5,
+                "exp" => time() + 60,
+                "jti" => 'lti-service-token_' . hash('sha256', random_bytes(64))
+            ];
+
+            //
+            // ERROR:
+            // ERROR: HTTP/1.1 400 No handler found for /2/lineitems/32/lineitem/scores application/json
+            // ERROR: HTTP/1.1 400 Incorrect score received
+            // ERROR: {"status":401,"reason":"Unauthorized","request":{"method":"POST","url":"\/mod\/lti\/services.php\/2\/lineitems\/32\/lineitem\/scores?type_id=3","accept":"application\/json","contentType":"application\/vnd.ims.lis.v1.score+json"}}}
+            //$headers = [
+            //    'kid: ff25d970a021ff7cdad1',
+            //];
+            $kid=[];
+            $kid[0]='ff25d970a021ff7cdad1';
+            // Sign the JWT with our private key (given by the platform on registration)
+            $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../db/private.key'), 'RS256', 'TRwtvqCcefOWuXU3-Dt4d26vCQExxh14vTO7_A375Pw');
+            //$jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../db/tool.key'), 'RS256');
+
+            // Build auth token request headers
+            $auth_request = [
+                'grant_type' => 'refresh_token',
+                'refresh_token' => $token_data_ags,
+                'client_assertion_type' => 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
+                'client_assertion' => $jwt,
+                //'scope' => 'https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly',
+                'scope' => implode(' ', ["https://purl.imsglobal.org/spec/lti-ags/scope/lineitem", "https://purl.imsglobal.org/spec/lti-ags/scope/lineitem.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/result.readonly", "https://purl.imsglobal.org/spec/lti-ags/scope/score"])
+            ];
+
+            // Make request to get refresh auth token
+            $ch = curl_init();
+            //curl_setopt($ch, CURLOPT_URL, 'http://ailanto-dev.intecca.uned.es/mod/lti/token.php');
+            curl_setopt($ch, CURLOPT_URL, $iss_GET['data']['credentials']['auth_token_url']);
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($auth_request));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+            $resp_ags = curl_exec($ch);
+            $refresh_token_data_ags = json_decode($resp_ags, true);
+            curl_close ($ch);
+
+            echo "<br/><br/><b>(AGS) REFRESH ACCESS TOKEN: </b>";
+            //print_r($ch);
+            //print_r($resp_ags);
+            print_r($refresh_token_data_ags);
+            //echo($token_data_ags['access_token']);
+
+            /// AGS
+            /// REFRESH TOKEN    (FIN)
+            ///////////////////////////////////////////////
             ///
+
+        ///
+        /// AGS
+        /// TOKENS    (FIN)
+        ///////////////////////////////////////////////
+        ///
     }
     else
         echo '405 No permitido';
@@ -262,7 +333,8 @@ try {
                             script.appendChild(source);
                             iframeDocument.body.appendChild(script);
                         }';
-    echo '<script>
+    echo '<script
+>
             // Same-Origin Policy (SOP)
             // Cross-Origin Resource Sharing (CORS)
             document.domain = "uned.es";
