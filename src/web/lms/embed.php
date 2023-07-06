@@ -132,8 +132,8 @@ try {
             //];
             $kid=[];
             $kid[0]='ff25d970a021ff7cdad1';
-            // Sign the JWT with our private key (given by the platform on registration)
-            $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../db/private.key'), 'RS256', 'TRwtvqCcefOWuXU3-Dt4d26vCQExxh14vTO7_A375Pw');
+            // Sign the JWT with our private key (given by the platform on registration) and the JWKS json kid
+            $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../db/private.key'), 'RS256', json_decode(file_get_contents(__DIR__ . '/../jwks.json'), true)['kid']);
             //$jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../db/tool.key'), 'RS256');
 
             // Build auth token request headers
@@ -197,8 +197,8 @@ try {
             //];
             $kid=[];
             $kid[0]='ff25d970a021ff7cdad1';
-            // Sign the JWT with our private key (given by the platform on registration)
-            $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../db/private.key'), 'RS256', 'TRwtvqCcefOWuXU3-Dt4d26vCQExxh14vTO7_A375Pw');
+            // Sign the JWT with our private key (given by the platform on registration) and the JWKS json kid
+            $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../db/private.key'), 'RS256', json_decode(file_get_contents(__DIR__ . '/../jwks.json'), true)['kid']);
             //$jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../db/tool.key'), 'RS256');
 
             // Build auth token request headers
@@ -258,7 +258,7 @@ try {
             //];
             // $kid=[];
             // $kid[0]='ff25d970a021ff7cdad1';
-            // Sign the JWT with our private key (given by the platform on registration)
+            // Sign the JWT with our private key (given by the platform on registration) and the JWKS json kid
             $jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../db/private.key'), 'RS256', json_decode(file_get_contents(__DIR__ . '/../jwks.json'), true)['kid']);
             //$jwt = JWT::encode($jwt_claim, file_get_contents(__DIR__ . '/../../db/tool.key'), 'RS256');
 
@@ -284,7 +284,7 @@ try {
             $refresh_token_data_ags = json_decode($resp_ags, true);
             curl_close ($ch);
 
-            echo "<br/><br/><b>(AGS) REFRESH ACCESS TOKEN: </b>";
+            echo "<br/><br/><b>(AGS) authorization_code ACCESS TOKEN: </b>";
             //print_r($ch);
             //print_r($resp_ags);
             print_r($refresh_token_data_ags);
