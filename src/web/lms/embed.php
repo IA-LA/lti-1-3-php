@@ -264,7 +264,7 @@ try {
 
             // Build auth token request headers
             $auth_request = [
-                'grant_type' => 'authorization_code',
+                'grant_type' => 'refresh_token',
                 'client_assertion_type' => 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
                 'client_assertion' => $jwt,
                 //'scope' => 'https://purl.imsglobal.org/spec/lti-nrps/scope/contextmembership.readonly',
