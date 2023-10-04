@@ -283,7 +283,7 @@ try {
             $refresh_token_data_ags = json_decode($resp_ags, true);
             curl_close ($ch);
 
-            echo "<br/><br/><b>(AGS) authorization_code ACCESS TOKEN: </b>";
+            echo "<br/><br/><b>(AGS) refresh_token ACCESS TOKEN: </b>";
             //print_r($ch);
             //print_r($resp_ags);
             print_r($refresh_token_data_ags);
